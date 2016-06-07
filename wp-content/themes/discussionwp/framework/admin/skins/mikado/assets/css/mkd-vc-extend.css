@@ -1,0 +1,162 @@
+.extended-custom-icon{
+	background-image: url('img/vc-extend.png');
+}
+.extended-custom-icon-magazine{
+    background-image: url('img/vc-extend-news.png');
+    width: 58px !important;
+    height: 42px !important;
+    top: 15px !important;
+}
+.extended-custom-icon.icon-wpb-button {
+	background-position:0px 0px;
+}
+.extended-custom-icon.icon-wpb-custom-font {
+	background-position:-32px 0px;
+}
+.extended-custom-icon.icon-wpb-icons {
+	background-position:-64px 0px;
+}
+.extended-custom-icon.icon-wpb-ordered-list {
+	background-position:-96px 0px;
+}
+.extended-custom-icon.icon-wpb-section-title {
+	background-position:-128px 0px;
+}
+.extended-custom-icon.icon-wpb-separator {
+	background-position:-160px 0px;
+}
+.extended-custom-icon.icon-wpb-social-share {
+	background-position:-192px 0px;
+}
+.extended-custom-icon.icon-wpb-tabs {
+	background-position:-224px 0px;
+}
+.extended-custom-icon.icon-wpb-tab {
+	background-position:-256px 0px;
+}
+.extended-custom-icon.icon-wpb-google-map {
+	background-position:-288px 0px;
+}
+.extended-custom-icon.icon-wpb-image-with-hover-info {
+	background-position:-320px 0px;
+}
+.extended-custom-icon.icon-wpb-expanding-video-post {
+	background-position:-352px 0px;
+}
+.extended-custom-icon.icon-wpb-vert-sep {
+	background-position:-384px 0px;
+}
+
+
+.extended-custom-icon-magazine.icon-wpb-mkd-ps{
+    background-position:0px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pswt{
+    background-position:-58px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-psi{
+    background-position:-116px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pc{
+    background-position:-174px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pcs{
+    background-position:-232px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pl-one{
+    background-position:-290px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pl-two{
+    background-position:-348px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pl-three{
+    background-position:-406px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pl-four{
+    background-position:-464px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pl-five{
+    background-position:-522px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pl-six{
+    background-position:-580px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pl-seven{
+    background-position:-638px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pl-eight{
+    background-position:-696px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pl-nine{
+    background-position:-754px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pb-one{
+    background-position:-812px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pb-two{
+    background-position:-870px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pb-three{
+    background-position:-928px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pb-four{
+    background-position:-986px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pb-five{
+    background-position:-1044px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pb-six{
+    background-position:-1102px 0px;
+}
+.extended-custom-icon-magazine.icon-wpb-mkd-pb-seven{
+    background-position:-1160px 0px;
+}
+
+.wpb_no_vertical_split_slider > .wpb_element_wrapper > .vc_container_for_children{
+	overflow: hidden;
+}
+
+.wpb_no_vertical_left_sliding_panel,
+.wpb_no_vertical_split_slider_with_text_over_left_panel{
+	width: 50%;
+	float: left;
+	clear: left;
+}
+
+.wpb_no_vertical_right_sliding_panel,
+.wpb_no_vertical_split_slider_with_text_over_right_panel{
+	width: 50%;
+	float: right;
+	clear: right;
+}
+
+.wpb_no_vertical_left_sliding_panel > .controls > .column_edit,
+.wpb_no_vertical_right_sliding_panel > .controls > .column_edit{
+	display: none;
+}
+
+
+
+a#mkd_post_layout_one,
+a#mkd_post_layout_two,
+a#mkd_post_layout_three,
+a#mkd_post_layout_four,
+a#mkd_post_layout_five,
+a#mkd_post_layout_six,
+a#mkd_post_layout_seven,
+a#mkd_post_layout_eight,
+a#mkd_post_layout_nine,
+a#mkd_block_one,
+a#mkd_block_two,
+a#mkd_block_three,
+a#mkd_block_four,
+a#mkd_block_five,
+a#mkd_block_six,
+a#mkd_block_seven,
+a#mkd_post_slider,
+a#mkd_post_slider_interactive,
+a#mkd_post_slider_with_thumbnails,
+a#mkd_post_carousel,
+a#mkd_post_carousel_swipe{
+    padding: 2px 4px 2px 73px;
+}

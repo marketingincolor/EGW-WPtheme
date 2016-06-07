@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /live-events/action~posterboard/
+Disallow: /live-events/action~agenda/
+Disallow: /live-events/action~oneday/
+Disallow: /live-events/action~month/
+Disallow: /live-events/action~week/
+Disallow: /live-events/action~stream/
+Disallow: /live-events/action~undefined/
+Disallow: /live-events/action~http:/
+Disallow: /live-events/action~default/
+Disallow: /live-events/action~poster/
+Disallow: /live-events/action~*/
+Disallow: /*controller=ai1ec_exporter_controller*

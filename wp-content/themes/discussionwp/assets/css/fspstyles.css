@@ -1,0 +1,124 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 2, 2016, 7:19:09 PM
+    Author     : FSSD
+*/
+.mkd-top-bar{
+    font-size: 16px;
+}
+.mkd-position-fullright{
+    float: right;
+    width: 100%;
+    text-align: right;
+}
+.signup_newsletter{
+    float: left;
+    padding-right: 25px;
+}
+.signup_newsletter a{
+    color: #696767;
+}
+.user_login{
+    background:#b3cc36;
+    padding: 0px 20px;
+    color: #ffffff;
+    font-size: 16px;
+    display: block;
+    overflow: hidden;
+}
+.user_login:hover{
+    background-color: #f99d3e;
+    color:#ffffff;
+}
+.user_login img {
+    float: left;
+    display: block;
+    padding-top: 7px;
+}
+.user_login span{
+    display: block;
+    float: left;
+    padding-left: 10px;
+}
+.home .mkd-content {
+    padding-bottom: 20px;
+}
+.mkd-main-menu > ul > li > a, .mkd-drop-down .mkd-menu-second .mkd-menu-inner ul li > a{
+    font-size: 18px;
+}
+.mkd-post-item .mkd-post-info-category a{
+    font-size: 14px;
+}
+
+/*footer css starts here*/
+footer .mkd-footer-bottom-holder .mkd-footer-bottom-holder-inner{
+    background: #4c4d4f;
+}
+footer .mkd-footer-bottom-holder .widget{
+    color: #fff;
+}
+/*footer css ends here*/
+
+/*dynamic css starts here*/
+::selection { background: #f99d3e;}
+
+::-moz-selection { background: #f99d3e;}
+
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover, a:hover, p a:hover, .mkd-comment-holder .mkd-comment-info-and-links .mkd-comment-author-label, .mkd-comment-holder .mkd-comment-text .mkd-comment-date:before, .mkd-comment-holder .mkd-comment-links a:hover, .mkd-post-author-comment .mkd-comment-info .mkd-comment-author-label, .mkd-post-author-comment .mkd-comment-info .mkd-comment-mark, .mkd-post-author-comment .mkd-comment-text .mkd-text-holder:before, #submit_comment:hover, .post-password-form input[type="submit"]:hover, input.wpcf7-form-control.wpcf7-submit:hover, .mkd-sidebar #lang_sel a:hover, .wpb_widgetised_column #lang_sel a:hover, .mkd-drop-down .mkd-menu-wide .mkd-menu-second .mkd-menu-inner > ul > li > a .menu_icon_wrapper i, .mkd-drop-down .mkd-menu-wide .mkd-menu-second .mkd-menu-inner > ul > li > a:hover, .mkd-top-bar .widget.widget_nav_menu ul li a:hover, .mkd-mobile-header .mkd-mobile-nav a:hover, .mkd-mobile-header .mkd-mobile-nav h6:hover, footer .widget.widget_rss li a:hover, footer .widget.widget_tag_cloud a:hover, footer .widget.widget_mkd_twitter_widget li a:hover, footer .widget #submit_comment:hover, footer .widget .post-password-form input[type="submit"]:hover, footer .mkd-footer-bottom-holder .widget.widget_nav_menu ul li a:hover, .mkd-title .mkd-title-holder .mkd-breadcrumbs a:hover, aside.mkd-sidebar .widget a:hover h5, .wpb_widgetised_column .widget a:hover h5, aside.mkd-sidebar .widget.widget_rss .mkd-st-title a:hover, .wpb_widgetised_column .widget.widget_rss .mkd-st-title a:hover, aside.mkd-sidebar .widget.widget_rss li .rss-date, .wpb_widgetised_column .widget.widget_rss li .rss-date, aside.mkd-sidebar .widget.widget_pages ul li a:hover, aside.mkd-sidebar .widget.widget_archive ul li a:hover, aside.mkd-sidebar .widget.widget_categories ul li a:hover, aside.mkd-sidebar .widget.widget_meta ul li a:hover, aside.mkd-sidebar .widget.widget_recent_comments ul li a:hover, aside.mkd-sidebar .widget.widget_nav_menu ul li a:hover, .wpb_widgetised_column .widget.widget_pages ul li a:hover, .wpb_widgetised_column .widget.widget_archive ul li a:hover, .wpb_widgetised_column .widget.widget_categories ul li a:hover, .wpb_widgetised_column .widget.widget_meta ul li a:hover, .wpb_widgetised_column .widget.widget_recent_comments ul li a:hover, .wpb_widgetised_column .widget.widget_nav_menu ul li a:hover, aside.mkd-sidebar .widget.widget_tag_cloud a:hover, .wpb_widgetised_column .widget.widget_tag_cloud a:hover, .mkd-btn.mkd-btn-outline, .mkd-icon-shortcode .mkd-icon-element, .mkd-tabs .mkd-tabs-nav li.ui-state-active a, .mkd-tabs .mkd-tabs-nav li.ui-state-hover a, .mkd-evp-holder .mkd-evp-image-holder .mkd-evp-image-text .mkd-evp-bottom-holder .mkd-post-info-author a:hover, .mkd-evp-holder .mkd-evp-image-holder .mkd-evp-image-text .mkd-post-info-date a:before, .mkd-evp-holder .mkd-evp-image-holder .mkd-evp-image-text .mkd-post-info-date a:hover, .mkd-evp-holder .mkd-evp-image-holder .mkd-evp-image-text .mkd-post-info-date a:hover:before, .mkd-evp-holder .mkd-evp-video-holder .mkd-evp-video-close a, .mkd-ps-holder .mkd-post-item .mkd-ps-content .mkd-ps-title a:hover, .mkd-ps-holder .mkd-post-item.mkd-item-hovered .mkd-ps-title a, .mkd-pswt-holder .mkd-pswt-slider .mkd-pswt-content .mkd-post-info-date a:before, .mkd-pswt-holder .mkd-pswt-slider .mkd-pswt-content .mkd-post-info-date a:hover, .mkd-pswt-holder .mkd-pswt-slider .mkd-pswt-content .mkd-post-info-date a:hover:before, .mkd-pswt-holder .flex-direction-nav li:hover a, .mkd-pswt-holder .mkd-pswt-thumb-slider .mkd-pswt-slide-thumb .mkd-pswt-thumb-content .mkd-post-info-date a:before, .mkd-pswt-holder .mkd-pswt-thumb-slider .mkd-pswt-slide-thumb .mkd-pswt-thumb-content .mkd-post-info-date a:hover, .mkd-pswt-holder .mkd-pswt-thumb-slider .mkd-pswt-slide-thumb .mkd-pswt-thumb-content .mkd-post-info-date a:hover:before, .mkd-pswt-holder .mkd-pswt-thumb-slider .mkd-pswt-slide-thumb:hover .mkd-pswt-title, .mkd-psi-holder .mkd-psi-slide .mkd-post-info-date a:before, .mkd-psi-holder .mkd-psi-slide-thumb .mkd-post-info-date a:before, .mkd-psi-holder .mkd-psi-slide .mkd-post-info-date a:hover, .mkd-psi-holder .mkd-psi-slide .mkd-post-info-date a:hover:before, .mkd-psi-holder .mkd-psi-slide-thumb .mkd-post-info-date a:hover, .mkd-psi-holder .mkd-psi-slide-thumb .mkd-post-info-date a:hover:before, .mkd-psi-holder .mkd-psi-slider-thumb .mkd-psi-slide-thumb.slick-current h5, .mkd-post-item .mkd-post-info-date a:before, .mkd-post-item .mkd-post-info-date a:hover, .mkd-post-item .mkd-post-info-date a:hover:before, .mkd-post-item .mkd-pt-info-section > div > div a:hover, .mkd-pt-one-item.mkd-item-hovered .mkd-pt-one-title a, .mkd-pt-one-item .mkd-post-info-rating .mkd-post-info-rating-active, .mkd-pt-two-item .mkd-pt-two-content-holder .mkd-pt-info-section .mkd-post-info-comments:before, .mkd-pt-two-item .mkd-pt-two-content-holder .mkd-pt-info-section .mkd-post-info-count:before, .mkd-pt-two-item .mkd-pt-two-content-holder .mkd-pt-info-section .mkd-social-share-dropdown-opener:before, .mkd-pt-three-item .mkd-pt-three-content-holder .mkd-pt-info-section .mkd-post-info-comments:before, .mkd-pt-three-item .mkd-pt-three-content-holder .mkd-pt-info-section .mkd-social-share-dropdown-opener:before, .mkd-post-item.mkd-pt-five-item .mkd-pt-five-content .mkd-pt-five-title a:hover, .mkd-pt-six-item.mkd-item-hovered .mkd-pt-six-title a, .mkd-pt-six-item .mkd-pt-info-section div div .mkd-post-info-comments:before, .mkd-pt-six-item .mkd-pt-info-section div div .mkd-social-share-dropdown-opener:before, .mkd-pt-seven-item.mkd-item-hovered .mkd-pt-seven-title a, .mkd-pt-eight-item.mkd-item-hovered .mkd-pt-eight-title a, .mkd-pt-eight-item .mkd-btn:hover, .mkd-pt-nine-item.mkd-item-hovered .mkd-pt-nine-title a, .mkd-pt-nine-item .mkd-pt-nine-bottom-holder .mkd-post-info-author a:hover, .mkd-pb-two-holder .mkd-pb-two-non-featured .mkd-pt-four-item:hover .mkd-post-info-date a:before, .mkd-pb-two-holder .mkd-pb-two-non-featured .mkd-pt-four-item.mkd-reveal-nonf-active .mkd-post-info-date a:before, .mkd-blog-holder article.sticky .mkd-post-title a, .mkd-blog-holder.mkd-blog-type-standard article .mkd-post-info-date a:before, .mkd-blog-holder.mkd-blog-type-standard article .mkd-post-info-date a:hover, .mkd-blog-holder.mkd-blog-type-standard article .mkd-post-info-date a:hover:before, .mkd-single-tags-holder .mkd-tags a:hover, .mkd-blog-single-navigation .mkd-blog-single-prev a:hover h5, .mkd-blog-single-navigation .mkd-blog-single-prev a:hover .mkd-nav-arrows, .mkd-blog-single-navigation .mkd-blog-single-next a:hover h5, .mkd-blog-single-navigation .mkd-blog-single-next a:hover .mkd-nav-arrows, .mkd-ratings-holder .mkd-ratings-stars-holder .mkd-ratings-stars-inner > span.mkd-active-rating-star, .mkd-ratings-holder .mkd-ratings-stars-holder .mkd-ratings-stars-inner > span.mkd-hover-rating-star, .mkd-bn-holder ul.mkd-bn-slide .mkd-bn-text a:hover, .mkd-rpc-holder .mkd-rpc-inner ul li .mkd-rpc-number-holder.mkd-hovered, .mkd-rpc-holder .mkd-rpc-inner ul li .mkd-rpc-date:before, .mkd-rpc-holder .mkd-rpc-inner ul li .mkd-rpc-date:hover, .mkd-rpc-holder .mkd-rpc-inner ul li .mkd-rpc-date:hover:before, .mkd-top-bar .mkd-social-icon-widget-holder:hover, .mkd-footer-bottom-holder .mkd-social-icon-widget-holder:hover, .mkd-twitter-widget li .mkd-tweet-text a, .mkd-twitter-widget li .mkd-tweet-text a.mkd-tweet-time:hover, .mkd-side-menu .widget.widget_rss li a:hover, .mkd-side-menu .widget.widget_tag_cloud a:hover, .mkd-side-menu .widget.widget_mkd_twitter_widget li a:hover, .mkd-related-posts-holder .mkd-related-content .mkd-related-title a:hover, .mkd-image-with-hover-info-item .mkd-hover-holder .mkd-hover-holder-inner .mkd-hover-content .mkd-hover-content-inner .mkd-image-description-add, .slick-arrow:hover:before, .mkd-pc-holder .flex-direction-nav a:hover, .mkd-ps-holder .flex-direction-nav a:hover, .mkd-post-pag-np-horizontal .mkd-bnl-navigation-holder .mkd-bnl-nav-icon.mkd-bnl-nav-prev, .mkd-blog-gallery .mkd-pg-slider .flex-direction-nav li a:hover { color: #f99d3e;}
+
+.mkd-pt-two-item.mkd-item-hovered .mkd-pt-two-title, .mkd-pt-three-item.mkd-item-hovered .mkd-pt-three-title { color: #f99d3e!important;}
+
+blockquote:before, .wpcf7-form .mkd-newsletter .mkd-column2 .wpcf7-submit, .mkd-pagination ul li a:hover, .mkd-pagination ul li.active span, #mkd-back-to-top > span, .mkd-main-menu > ul > li.mkd-active-item > a, .mkd-drop-down .mkd-menu-second .mkd-menu-inner ul li:hover, .mkd-drop-down .mkd-menu-wide .mkd-menu-second .mkd-menu-inner ul li ul li:hover, .mkd-search-opener:hover, .mkd-search-opener.mkd-active, .mkd-search-widget-holder .mkd-search-submit, footer .widget #wp-calendar td#today, footer .widget.widget_search input[type="submit"], .mkd-search-page-holder .mkd-search-page-form .mkd-form-holder .mkd-search-submit, aside.mkd-sidebar .widget #wp-calendar td#today, .wpb_widgetised_column .widget #wp-calendar td#today, aside.mkd-sidebar .widget.widget_search input[type="submit"], .wpb_widgetised_column .widget.widget_search input[type="submit"], .mkd-btn.mkd-btn-solid, .mkd-icon-shortcode.circle, .mkd-icon-shortcode.square, .mkd-icon-shortcode.landscape, .wpb_gallery_slides.wpb_flexslider .flex-control-nav li a:hover, .wpb_gallery_slides.wpb_flexslider .flex-control-nav li a.flex-active, .mkd-section-title-holder .mkd-st-title, .mkd-social-share-holder.mkd-list ul li a.mkd-share-link:hover, .mkd-evp-holder .mkd-evp-image-holder .mkd-evp-image-text .mkd-post-info-category:before, .mkd-ps-holder .flex-control-paging > li a:hover, .mkd-ps-holder .flex-control-paging > li a.flex-active, .mkd-pswt-holder .mkd-pswt-slider .mkd-pswt-content .mkd-post-info-category:before, .mkd-pswt-holder .mkd-pswt-slider .mkd-pswt-content .mkd-pt-info-section, .mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-post-info-category:before, .mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section, .mkd-psi-holder .mkd-psi-slider-thumb .mkd-psi-slide-thumb:hover, .mkd-pc-holder .flex-control-paging > li a:hover, .mkd-pc-holder .flex-control-paging > li a.flex-active, .mkd-post-item .mkd-post-info-category:before, .mkd-post-item .mkd-social-share-holder .mkd-social-share-dropdown-opener, .mkd-pt-one-item .mkd-pt-info-section, .mkd-post-item.mkd-pt-five-item .mkd-pt-five-content .mkd-pt-info-section, .mkd-pt-six-item .mkd-pt-info-section .mkd-pt-info-section-background, .mkd-pb-four-holder .mkd-bnl-outer .mkd-bnl-inner > .mkd-pb-four-non-featured .mkd-hide-show-button, .mkd-blog-holder article .mkd-post-content-inner > .mkd-post-info-category:before, .mkd-blog-holder article .mkd-post-image-holder > .mkd-post-info-category:before, .mkd-blog-holder article .mkd-post-info, .mkd-blog-holder article .mkd-social-share-holder .mkd-social-share-dropdown-opener, .mkd-blog-holder.mkd-blog-single article .mkd-post-image-area .mkd-post-info-category:before, .mkd-blog-holder.mkd-blog-single article .mkd-post-info, .mkd-author-description .mkd-author-description-image .mkd-author-name, .mkd-single-links-pages .mkd-single-links-pages-inner > span, .mkd-single-links-pages .mkd-single-links-pages-inner > a:hover, .mkd-main-menu ul li .mkd-plw-tabs .mkd-plw-tabs-tab:hover, .mkd-side-menu-button-opener:hover, .mkd-side-menu-button-opener.opened, .mkd-side-menu .widget #wp-calendar td#today, .mkd-side-menu .widget.widget_search input[type="submit"], .mkd-side-menu .widget.widget_pages ul li a:hover:before, .mkd-side-menu .widget.widget_meta ul li a:hover:before, .mkd-side-menu .widget.widget_nav_menu ul li a:hover:before, .mkd-pswt-holder .mkd-pswt-slider .mkd-pswt-content .mkd-social-share-holder .mkd-social-share-dropdown-opener, .mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-social-share-holder .mkd-social-share-dropdown-opener, .mkd-post-ajax-preloader .mkd-pulse { background-color: #f99d3e;}
+
+.mkd-btn.mkd-btn-outline:not(.mkd-btn-custom-hover-bg):hover, footer .widget input.wpcf7-form-control.wpcf7-submit:hover { background-color: #f99d3e!important;}
+
+.mkd-drop-down .mkd-menu-second .mkd-menu-inner ul li:hover, .mkd-search-widget-holder .mkd-search-field:focus, .mkd-search-page-holder .mkd-search-page-form .mkd-form-holder .mkd-search-field:focus, .mkd-btn.mkd-btn-outline, .mkd-main-menu ul li .mkd-plw-tabs .mkd-plw-tabs-tab:hover { border-color: #f99d3e;}
+
+.mkd-pb-four-holder .mkd-pb-four-non-featured .mkd-pb-item-row { border-left-color: #f99d3e;}
+
+.mkd-btn.mkd-btn-outline:not(.mkd-btn-custom-border-hover):hover { border-color: #f99d3e!important;}
+
+.mkd-wrapper-inner, .mkd-content, .mkd-boxed .mkd-wrapper .mkd-wrapper-inner, .mkd-boxed .mkd-wrapper .mkd-content { background-color: #e6e7e8;}
+
+.mkd-boxed { background-attachment: fixed;background-size: cover;}
+
+.mkd-content .mkd-content-inner > .mkd-full-width > .mkd-full-width-inner { padding-top: 0px;}
+
+.mkd-content .mkd-content-inner > .mkd-container > .mkd-container-inner { padding-top: 0px;}
+
+h1 { font-family: Roboto;font-size: 30px;font-style: normal;font-weight: 600;}
+
+h2 { font-family: Roboto;font-size: 27px;font-style: normal;font-weight: 500;}
+
+h3 { font-family: Roboto;font-style: normal;font-weight: 400;}
+
+h4 { font-family: Roboto;font-style: normal;}
+
+h5 { font-family: Roboto;font-style: normal;}
+
+h6 { font-family: Roboto;font-style: normal;}
+
+@media only screen and (max-width: 700px) {
+    .mkd-top-bar {
+        height: 0;
+        display: none;
+    }
+}
+.mkd-header-type3 .mkd-page-header .mkd-menu-area { background-color: #b3cc36;}
+.mkd-main-menu > ul > li > a,
+.mkd-page-header .mkd-left-from-main-menu,
+.mkd-page-header .mkd-right-from-main-menu { border-color: #9ab08c !important;}
+.mkd-page-header .mkd-sticky-header .mkd-sticky-holder { background-color: rgba(179, 204, 54, 1);}
+.mkd-side-menu-slide-over-content .mkd-side-menu { left: -280px;width: 280px;}
+
+
+/*dynamic css ends here*/
+@media only screen and (max-width: 780px) {
+    .signup_newsletter{
+        display: none;
+    }
+}
