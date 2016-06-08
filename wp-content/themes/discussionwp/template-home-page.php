@@ -2,7 +2,7 @@
 /**
  * Template Name: Home page
  *
- * Selectable from a dropdown menu on the edit page screen.
+ * For displaying featured article and home category blogs
  */
 ?>
 
