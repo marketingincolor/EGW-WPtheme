@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: /
+ * Template Name: Medical page
  *
  * For displaying featured article and home category blogs
  */
