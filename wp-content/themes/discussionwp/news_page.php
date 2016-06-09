@@ -127,8 +127,8 @@
                     );
                     $my_query = null;
                     $my_query = new WP_Query($args);
-                    
-                    /* settings for post display*/
+
+                    /* settings for post display */
                     $title_tag = 'h3';
                     $title_length = '';
                     $display_date = 'yes';
@@ -143,11 +143,10 @@
                     $thumb_image_size = '150';
                     $excerpt_length = '12';
                     ?>
-
                     <div style="" class="vc_row wpb_row vc_row-fluid mkd-section mkd-content-aligment-left mkd-grid-section">
                         <div class="mkd-container-inner clearfix">
                             <div class="mkd-section-inner-margin clearfix">
-                                                                <!-- Post block start-->
+                                <!-- Post block start-->
                                 <div class="wpb_column vc_column_container vc_col-sm-12">
                                     <div class="vc_column-inner ">
                                         <div class="wpb_wrapper">
@@ -156,12 +155,12 @@
                                                 <div class="mkd-bnl-outer">
                                                     <div class="mkd-bnl-inner">
                                                         <?php
-                                                if ($my_query->have_posts()) {
-                                                    while ($my_query->have_posts()) : $my_query->the_post();
-                                                        ?> 
-                                                        <!-- Post loop started -->
-                                                        <div class="mkd-pt-six-item mkd-post-item mkd-active-post-page">
-                                                           <div class="mkd-pt-six-image-holder">
+                                                        if ($my_query->have_posts()) {
+                                                            while ($my_query->have_posts()) : $my_query->the_post();
+                                                                ?> 
+                                                                <!-- Post loop started -->
+                                                                <div class="mkd-pt-six-item mkd-post-item mkd-active-post-page">
+                                                                    <div class="mkd-pt-six-image-holder">
                                                                         <?php
                                                                         discussion_post_info_category(array(
                                                                             'category' => $display_category
@@ -184,61 +183,58 @@
                                                                             ?>
                                                                         </a>
                                                                     </div>
-                                                            <div class="mkd-pt-six-content-holder">
-                                                                    <div class="mkd-pt-six-title-holder">
-                                                                        </<?php echo esc_html($title_tag) ?> class="mkd-pt-six-title">
-                                                                        <a itemprop="url" class="mkd-pt-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self"><?php echo discussion_get_title_substring(get_the_title(), $title_length) ?></a>
-                                                                        </<?php echo esc_html($title_tag) ?>>
+                                                                    <div class="mkd-pt-six-content-holder">
+                                                                        <div class="mkd-pt-six-title-holder">
+                                                                            </<?php echo esc_html($title_tag) ?> class="mkd-pt-six-title">
+                                                                            <a itemprop="url" class="mkd-pt-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self"><?php echo discussion_get_title_substring(get_the_title(), $title_length) ?></a>
+                                                                            </<?php echo esc_html($title_tag) ?>>
+                                                                        </div>
+                                                                        <?php
+                                                                        discussion_post_info_date(array(
+                                                                            'date' => $display_date,
+                                                                            'date_format' => $date_format
+                                                                        ));
+                                                                        ?>
+                                                                        <?php if ($display_excerpt == 'yes') { ?>
+                                                                            <div class="mkd-pt-one-excerpt">
+                                                                                <?php discussion_excerpt($excerpt_length); ?>
+                                                                            </div>
+                                                                        <?php } ?>
                                                                     </div>
-                                                                    <?php
-                                                                    discussion_post_info_date(array(
-                                                                        'date' => $display_date,
-                                                                        'date_format' => $date_format
-                                                                    ));
-                                                                    ?>
-                                                                    <?php if ($display_excerpt == 'yes') { ?>
-                                                                        <div class="mkd-pt-one-excerpt">
-                                                                            <?php discussion_excerpt($excerpt_length); ?>
+                                                                    <?php if ($display_share == 'yes' || $display_comments == 'yes') { ?>
+                                                                        <div class="mkd-pt-info-section clearfix">
+                                                                            <div>
+                                                                                <?php
+                                                                                discussion_post_info_share(array(
+                                                                                    'share' => $display_share
+                                                                                ));
+                                                                                discussion_post_info_comments(array(
+                                                                                    'comments' => $display_comments
+                                                                                ));
+                                                                                ?>
+                                                                            </div>
+                                                                            <div class="mkd-pt-info-section-background"></div>
                                                                         </div>
                                                                     <?php } ?>
                                                                 </div>
-                                                            <?php if ($display_share == 'yes' || $display_comments == 'yes') { ?>
-                                                                    <div class="mkd-pt-info-section clearfix">
-                                                                        <div>
-                                                                            <?php
-                                                                            discussion_post_info_share(array(
-                                                                                'share' => $display_share
-                                                                            ));
-                                                                            discussion_post_info_comments(array(
-                                                                                'comments' => $display_comments
-                                                                            ));
-                                                                            ?>
-                                                                        </div>
-                                                                        <div class="mkd-pt-info-section-background"></div>
-                                                                    </div>
-                                                                <?php } ?>
-                                                        </div>
-                                                        <?php
-                                                        endwhile;
-                }
-                wp_reset_query();  // Restore global post data stomped by the_post().
-                ?>
+                                                                <?php
+                                                            endwhile;
+                                                        }
+                                                        wp_reset_query();  // Restore global post data stomped by the_post().
+                                                        ?>
                                                         <!-- Post Loop ended  -->
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-
                                 </div>
-                           
+                            </div>
                         </div><!-- #content -->
-
                     </div>
-                </div> <?php }?>
-                
-            </div></div>
-    </div>    
-    <?php get_footer(); ?>
+                </div> <?php } ?>
+        </div>
+    </div>
+</div>    
+<?php get_footer(); ?>
 
