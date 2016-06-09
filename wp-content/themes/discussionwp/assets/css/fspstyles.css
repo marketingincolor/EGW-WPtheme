@@ -7,61 +7,6 @@ and open the template in the editor.
     Created on : Jun 2, 2016, 7:19:09 PM
     Author     : FSSD
 */
-.mkd-top-bar{
-    font-size: 16px;
-}
-.mkd-position-fullright{
-    float: right;
-    width: 100%;
-    text-align: right;
-}
-.signup_newsletter{
-    float: left;
-    padding-right: 25px;
-}
-.signup_newsletter a{
-    color: #696767;
-}
-.user_login{
-    background:#b3cc36;
-    padding: 0px 20px;
-    color: #ffffff;
-    font-size: 16px;
-    display: block;
-    overflow: hidden;
-}
-.user_login:hover{
-    background-color: #f99d3e;
-    color:#ffffff;
-}
-.user_login img {
-    float: left;
-    display: block;
-    padding-top: 7px;
-}
-.user_login span{
-    display: block;
-    float: left;
-    padding-left: 10px;
-}
-.home .mkd-content {
-    padding-bottom: 20px;
-}
-.mkd-main-menu > ul > li > a, .mkd-drop-down .mkd-menu-second .mkd-menu-inner ul li > a{
-    font-size: 18px;
-}
-.mkd-post-item .mkd-post-info-category a{
-    font-size: 14px;
-}
-
-/*footer css starts here*/
-footer .mkd-footer-bottom-holder .mkd-footer-bottom-holder-inner{
-    background: #4c4d4f;
-}
-footer .mkd-footer-bottom-holder .widget{
-    color: #fff;
-}
-/*footer css ends here*/
 
 /*dynamic css starts here*/
 ::selection { background: #f99d3e;}
@@ -102,12 +47,7 @@ h5 { font-family: Roboto;font-style: normal;}
 
 h6 { font-family: Roboto;font-style: normal;}
 
-@media only screen and (max-width: 700px) {
-    .mkd-top-bar {
-        height: 0;
-        display: none;
-    }
-}
+
 .mkd-header-type3 .mkd-page-header .mkd-menu-area { background-color: #b3cc36;}
 .mkd-main-menu > ul > li > a,
 .mkd-page-header .mkd-left-from-main-menu,
@@ -115,10 +55,191 @@ h6 { font-family: Roboto;font-style: normal;}
 .mkd-page-header .mkd-sticky-header .mkd-sticky-holder { background-color: rgba(179, 204, 54, 1);}
 .mkd-side-menu-slide-over-content .mkd-side-menu { left: -280px;width: 280px;}
 
-
 /*dynamic css ends here*/
-@media only screen and (max-width: 780px) {
-    .signup_newsletter{
-        display: none;
+
+/*header css starts here*/
+.mkd-top-bar{
+    font-size: 16px;
+}
+.mkd-position-fullright{
+    float: right;
+    width: 100%;
+    text-align: right;
+}
+.mkd-main-menu > ul > li:hover > a, .mkd-main-menu > ul > li.mkd-active-item > a, .mkd-main-menu ul li .mkd-plw-tabs .mkd-plw-tabs-tab:hover, .mkd-search-opener:hover, .mkd-search-opener.mkd-active, .mkd-search-widget-holder .mkd-search-submit{
+     background-color: #4e5f13;
+}
+.mkd-search-widget-holder .mkd-search-field:focus, .mkd-search-page-holder .mkd-search-page-form .mkd-form-holder .mkd-search-field:focus{
+     border-color: #4e5f13;
+}
+.signup_newsletter{
+    float: left;
+    padding-right: 25px;
+}
+.signup_newsletter a{
+    color: #696767;
+}
+.user_login{
+    background:#b3cc36;
+    padding: 0px 20px;
+    color: #ffffff;
+    font-size: 16px;
+    display: block;
+    overflow: hidden;
+}
+.user_login:hover{
+    background-color: #f99d3e;
+    color:#ffffff;
+}
+.user_login img {
+    float: left;
+    display: block;
+    padding-top: 7px;
+}
+.user_login span{
+    display: block;
+    float: left;
+    padding-left: 10px;
+}
+.home .mkd-content {
+    padding-bottom: 20px;
+}
+.mkd-main-menu > ul > li > a, .mkd-drop-down .mkd-menu-second .mkd-menu-inner ul li > a{
+    font-size: 18px;
+}
+.mkd-post-item .mkd-post-info-category a{
+    font-size: 14px;
+}
+.social-icons-header{
+    float:left;
+}
+.user_login_container{
+    float: left;
+}
+.top-menu-left-container{
+    float: left;
+    padding-right: 30px;
+}
+.topbar-rightcontainer{
+    float: right;
+}
+
+
+/**/
+@media only screen and (min-width: 1025px) {
+    .mkd-sticky-holder .mkd-vertical-align-containers .mkd-position-left{
+    float: left;
+}
+.mkd-sticky-holder .mkd-main-menu {
+    width: 87%; 
+}
+.mkd-sticky-holder .mkd-main-menu > ul > li:last-child{
+    float: right;
+    margin-right: 52px;
+}
+.mkd-vertical-align-containers .mkd-position-left{
+    width: 100%;
+}
+.mkd-position-left-inner{
+    width: 99.90%;
+}
+.mkd-main-menu{
+    width: 100%;
+}
+.mkd-main-menu > ul {
+    width: 100%;
+}
+.mkd-main-menu > ul > li:last-child{
+    float: right;
+    margin-right: 52px;
+}
+.mkd-vertical-align-containers .mkd-position-right{
+    top:-100%;
+}
+.mkd-main-menu > ul > li:last-child > a {
+    border-right: none;
+}
+}
+
+@media only screen and (max-width: 1189px) {
+    .mkd-sticky-holder .mkd-main-menu {
+        width: 85%;
     }
 }
+/**/
+@media only screen and (min-width: 768px) {
+    .top-bar-section-mobile{
+        display: none;
+    }
+    .top-bar-section{
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .top-bar-section-mobile{
+        display: none;
+    }
+    .top-bar-section{
+        display: block;
+    }
+}
+@media screen and (max-width: 800px) and (min-width: 768px){
+    .mkd-top-bar-section .mkd-grid{
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .mkd-top-bar-section .mkd-position-fullright {
+        text-align: left;
+    }
+    .mkd-topbar-mobilecontainer{
+        width: 100%;
+    }
+
+    .mkd-top-bar-section .mkd-grid{
+        width: 100%;
+    }
+    .top-bar-section-mobile{
+        display: block;
+    }
+    .top-bar-section{
+        display: none;
+    }
+    .mkd-top-bar {
+        height: 100%;
+    }
+    .top-menu-left-container{
+        text-align: center;
+        width: 100%;
+        padding: 10px 0px 0px 0px;
+    }
+    .topbar-rightcontainer{
+        width: 100%;
+    }
+    .social-icons-header {
+        float: right;
+    }
+}
+@media only screen and (max-width: 448px) {
+    .mkd-top-bar {
+        font-size: 12px;
+    }
+
+    .mkd-top-bar .widget.widget_nav_menu ul li::after {
+        padding-left: 5px;
+    }
+    .mkd-top-bar .widget.widget_nav_menu ul li {
+        margin: 0 5px 0px 0 !important;
+    }
+}
+/*header css ends here*/
+
+/*footer css starts here*/
+footer .mkd-footer-bottom-holder .mkd-footer-bottom-holder-inner{
+    background: #4c4d4f;
+}
+footer .mkd-footer-bottom-holder .widget{
+    color: #fff;
+}
+/*footer css ends here*/
