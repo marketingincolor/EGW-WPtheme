@@ -243,3 +243,9 @@ footer .mkd-footer-bottom-holder .widget{
     color: #fff;
 }
 /*footer css ends here*/
+
+
+/*category page banner/slide image */
+#category_banner .slick-list.draggable{
+    cursor:inherit;
+}
