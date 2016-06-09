@@ -134,7 +134,7 @@
 
                             <?php
                             $my_query = null;
-                            $my_query = discussion_custom_category_query('home');
+                            $my_query = discussion_custom_category_query('post','home');
                             global $wp_query;
                             ?>
 

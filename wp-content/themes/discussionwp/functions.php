@@ -1147,11 +1147,12 @@ if(!function_exists('discussion_custom_getImageParams')){
  * For custom template for category query
  */
 if(!function_exists('discussion_custom_category_query')){
-    function discussion_custom_category_query($type){
+    function discussion_custom_category_query($type,$category){
         $args=array(
-            'category_name' => 'Home',
+            'category_name' => $category,
             'post_status' => 'publish', 
             'order' => 'DESC',
+            'post_type'=>$type,
             'posts_per_page' => 6,
             'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1)
         );        
