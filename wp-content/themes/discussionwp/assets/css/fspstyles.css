@@ -48,12 +48,21 @@ h5 { font-family: Roboto;font-style: normal;}
 h6 { font-family: Roboto;font-style: normal;}
 
 
-.mkd-header-type3 .mkd-page-header .mkd-menu-area { background-color: #b3cc36;}
+.mkd-header-type3 .mkd-page-header .mkd-menu-area { 
+    background-color: #b3cc36;
+}
 .mkd-main-menu > ul > li > a,
 .mkd-page-header .mkd-left-from-main-menu,
-.mkd-page-header .mkd-right-from-main-menu { border-color: #9ab08c !important;}
-.mkd-page-header .mkd-sticky-header .mkd-sticky-holder { background-color: rgba(179, 204, 54, 1);}
-.mkd-side-menu-slide-over-content .mkd-side-menu { left: -280px;width: 280px;}
+.mkd-page-header .mkd-right-from-main-menu { 
+    border-color: #9ab08c !important;
+}
+.mkd-page-header .mkd-sticky-header .mkd-sticky-holder { 
+    background-color: rgba(179, 204, 54, 1);
+}
+.mkd-side-menu-slide-over-content .mkd-side-menu { 
+    left: -280px;
+    width: 280px;
+}
 
 /*dynamic css ends here*/
 
@@ -67,10 +76,10 @@ h6 { font-family: Roboto;font-style: normal;}
     text-align: right;
 }
 .mkd-main-menu > ul > li:hover > a, .mkd-main-menu > ul > li.mkd-active-item > a, .mkd-main-menu ul li .mkd-plw-tabs .mkd-plw-tabs-tab:hover, .mkd-search-opener:hover, .mkd-search-opener.mkd-active, .mkd-search-widget-holder .mkd-search-submit{
-     background-color: #4e5f13;
+    background-color: #4e5f13;
 }
 .mkd-search-widget-holder .mkd-search-field:focus, .mkd-search-page-holder .mkd-search-page-form .mkd-form-holder .mkd-search-field:focus{
-     border-color: #4e5f13;
+    border-color: #4e5f13;
 }
 .signup_newsletter{
     float: left;
@@ -125,40 +134,43 @@ h6 { font-family: Roboto;font-style: normal;}
 }
 
 
-/**/
+/*Category menu right side css starts here*/
 @media only screen and (min-width: 1025px) {
     .mkd-sticky-holder .mkd-vertical-align-containers .mkd-position-left{
-    float: left;
-}
-.mkd-sticky-holder .mkd-main-menu {
-    width: 87%; 
-}
-.mkd-sticky-holder .mkd-main-menu > ul > li:last-child{
-    float: right;
-    margin-right: 52px;
-}
-.mkd-vertical-align-containers .mkd-position-left{
-    width: 100%;
-}
-.mkd-position-left-inner{
-    width: 99.90%;
-}
-.mkd-main-menu{
-    width: 100%;
-}
-.mkd-main-menu > ul {
-    width: 100%;
-}
-.mkd-main-menu > ul > li:last-child{
-    float: right;
-    margin-right: 52px;
-}
-.mkd-vertical-align-containers .mkd-position-right{
-    top:-100%;
-}
-.mkd-main-menu > ul > li:last-child > a {
-    border-right: none;
-}
+        float: left;
+    }
+    .mkd-sticky-holder .mkd-main-menu {
+        width: 87%; 
+    }
+    .mkd-sticky-holder .mkd-main-menu > ul > li:last-child{
+        float: right;
+        margin-right: 52px;
+    }
+    .mkd-vertical-align-containers .mkd-position-left{
+        width: 100%;
+    }
+    .mkd-position-left-inner{
+        width: 99.90%;
+    }
+    .mkd-main-menu{
+        width: 100%;
+    }
+    .mkd-main-menu > ul {
+        width: 100%;
+    }
+    .mkd-main-menu > ul > li:last-child{
+        float: right;
+        margin-right: 52px;
+    }
+    .mkd-vertical-align-containers .mkd-position-right{
+        top:-100%;
+    }
+    .mkd-main-menu > ul > li:last-child > a {
+        border-right: none;
+    }
+    .mkd-main-menu > ul > li:nth-last-child(2){
+        border-right: 1px solid #9ab08c;
+    }
 }
 
 @media only screen and (max-width: 1189px) {
@@ -166,7 +178,8 @@ h6 { font-family: Roboto;font-style: normal;}
         width: 85%;
     }
 }
-/**/
+/*Category menu right side css ends here*/
+
 @media only screen and (min-width: 768px) {
     .top-bar-section-mobile{
         display: none;
@@ -245,7 +258,45 @@ footer .mkd-footer-bottom-holder .widget{
 /*footer css ends here*/
 
 
-/*category page banner/slide image */
+/*category page banner/slide image css starts here*/
 #category_banner .slick-list.draggable{
     cursor:inherit;
 }
+#category_banner .mkd-psi-holder .mkd-psi-slider .mkd-psi-content{
+    background: none;
+}
+#category_banner .mkd-psi-holder .mkd-psi-slider .mkd-psi-slide.slick-active .mkd-psi-content:hover{
+    background: none;
+}
+#category_banner h2{
+    padding: 10px 30px;
+    float: left; 
+    background-color: rgba(32, 32, 32, 0.25);
+}
+.category_pink{
+    color:#c9739c;
+}
+.category_blue{
+    color:#0e84ac;
+}
+.category_violet{
+    color:#7e3b5a;
+}
+.category_green{
+    color:#b3cc36;
+}
+.category_darkorange{
+    color:#cb8132;
+}
+/*category page banner/slide image css ends here*/
+
+/*Maginific pop css starts here*/
+.white-popup-block {
+    background: #FFF;
+    padding: 20px 30px;
+    text-align: left;
+    max-width: 520px;
+    margin: 40px auto;
+    position: relative;
+}
+/*Maginific pop css ends here*/
