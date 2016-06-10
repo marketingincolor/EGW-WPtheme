@@ -4,57 +4,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/**
- * Template Name: Find branch
- *
- * Selectable from a dropdown menu on the edit page screen.
- */
 ?>
-
-<?php get_header(); ?>
-<div class="mkd-content">
-    <div class="mkd-content-inner">
-        <?php do_action('discussion_after_container_open'); ?>
-        <div class="mkd-full-width">
-            <div class="mkd-full-width-inner">               
-                <div style="" class="vc_row wpb_row vc_row-fluid mkd-section mkd-content-aligment-left">
-                    <div class="clearfix mkd-full-section-inner">
-                        <div class="wpb_column vc_column_container vc_col-sm-12">
-                            <div class="vc_column-inner ">
-                                <div class="wpb_wrapper">
-                                    <div data-max_pages="1" data-paged="1" data-sort="featured_first" data-post_in="205, 215, 218, 225, 232" data-category_id="4" data-number_of_posts="5" data-slider_height="735" data-base="mkd_post_slider_interactive" class="mkd-bnl-holder mkd-psi-holder  mkd-psi-number-5" style="opacity: 1;">
-                                        <div class="mkd-bnl-outer">
-                                            <!-- Full page banner at top f the page -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>    
-                    </div>
-                </div>
-                <div style="" class="vc_row wpb_row vc_row-fluid mkd-section mkd-content-aligment-left mkd-grid-section">
-                    <div class="mkd-container-inner clearfix">
-                        <div class="mkd-column1 mkd-content-left-from-sidebar">
-                            <div class="mkd-column-inner">
-                                <ul>
-                                <?php
-                                $blog_list = get_blog_list(0, 'all');
-                                foreach ($blog_list AS $blog) {
-                                    
-                                    //echo 'Blog ' . $blog['blog_id'] . ': ' . $blog['domain'] . $blog['path'] . '';
-                                    echo "<li type='square'><a href='http://".$blog['domain'] . $blog['path']."' target='_blank'>". $blog['domain'] . $blog['path'] . "</a></li>";
-                                }
-                                ?>
-                            </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-            </div>
-        </div>
-    </div>    
-    <?php get_footer(); ?>
-
-
-
-
+<style>
+    .white-popup-block {
+        background: #FFF;
+        padding: 20px 30px;
+        text-align: left;
+        max-width: 650px;
+        margin: 40px auto;
+        position: relative;
+    }
+</style>
+<div class="white-popup-block">
+    <?php
+    $url = (!empty($_SERVER['HTTPS'])) ? "https://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] : "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+    $url = $_SERVER['REQUEST_URI'];
+    $my_url = explode('wp-content', $url);
+    $path = $_SERVER['DOCUMENT_ROOT'] . $my_url[0];
+    define('WP_USE_THEMES', false);
+    require($path . 'wp-load.php');
+    $blog_list = get_blog_list(0, 'all');
+    foreach ($blog_list AS $blog) {
+        echo "<li type='square'><a href='http://" . $blog['domain'] . $blog['path'] . "' target='_blank'>" . $blog['domain'] . $blog['path'] . "</a></li>";
+    }
+    ?>
+</div>
