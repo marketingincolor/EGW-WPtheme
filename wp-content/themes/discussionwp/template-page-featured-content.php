@@ -12,7 +12,7 @@
                                 'display_date' => 'no',
                                 'date_format' => 'd. F Y',
                                 'display_comments' => 'no',
-                                'display_count' => 'yes',
+                                'display_count' => 'no',
                                 'display_share' => 'no',
                                 'slider_height' => ''
                             );
@@ -20,10 +20,10 @@
                             if (have_posts()):
                                 $title_ta = 'h2';
                                 $display_category = 'no';
-                                $display_date = 'yes';
+                                $display_date = 'no';
                                 $date_format = 'd. F Y';
                                 $display_comments = 'no';
-                                $display_count = 'yes';
+                                $display_count = 'no';
                                 $display_share = 'yes';
                                 $slider_height = '';
                                 $params = shortcode_atts($args, $atts);
@@ -38,13 +38,17 @@
                                         <div class="mkd-psi-slide" data-image-proportion="<?php echo esc_attr($params['proportion']) ?>" <?php discussion_inline_style($params['background_image']); ?>>
                                             <div class="mkd-psi-content">
                                                 <div class="mkd-grid">
+                                                     
+
                                                     <?php
                                                     discussion_post_info_category(array(
                                                         'category' => $display_category
                                                     ))
                                                     ?>
                                                     <h2 class="mkd-psi-title">
-                                                        <a itemprop="url" href="javascript:void(0)" target="_self"><?php echo esc_attr(get_the_title()) ?></a>
+<!--                                                        <a itemprop="url" href="javascript:void(0)" target="_self">-->
+                                                            <?php echo esc_attr(get_the_title()) ?>
+<!--                                                        </a>-->
                                                     </h2>
                                                     <?php
                                                     discussion_post_info_date(array(

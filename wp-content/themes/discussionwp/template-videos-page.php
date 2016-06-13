@@ -97,7 +97,7 @@
                                                 endwhile;
                                                 $html .= '<div class="mkd-psi-slider">  </div>';
                                             else:
-                                                $html .= $this->errorMessage();
+                                                
 
                                             endif;
                                             wp_reset_query();

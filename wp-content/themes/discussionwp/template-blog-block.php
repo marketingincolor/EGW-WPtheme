@@ -49,11 +49,19 @@
                                 <div class="mkd-pt-six-item mkd-post-item">
                                     <?php if (has_post_thumbnail()) { ?>
                                         <div class="mkd-pt-six-image-holder">
-                                            <?php
-                                            discussion_post_info_category(array(
-                                                'category' => $display_category
-                                            ));
+                                           <?php
+
+                                            $category = get_the_category();
+                                            $the_category_id = $category[0]->cat_ID;
+                                            if(function_exists('rl_color')){
+                                                $rl_category_color = rl_color($the_category_id);
+                                            }
+
                                             ?>
+                                            <div  style="background: <?php echo $rl_category_color; ?>;" class="mkd-post-info-category">
+                                                <?php the_category(' / '); ?>
+                                            </div>
+
                                             <a itemprop="url" class="mkd-pt-six-slide-link mkd-image-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self">
                                                 <?php
                                                 if ($thumb_image_size != 'custom_size') {
@@ -120,8 +128,8 @@
 
                     <?php
                     echo "</ul>";
-                } else {
-                    echo "No content found";
+                } else {                   
+			discussion_get_module_template_part('templates/parts/no-posts', 'blog');		
                 }
                
                 discussion_pagination($wp_query->max_num_pages, 6, get_query_var('paged') ? get_query_var('paged') : 1);
