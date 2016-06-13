@@ -249,12 +249,14 @@ h6 { font-family: Roboto;font-style: normal;}
 /*header css ends here*/
 
 /*footer css starts here*/
-footer .mkd-footer-bottom-holder .mkd-footer-bottom-holder-inner{
+/*footer .mkd-footer-bottom-holder .mkd-footer-bottom-holder-inner{
     background: #4c4d4f;
 }
 footer .mkd-footer-bottom-holder .widget{
     color: #fff;
-}
+}*/
+.copyrights p{font-size: 12px;}
+.copyrights p a:hover{color: #f99d3e;}  
 /*footer css ends here*/
 
 
@@ -300,3 +302,57 @@ footer .mkd-footer-bottom-holder .widget{
     position: relative;
 }
 /*Maginific pop css ends here*/
+
+/*Login css starts here*/
+.login-container {
+    background: #ffffff;
+    padding: 20px 50px;
+    text-align: center;
+    max-width: 280px;
+    margin: 40px auto;
+    position: relative;
+}
+.login-container p{
+    margin: 10px 0 20px;
+}
+.login-container h3{
+    font-size: 20px;
+    padding-bottom: 5px;
+}
+.login-container ul li{
+    list-style: none;
+    padding-bottom: 15px;
+    overflow: hidden;
+}
+.login-container ul li label{
+    line-height: 37px;
+    float: left;
+}
+.login-container ul li input{
+    outline: none;
+    padding: 10px;
+    border: 1px solid #e6e7e8;
+    float: right;
+}
+.fsplogin_btn{
+    background: #f99d3e;
+    padding: 10px 35px;
+    border: 0;
+    color: #ffffff;
+    font-size: 14px;
+}
+.fs_forgot_password a{
+    font-size: 13px;
+    color: #747575;
+    text-decoration: underline;
+}
+.fs_forgot_password a:hover{
+    text-decoration: none;
+}
+@media only screen and (max-width: 480px) {
+    .login-container ul li input{
+        float: left;
+        width: 87%;
+    }
+}
+/*Login css ends here*/

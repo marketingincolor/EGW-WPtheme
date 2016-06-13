@@ -184,6 +184,7 @@ function fspr_login_form_fields() {
 
     ob_start();
     ?>
+<div class="login-container">
     <h3 class="fspr_header"><?php _e('Login'); ?></h3>
 
     <?php
@@ -193,20 +194,26 @@ function fspr_login_form_fields() {
 
     <form id="fspr_login_form"  class="fspr_form"action="" method="post">
         <fieldset>
-            <p>
-                <label for="fspr_user_Login">Username</label>
+            <ul>
+                <li>
+                     <label for="fspr_user_Login">Username</label>
                 <input name="fspr_user_login" id="fspr_user_login" class="required" type="text"/>
-            </p>
-            <p>
-                <label for="fspr_user_pass">Password</label>
+                </li>
+                <li>
+                    <label for="fspr_user_pass">Password</label>
                 <input name="fspr_user_pass" id="fspr_user_pass" class="required" type="password"/>
-            </p>
+                </li>
+            </ul>
             <p>
                 <input type="hidden" name="fspr_login_nonce" value="<?php echo wp_create_nonce('fspr-login-nonce'); ?>"/>
-                <input id="fspr_login_submit" name="fspr_login_submit" type="submit" value="Login"/>
+                <input id="fspr_login_submit" name="fspr_login_submit" type="submit" value="Login" class="fsplogin_btn"/>
             </p>
+            <div class="fs_forgot_password">
+                 <a href="#">Forgot your password?</a>
+            </div>
         </fieldset>
     </form>
+    </div>
     <?php
     return ob_get_clean();
 }
