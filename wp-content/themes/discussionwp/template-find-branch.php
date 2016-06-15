@@ -5,16 +5,6 @@
  * and open the template in the editor.
  */
 ?>
-<style>
-    .white-popup-block {
-        background: #FFF;
-        padding: 20px 30px;
-        text-align: left;
-        max-width: 650px;
-        margin: 40px auto;
-        position: relative;
-    }
-</style>
 <div class="white-popup-block">
     <?php
     $url = (!empty($_SERVER['HTTPS'])) ? "https://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] : "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
@@ -28,4 +18,18 @@
         echo "<li type='square'><a href='http://" . $blog['domain'] . $blog['path'] . "' target='_blank'>" . $blog['domain'] . $blog['path'] . "</a></li>";
     }
     ?>
+</div>
+<div class="white-popup-block">
+    <div class="find-a-branch-container">
+        <h4>Find A Branch</h4>
+        <div class="fs-custom-select">
+            <select>
+                <option value="Select Your Village" selected="selected">Select Your Village</option>
+                <option value="saab">The village</option>
+            </select>
+        </div>
+        <div class="ev-btn-container">
+            <button type="button">myEveergreen Home</button>
+        </div>
+    </div>
 </div>
