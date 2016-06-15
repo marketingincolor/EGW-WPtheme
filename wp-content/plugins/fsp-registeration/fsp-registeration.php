@@ -400,7 +400,7 @@ function custom_user_profile_fields($current_user, $userdata,$user_ID){
                 </tr>
     <?php endif; ?>
             <tr>
-                <td colspan="2" align="center"><h2>Update profile</h2></td>
+                <td colspan="2" align="center"><h2>User profile</h2></td>
             </tr>
             <tr>
                 <td>First Name</td>
@@ -453,10 +453,6 @@ function custom_user_profile_fields($current_user, $userdata,$user_ID){
             <tr>
                 <td>City</td>
                 <td><input type="text" name="city" id="city" value="<?php echo esc_attr(get_the_author_meta('city', $userdata->ID)); ?>" style="width: 300px;" /></td>
-            </tr>
-            <tr>
-                <td>Province</td>
-                <td><input type="text" name="province" id="province" value="<?php echo esc_attr(get_the_author_meta('province', $userdata->ID)); ?>" style="width: 300px;" /></td>
             </tr>
             <tr>
                 <td>Postal Code</td>
