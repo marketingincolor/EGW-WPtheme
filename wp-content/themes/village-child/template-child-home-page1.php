@@ -24,7 +24,7 @@
                                     $my_query = null;
                                     $my_query = discussion_custom_category_query('post', $category);
                                     global $wp_query;
-                                    get_template_part('template-blog-block');
+                                    get_template_part('template-blog-block1');
                                     ?>                            
                                 </div>
                             </div>		
