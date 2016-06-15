@@ -76,7 +76,7 @@
                                                                     ))
                                                                     ?>
                                                                     <h2 class="mkd-psi-title">
-                                                                        <a itemprop="url" href="<?php echo $redirect_url; ?>" target="_self"><?php echo esc_attr(get_the_title()) ?></a>
+                                                                        <a itemprop="url" href="<?php echo $redirect_url; ?>" target="_self"><?php echo esc_attr(the_title()) ?></a>
                                                                     </h2>
                                                                     <?php
                                                                     discussion_post_info_date(array(
@@ -109,7 +109,7 @@
                                                 endwhile;
                                                 $html .= '<div class="mkd-psi-slider">  </div>';
                                             else:
-                                                $html .= $this->errorMessage();
+                                                discussion_get_module_template_part('templates/parts/no-posts', 'blog');
 
                                             endif;
                                             wp_reset_postdata();
@@ -164,7 +164,7 @@
                                                     }
 
                                                     $title_tag = 'h3';
-                                                    $title_length = '';
+                                                    $title_length = '20';
                                                     $display_date = 'yes';
                                                     $date_format = 'd. F Y';
                                                     $display_category = 'yes';

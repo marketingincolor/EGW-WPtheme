@@ -1031,9 +1031,10 @@ if(!function_exists('get_videoid_from_url')){
  */
 if(!function_exists('discussion_custom_featured_query')){
     function discussion_custom_featured_query($title,$type){
-         $args1=array(
-           'title'=>$title,
+        $cat_id = get_cat_ID('My Category');
+         $args1=array(        
            'post_type'=>$type,
+           'category_name'=>'feature-home',
            'post_status' => 'publish',          
            'order' => 'DESC',
            'posts_per_page' =>1 
