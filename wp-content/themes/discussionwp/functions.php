@@ -11,6 +11,7 @@ if(!function_exists('discussion_styles')) {
         wp_enqueue_style('discussion_default_style', MIKADO_ROOT.'/style.css');
         wp_enqueue_style('discussion_modules', MIKADO_ASSETS_ROOT.'/css/modules.css');
         wp_enqueue_style('fsp_custom_css', MIKADO_ASSETS_ROOT.'/css/fspstyles.css');
+        wp_enqueue_style('fsp_custom_popup', MIKADO_ASSETS_ROOT.'/css/magnific-popup.css');
 
         discussion_icon_collections()->enqueueStyles();
 
@@ -126,6 +127,7 @@ if(!function_exists('discussion_scripts')) {
 		wp_enqueue_script( 'jquery-ui-core');
 		wp_enqueue_script( 'jquery-ui-tabs');
 		wp_enqueue_script( 'wp-mediaelement');
+                
 
         wp_enqueue_script('discussion_third_party', MIKADO_ASSETS_ROOT.'/js/third-party.min.js', array('jquery'), false, true);
 
@@ -137,6 +139,8 @@ if(!function_exists('discussion_scripts')) {
         wp_enqueue_script('google_map_api', '//maps.googleapis.com/maps/api/js?sensor=false', array(), false, true);
         
         wp_enqueue_script('discussion_modules', MIKADO_ASSETS_ROOT.'/js/modules.min.js', array('jquery'), false, true);
+        wp_enqueue_script('fsp-custom-popupjs', MIKADO_ASSETS_ROOT.'/js/jquery.magnific-popup.js' , array('jquery'), false, true);
+        
 
         //include comment reply script
         $wp_scripts->add_data('comment-reply', 'group', 1);
@@ -1147,14 +1151,16 @@ if(!function_exists('discussion_custom_getImageParams')){
  * For custom template for category query
  */
 if(!function_exists('discussion_custom_category_query')){
-    function discussion_custom_category_query($type){
+    function discussion_custom_category_query($type,$category){
         $args=array(
-            'category_name' => 'Home',
+            'category_name' => $category,
             'post_status' => 'publish', 
             'order' => 'DESC',
+            'post_type'=>$type,
             'posts_per_page' => 6,
             'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1)
         );        
         return $my_query = query_posts($args);
     }
 }
+

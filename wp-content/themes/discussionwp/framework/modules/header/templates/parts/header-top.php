@@ -2,7 +2,7 @@
 
 <?php do_action('discussion_before_header_top'); ?>
 
-<div class="mkd-top-bar">
+<div class="mkd-top-bar mkd-top-bar-section">
     <?php if($top_bar_in_grid) : ?>
     <div class="mkd-grid">
     <?php endif; ?>

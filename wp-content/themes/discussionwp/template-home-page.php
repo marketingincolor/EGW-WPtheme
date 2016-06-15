@@ -2,7 +2,7 @@
 /**
  * Template Name: Home page
  *
- * Selectable from a dropdown menu on the edit page screen.
+ * For displaying featured article and home category blogs
  */
 ?>
 
@@ -134,7 +134,7 @@
 
                             <?php
                             $my_query = null;
-                            $my_query = discussion_custom_category_query('home');
+                            $my_query = discussion_custom_category_query('post','home');
                             global $wp_query;
                             ?>
 
