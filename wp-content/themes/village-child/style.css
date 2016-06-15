@@ -1,0 +1,17 @@
+/*
+ Theme Name:   Village Child
+ Theme URI:    http://192.168.1.154/evergreen/village/
+ Description:  Village Child Theme
+ Author:       John Doe
+ Author URI:   http://example.com
+ Template:     discussionwp
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Tags:         light, dark, two-columns, right-sidebar, responsive-layout, accessibility-ready
+ Text Domain:  village-child
+*/
+
+.mkd-logo-area{
+background-color:red;
+}
