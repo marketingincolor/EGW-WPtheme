@@ -33,6 +33,7 @@
                                     <aside class="mkd-sidebar" style="transform: translateY(0px);">
                                         <div class="widget widget_apsc_widget">   
                                             <?php get_template_part('template_sidebar_home'); ?>
+                                            <?php //get_sidebar(); ?>
                                         </div>    
                                     </aside>
                                 </div>
