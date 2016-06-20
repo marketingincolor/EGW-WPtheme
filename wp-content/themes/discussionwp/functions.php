@@ -1005,7 +1005,9 @@ if(!function_exists('discussion_get_blog_page_range')) {
 }
 
 /**
- * For retrieve video id and generate video url
+ * Author - Akilan
+ * Update - 20-06-2016
+ * Purpose - For retrieve video id and generate video url
  */
 if(!function_exists('get_videoid_from_url')){
     function get_videoid_from_url($url){
@@ -1027,7 +1029,9 @@ if(!function_exists('get_videoid_from_url')){
 
 
 /**
- * For custom template featured query
+ * Author -Akilan
+ * Date  - 20-06-2016
+ * Purpose -  For custom template featured query
  */
 if(!function_exists('discussion_custom_featured_query')){
     function discussion_custom_featured_query($title,$type){
@@ -1044,8 +1048,12 @@ if(!function_exists('discussion_custom_featured_query')){
 }
 
 /**
- * For featured template image background
+ * 
+ * Author -Akilan
+ * Date  - 20-06-2016
+ * Purpose -  For featured template image background
  */
+ 
 if(!function_exists('discussion_custom_getImageBackground')){
     function discussion_custom_getImageBackground($id) {
         $background_image_style = '';
@@ -1061,7 +1069,9 @@ if(!function_exists('discussion_custom_getImageBackground')){
 }
 
 /**
- * Returns title tag for smaller posts
+ * Author -Akilan
+ * Date  - 20-06-2016
+ * purpose-  Returns title tag for smaller posts
  */
 if(!function_exists('discussion_custom_gettitletagsmaller')){
     function discussion_custom_gettitletagsmaller($params) {
@@ -1096,6 +1106,8 @@ if(!function_exists('discussion_custom_gettitletagsmaller')){
 }   
  
 /**
+ * Author -Akilan
+ * Date  - 20-06-2016
  * get data of attributes
  * @param type $params
  * @param type $atts
@@ -1118,8 +1130,9 @@ if(!function_exists('discussion_custom_getData')){
     }
 }
 
-/**
- * get image params detail
+/** Author -Akilan
+ *  Date  - 20-06-2016
+ *  purpose - For implementing custom template image params detail
  * @param type $id
  * @return string
  */        
@@ -1148,8 +1161,48 @@ if(!function_exists('discussion_custom_getImageParams')){
     }
 }
 
+
 /**
- * For custom template for category query
+ * Author -Akilan
+ * Date  - 20-06-2016
+ * purpose - For implementing custom category template for getting category image detail
+ * 
+ * @param type $id
+ * @return string
+ */        
+if(!function_exists('discussion_custom_categoryImageParams')){
+    function discussion_custom_categoryImageParams($id){
+        $params = array();
+        $params['proportion'] = 1;
+        $params['background_image'] = '';
+        $params['background_image_thumbs'] = '';
+        $url= z_taxonomy_image_url($id);
+        $background_image_url = wp_get_attachment_image_src($url,'full');
+        if($url!=""){
+             $background_image=getimagesize( $url );      
+        }
+       
+        $background_image_thumbs = wp_get_attachment_image_src(get_post_thumbnail_id($id),'discussion_landscape');
+
+        if (count($background_image) && is_array($background_image)){
+                $width = $background_image[0];
+                $height = $background_image[1];
+                $params['proportion'] = $height/$width; //get height/width proportion
+                $params['background_image'] = 'background-image: url('.$url.')';
+        }
+
+        if (count($background_image_thumbs) && is_array($background_image_thumbs)){
+                $params['background_image_thumbs'] = 'background-image: url('.$background_image_thumbs[0].')';
+        }
+       
+        return $params;
+    }
+}
+
+/**
+ * Author -Akilan
+ * Date  - 20-06-2016
+ * Purpose - For custom template for category query
  */
 if(!function_exists('discussion_custom_category_query')){
     function discussion_custom_category_query($type,$category){
@@ -1162,6 +1215,59 @@ if(!function_exists('discussion_custom_category_query')){
             'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1)
         );        
         return $my_query = query_posts($args);
+    }
+}
+
+/**
+ * Author - Akilan
+ * Date - 20-06-2016
+ * Purpose - For custom template for category query 
+ */
+if(!function_exists('discussion_custom_categorylist_query')){
+    function discussion_custom_categorylist_query($category){
+        $args=array(
+            'cat' => $category,
+            'post_status' => 'publish', 
+            'order' => 'DESC',
+//            'post_type'=>$type,
+            'posts_per_page' => 6,
+            'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1)
+        );        
+        return $my_query = query_posts($args);
+    }
+}
+
+
+
+
+/**
+ * Author - Akilan
+ * Date - 20-06-2016
+ * Purpose - Custom function for changing image post reating extension
+ */
+function custom_rating_image_extension() {
+    return 'png';
+}
+add_filter( 'wp_postratings_image_extension', 'custom_rating_image_extension' );
+
+/**
+* Returns ID of top-level parent category, or current category if you are viewing a top-level
+*
+* @param	string		$catid 		Category ID to be checked
+* @return 	string		$catParent	ID of top-level parent category
+*/
+if(!function_exists('category_top_parent_id')) {
+    function category_top_parent_id ($catid) {
+
+     while ($catid) {
+      $cat = get_category($catid); // get the object for the catid
+      $catid = $cat->category_parent; // assign parent ID (if exists) to $catid
+      // the while loop will continue whilst there is a $catid
+      // when there is no longer a parent $catid will be NULL so we can assign our $catParent
+      $catParent = $cat->cat_ID;
+     }
+
+    return $catParent;
     }
 }
 

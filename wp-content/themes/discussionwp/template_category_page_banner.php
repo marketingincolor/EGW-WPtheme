@@ -1,3 +1,12 @@
+<?php
+/**
+ * Author - Akilan
+ * Date - 20-06-2016
+ * Purpose - For displaying category image as banner
+ */
+
+?>
+
 <div id="category_banner" class="vc_row wpb_row vc_row-fluid mkd-section mkd-content-aligment-left">
     <div class="clearfix mkd-full-section-inner">
         <div class="wpb_column vc_column_container vc_col-sm-12">
@@ -6,6 +15,11 @@
                     <div data-max_pages="1" data-paged="1" data-sort="featured_first" data-post_in="205, 215, 218, 225, 232" data-category_id="4" data-number_of_posts="5" data-slider_height="735" data-base="mkd_post_slider_interactive" class="mkd-bnl-holder mkd-psi-holder  mkd-psi-number-5" style="opacity: 1;">
                         <div class="mkd-bnl-outer">
                             <?php
+                            $category_id = get_cat_id( single_cat_title("",false));     
+                            $cat = get_category($category_id);
+                          
+                          
+                            
                             $args = array(
                                 'title_tag' => 'h2',
                                 'display_category' => 'no',
@@ -16,8 +30,8 @@
                                 'display_share' => 'no',
                                 'slider_height' => ''
                             );
-
-                            if (have_posts()):
+                            
+                            if ($cat):
                                 $title_ta = 'h2';
                                 $display_category = 'no';
                                 $display_date = 'no';
@@ -27,10 +41,14 @@
                                 $display_share = 'yes';
                                 $slider_height = '';
                                 $params = shortcode_atts($args, $atts);
-                                while (have_posts()) : the_post();
-                                    $id = get_the_ID();
-                                    $image_params = discussion_custom_getImageParams($id);
-                                    $params = array_merge($params, $image_params);
+                                    $url= z_taxonomy_image_url($cat->term_id);
+                                    if($url!=""){
+                                     $image_params = discussion_custom_categoryImageParams($cat->term_id);
+                                     $params = array_merge($params, $image_params);
+                                    }
+                                    
+                                   
+                                    
                                     $redirect_url = esc_url(get_permalink());
                                     ?>
                                     <div class="mkd-psi-slider">      
@@ -78,14 +96,14 @@
                                         </div>
                                     </div>
                                     <?php
-                                endwhile;
+                              
                              
                             else:
                                 discussion_get_module_template_part('templates/parts/no-posts', 'blog');
 
                             endif;
                             wp_reset_postdata();
-                           
+                            echo $html;
                             ?>
 
 

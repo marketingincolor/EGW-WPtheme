@@ -23,7 +23,7 @@
                         }
 
                         $title_tag = 'h3';
-                        $title_length = '';
+                        $title_length = '20';
                         $display_date = 'yes';
                         $date_format = 'd. F Y';
                         $display_category = 'yes';
