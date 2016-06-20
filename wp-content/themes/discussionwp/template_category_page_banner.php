@@ -65,7 +65,7 @@
                                                     ?>
                                                     <h2 class="mkd-psi-title">
 <!--                                                        <a itemprop="url" href="javascript:void(0)" target="_self">-->
-                                                            <?php echo esc_attr(get_the_title()) ?>
+                                                            <?php echo esc_attr($cat->name) ?>
 <!--                                                        </a>-->
                                                     </h2>
                                                     <?php
