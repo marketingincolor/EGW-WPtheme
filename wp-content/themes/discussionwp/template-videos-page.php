@@ -96,11 +96,9 @@
                                                     <?php
                                                 endwhile;
                                                 $html .= '<div class="mkd-psi-slider">  </div>';
-                                            else:
-                                                
-
-                                            endif;
-                                            wp_reset_query();
+                                                else:
+                                                endif;
+                                                wp_reset_query();
                                             ?>
                                         </div>
                                     </div>
@@ -120,13 +118,12 @@
                                 <div class="vc_column-inner ">
                                     <div class="wpb_wrapper">
                                         <div class="vc_empty_space" style="height: 40px"><span class="vc_empty_space_inner"></span></div>
-                                        <div class="mkd-bnl-holder mkd-pl-five-holder  mkd-post-columns-3"  data-base="mkd_post_layout_five"  data-number_of_posts="3" data-column_number="3" data-category_id="7"         data-thumb_image_size="custom_size" data-thumb_image_width="302" data-thumb_image_height="198" data-title_tag="h6" data-title_length="27" data-display_date="no"  data-display_category="no" data-display_comments="no" data-display_share="no" data-display_count="no" data-display_excerpt="yes" data-excerpt_length="7" data-display_read_more="no"     data-paged="1" data-max_pages="8">
+                                        <div class="mkd-bnl-holder mkd-pl-five-holder  mkd-post-columns-3"  data-base="mkd_post_layout_five"  data-number_of_posts="3" data-column_number="3" data-category_id="7"  data-thumb_image_size="custom_size" data-thumb_image_width="302" data-thumb_image_height="198" data-title_tag="h6" data-title_length="27" data-display_date="no"  data-display_category="no" data-display_comments="no" data-display_share="no" data-display_count="no" data-display_excerpt="yes" data-excerpt_length="7" data-display_read_more="no"     data-paged="1" data-max_pages="8">
                                             <div class="mkd-layout-title-holder">
                                                 <span class="mkd-section-title-holder clearfix mkd-pattern-light">
                                                     <span class="mkd-st-title"> Latest Videos </span>    
                                                 </span>
                                             </div>
-
                                             <?php
                                             $i = 1;
                                             $type = 'videos';
@@ -150,37 +147,14 @@
                                                      <div class="mkd-pt-six-item mkd-post-item">  
                                                             <div class="mkd-pt-six-image-holder">
                                                                    <?php
-                                                                            $video_url = get_field('video_url');
-                                                                  
-                                                                            $video_file = get_field('video_file');
-                                                                       
-                                                                            if($video_url != "") 
-                                                                            {
-                                                                                $val = get_videoid_from_url($video_url);
-                                                                                if (strpos($val, 'youtube') > 0) {
-                                                                                ?>
-                     
-                                                                            <iframe width="540" height="340" frameborder="0" src="<?php echo $val; ?>" allowfullscreen></iframe>
-
-                                                                                <?php
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                ?>
-                                                                             <iframe width="540" height="340"  src="<?php echo $val; ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                                                                            
-                                                                            <?php
-                                                                            }
-                                                                                
-                                                                            }
-                                                                            if($video_file != "") 
-                                                                            { 
-                                                                                ?>                                                 
-                                                                                 <video width="100%" height="250px" controls >
-                                                                                        <source src="<?php echo $video_file; ?>" type="video/mp4">
-                                                                                 </video> 
-                                                                         <?php
-                                                                            } ?>
+                                                                             $image_file = get_field('image_file');
+                                                                             
+                                                                             if($image_file != "") 
+                                                                             { ?>
+                                                                              <a href="<?php echo esc_url(get_permalink()); ?>" target="_self"> <img src="<?php echo $image_file; ?>" width="100%" height="250px"> </a>
+                                                                             <?php
+                                                                             }  
+                                                                             ?>
                                                             </div>    
                                                          <div class="mkd-pt-six-content-holder">
                                                             <div class="mkd-pt-six-title-holder">  
@@ -195,18 +169,19 @@
                                                    </div>                      
                                                  <?php if ($i % 3 == 0 || $wp_query->post_count == $i) : ?>
                                                  </div>
-                                                 </div>
+                                               </div>
                                                 <?php endif; ?>
                                                     <?php
                                                     $i++;
-                                                endwhile;
-                                                ?>
-                                            <?php echo discussion_pagination($wp_query->max_num_pages, 1, get_query_var('paged') ? get_query_var('paged') : 1); ?>
-                                                <?php
-                                            } else {
+                                                endwhile;?>
+                                            <?php
+                                                echo discussion_pagination($wp_query->max_num_pages, 1, get_query_var('paged') ? get_query_var('paged') : 1);  
+                                              } 
+                                              else 
+                                              {
                                                 echo "No content found";
-                                            }
-                                            wp_reset_query();  // Restore global post data stomped by the_post().
+                                              }
+                                              wp_reset_query();  
                                             ?>
                                        </div>
                                     </div>
