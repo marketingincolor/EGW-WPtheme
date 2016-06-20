@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: aboutus
+ * Template Name: about_us
  *
  * 
  */
