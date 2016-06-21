@@ -141,7 +141,6 @@ if (!function_exists('discussion_scripts')) {
         wp_enqueue_script('discussion_modules', MIKADO_ASSETS_ROOT . '/js/modules.min.js', array('jquery'), false, true);
         wp_enqueue_script('fsp-custom-popupjs', MIKADO_ASSETS_ROOT . '/js/jquery.magnific-popup.js', array('jquery'), false, true);
 
-
         //include comment reply script
         $wp_scripts->add_data('comment-reply', 'group', 1);
         if (is_singular()) {
@@ -1332,3 +1331,25 @@ function execute_php($html) {
     }
     return $html;
 }
+
+
+/**
+ * Author -Vinoth
+ * Date  - 21-06-2016
+ * Purpose - For custom post(videos feature article)query
+ */
+if (!function_exists('discussion_custompost_featured_query')) {
+
+    function discussion_custompost_featured_query($title, $type) {
+        $cat_id = get_cat_ID('My Category');
+        $args1 = array(
+            'post_type' => $type,
+            'post_status' => 'publish',
+            'order' => 'DESC',
+            'posts_per_page' => 1
+        );
+        return $result = query_posts($args1);
+    }
+
+}
+
