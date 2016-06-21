@@ -25,7 +25,7 @@
                 ?>
                 <?php if (has_post_thumbnail()) { ?>
                     <div class="mkd-post-image-area">
-                        <?php discussion_post_info_category(array('category' => $display_category)) ?>
+                        <?php discussion_post_info_category(array('category' => 'no')) ?>
                         <?php discussion_get_module_template_part('templates/single/parts/image', 'blog'); ?>
 
                     </div>
