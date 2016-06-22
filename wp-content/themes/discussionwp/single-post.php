@@ -4,7 +4,7 @@
         <div class="mkd-full-width">
             <div class="mkd-full-width-inner">               
                 <!-- Feature images should be here... -->
-                <div class="vc_empty_space" style="height: 40px"><span class="vc_empty_space_inner"></span></div>
+                <div class="vc_empty_space" style="height: 0px"><span class="vc_empty_space_inner"></span></div>
                 <div class="mkd-container">
                     
                     <div class="mkd-container-inner clearfix">
@@ -61,7 +61,7 @@
                                                                 'date' => $display_date,
                                                             ))
                                                             ?>
-                                                            <a href="#">Social</a>
+                                                            <a href="#"><?php the_category();?></a>
                                                         </div>
                                                         <?php the_content(); ?>
                                                     </div>

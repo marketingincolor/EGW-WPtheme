@@ -61,7 +61,7 @@
                                                                 'date' => $display_date,
                                                             ))
                                                             ?>
-                                                            <a href="#">Social</a>
+                                                            <a href="#"><?php the_category();?></a>
                                                         </div>
                                                         <?php the_content(); ?>
                                                     </div>
