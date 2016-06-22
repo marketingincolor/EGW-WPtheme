@@ -1,13 +1,14 @@
 <?php
 /**
  * Template Name: Videos Page
- *
+ * 
+ * Author - Vinoth Raja
+ * Date - 21-06-2016
  * For displaying featured article and videos blog
  */
 ?>
 
 <?php get_header(); ?>
-
 <div class="mkd-content">
     <div class="mkd-content-inner">
         <div class="mkd-content">
@@ -21,7 +22,6 @@
                                         <div class="wpb_wrapper">
                                             <div data-max_pages="1" data-paged="1" data-sort="featured_first" data-post_in="205, 215, 218, 225, 232" data-category_id="4" data-number_of_posts="5" data-slider_height="735" data-base="mkd_post_slider_interactive" class="mkd-bnl-holder mkd-psi-holder  mkd-psi-number-5" style="opacity: 1;">
                                                 <div class="mkd-bnl-outer">
-
                                                     <?php
                                                     $args = array(
                                                         'title_tag' => 'h2',
@@ -56,7 +56,6 @@
                                                             $params = array_merge($params, $image_params);
                                                             ?>
                                                             <div class="mkd-psi-slider">      
-
                                                                 <div  class="mkd-psi-slide" data-image-proportion="<?php echo esc_attr($params['proportion']) ?>" <?php discussion_inline_style($params['background_image']); ?>>
                                                                     <div class="mkd-psi-content">
                                                                         <div class="mkd-grid">
@@ -119,14 +118,10 @@
                                                             <?php endif; ?>
                                                             <div class="mkd-pt-six-item mkd-post-item">  
                                                                 <div class="mkd-pt-six-image-holder">
-                                                                    <?php
-                                                                    $image_file = get_field('image_file');
-
-                                                                    if ($image_file != "") {
-                                                                        ?>
-                                                                        <a href="<?php echo esc_url(get_permalink()); ?>" target="_self"> <img src="<?php echo $image_file; ?>" width="100%" height="250px"> </a>
+                                                                    <?php if (has_post_thumbnail()) : ?>
+                                                                        <a href="<?php echo esc_url(get_permalink()); ?>" target="_self"> <img src="<?php the_post_thumbnail_url(); ?>" width="100%" height="250px"> </a>
                                                                         <?php
-                                                                    }
+                                                                    endif;
                                                                     ?>
                                                                 </div>    
                                                                 <div class="mkd-pt-six-content-holder">

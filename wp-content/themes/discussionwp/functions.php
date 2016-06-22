@@ -1334,14 +1334,13 @@ function execute_php($html) {
 
 
 /**
- * Author -Vinoth
+ * Author -Vinoth Raja
  * Date  - 21-06-2016
  * Purpose - For custom post(videos feature article)query
  */
 if (!function_exists('discussion_custompost_featured_query')) {
 
     function discussion_custompost_featured_query($title, $type) {
-        $cat_id = get_cat_ID('My Category');
         $args1 = array(
             'post_type' => $type,
             'post_status' => 'publish',
@@ -1353,3 +1352,31 @@ if (!function_exists('discussion_custompost_featured_query')) {
 
 }
 
+
+/**
+ * Author- Vinoth Raja
+ * Date  - 21-06-2016
+ * Purpose - For Related Videos Display(Sidebar)
+ */
+if (!function_exists('discussion_related_posts')) {
+
+function discussion_related_posts($post_id, $post_type, $options = array()) {
+
+		$posts_per_page = 5;
+
+		extract($options);
+
+		$args = array(
+			'post__not_in'   => array($post_id),
+			'order'          => 'DESC',
+			'orderby'        => 'date',
+			'posts_per_page' => $posts_per_page,
+                        'post_type'=>$post_type
+            
+		);
+
+		$related_posts = new WP_Query($args);
+
+		return $related_posts;
+	}
+}

@@ -1,16 +1,23 @@
+<?php
+/**
+ * Author - Vinoth Raja
+ * Date - 21-06-2016
+ * Purpose - For displaying video single page
+ */
+?>
 <div class="mkd-content">
     <div class="mkd-content-inner">
         <div class="mkd-container">
-            <div class="mkd-container-inner">
+            <div class="mkd-container-inner"> 
+                
                 <div class="mkd-two-columns-75-25  mkd-content-has-sidebar clearfix">
                     <div class="mkd-column1 mkd-content-left-from-sidebar">
                         <div class="mkd-blog-holder mkd-blog-single">              
                             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                                 <div class="mkd-post-content">
-                                    	<?php if (has_post_thumbnail()) { ?>
+                                    <?php if (has_post_thumbnail()) { ?>
                                         <div class="mkd-post-image-area">
-                                            <?php discussion_post_info_category(array('category' => $display_category)) ?>
-                                            <?php discussion_get_module_template_part('templates/single/parts/image', 'blog'); ?>
+
                                             <div class="mkd-post-info">
                                                 <?php
                                                 discussion_post_info(array(
@@ -23,7 +30,7 @@
                                                 ?>
                                             </div>
                                         </div>
-                                       <?php } ?>
+                                    <?php } ?>
                                     <div class="mkd-post-text">
                                         <div class="mkd-post-text-inner clearfix">
                                             <?php if (!has_post_thumbnail()) { ?>
@@ -79,17 +86,14 @@
                             <div class="mkd-blog-holder mkd-blog-single">
                                 <?php discussion_get_module_template_part('templates/single/parts/single-navigation', 'blog'); ?>	
                                 <?php discussion_get_module_template_part('templates/single/parts/author-info', 'blog'); ?> 
-                                <?php discussion_get_module_template_part('templates/single/parts/related-posts', 'blog'); ?>   
-                                <?php get_template_part('comments'); ?>
+                                <?php echo do_shortcode('[AuthorRecommendedPosts]'); ?> 
+                                <?php comments_template(); ?>
                             </div>
                         </div>
                     </div>
                     <div class="mkd-column2">
                         <div class="mkd-column-inner">
-                            <aside class="mkd-sidebar" style="transform: translateY(0px);">
-                                <?php // get_template_part('template-videos-sidebar'); ?>
-                                <?php get_sidebar(); ?>
-                            </aside>
+                            <?php get_template_part('template-videos-sidebar'); ?>
                         </div>
                     </div>
                 </div>
