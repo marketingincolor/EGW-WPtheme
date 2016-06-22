@@ -23,6 +23,10 @@
              echo do_shortcode('[mkd_verticalsep color="#212121" height="33" thickness="1" margin_left="0" margin_right="0"]');
 
              echo do_shortcode('[mkd_icon icon_pack="font_elegant" fe_icon="social_googleplus" size="mkd-icon-tiny"  type="landscape" shape_width="42" custom_size="12" shape_height="33" link="https://plus.google.com/" target="_blank" icon_color="#ffffff" border_width="0" background_color="#f44336" hover_icon_color="#ffffff" hover_background_color="#f44336" margin="0px"]');
+             
+             echo do_shortcode('[mkd_verticalsep color="#212121" height="33" thickness="1" margin_left="0" margin_right="0"]');
+
+             echo do_shortcode('[mkd_icon icon_pack="font_elegant" fe_icon="social_linkedin" size="mkd-icon-tiny"  type="landscape" shape_width="42" custom_size="12" shape_height="33" link="http://linkedin.com/" target="_blank" icon_color="#ffffff" border_width="0" background_color="#4875B4" hover_icon_color="#ffffff" hover_background_color="#f44336" margin="0px"]');
         ?>
          </div>
         </div>
