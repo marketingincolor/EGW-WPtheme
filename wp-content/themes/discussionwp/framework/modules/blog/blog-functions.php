@@ -322,7 +322,9 @@ if(!function_exists('discussion_post_info')){
 			'like' => '',
 			'count' => '',
 			'share' => '',
-			'rating' => ''
+			'rating' => '',
+                        'category_singlepost' => '',
+                        'save_stories' => ''
 		);
 
 		extract(shortcode_atts($default_config, $config));
@@ -347,6 +349,12 @@ if(!function_exists('discussion_post_info')){
 		}
 		if($category == 'yes'){
 			discussion_get_module_template_part('templates/parts/post-info/post-info-category', 'blog');
+		}
+                if($category_singlepost == 'yes'){
+			discussion_get_module_template_part('templates/parts/post-info/post-info-category_singlepost', 'blog');
+		}
+                if($save_stories == 'yes'){
+			discussion_get_module_template_part('templates/parts/post-info/post-info-save-stories', 'blog');
 		}
 		if($rating == 'yes'){
 			discussion_get_module_template_part('templates/parts/post-info/post-info-rating', 'blog');

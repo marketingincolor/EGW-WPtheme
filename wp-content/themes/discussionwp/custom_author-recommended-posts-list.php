@@ -1,4 +1,4 @@
-<div class="mkd-related-posts-holder author-recommended-posts<?php echo ( $format_horizontal ) ? ' horizontal' : ' vertical'; ?>">
+<div class="mkd-related-posts-holder <?php echo ( $format_horizontal ) ? ' horizontal' : ' vertical'; ?>">
 
     <?php if ($html_title && $show_title) { ?>
         <h3><?php echo $html_title; ?></h3>

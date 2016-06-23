@@ -1,20 +1,14 @@
-<style>
-    .mkd-blog-single-share .mkd-single-share-title {
-    display: none;
-    margin-top: 10px;
-}
-.mkd-blog-single-share {
-    display: inline-block;
-    margin-bottom: 10px;
-    margin-left: 1px;
-    position: relative;
-    vertical-align: middle;
-}
-    </style>
 <?php do_action('discussion_before_blog_article_closed_tag'); ?>
+<div id="apsc_widget-4" class="widget widget_apsc_widget">
+    <div class="mkd-section-title-holder clearfix">
+        <span class="mkd-st-title">Share</span>
+    </div>
+        <?php echo do_shortcode('[aps-counter theme="theme-2"]'); ?>  
+</div>
+
 <div class="mkd-ratings-holder">
     <div class="mkd-ratings-text-holder">
-        <h6 class="mkd-ratings-text-title"><?php //esc_html_e('Rate This Article', 'discussionwp');         ?></h6>
+        <h6 class="mkd-ratings-text-title"><?php //esc_html_e('Rate This Article', 'discussionwp'); ?></h6>
         <div class="mkd-ratings-stars-holder">
             <?php
             if (function_exists('the_ratings')) {
@@ -53,41 +47,17 @@ if ($show_related) {
     $related_posts_params = array('related_postss' => discussion_get_related_post_type($post_id, $related_posts_options), 'related_posts_image_size' => $related_posts_image_size, 'related_posts_title_size' => $related_posts_title_size);
 }
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div id="mkd-widget-tab-4" class="mkd-ptw-content mkd-tab-container ui-tabs-panel ui-widget-content ui-corner-bottom" aria-labelledby="ui-id-5" role="tabpanel" aria-hidden="false">
+<div id="mkd-widget-tab-4" class="mkd-ptw-holder mkd-tabs" aria-labelledby="ui-id-5" role="tabpanel" aria-hidden="false">
     <div class="mkd-plw-tabs-content">
-        <div data-max_pages="4" data-paged="1" data-display_excerpt="no" data-display_date="yes" data-title_length="30" data-title_tag="h6" data-display_image="yes" data-custom_thumb_image_height="84" data-custom_thumb_image_width="117" data-category_id="4" data-number_of_posts="5" data-base="mkd_post_layout_seven" class="mkd-bnl-holder mkd-pl-seven-holder  ">
+        <div data-max_pages="4" data-paged="1" data-display_excerpt="no" data-display_date="yes" data-title_length="30" data-title_tag="h6" data-display_image="yes" data-custom_thumb_image_height="84" data-custom_thumb_image_width="117" data-category_id="4" data-number_of_posts="5" data-base="mkd_post_layout_seven">
             <div class="mkd-bnl-outer">
                 <div class="mkd-bnl-inner">
-                    <!-- Loop will start -->
                     <?php if ($related_posts_params['related_postss'] && $related_posts_params['related_postss']->have_posts()) : ?>
-
                         <?php echo discussion_execute_shortcode('mkd_section_title', array('title' => esc_html__('Related Stories', 'discussionwp'))); ?>
-
-
                         <?php while ($related_posts_params['related_postss']->have_posts()) : $related_posts_params['related_postss']->the_post(); ?>
-
                             <div class="mkd-pt-seven-item mkd-post-item mkd-active-post-page">
                                 <div class="mkd-pt-seven-item-inner clearfix">
-                                    <!-- IMage section -->
-                                    <div style="width: 117px" class="mkd-pt-seven-image-holder">
+                                    <div class="mkd-pt-seven-image-holder" style="width: 117px">
                                         <?php if (has_post_thumbnail()) { ?>
 
                                             <a itemprop="url" class="mkd-pt-seven-link mkd-image-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self">
@@ -102,7 +72,6 @@ if ($show_related) {
 
                                         <?php } ?>
                                     </div>
-
                                     <!-- Title section -->
                                     <div class="mkd-pt-seven-content-holder">
                                         <div class="mkd-pt-seven-title-holder">
@@ -114,14 +83,10 @@ if ($show_related) {
                                 </div>
                             </div>
                         <?php endwhile; ?>
-
                         <?php
                     endif;
                     wp_reset_postdata();
                     ?>
-
-                    <!-- Loop will start end -->
-
                 </div>
             </div>
         </div>
