@@ -256,7 +256,7 @@ class DiscussionCategoryLayoutTabs extends DiscussionWidget {
                 echo '<div class="mkd-plw-tabs-tabs-holder">';
                     foreach($categories as $key => $value){
                         $category_name = $value != 0 ? get_the_category_by_ID($value) : esc_html__('All','discussionwp');
-                        echo '<div class="mkd-plw-tabs-tab"><a href="'.$cat_lnk[$value].'"><span class="item_text">'.$category_name.'</span></a></div>';
+                        echo '<div class="mkd-plw-tabs-tab"><a href="'.site_url()."/".$cat_lnk[$value].'"><span class="item_text">'.$category_name.'</span></a></div>';
                     }
                 echo '</div>'; //close div.mkd-plw-tabs-tabs-holder
 
@@ -274,7 +274,7 @@ class DiscussionCategoryLayoutTabs extends DiscussionWidget {
 
                           <?php   
                         if($i==1 || $i%4==1): ?>
-                           <div class="mkd-bnl-holder mkd-pl-five-holder  mkd-post-columns-4"  data-base="mkd_post_layout_five"  data-number_of_posts="3" data-column_number="3" data-category_id="5"         data-thumb_image_size="custom_size" data-thumb_image_width="302" data-thumb_image_height="198" data-title_tag="h6" data-title_length="27" data-display_date="no"  data-display_category="no" data-display_comments="no" data-display_share="no" data-display_count="no" data-display_excerpt="yes" data-excerpt_length="7" data-display_read_more="no"     data-paged="1" data-max_pages="2">
+                           <div class="mkd-bnl-holder mkd-pl-five-holder  mkd-post-columns-4">
                             <div class="mkd-bnl-outer">
                              <div class="mkd-bnl-inner">
                         <?php
