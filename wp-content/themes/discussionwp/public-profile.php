@@ -4,11 +4,14 @@
  * Author: Ramkumar.S
  * Date: June 22, 2016
  */
-
 $link = $_SERVER["REQUEST_URI"];
+$server = $_SERVER['SERVER_NAME'];
 $link_array = explode('/', $link);
 //print_r($link_array);
-$username = $link_array[3];
+if ($server == 'localhost')
+    $username = $link_array[3];
+else
+    $username = $link_array[2];
 ?>
 <?php
 
