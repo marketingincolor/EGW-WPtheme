@@ -44,7 +44,7 @@
                 </article>
             </div>
         <?php } ?>
-        <div class="fsp-padd-30px mkd-two-columns-75-25  mkd-content-has-sidebar clearfix">
+        <div class="mkd-two-columns-75-25  mkd-content-has-sidebar clearfix">
             <div class="mkd-column1 mkd-content-left-from-sidebar">
                 <div class="mkd-column-inner">
                     <div class="mkd-blog-holder mkd-blog-single">
@@ -67,15 +67,6 @@
                                             </div>
                                         <?php } ?>
                                         <?php discussion_get_module_template_part('templates/single/parts/title', 'blog'); ?>
-                                        <br>
-                                        <div class="mkd-post-infoi">
-                                            <?php
-                                            discussion_post_info(array(
-                                                'date' => $display_date,
-                                            ))
-                                            ?>
-                                            <a href="#"><?php the_category(); ?></a>
-                                        </div>
                                         <?php the_content(); ?>
                                     </div>
                                 </div>

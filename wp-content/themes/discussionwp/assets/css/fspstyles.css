@@ -78,10 +78,10 @@ li{
     text-align: right;
 }
 .mkd-main-menu > ul > li:hover > a, .mkd-main-menu > ul > li.mkd-active-item > a, .mkd-main-menu ul li .mkd-plw-tabs .mkd-plw-tabs-tab:hover, .mkd-search-opener:hover, .mkd-search-opener.mkd-active, .mkd-search-widget-holder .mkd-search-submit{
-    background-color: #4e5f13;
+    background-color: #3a7d3b;
 }
 .mkd-search-widget-holder .mkd-search-field:focus, .mkd-search-page-holder .mkd-search-page-form .mkd-form-holder .mkd-search-field:focus{
-    border-color: #4e5f13;
+    border-color: #3a7d3b;
 }
 .signup_newsletter{
     float: left;
