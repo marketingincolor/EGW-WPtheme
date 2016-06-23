@@ -331,7 +331,7 @@ add_action('template_redirect', 'fsp_template_redirect');
  * Create Date: May 26 2016
  * Updated Date: May 26 2016
  */
-
+/*
 
 // Register a new shortcode: [fsp_user_profile]
 add_shortcode('fsp_user_profile', 'user_profile_shortcode');
@@ -472,4 +472,4 @@ function custom_user_profile_fields($current_user, $userdata,$user_ID){
         <input type="hidden" name="update-profile-nonce" value="<?php echo wp_create_nonce('update-profile-nonce'); ?>"/>
     </form>
     <?php
-}
+}*/

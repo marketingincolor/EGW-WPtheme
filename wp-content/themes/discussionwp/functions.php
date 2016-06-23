@@ -300,7 +300,7 @@ if (!function_exists('discussion_user_scalable_meta')) {
             <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
         <?php } else { ?>
             <meta name="viewport" content="width=1200,user-scalable=yes">
-        <?php
+            <?php
         }
     }
 
@@ -1091,7 +1091,8 @@ if (!function_exists('discussion_custom_featured_query')) {
  * Date  - 20-06-2016
  * Purpose -  For featured template image background
  */
-if(!function_exists('discussion_custom_getImageBackground')){
+if (!function_exists('discussion_custom_getImageBackground')) {
+
     function discussion_custom_getImageBackground($id) {
         $background_image_style = '';
 
@@ -1212,34 +1213,36 @@ if (!function_exists('discussion_custom_getImageParams')) {
  * 
  * @param type $id
  * @return string
- */        
-if(!function_exists('discussion_custom_categoryImageParams')){
-    function discussion_custom_categoryImageParams($id){
+ */
+if (!function_exists('discussion_custom_categoryImageParams')) {
+
+    function discussion_custom_categoryImageParams($id) {
         $params = array();
         $params['proportion'] = 1;
         $params['background_image'] = '';
         $params['background_image_thumbs'] = '';
-        $url= z_taxonomy_image_url($id);
-        $background_image_url = wp_get_attachment_image_src($url,'full');
-        if($url!=""){
-             $background_image=getimagesize( $url );      
-        }
-       
-        $background_image_thumbs = wp_get_attachment_image_src(get_post_thumbnail_id($id),'discussion_landscape');
-
-        if (count($background_image) && is_array($background_image)){
-                $width = $background_image[0];
-                $height = $background_image[1];
-                $params['proportion'] = $height/$width; //get height/width proportion
-                $params['background_image'] = 'background-image: url('.$url.')';
+        $url = z_taxonomy_image_url($id);
+        $background_image_url = wp_get_attachment_image_src($url, 'full');
+        if ($url != "") {
+            $background_image = getimagesize($url);
         }
 
-        if (count($background_image_thumbs) && is_array($background_image_thumbs)){
-                $params['background_image_thumbs'] = 'background-image: url('.$background_image_thumbs[0].')';
+        $background_image_thumbs = wp_get_attachment_image_src(get_post_thumbnail_id($id), 'discussion_landscape');
+
+        if (count($background_image) && is_array($background_image)) {
+            $width = $background_image[0];
+            $height = $background_image[1];
+            $params['proportion'] = $height / $width; //get height/width proportion
+            $params['background_image'] = 'background-image: url(' . $url . ')';
         }
-       
+
+        if (count($background_image_thumbs) && is_array($background_image_thumbs)) {
+            $params['background_image_thumbs'] = 'background-image: url(' . $background_image_thumbs[0] . ')';
+        }
+
         return $params;
     }
+
 }
 
 /**
@@ -1268,18 +1271,20 @@ if (!function_exists('discussion_custom_category_query')) {
  * Date - 20-06-2016
  * Purpose - For custom template for category query 
  */
-if(!function_exists('discussion_custom_categorylist_query')){
-    function discussion_custom_categorylist_query($category){
-        $args=array(
+if (!function_exists('discussion_custom_categorylist_query')) {
+
+    function discussion_custom_categorylist_query($category) {
+        $args = array(
             'cat' => $category,
-            'post_status' => 'publish', 
+            'post_status' => 'publish',
             'order' => 'DESC',
 //            'post_type'=>$type,
             'posts_per_page' => 6,
             'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1)
-        );        
+        );
         return $my_query = query_posts($args);
     }
+
 }
 
 /**
@@ -1290,27 +1295,30 @@ if(!function_exists('discussion_custom_categorylist_query')){
 function custom_rating_image_extension() {
     return 'png';
 }
-add_filter( 'wp_postratings_image_extension', 'custom_rating_image_extension' );
+
+add_filter('wp_postratings_image_extension', 'custom_rating_image_extension');
 
 /**
-* Returns ID of top-level parent category, or current category if you are viewing a top-level
-*
-* @param	string		$catid 		Category ID to be checked
-* @return 	string		$catParent	ID of top-level parent category
-*/
-if(!function_exists('category_top_parent_id')) {
-    function category_top_parent_id ($catid) {
+ * Returns ID of top-level parent category, or current category if you are viewing a top-level
+ *
+ * @param	string		$catid 		Category ID to be checked
+ * @return 	string		$catParent	ID of top-level parent category
+ */
+if (!function_exists('category_top_parent_id')) {
 
-     while ($catid) {
-      $cat = get_category($catid); // get the object for the catid
-      $catid = $cat->category_parent; // assign parent ID (if exists) to $catid
-      // the while loop will continue whilst there is a $catid
-      // when there is no longer a parent $catid will be NULL so we can assign our $catParent
-      $catParent = $cat->cat_ID;
-     }
+    function category_top_parent_id($catid) {
 
-    return $catParent;
+        while ($catid) {
+            $cat = get_category($catid); // get the object for the catid
+            $catid = $cat->category_parent; // assign parent ID (if exists) to $catid
+            // the while loop will continue whilst there is a $catid
+            // when there is no longer a parent $catid will be NULL so we can assign our $catParent
+            $catParent = $cat->cat_ID;
+        }
+
+        return $catParent;
     }
+
 }
 
 /* *
@@ -1332,3 +1340,66 @@ function execute_php($html) {
     }
     return $html;
 }
+
+/** 
+ * Purpose: Enable Additional Fields for users
+ * Author: Ramkumar S
+ * Create Date: June 1, 2016
+ * Last Modified: June 23, 2016
+ *
+ */
+
+function modify_contact_methods($profile_fields) {
+
+	// Add new fields
+	$profile_fields['twitter'] = 'Twitter Username';
+	$profile_fields['facebook'] = 'Facebook URL';
+	$profile_fields['dob'] = 'Date of Birth';
+        $profile_fields['phone'] = 'Phone';
+        $profile_fields['address'] = 'Address';
+        $profile_fields['city'] = 'City';
+        $profile_fields['state'] = 'State';
+        $profile_fields['postalcode'] = 'Postal Code';
+
+	return $profile_fields;
+        
+}
+add_filter('user_contactmethods', 'modify_contact_methods');
+
+/* *
+ * 
+ * Purpose: Public Profile
+ * Author: Ramkumar.S 
+ * Date : 22 June 2016
+ * Last Modified : 22 June 2016
+ * */
+
+// Create the query var so that WP catches the custom /member/username url
+function userpage_rewrite_add_var($vars) {
+    $vars[] = 'public';
+    return $vars;
+}
+
+add_filter('query_vars', 'userpage_rewrite_add_var');
+
+// Create the rewrites
+function userpage_rewrite_rule() {
+    add_rewrite_tag('%public%', '([^&]+)');
+    add_rewrite_rule(
+            '^public/([^/]*)/?', 'index.php?public=$matches[1]', 'top'
+    );
+}
+
+add_action('init', 'userpage_rewrite_rule');
+
+// Catch the URL and redirect it to a template file
+function userpage_rewrite_catch() {
+    global $wp_query;
+
+    if (array_key_exists('public', $wp_query->query_vars)) {
+        include (TEMPLATEPATH . '/public-profile.php');
+        exit;
+    }
+}
+
+add_action('template_redirect', 'userpage_rewrite_catch');
