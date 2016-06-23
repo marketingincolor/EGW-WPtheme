@@ -1,6 +1,8 @@
 <?php
 /*
   Template Name: User Profile
+ * Author: Ramkumar.S
+ * Date: June 23,2016
  */
 
 $wpdb->hide_errors();
