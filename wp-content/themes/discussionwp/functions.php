@@ -1466,8 +1466,10 @@ function discussion_author_recommended_posts() {
     //Create class and extend author recommended post class to override author recommended section design
     class DiscussionAuthorRecommendPosts extends AuthorRecommendedPosts {
         
-        function __construct() {
-            parent::__construct();
+                
+        function __construct() {            
+            
+            $this->option_name = '_' . $this->namespace . '--options';
             add_shortcode( 'AuthorRecommendedPosts', array( &$this, 'shortcode') );
         }
         
