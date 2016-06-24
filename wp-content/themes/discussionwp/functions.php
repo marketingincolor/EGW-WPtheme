@@ -1548,3 +1548,37 @@ if ((!current_user_can('administrator') && !is_admin()) || (!is_super_admin())) 
       show_admin_bar(false);
 }
 
+/**
+ * Author - Akilan
+ * Date - 22-06-2015
+ * Purpose - For implementing scroll based post loading
+ */
+function custom_scroll_post_load(){
+    get_template_part('template_scroll_article');
+    exit;
+   
+}
+
+add_action('wp_ajax_custom_scroll_post_load', 'custom_scroll_post_load');
+add_action('wp_ajax_nopriv_custom_scroll_post_load', 'custom_scroll_post_load');
+
+/**
+ * Author -Akilan
+ * Date  - 22-06-2016
+ * Purpose - For custom template for category query
+ */
+if (!function_exists('discussion_home_custom_category_query')) {
+
+    function discussion_home_custom_category_query($type, $category,$per_page=6) {
+        $args = array(
+            'category_name' => $category,
+            'post_status' => 'publish',
+            'order' => 'DESC',
+            'post_type' => $type,
+            'posts_per_page' => $per_page,
+            'paged'=>1
+        );
+        return $my_query = query_posts($args);
+    }
+
+}
