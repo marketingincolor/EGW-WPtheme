@@ -1450,3 +1450,36 @@ function discussion_related_posts($post_id, $post_type, $options = array()) {
 		return $related_posts;
 	}
 }
+
+/* *
+ * 
+ * Purpose: Login direct after login and disable top menu
+ * Author: Ramkumar.S 
+ * Date : 24 June 2016
+ * Last Modified : 24 June 2016
+ * */
+
+
+function redirect_login_page(){
+    // Store for checking if this page equals wp-login.php
+    $page_viewed = basename( $_SERVER['REQUEST_URI'] );
+    // permalink to the custom login page
+    $login_page  = home_url('/login');
+    $register_page  = home_url('/register');
+
+    if( $page_viewed == "wp-login.php" ) {
+        wp_redirect( $login_page );
+        exit();
+    }
+    if( $page_viewed == "wp-signup.php" ) {
+        wp_redirect( $register_page );
+        exit();
+    }
+    
+}
+
+add_action( 'init','redirect_login_page' );
+
+if (!current_user_can('administrator') && !is_admin()) {
+      show_admin_bar(false);
+}

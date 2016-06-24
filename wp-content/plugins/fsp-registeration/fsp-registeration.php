@@ -251,8 +251,7 @@ function fspr_login_member() {
             wp_setcookie($_POST['fspr_user_login'], $_POST['fspr_user_pass'], true);
             wp_set_current_user($user->ID, $_POST['fspr_user_login']);
             do_action('wp_login', $_POST['fspr_user_login']);
-
-            wp_redirect(home_url());
+            wp_redirect(home_url('/user-profile'));
             exit;
         }
     }
