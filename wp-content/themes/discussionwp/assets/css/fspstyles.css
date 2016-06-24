@@ -655,3 +655,29 @@ footer .mkd-footer-top-holder {
 .mkd-post-fsp-savestories a, .mkd-post-info-fsp-singlepost a{
     font-size: 13px !important;
 }
+.single-post .mkd-comment-holder {
+    margin-top: 50px;
+}
+/*Title color*/
+aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_column .mkd-section-title-holder .mkd-st-title{
+ background-color: #f99d3e;   
+}
+/*Title color ends*/
+
+/*Rating starts here*/    
+.mkd-ratings-holder-container{
+    padding-bottom: 15px;
+}
+.mkd-ratings-holder-container .mkd-ratings-holder{
+    text-align: center;
+}
+.mkd-ratings-holder .mkd-ratings-stars-holder {
+    width: auto;
+    float: none;
+    padding: 10px 16px 7px;
+    border-right: none;
+}
+.mkd-ratings-holder-container .post-ratings img{
+    padding: 0 10px;
+}
+/*Rating ends here*/
