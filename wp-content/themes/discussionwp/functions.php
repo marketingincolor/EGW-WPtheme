@@ -1451,14 +1451,70 @@ function discussion_related_posts($post_id, $post_type, $options = array()) {
 	}
 }
 
-/* *
+/**
+ * Author- Muthupandi
+ * Date  - 23-06-2016
+ * Purpose - Related to Author Recommended posts section
+ */
+add_action('init','discussion_author_recommended_posts');
+
+function discussion_author_recommended_posts() {        
+    
+    //Remove default short code
+    remove_shortcode('AuthorRecommendedPosts' );
+    
+    //Create class and extend author recommended post class to override author recommended section design
+    class DiscussionAuthorRecommendPosts extends AuthorRecommendedPosts {
+        
+        function __construct() {
+            parent::__construct();
+            add_shortcode( 'AuthorRecommendedPosts', array( &$this, 'shortcode') );
+        }
+        
+        function shortcode($atts) {
+            global $post;
+            $namespace = $this->namespace;
+
+            if ( isset( $atts['post_id'] ) && !empty( $atts['post_id'] ) ){
+                $shortcode_post_id = $atts['post_id']; 
+            }else{
+                $shortcode_post_id = $post->ID;
+            }
+
+            $recommended_ids = get_post_meta( $shortcode_post_id, $namespace, true );
+
+            $html = '';
+
+            if( $recommended_ids ){
+
+                $html_title = $this->get_option( "{$namespace}_title" );
+                $show_title = $this->get_option( "{$namespace}_show_title" );
+                $show_featured_image = $this->get_option( "{$namespace}_show_featured_image" );
+                $format_horizontal = $this->get_option( "{$namespace}_format_is_horizontal" );
+                $author_recommended_posts_post_types = $this->get_option( "{$namespace}_post_types" );
+
+                ob_start( );
+                include('custom_author-recommended-posts-list.php' );
+                $html .= ob_get_contents( );
+                ob_end_clean( );
+
+            }
+
+            return $html;
+        }
+                                                
+    }     
+    $DiscussionAuthorRecommedPost = new DiscussionAuthorRecommendPosts();
+    
+ }
+ 
+ /* *
  * 
- * Purpose: Login direct after login and disable top menu
+ * Purpose: Login direct after login 
  * Author: Ramkumar.S 
  * Date : 24 June 2016
  * Last Modified : 24 June 2016
  * */
-
 
 function redirect_login_page(){
     // Store for checking if this page equals wp-login.php
@@ -1480,6 +1536,15 @@ function redirect_login_page(){
 
 add_action( 'init','redirect_login_page' );
 
+ /* *
+ * 
+ * Purpose: Disable top menu based on user role
+ * Author: Ramkumar.S 
+ * Date : 24 June 2016
+ * Last Modified : 24 June 2016
+ * */
+
 if (!current_user_can('administrator') && !is_admin()) {
       show_admin_bar(false);
 }
+

@@ -11,7 +11,7 @@
 
 	<?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
+<body <?php if(is_single()){body_class('mkd-apsc-custom-style-enabled');}else {body_class();} ?> itemscope itemtype="http://schema.org/WebPage">
 <?php discussion_get_side_area(); ?>
 <div class="mkd-wrapper">
     <div class="mkd-wrapper-inner">
