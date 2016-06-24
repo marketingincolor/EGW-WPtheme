@@ -151,6 +151,12 @@ if (!function_exists('discussion_scripts')) {
         if (class_exists('WPBakeryVisualComposerAbstract')) {
             wp_enqueue_script('wpb_composer_front_js');
         }
+        
+        //Remove article from the user profile page
+        if(is_page('user-profile')){
+           wp_enqueue_script( 'custom-remove-save-article',  MIKADO_ASSETS_ROOT . '/js/fsp-remove-save-article.js'); 
+        }
+        
     }
 
     add_action('wp_enqueue_scripts', 'discussion_scripts');

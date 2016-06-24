@@ -139,49 +139,47 @@ get_header();
                         <div class="wpb_column vc_col-md-6 vc_col-sm-12">
                             <div class="fsp-saved-articles">
                                 <h2>Saved Articles</h2>
-                                <div class="saved-articles-container">
-                                    <ul>
-                                        <li>
-                                            <div class="saved_art_img">
-                                                <img src="wp-content/wp-content/uploads/2016/03/saved-articles-117x117.jpg" width="117" height="117"/>
-                                            </div>
-                                            <div class="saved_art_cont">
-                                                <h4>How to Lose Weight When...</h4>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipis elit. Morbi nec lacus in nisl tristique vulputate..</p>
-                                            </div>
-                                            <div class="saved_art_cont_btns">
-                                                <a class="fsp_remove_btn" href="#" title="Remove" rel="">Remove</a>
-                                                <a class="fsp_readart_btn" href="#" title="Read Article" rel="">Read Article</a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="saved_art_img">
-                                                <img src="wp-content/wp-content/uploads/2016/03/saved-articles-117x117.jpg" width="117" height="117"/>
-                                            </div>
-                                            <div class="saved_art_cont">
-                                                <h4>How to Lose Weight When...</h4>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipis elit. Morbi nec lacus in nisl tristique vulputate..</p>
-                                            </div>
-                                            <div class="saved_art_cont_btns">
-                                                <a class="fsp_remove_btn" href="#" title="Remove" rel="">Remove</a>
-                                                <a class="fsp_readart_btn" href="#" title="Read Article" rel="">Read Article</a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="saved_art_img">
-                                                <img src="wp-content/wp-content/uploads/2016/03/saved-articles-117x117.jpg" width="117" height="117"/>
-                                            </div>
-                                            <div class="saved_art_cont">
-                                                <h4>How to Lose Weight When...</h4>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipis elit. Morbi nec lacus in nisl tristique vulputate..</p>
-                                            </div>
-                                            <div class="saved_art_cont_btns">
-                                                <a class="fsp_remove_btn" href="#" title="Remove" rel="">Remove</a>
-                                                <a class="fsp_readart_btn" href="#" title="Read Article" rel="">Read Article</a>
-                                            </div>
-                                        </li>
-
-                                    </ul>
+                                <div class="saved-articles-container">                                    
+                                <?php
+                                    global $post;
+                                    $require_post = $post;
+                                    $user_data = get_user_meta(get_current_user_id(), 'wpfp_favorites');
+                                    $post_id_ar = array();
+                                    
+                                    if (isset($user_data) && !empty($user_data[0])):
+                                        $post_id_ar = $user_data[0];                                                                        
+                                    $args = array(
+                                        'post__in' => $post_id_ar,
+                                        'posts_per_page' => 5,
+                                        'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1 ),
+                                    );
+                                    $saved_posts = query_posts($args);
+                                ?>      
+                                    <ul>                        
+                                        <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                                            <?php if (($sidebar == 'default') || ($sidebar == '')) : ?>
+                                                <li>
+                                                    <div class="saved_art_img">
+                                                        <?php the_post_thumbnail([117,117]) ?>
+                                                    </div>
+                                                    <div class="saved_art_cont">
+                                                        <h4><?php the_title(); ?></h4>
+                                                        <p><?php discussion_excerpt(15); ?></p>
+                                                    </div>
+                                                    <div class="saved_art_cont_btns">
+                                                        <a class="fsp_remove_btn" href="?wpfpaction=remove&postid=<?php the_ID(); ?>" title="Remove" rel="">Remove</a>
+                                                        <a class="fsp_readart_btn" href="<?php the_permalink(); ?>" title="Read Article" rel="">Read Article</a>
+                                                    </div>
+                                                </li>
+                                            <?php endif; ?>
+                                        <?php endwhile; ?>     
+                                      <?php
+                                        endif;
+                                        $post = $require_post; ?>
+                                    </ul> 
+                                    <?php  else: ?>
+                                        <span>No articles found</span> 
+                                    <?php endif; ?>                                                                                
                                 </div>
                             </div>
                         </div>
