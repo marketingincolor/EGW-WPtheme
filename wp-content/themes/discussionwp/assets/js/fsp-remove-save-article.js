@@ -19,4 +19,20 @@ jQuery(document).ready( function($) {
           });
         return false;
     });
+    
+    //User profile image upload
+    
+    jQuery( document ).ready(function() {
+       jQuery("#upload").click(function() {
+            jQuery("#userProfileImage").click();
+        }) 
+    });
+    
+    $('#userProfileImage').change(function() {
+        var filename = $('#userProfileImage').val();
+        $('#user-profile-avatar').html(filename).css('color','green');
+    });
 });
+
+
+    

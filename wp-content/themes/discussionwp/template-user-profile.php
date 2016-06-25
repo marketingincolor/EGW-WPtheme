@@ -8,16 +8,53 @@
 $wpdb->hide_errors();
 nocache_headers();
 
-
 if (!empty($_POST['action'])) {
-
+        
     require_once(ABSPATH . 'wp-admin/includes/user.php');
     require_once(ABSPATH . WPINC . '/registration.php');
 
     check_admin_referer('update-profile_' . $user_ID);
 
     $errors = edit_user($user_ID);
+    
+    /*********** Upload User profile Image:start *****************/
+    
+    if(!empty($_FILES)){
+        
+        require_once(ABSPATH . '/wp-load.php');
+        require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+        require_once(ABSPATH . "wp-admin" . '/includes/image.php');
 
+        $filename =  $_FILES['userProfileImage']['name'];
+        $uploaddir = wp_upload_dir(); // get wordpress upload directory
+
+        $MyImage = rand(0,5000).$_FILES['userProfileImage']['name'];
+        $image_path = $uploaddir['path'].'/'.$MyImage;
+        move_uploaded_file($_FILES['userProfileImage']['tmp_name'],$image_path);
+
+        $uploadfile = $uploaddir['path'].'/' . basename( $MyImage );
+        $filename = basename($uploadfile);
+        $wp_filetype = wp_check_filetype(basename($filename), null );
+
+        echo 'works';
+        echo $uploaddir['url'] . '/' . basename( $uploadfile );
+        
+        $attachment = array(
+        'guid'           => $uploaddir['url'] . '/' . basename( $uploadfile ),
+        'post_mime_type' => $wp_filetype['type'],
+        'post_title' => preg_replace('/\.[^.]+$/', "", $_FILES['userProfileImage']['name']),
+        'post_content' => "",
+        'post_status' => 'inherit'
+        );
+
+        $attachment_id = wp_insert_attachment( $attachment, $uploadfile );
+        $attach_data = wp_generate_attachment_metadata( $attachment_id, $uploadfile );
+        wp_update_attachment_metadata( $attachment_id, $attach_data );
+        update_field( 'custom_avatar', $attachment_id, "user_".$user_ID);
+    }
+    
+    /************* Upload User profile Image:end *********************/
+    
     if (is_wp_error($errors)) {
         foreach ($errors->get_error_messages() as $message)
             $errmsg = "$message";
@@ -46,13 +83,21 @@ get_header();
                         <!-- Info container starts here -->
                         <div class="vc_col-md-6 vc_col-sm-12">
                             <div class="user-profile-container"> 
+                                <form name="profile" action="" method="post" enctype="multipart/form-data">
                                 <!-- info left starts here -->
                                 <div class=" vc_column_container vc_col-md-5">
                                     <div class="user-profile-lft">
                                         <div class="aavthar">
-                                            <img src="wp-content/themes/discussionwp/assets/img/aavathar.jpg" width="248" height="248"/>
+                                            <?php $profile_image = get_field( 'custom_avatar','user_'.$user_ID); 
+                                                  if(!$profile_image) : ?>
+                                                    <img src="wp-content/themes/discussionwp/assets/img/aavathar.jpg" width="248" height="248"/>
+                                                  <?php else : ?>
+                                                    <img src="<?php echo $profile_image; ?>" style="width:248px;height:248px" />
+                                                  <?php endif; ?>
                                             <div class="fspgray_btn">
-                                                <input type="submit" value="Upload Image" name="upload">
+                                                <input type="file" id="userProfileImage" name="userProfileImage" style="display:none">                                                
+                                                <input type="button" value="Upload Image" name="upload" id="upload"><br/>  
+                                                <span id="user-profile-avatar"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -70,8 +115,7 @@ get_header();
                                                 the_content();
                                                 ?>
                                             <?php endwhile; ?>
-                                        <?php endif; ?>
-                                        <form name="profile" action="" method="post" enctype="multipart/form-data">
+                                        <?php endif; ?>                                        
                                             <?php
                                             wp_nonce_field('update-profile_' . $user_ID);
                                             //echo $user_ID;
@@ -103,7 +147,7 @@ get_header();
                                                 <li><input type="text" name="city" id="city" placeholder="City" value="<?php echo esc_attr(get_the_author_meta('city', $userdata->ID)); ?>"  /></li>
                                                 <li><input type="text" name="state" id="state" placeholder="State" value="<?php echo esc_attr(get_the_author_meta('state', $userdata->ID)); ?>"  /></li>
                                                 <li><input type="text" name="postalcode" id="postalcode" placeholder="Postal Code"  value="<?php echo esc_attr(get_the_author_meta('postalcode', $userdata->ID)); ?>" /></li>
-                                                <li><input type="text" name="address" id="address" placeholder="Address"  value="<?php echo esc_attr(get_the_author_meta('address', $userdata->ID)); ?>" /></li>
+                                                <li><input type="text" name="address" id="address" placeholder="Address"  value="<?php echo esc_attr(get_the_author_meta('address', $userdata->ID)); ?>" /></li>                                                
                                                 <!--<li>
                                                      <div>Facebook URL</div>
                                                      <div><input type="text" name="facebook" id="facebook" value="<?php echo esc_attr(get_the_author_meta('facebook', $userdata->ID)); ?>" style="width: 300px;" /></div>
@@ -124,12 +168,12 @@ get_header();
                                             </ul>
                                             <div class="fsporange_btn">
                                                 <input type="submit" value="Update" name="update">
-                                            </div>
-                                        </form>
+                                            </div>                                        
 
                                     </div>
                                 </div>
                                 <!-- info right ends here -->
+                                </form>
                             </div>	
                         </div>
                         <!-- Info container ends here -->
