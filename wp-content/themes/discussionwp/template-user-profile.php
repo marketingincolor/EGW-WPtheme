@@ -36,9 +36,6 @@ if (!empty($_POST['action'])) {
         $filename = basename($uploadfile);
         $wp_filetype = wp_check_filetype(basename($filename), null );
 
-        echo 'works';
-        echo $uploaddir['url'] . '/' . basename( $uploadfile );
-        
         $attachment = array(
         'guid'           => $uploaddir['url'] . '/' . basename( $uploadfile ),
         'post_mime_type' => $wp_filetype['type'],
