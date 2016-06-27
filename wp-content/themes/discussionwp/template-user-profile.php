@@ -3,6 +3,7 @@
   Template Name: User Profile
  * Author: Ramkumar.S
  * Date: June 23,2016
+ * Updated by : Muthupandi
  */
 
 $wpdb->hide_errors();
@@ -43,11 +44,12 @@ if (!empty($_POST['action'])) {
         'post_content' => "",
         'post_status' => 'inherit'
         );
-
+        
         $attachment_id = wp_insert_attachment( $attachment, $uploadfile );
-        $attach_data = wp_generate_attachment_metadata( $attachment_id, $uploadfile );
+        $attach_data = wp_generate_attachment_metadata( $attachment_id, $uploadfile );        
         wp_update_attachment_metadata( $attachment_id, $attach_data );
-        update_field( 'custom_avatar', $attachment_id, "user_".$user_ID);
+        //update_field( 'custom_avatar', $attachment_id, "user_".$user_ID);
+        update_user_meta( $user_ID, 'custom_avatar', $attachment_id );
     }
     
     /************* Upload User profile Image:end *********************/
@@ -85,11 +87,13 @@ get_header();
                                 <div class=" vc_column_container vc_col-md-5">
                                     <div class="user-profile-lft">
                                         <div class="aavthar">
-                                            <?php $profile_image = get_field( 'custom_avatar','user_'.$user_ID); 
-                                                  if(!$profile_image) : ?>
+                                            <?php $custom_avatar_meta_data = get_user_meta($user_ID,'custom_avatar');                                                  
+                                                  if(isset($custom_avatar_meta_data) && !empty($custom_avatar_meta_data[0])):
+                                                  $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0],'medium');                                                 
+                                               ?>
+                                                    <img src="<?php echo $attachment[0]; ?>" width="248"/>
+                                                 <?php else : ?>                                                    
                                                     <img src="wp-content/themes/discussionwp/assets/img/aavathar.jpg" width="248" height="248"/>
-                                                  <?php else : ?>
-                                                    <img src="<?php echo $profile_image; ?>" style="width:248px;height:248px" />
                                                   <?php endif; ?>
                                             <div class="fspgray_btn">
                                                 <input type="file" id="userProfileImage" name="userProfileImage" style="display:none">                                                
