@@ -15,7 +15,7 @@
                     jQuery.ajax({
                         type: "POST",
                         url: "<?php echo bloginfo('wpurl'); ?>/wp-admin/admin-ajax.php",
-                        async: false,
+//                        async: false,
                         data: {
                             action: 'custom_scroll_post_load',
                             offset: parseInt(jQuery('#current_post').val()),

@@ -140,6 +140,9 @@ if (!function_exists('discussion_scripts')) {
 
         wp_enqueue_script('discussion_modules', MIKADO_ASSETS_ROOT . '/js/modules.min.js', array('jquery'), false, true);
         wp_enqueue_script('fsp-custom-popupjs', MIKADO_ASSETS_ROOT . '/js/jquery.magnific-popup.js', array('jquery'), false, true);
+        
+        wp_enqueue_script('common script', MIKADO_ASSETS_ROOT . '/js/common.js', array('jquery'), false, true);
+
 
         //include comment reply script
         $wp_scripts->add_data('comment-reply', 'group', 1);
@@ -1590,3 +1593,86 @@ if (!function_exists('discussion_home_custom_category_query')) {
     }
 
 }
+
+
+        
+/**
+ * Author- Vinoth Raja
+ * Date  - 25-06-2016
+ * Purpose - For forgot password functionality
+ */
+
+add_action( 'wp_ajax_nopriv_ajax_forgotPassword', 'ajax_forgotPassword');
+
+add_action( 'wp_ajax_ajax_forgotPassword', 'ajax_forgotPassword');
+
+
+function ajax_forgotPassword()
+ {	 	
+     check_ajax_referer( 'fp-ajax-nonce', 'security' );
+     
+	global $wpdb;
+	
+	$account = $_POST['user_email'];
+	
+	if( empty( $account ) ) {
+		$error = 'Lost your password? Please enter your email address.';
+	} else {
+		if(is_email( $account )) {
+                   
+			if( email_exists($account) ) 
+				$get_by = 'email';
+			else	
+				$error = 'Please enter your valid email address.';			
+		}
+		else
+			$error = 'Invalid e-mail address.';		
+	}	
+	
+	if(empty ($error)) {
+		
+		$random_password = wp_generate_password(); 
+
+		$user = get_user_by( $get_by, $account );
+               		
+		$update_user = wp_update_user( array ( 'ID' => $user->ID, 'user_pass' => $random_password ) );
+
+		if( $update_user ) {
+			
+			$from =  get_option('admin_email');
+			
+			$to = $user->user_email;
+			$subject = 'Your new password';
+			$sender = 'From: '.get_option('name').' <'.$from.'>' . "\r\n";
+			
+			$message = 'Your new password is: '.$random_password;
+				
+			$headers[] = 'MIME-Version: 1.0' . "\r\n";
+			$headers[] = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			$headers[] = "X-Mailer: PHP \r\n";
+			$headers[] = $sender;
+				
+			$mail = wp_mail( $to, $subject, $message, $headers );
+			if($mail)
+                        {
+				$success = 'You will received a new password via email.';
+                        }
+			else
+				$error = 'System is unable to send you mail containg your new password.';						
+		} else {
+			$error = 'Oops! Something went wrong while updaing your account.';
+		}
+	}
+	
+	if(!empty( $error ) )
+
+                echo $error;
+			
+	if(!empty( $success ) )
+
+               echo $success;
+				
+	die();
+}
+
+

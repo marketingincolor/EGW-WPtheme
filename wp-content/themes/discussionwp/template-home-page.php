@@ -307,7 +307,7 @@ $post_per_section=6;
                     <div class="mkd-ratings-text-holder">                      
                         <div class="mkd-ratings-stars-holder">
                             <div class="mkd-ratings-stars-inner">
-                                <img src="<?php echo MIKADO_ASSETS_ROOT . '/img/loading.gif'; ?>">
+                                <img src="<?php echo MIKADO_ASSETS_ROOT . '/img/loading.svg'; ?>" width="75">
                             </div>
                         </div>
                     </div>
