@@ -6,7 +6,10 @@
  */
 ?>
 
-<?php get_header(); ?>
+<?php get_header();
+$post_per_section=6;
+?>
+
 <div class="mkd-content">
     <div class="mkd-content-inner">
         <div class="mkd-full-width">
@@ -134,8 +137,10 @@
 
                             <?php
                             $my_query = null;
-                            $my_query = discussion_custom_category_query('post','home');
+                            $my_query = discussion_home_custom_category_query('post','home',$post_per_section);       
+                          
                             global $wp_query;
+                              
                             ?>
 
 
@@ -181,6 +186,7 @@
                                                     /**
                                                      * For implement two coloumn based post in one row
                                                      */
+//                                                   
                                                     ?>
 
                                     <?php if ($i % 3 == 1 && $wp_query->post_count > $i) : ?>
@@ -251,22 +257,39 @@
                                                             </div>
                                                         </div>
                                                         <?php endif; ?>
-
-
-                                                        <?php
+                                                         <?php
+                                                  
+                                                        
+                                                      
                                                         $i++;
                                                     endwhile;
-                                                    ?>
-
+                                                    
+                                                    $total_post=$wp_query->found_posts;
+                                                    $no_of_adds=floor($wp_query->found_posts/$post_per_section);
+                                                    for ($i = 1; $i <=$no_of_adds; $i++) { ?> 
+                                                        <div  id="adv_row_<?php echo $i; ?>" <?php if($i!=1) { ?> style="display:none" <?php } ?>>  
+                                                            <?php if (function_exists('drawAdsPlace'))
+                                                                drawAdsPlace(array('id' => 1), true);
+                                                            ?>
+                                                        </div>
+                                                        <?php
+                                                    }
+                                                                                                    ?>
+                                                   
 
                                                     <?php
                                                     echo "</ul>";
                                                 } else {
                                                     echo "No content found";
-                                                }
+                                                }?>
+                                                <input type="hidden" id="processing" value="0">
+                                                <input type="hidden" id="currentloop" value="1">
+                                                <input type="hidden" id="total_post" value="<?php echo $wp_query->found_posts;?>">
+                                                <input type="hidden" id="current_post" value="<?php if($wp_query->found_posts<6): echo $wp_query->found_posts; else: echo '6'; endif;?>">
+                                                <?php
                                                 wp_reset_query();  // Restore global post data stomped by the_post().
                                                 ?><!--/div-->
-
+                                                 
                                             </div>
                                         </div>
                                     </div>
@@ -277,10 +300,32 @@
                         </div><!-- #content -->
 
                     </div>
+                
+              
+                
+                <div class="mkd-ratings-holder" style="background:none;display:none" align="center">
+                    <div class="mkd-ratings-text-holder">                      
+                        <div class="mkd-ratings-stars-holder">
+                            <div class="mkd-ratings-stars-inner">
+                                <img src="<?php echo MIKADO_ASSETS_ROOT . '/img/loading.svg'; ?>" width="75">
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-            </div></div>
+               
+                </div>
+            </div>
+            </div>
     </div>
+     <!-- For post pagintation maintain -->
+    
     <?php
+//    $mysqll=custom_scroll_post_load('home','post');
+//    global $wp_query;
+    get_template_part('template-ajax-pagination');
+   
+   
     ?>
     <?php get_footer(); ?>
 

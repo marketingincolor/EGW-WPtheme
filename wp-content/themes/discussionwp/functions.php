@@ -140,6 +140,9 @@ if (!function_exists('discussion_scripts')) {
 
         wp_enqueue_script('discussion_modules', MIKADO_ASSETS_ROOT . '/js/modules.min.js', array('jquery'), false, true);
         wp_enqueue_script('fsp-custom-popupjs', MIKADO_ASSETS_ROOT . '/js/jquery.magnific-popup.js', array('jquery'), false, true);
+        
+        wp_enqueue_script('common script', MIKADO_ASSETS_ROOT . '/js/common.js', array('jquery'), false, true);
+
 
         //include comment reply script
         $wp_scripts->add_data('comment-reply', 'group', 1);
@@ -151,6 +154,12 @@ if (!function_exists('discussion_scripts')) {
         if (class_exists('WPBakeryVisualComposerAbstract')) {
             wp_enqueue_script('wpb_composer_front_js');
         }
+        
+        //Remove article from the user profile page
+        if(is_page('user-profile')){
+           wp_enqueue_script( 'custom-remove-save-article',  MIKADO_ASSETS_ROOT . '/js/fsp-remove-save-article.js'); 
+        }
+        
     }
 
     add_action('wp_enqueue_scripts', 'discussion_scripts');
@@ -1466,8 +1475,10 @@ function discussion_author_recommended_posts() {
     //Create class and extend author recommended post class to override author recommended section design
     class DiscussionAuthorRecommendPosts extends AuthorRecommendedPosts {
         
-        function __construct() {
-            parent::__construct();
+                
+        function __construct() {            
+            
+            $this->option_name = '_' . $this->namespace . '--options';
             add_shortcode( 'AuthorRecommendedPosts', array( &$this, 'shortcode') );
         }
         
@@ -1549,4 +1560,121 @@ if ((current_user_can('administrator') && is_admin()) || (is_super_admin())) {
 }else{
     show_admin_bar(false);
 }
+
+/**
+ * Author - Akilan
+ * Date - 22-06-2015
+ * Purpose - For implementing scroll based post loading
+ */
+function custom_scroll_post_load(){
+    get_template_part('template_scroll_article');
+    exit;
+   
+}
+
+add_action('wp_ajax_custom_scroll_post_load', 'custom_scroll_post_load');
+add_action('wp_ajax_nopriv_custom_scroll_post_load', 'custom_scroll_post_load');
+
+/**
+ * Author -Akilan
+ * Date  - 22-06-2016
+ * Purpose - For custom template for category query
+ */
+if (!function_exists('discussion_home_custom_category_query')) {
+
+    function discussion_home_custom_category_query($type, $category,$per_page=6) {
+        $args = array(
+            'category_name' => $category,
+            'post_status' => 'publish',
+            'order' => 'DESC',
+            'post_type' => $type,
+            'posts_per_page' => $per_page,
+            'paged'=>1
+        );
+        return $my_query = query_posts($args);
+    }
+
+}
+
+
+        
+/**
+ * Author- Vinoth Raja
+ * Date  - 25-06-2016
+ * Purpose - For forgot password functionality
+ */
+
+add_action( 'wp_ajax_nopriv_ajax_forgotPassword', 'ajax_forgotPassword');
+
+add_action( 'wp_ajax_ajax_forgotPassword', 'ajax_forgotPassword');
+
+
+function ajax_forgotPassword()
+ {	 	
+     check_ajax_referer( 'fp-ajax-nonce', 'security' );
+     
+	global $wpdb;
+	
+	$account = $_POST['user_email'];
+	
+	if( empty( $account ) ) {
+		$error = 'Lost your password? Please enter your email address.';
+	} else {
+		if(is_email( $account )) {
+                   
+			if( email_exists($account) ) 
+				$get_by = 'email';
+			else	
+				$error = 'Please enter your valid email address.';			
+		}
+		else
+			$error = 'Invalid e-mail address.';		
+	}	
+	
+	if(empty ($error)) {
+		
+		$random_password = wp_generate_password(); 
+
+		$user = get_user_by( $get_by, $account );
+               		
+		$update_user = wp_update_user( array ( 'ID' => $user->ID, 'user_pass' => $random_password ) );
+
+		if( $update_user ) {
+			
+			$from =  get_option('admin_email');
+			
+			$to = $user->user_email;
+			$subject = 'Your new password';
+			$sender = 'From: '.get_option('name').' <'.$from.'>' . "\r\n";
+			
+			$message = 'Your new password is: '.$random_password;
+				
+			$headers[] = 'MIME-Version: 1.0' . "\r\n";
+			$headers[] = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			$headers[] = "X-Mailer: PHP \r\n";
+			$headers[] = $sender;
+				
+			$mail = wp_mail( $to, $subject, $message, $headers );
+			if($mail)
+                        {
+				$success = 'You will received a new password via email.';
+                        }
+			else
+				$error = 'System is unable to send you mail containg your new password.';						
+		} else {
+			$error = 'Oops! Something went wrong while updaing your account.';
+		}
+	}
+	
+	if(!empty( $error ) )
+
+                echo $error;
+			
+	if(!empty( $success ) )
+
+               echo $success;
+				
+	die();
+}
+
 
