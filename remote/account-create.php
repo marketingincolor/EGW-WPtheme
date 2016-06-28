@@ -80,6 +80,7 @@ $data = array(
     'user_login' => $user_email,
     'user_email' => $user_email,
     'user_nicename'=>$username,
+    'display_name'=>$username,
     'role' => $role // optional but useful if you create a special role for remote registered users
 );
 
