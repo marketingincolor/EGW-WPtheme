@@ -77,8 +77,10 @@ $username = strstr($user_email, '@', true) . rand(1, 1000); //"username"
 
 $data = array(
     'user_pass' => $random_password,
-    'user_login' => $username,
+    'user_login' => $user_email,
     'user_email' => $user_email,
+    'user_nicename'=>$username,
+    'display_name'=>$username,
     'role' => $role // optional but useful if you create a special role for remote registered users
 );
 
@@ -92,19 +94,24 @@ $register_page = home_url('/register');
 if (!is_wp_error($new_user)) {
 
     $subject = "Evergreen Wellness remote registration";
-    $message = "Hi there! \n You have successfully registered to the site. Your login name is {$username} and your password is {$random_password}\nPlease change your password immediately!\n\n"
+    $message = "Hi there! \n You have successfully registered to the site. Your login name is {$user_email} and your password is {$random_password}\nPlease change your password immediately!\n\n"
             . "<a href='$login_page'>Click Here </a> to login";
-    $headers = 'From: Admin <sramkumar@farshore.com>' . "\r\n";
+    $sender = 'From: Admin <ramfsp@gmail.com>' . "\r\n";
+    $headers[] = 'MIME-Version: 1.0' . "\r\n";
+    $headers[] = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $headers[] = "X-Mailer: PHP \r\n";
+    $headers[] = $sender;
 
     // @see http://codex.wordpress.org/Function_Reference/wp_mail
     $success = wp_mail($user_email, $subject, $message, $headers, $attachments);
 
     // maybe you want to be informed if the registration was successfull
     if (true == $success) {
-        wp_mail('sramkumar@farshore.com', 'Evergreen Wellness remote registration', "User {$username} was registered on " . date('d.m. Y H:i:s', time()));
+        wp_mail('ramfsp@gmail.com', 'Evergreen Wellness remote registration', "User {$user_email} was registered on " . date('d.m. Y H:i:s', time()));
     }
 } else {
     echo '<div class="error notice"><p>There has been an error while register. Please try again ! - Redirecting in 2 sec</p></div>';
+    wp_mail('ramfsp@gmail.com', 'Evergreen Wellness remote registration Failed', "User {$user_email} was registered Failed on " . date('d.m. Y H:i:s', time()));
     header('Refresh: 2;url= /register');
     exit();
 }
