@@ -77,8 +77,9 @@ $username = strstr($user_email, '@', true) . rand(1, 1000); //"username"
 
 $data = array(
     'user_pass' => $random_password,
-    'user_login' => $username,
+    'user_login' => $user_email,
     'user_email' => $user_email,
+    'nickname'=>$username,
     'role' => $role // optional but useful if you create a special role for remote registered users
 );
 
