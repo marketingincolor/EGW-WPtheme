@@ -30,7 +30,7 @@
                     jQuery(function () {
                         jQuery(".comment_button").click(function () {
                             var dataString = jQuery('form').serialize();
-                            alert(dataString);
+                            //alert(dataString);
                             jQuery.ajax({
                                 type: "POST",
                                 url: "wp-content/themes/discussionwp/followajax.php",
