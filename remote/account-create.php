@@ -95,7 +95,11 @@ if (!is_wp_error($new_user)) {
     $subject = "Evergreen Wellness remote registration";
     $message = "Hi there! \n You have successfully registered to the site. Your login name is {$user_email} and your password is {$random_password}\nPlease change your password immediately!\n\n"
             . "<a href='$login_page'>Click Here </a> to login";
-    $headers = 'From: Admin <ramfsp@gmail.com>' . "\r\n";
+    $sender = 'From: Admin <ramfsp@gmail.com>' . "\r\n";
+    $headers[] = 'MIME-Version: 1.0' . "\r\n";
+    $headers[] = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $headers[] = "X-Mailer: PHP \r\n";
+    $headers[] = $sender;
 
     // @see http://codex.wordpress.org/Function_Reference/wp_mail
     $success = wp_mail($user_email, $subject, $message, $headers, $attachments);
