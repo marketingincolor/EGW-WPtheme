@@ -49,7 +49,7 @@
                 <div id="followContainer">
                     <form method="post" name="form" action="">
                         <?php
-                        $categoryid = get_cat_ID($category);
+                        $categoryid = $category_id;
                         $userid = get_current_user_id();
                         //echo $categoryid =  $wp_query->get_queried_object();
                         //echo "SELECT *from wp_follow_category where userid=" . $userid . " and categoryid=" . $categoryid . "";
