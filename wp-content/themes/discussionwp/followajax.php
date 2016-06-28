@@ -22,7 +22,7 @@ if ($_POST['submit'] == 'insert') {
     } else {
         $setflag = 0;
         $label = "Unfollow";
-        $msg = "New record created successfully";
+        $msg = "New record created successfully!";
         $submitvalue = "update";
     }
     $jsonInput = array(
@@ -59,7 +59,7 @@ if ($_POST['submit'] == 'insert') {
             $label = "unfollow";
             $setflag = 0;
         }
-        $msg = "Record Updated successfully";
+        $msg = "You have unfollowed this Category!";
     }
     $jsonInput = array(
         "label" => $label,

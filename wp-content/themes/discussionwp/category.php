@@ -22,7 +22,10 @@
                 get_template_part('template_category_page_banner');
                 ?>
                 <!-- Category follow functionality Start-->
+                <?php 
+                if ( is_user_logged_in() ) {
 
+                ?>
                 <script type = "text/javascript">
                     jQuery(function () {
                         jQuery(".comment_button").click(function () {
@@ -81,6 +84,8 @@
                     </form>
                 </div>
                 <!-- Category follow functionality end -->
+                
+                <?php }?>
                 <div style="" class="vc_row wpb_row vc_row-fluid mkd-section mkd-content-aligment-left mkd-grid-section">
                     <div class="mkd-container-inner clearfix">
                         <div class="mkd-section-inner-margin clearfix">
