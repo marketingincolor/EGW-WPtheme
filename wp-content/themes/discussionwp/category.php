@@ -4,7 +4,6 @@
  * Date - 20-06-2016
  * Purpose - For changing template based on requirement
  */
-
 ?>
 
 <?php get_header(); ?>
@@ -12,16 +11,16 @@
     <div class="mkd-content-inner">
         <div class="mkd-full-width">
             <div class="mkd-full-width-inner">               
-               <?php
-                $parent_category_id="";
-                $cat=array();
-                $category_id = get_cat_id( single_cat_title("",false));     
-                if(!empty($category_id)){
-                    $parent_category_id=category_top_parent_id($category_id);                
+                <?php
+                $parent_category_id = "";
+                $cat = array();
+                $category_id = get_cat_id(single_cat_title("", false));
+                if (!empty($category_id)) {
+                    $parent_category_id = category_top_parent_id($category_id);
                     $cat = get_category($parent_category_id);
-                }                
-                get_template_part('template_category_page_banner');               
-               ?>
+                }
+                get_template_part('template_category_page_banner');
+                ?>
                 <!-- Category follow functionality Start-->
 
                 <script type = "text/javascript">
@@ -35,11 +34,12 @@
                                 data: jQuery('form').serialize(),
                                 cache: false,
                                 success: function (successvalue) {
-                                    
+
                                     obj = JSON.parse(successvalue);
                                     alert(obj.msg);
                                     jQuery(".comment_button").html(obj.label);
                                     jQuery("#flagvalue").val(obj.setflag);
+                                    jQuery("#submitvalue").val(obj.submitvalue);
                                 }
                             });
                             return false;
@@ -75,7 +75,7 @@
                         ?>
                         <button type="button" value="<?php echo $label; ?>" name="follow" class="comment_button"><?php echo $label; ?></button>
                         <input type="text" name="updateflag" id="flagvalue" value="<?php echo $setValue; ?>">
-                        <input type="hidden" name="submit" value="<?php echo $processDo; ?>">
+                        <input type="text" name="submit" value="<?php echo $processDo; ?>">
                         <input type="hidden" name="userid" value="<?php echo $userid; ?>">
                         <input type="hidden" name="categoryid" value="<?php echo $categoryid; ?>">
                     </form>
@@ -85,19 +85,17 @@
                     <div class="mkd-container-inner clearfix">
                         <div class="mkd-section-inner-margin clearfix">
                             <?php
-                            
-                            $my_query = null;                           
+                            $my_query = null;
                             $my_query = discussion_custom_categorylist_query($category_id);
                             global $wp_query;
-                            get_template_part('template-blog-block');   
+                            get_template_part('template-blog-block');
                             ?>      
-                            </div>
-                        </div><!-- #content -->
+                        </div>
+                    </div><!-- #content -->
 
                 </div>
-                </div>
-            </div></div>
-    </div>
-    <?php
-    ?>
-    <?php get_footer(); ?>
+            </div>
+        </div></div>
+</div>
+<?php ?>
+<?php get_footer(); ?>

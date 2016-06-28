@@ -23,11 +23,13 @@ if ($_POST['submit'] == 'insert') {
         $setflag = 0;
         $label = "Unfollow";
         $msg = "New record created successfully";
+        $submitvalue = "update";
     }
     $jsonInput = array(
         "label" => $label,
         "msg" => $msg,
-        "setflag" => $setflag
+        "setflag" => $setflag,
+        "submitvalue" => $submitvalue
     );
     echo json_encode($jsonInput);
 } else {
