@@ -74,8 +74,8 @@
                         }
                         ?>
                         <button type="button" value="<?php echo $label; ?>" name="follow" class="comment_button"><?php echo $label; ?></button>
-                        <input type="text" name="updateflag" id="flagvalue" value="<?php echo $setValue; ?>">
-                        <input type="text" name="submit" value="<?php echo $processDo; ?>">
+                        <input type="hidden" name="updateflag" id="flagvalue" value="<?php echo $setValue; ?>">
+                        <input type="hidden" name="submit" id="submitvalue" value="<?php echo $processDo; ?>">
                         <input type="hidden" name="userid" value="<?php echo $userid; ?>">
                         <input type="hidden" name="categoryid" value="<?php echo $categoryid; ?>">
                     </form>
