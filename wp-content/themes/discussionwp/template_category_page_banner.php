@@ -75,7 +75,7 @@
                                                     ));
                                                     ?>
                                                     <?php if ($display_share == 'yes' || $display_comments == 'yes' || $display_count == 'yes') { ?>
-                                                        <div class="mkd-pt-info-section clearfix">
+                                                      <!--   <div class="mkd-pt-info-section clearfix">
                                                             <div>
                                                                 <?php
                                                                 discussion_post_info_share(array(
@@ -89,7 +89,10 @@
                                                                         ), 'list');
                                                                 ?>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
+                                                     <div class="mkd-follow-category">
+                                                        <a href="">Follow</a>
+                                                    </div>
                                                     <?php } ?>
                                                 </div>
                                             </div>
