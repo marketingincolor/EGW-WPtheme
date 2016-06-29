@@ -33,13 +33,10 @@
                                     $params = array_merge($params, $image_params);
                                     $redirect_url = esc_url(get_permalink());
                                     ?>
-                                    <div class="mkd-psi-slider">      
-
+                                    <div class="mkd-psi-slider"> 
                                         <div class="mkd-psi-slide" data-image-proportion="<?php echo esc_attr($params['proportion']) ?>" <?php discussion_inline_style($params['background_image']); ?>>
                                             <div class="mkd-psi-content">
                                                 <div class="mkd-grid">
-                                                     
-
                                                     <?php
                                                     discussion_post_info_category(array(
                                                         'category' => $display_category

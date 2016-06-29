@@ -47,6 +47,10 @@ h5 { font-family: Roboto;font-style: normal;}
 
 h6 { font-family: Roboto;font-style: normal;}
 
+.fsp-pad-btm-10{padding-bottom:10px;}
+.fsp-pad-btm-20{padding-bottom:20px;}
+.fsp-pad-btm-30{padding-bottom:30px;}
+
 li{
     list-style: none;
 }
@@ -695,3 +699,19 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
     font-weight: 500;
 }
 /*single article page styles ends here*/
+
+/*follow-category styles starts here*/
+.mkd-follow-category{
+    position: relative;
+    top: -10px;
+}
+.mkd-follow-category a{
+    background: #f79c49;
+    color: #fff;
+    border: 3px solid #fff;
+    text-transform: uppercase;
+    padding: 5px 30px;
+    float: right;
+    margin-right: 50px;
+}
+/*follow-category styles ends here*/

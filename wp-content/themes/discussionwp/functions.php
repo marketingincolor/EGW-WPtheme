@@ -1257,17 +1257,21 @@ if (!function_exists('discussion_custom_categoryImageParams')) {
  * Author -Akilan
  * Date  - 20-06-2016
  * Purpose - For custom template for category query
+ * paramater
+ * $post_type => type of post
+ * $category =>category name
+ * $post_per_section => post per page
  */
 if (!function_exists('discussion_custom_category_query')) {
 
-    function discussion_custom_category_query($type, $category) {
-        $args = array(
+    function discussion_custom_category_query($post_type,$category,$post_per_section) {
+         $args = array(
             'category_name' => $category,
             'post_status' => 'publish',
             'order' => 'DESC',
-            'post_type' => $type,
-            'posts_per_page' => 6,
-            'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1)
+            'post_type' => $post_type,
+            'posts_per_page' => $post_per_section,
+            'paged'=>1
         );
         return $my_query = query_posts($args);
     }
@@ -1281,14 +1285,14 @@ if (!function_exists('discussion_custom_category_query')) {
  */
 if (!function_exists('discussion_custom_categorylist_query')) {
 
-    function discussion_custom_categorylist_query($category) {
+    function discussion_custom_categorylist_query($category,$post_per_section) {
         $args = array(
             'cat' => $category,
             'post_status' => 'publish',
             'order' => 'DESC',
 //            'post_type'=>$type,
-            'posts_per_page' => 6,
-            'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1)
+            'posts_per_page' => $post_per_section,
+            'paged' => 1
         );
         return $my_query = query_posts($args);
     }
@@ -1677,4 +1681,15 @@ function ajax_forgotPassword()
 	die();
 }
 
+
+/**
+ * Author : Akilan
+ * Date : 28-06-2016
+ * Purpose - For maintaing common variables and functionalities for scroll based post loading
+ * First parameter => per page section
+ * second parameter => post type
+ */
+function scroll_loadpost_settings(){    
+    return array(6,'post');   
+}
 

@@ -1,5 +1,7 @@
 <!-- Post block start-->
-
+<?php
+list($post_per_section,$post_type)=scroll_loadpost_settings();
+?>
 <div class="wpb_column vc_column_container vc_col-sm-12">
     <div class="vc_column-inner ">
         <div class="wpb_wrapper">
@@ -44,22 +46,19 @@
 
                         <?php if ($i % 3 == 1 && $wp_query->post_count > $i) : ?>
                             <div class="mkd-bnl-outer"><div class="mkd-bnl-inner">
-                                <?php endif; ?>
-                                <!--div class="mkd-post-block-part clearfix"-->
+                                <?php endif; ?>                                
                                 <div class="mkd-pt-six-item mkd-post-item">
                                     <?php if (has_post_thumbnail()) { ?>
                                         <div class="mkd-pt-six-image-holder">
-                                           <?php
-
+                                            <?php
                                             $category = get_the_category();
                                             $the_category_id = $category[0]->cat_ID;
-                                            if(function_exists('rl_color')){
+                                            if (function_exists('rl_color')) {
                                                 $rl_category_color = rl_color($the_category_id);
                                             }
-
                                             ?>
                                             <div  style="background: <?php echo $rl_category_color; ?>;" class="mkd-post-info-category">
-                                                <?php the_category(' / '); ?>
+                                            <?php the_category(' / '); ?>
                                             </div>
 
                                             <a itemprop="url" class="mkd-pt-six-slide-link mkd-image-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self">
@@ -69,8 +68,7 @@
                                                 } elseif ($thumb_image_width != '' && $thumb_image_height != '') {
                                                     echo discussion_generate_thumbnail(get_post_thumbnail_id(get_the_ID()), null, $thumb_image_width, $thumb_image_height);
                                                 }
-                                                ?>
-                                                <?php
+                                               
                                                 if ($display_post_type_icon == 'yes') {
                                                     discussion_post_info_type(array(
                                                         'icon' => 'yes',
@@ -79,63 +77,100 @@
                                                 ?>
                                             </a>
                                         </div>
-                                    <?php } ?>
+                            <?php } ?>
                                     <div class="mkd-pt-six-content-holder">
                                         <div class="mkd-pt-six-title-holder">
                                             <<?php echo esc_html($title_tag) ?> class="mkd-pt-six-title">
                                             <a itemprop="url" class="mkd-pt-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self"><?php echo discussion_get_title_substring(get_the_title(), $title_length) ?></a>
                                             </<?php echo esc_html($title_tag) ?>>
                                         </div>
-                                        <?php
-                                        discussion_post_info_date(array(
-                                            'date' => $display_date,
-                                            'date_format' => $date_format
-                                        ));
-                                        ?>
-                                        <?php if ($display_excerpt == 'yes') { ?>
+                                            <?php
+                                            discussion_post_info_date(array(
+                                                'date' => $display_date,
+                                                'date_format' => $date_format
+                                            ));
+                                            if ($display_excerpt == 'yes') { ?>
                                             <div class="mkd-pt-one-excerpt">
-                                                <?php discussion_excerpt($excerpt_length); ?>
+                                            <?php discussion_excerpt($excerpt_length); ?>
                                             </div>
-                                        <?php } ?>
+                                            <?php } ?>
                                     </div>
                                     <?php if ($display_share == 'yes' || $display_comments == 'yes') { ?>
                                         <div class="mkd-pt-info-section clearfix">
                                             <div>
-                                                <?php
-                                                discussion_post_info_share(array(
-                                                    'share' => $display_share
-                                                ));
-                                                discussion_post_info_comments(array(
-                                                    'comments' => $display_comments
-                                                ));
-                                                ?>
+                                            <?php
+                                            discussion_post_info_share(array(
+                                                'share' => $display_share
+                                            ));
+                                            discussion_post_info_comments(array(
+                                                'comments' => $display_comments
+                                            ));
+                                            ?>
                                             </div>
                                             <div class="mkd-pt-info-section-background"></div>
                                         </div>
                                     <?php } ?>
                                 </div>                      
-                                <?php if ($i % 3 == 0 || $wp_query->post_count == $i) : ?>
+                                    <?php if ($i % 3 == 0 || $wp_query->post_count == $i) : ?>
                                 </div>
                             </div>
-                        <?php endif; ?>
-
-
-                        <?php
-                        $i++;
-                    endwhile;
-                    ?>
+                    <?php endif; ?>
 
 
                     <?php
-                    echo "</ul>";
-                } else {                   
-			discussion_get_module_template_part('templates/parts/no-posts', 'blog');		
-                }
+                    $i++;
+                endwhile;
+                ?>
+
+
+                <?php
+                echo "</ul>";
+                /**
+                 * For displaying ads based on total count of post
+                 */
+                
+                 if ($wp_query->found_posts >= $post_per_section) {
+                    $no_of_adds = floor($wp_query->found_posts / $post_per_section);
+                    for ($i = 1; $i <= $no_of_adds; $i++) {
+                        ?> 
+                            <div  id="adv_row_<?php echo $i; ?>" <?php if ($i != 1) { ?> style="display:none" <?php } ?>>  
+                            <?php
+                            if (function_exists('drawAdsPlace'))
+                                drawAdsPlace(array('id' => 1), true);
+                            ?>
+                            </div>
+                                <?php
+                            }
+                        }
+                    } else {
+                        discussion_get_module_template_part('templates/parts/no-posts', 'blog');
+                    }
                
-                discussion_pagination($wp_query->max_num_pages, 6, get_query_var('paged') ? get_query_var('paged') : 1);
+                
+               ?>
+                <input type="hidden" id="processing" value="0">
+                <input type="hidden" id="currentloop" value="1">
+                <input type="hidden" id="total_post" value="<?php echo $wp_query->found_posts; ?>">
+                <input type="hidden" id="current_post" value="<?php if ($wp_query->found_posts < $post_per_section): echo $wp_query->found_posts;
+                else: echo $post_per_section;
+                endif; ?>">
+                <?php
+                //discussion_pagination($wp_query->max_num_pages, 6, get_query_var('paged') ? get_query_var('paged') : 1);
+
                 wp_reset_query();  // Restore global post data stomped by the_post().
                 ?><!--/div-->
 
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="mkd-ratings-holder" style="background:none;display:none" align="center">
+    <div class="mkd-ratings-text-holder">                      
+        <div class="mkd-ratings-stars-holder">
+            <div class="mkd-ratings-stars-inner">
+                <img src="<?php echo MIKADO_ASSETS_ROOT . '/img/loading.svg'; ?>" width="75">
             </div>
         </div>
     </div>

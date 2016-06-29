@@ -1,13 +1,19 @@
 <?php
 /**
+ * 
+ * Author - Akilan
+ * Date - 29-06-2016
+ * 
+ * Purpose - For displaying activity based blogs
  * Template Name: Activity page
  *
- * For displaying featured article and home category blogs
+ * 
  */
 ?>
 
 <?php get_header(); 
 $category='activity';
+list($post_per_section,$post_type)=scroll_loadpost_settings();
 ?>
 <div class="mkd-content">
     <div class="mkd-content-inner">
@@ -22,9 +28,13 @@ $category='activity';
                         <div class="mkd-section-inner-margin clearfix">
                             <?php
                             $my_query = null;
-                            $my_query = discussion_custom_category_query('post',$category);
+                           
+                           // $my_query = discussion_custom_category_query('post',$category);
+                            $my_query = discussion_custom_category_query($post_type,$category,$post_per_section);      
                             global $wp_query;
-                            get_template_part('template-blog-block');   
+                            get_template_part('template-blog-block');                             
+                            
+
                             ?>      
                         </div>
                     </div>
@@ -35,5 +45,11 @@ $category='activity';
 </div>
    
 
-    <?php get_footer(); ?>
+    <?php
+    /**
+     * For loading post based on scrolling
+     */
+
+    include(locate_template('template-ajax-pagination.php'));   
+    get_footer(); ?>
 

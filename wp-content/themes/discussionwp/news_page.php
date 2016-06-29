@@ -1,12 +1,15 @@
 <?php
 /**
- * Template Name: News Page
- *
- * Selectable from a dropdown menu on the edit page screen.
+ * Author - Akilan
+ * Date - 10-06-2016
+ * Purpose - For displaying news based blogs  
+ * Template Name: News Page *
+ * 
  */
 ?>
 
 <?php $category ='news';
+list($post_per_section,$post_type)=scroll_loadpost_settings();
 ?>
 
 <?php get_header(); ?>
@@ -24,7 +27,7 @@
                             <!-- Post block start-->
                              <?php
                                 $my_query = null;
-                                $my_query = discussion_custom_category_query('post',$category);
+                                $my_query = discussion_custom_category_query($post_type,$category,$post_per_section); 
                                 global $wp_query;
                                 get_template_part('template-blog-block');   
                         ?>
@@ -33,6 +36,12 @@
             </div> 
         </div>
     </div>
-</div>    
-<?php get_footer(); ?>
+    </div>    
+</div>
+<?php
+/**
+* For loading scroll based post loading
+*/
+ include(locate_template('template-ajax-pagination.php'));
+get_footer(); ?>
 
