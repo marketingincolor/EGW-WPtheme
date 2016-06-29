@@ -1552,11 +1552,13 @@ add_action( 'init','redirect_login_page' );
  * Purpose: Disable top menu based on admin/super admin role
  * Author: Ramkumar.S 
  * Date : 24 June 2016
- * Last Modified : 24 June 2016
+ * Last Modified : 27 June 2016
  * */
 
-if ((!current_user_can('administrator') && !is_admin()) || (!is_super_admin())) {
-      show_admin_bar(false);
+if ((current_user_can('administrator') && is_admin()) || (is_super_admin())) {
+      show_admin_bar(true);
+}else{
+    show_admin_bar(false);
 }
 
 /**

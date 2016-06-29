@@ -209,7 +209,7 @@ function fspr_login_form_fields() {
                 <input id="fspr_login_submit" name="fspr_login_submit" type="submit" value="Login" class="fsplogin_btn"/>
             </p>
             <div class="fs_forgot_password">
-                 <a href="#">Forgot your password?</a>
+                 <a href="<?php echo home_url('/forgot-password')?>">Forgot your password?</a>
             </div>
         </fieldset>
     </form>
@@ -251,7 +251,12 @@ function fspr_login_member() {
             wp_setcookie($_POST['fspr_user_login'], $_POST['fspr_user_pass'], true);
             wp_set_current_user($user->ID, $_POST['fspr_user_login']);
             do_action('wp_login', $_POST['fspr_user_login']);
-            wp_redirect(home_url('/user-profile'));
+            //wp_redirect(home_url('/user-profile'));
+            if ((current_user_can('administrator') && is_admin()) || (is_super_admin())) {
+                wp_redirect(home_url('/wp-admin'));
+            }else{
+                wp_redirect(home_url('/user-profile'));
+            }
             exit;
         }
     }
@@ -311,7 +316,11 @@ register_activation_hook(__FILE__, 'add_roles_on_plugin_activation');
 
 function fsp_template_redirect() {
     if ((is_page('login') || is_page('register')) && is_user_logged_in()) {
-        wp_redirect(home_url('/user-profile'));
+        if ((current_user_can('administrator') && is_admin()) || (is_super_admin())) {
+            wp_redirect(home_url('/wp-admin'));
+        }else{
+            wp_redirect(home_url('/user-profile'));
+        }
         exit();
     }
 

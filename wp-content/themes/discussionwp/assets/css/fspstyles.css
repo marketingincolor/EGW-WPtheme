@@ -660,7 +660,7 @@ footer .mkd-footer-top-holder {
 }
 /*Title color*/
 aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_column .mkd-section-title-holder .mkd-st-title{
- background-color: #f99d3e;   
+    background-color: #f99d3e;   
 }
 /*Title color ends*/
 
@@ -681,3 +681,17 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
     padding: 0 10px;
 }
 /*Rating ends here*/
+
+/*single article page styles starts here*/
+.mdk-sng-pst p{
+    padding:10px 0;
+}
+.mdk-sng-pst p img{
+    float:left;
+    padding-right: 20px;
+}
+.mdk-sng-pst a{
+    color: #ff6600;
+    font-weight: 500;
+}
+/*single article page styles ends here*/
