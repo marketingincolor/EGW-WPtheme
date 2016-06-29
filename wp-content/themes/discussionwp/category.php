@@ -4,6 +4,7 @@
  * Date - 20-06-2016
  * Purpose - For changing template based on requirement
  */
+list($post_per_section,$post_type)=scroll_loadpost_settings();
 ?>
 
 <?php get_header(); ?>
@@ -91,7 +92,8 @@
                         <div class="mkd-section-inner-margin clearfix">
                             <?php
                             $my_query = null;
-                            $my_query = discussion_custom_categorylist_query($category_id);
+                            $my_query = discussion_custom_categorylist_query($category_id,$post_per_section);   
+//                            $my_query = discussion_custom_categorylist_query($category_id);
                             global $wp_query;
                             get_template_part('template-blog-block');
                             ?>      
@@ -102,5 +104,10 @@
             </div>
         </div></div>
 </div>
-<?php ?>
+<?php
+ /**
+ * For loading post based on scrolling
+ */
+include(locate_template('template-ajax-pagination.php'));
+?>
 <?php get_footer(); ?>

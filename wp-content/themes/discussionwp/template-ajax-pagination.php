@@ -1,4 +1,10 @@
 <script type="text/javascript">
+    <?php
+    $cat_name="";
+    $cat_id="";
+    if(isset($category)) $cat_id=get_cat_ID($category);
+    if(isset($category_id)) $cat_id=$category_id;
+    ?>
     jQuery(document).ready(function() {
 
         jQuery(window).scroll(function() {
@@ -18,8 +24,8 @@
 //                        async: false,
                         data: {
                             action: 'custom_scroll_post_load',
-                            offset: parseInt(jQuery('#current_post').val()),
-                            cat_name:'home',
+                            offset: parseInt(jQuery('#current_post').val()),                         
+                            cat_id:'<?php echo $cat_id; ?>',                        
                             post_type:'post',
                             perpage: '6'
                         },

@@ -6,10 +6,9 @@
                  * Purpose - For creating ajax template for scroll based post loading
                  */
               
-               $category='home';
-               $type='post';
+
                $args = array(
-                'category_name' => $_POST['cat_name'],
+                'category' => $_POST['cat_id'],
                 'post_status' => 'publish',
                 'order' => 'DESC',
                 'post_type' => $_POST['post_type'],
@@ -147,7 +146,7 @@
 
                         <?php
                         $i++;
-//                    endwhile;
+
                         endforeach; 
                         wp_reset_postdata();?>
         
@@ -157,8 +156,7 @@
                     echo "</ul>";
                 } else {                   
 			discussion_get_module_template_part('templates/parts/no-posts', 'blog');		
-                }
-               
+                }             
                
                 wp_reset_postdata();  // Restore global post data stomped by the_post().
                 ?><!--/div-->
