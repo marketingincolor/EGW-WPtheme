@@ -16,18 +16,13 @@
                                 'display_share' => 'no',
                                 'slider_height' => ''
                             );
- 
                             
-                            $my_query = null;
-
-                            $atts['query_result'] = discussion_custom_featured_query('home', 'featured_article');
 
                             $params = shortcode_atts($args, $atts);
 
                             $html = '';
                             $thumb_html = '';
 
-                            $data = discussion_custom_getData($params, $atts);
 
                             if (have_posts()):
                                 $title_ta = 'h2';

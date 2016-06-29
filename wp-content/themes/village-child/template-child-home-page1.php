@@ -11,6 +11,10 @@
         <div class="mkd-full-width">
             <div class="mkd-full-width-inner">               
                 <?php
+                $my_query = null;
+
+                $atts['query_result'] = discussion_custom_featured_query('home', 'featured_article');
+                $data = discussion_custom_getData($params, $atts);
                 get_template_part('template-page-featured-content');
                 ?>   
                 <div class="vc_empty_space" style="height: 40px"><span class="vc_empty_space_inner"></span></div>
@@ -33,7 +37,6 @@
                                     <aside class="mkd-sidebar" style="transform: translateY(0px);">
                                         <div class="widget widget_apsc_widget">   
                                             <?php get_template_part('sidebar/template-sidebar-home'); ?>
-                                            <?php //get_sidebar(); ?>
                                         </div>    
                                     </aside>
                                 </div>
