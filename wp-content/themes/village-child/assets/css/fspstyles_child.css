@@ -1,0 +1,47 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 29, 2016, 3:38:22 PM
+    Author     : FSSD
+*/
+/*sidebar welcome css starts here*/
+.fsp-welcome-branch{
+    padding-bottom: 40px;
+}
+.fsp-branch-title {
+    padding-bottom: 20px;
+}
+.fsp-branch-title h4{
+    background: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 17px;
+    color:#0d0d0d;
+}    
+.fsp-branch-content ul{
+    text-align: center;
+    overflow: hidden;
+}
+.fsp-branch-content ul li{
+    overflow: hidden;
+}
+.fsp-branch-content ul li a{
+    background: #b3cc36;
+    padding: 10px 0px 10px 20px;
+    color: #ffffff;
+    font-size: 14px;
+    width: 200px;
+    text-align: left;
+    display: block;
+    margin: 0 auto;
+}
+.fsp-branch-content ul li a i{
+    padding-right: 10px;
+}
+.fsp-branch-content ul li a:hover{
+    background-color: #3a7d3b;
+}
+/*sidebar welcome css ends here*/
