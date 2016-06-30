@@ -39,12 +39,25 @@ jQuery(document).ready(function ()
         if(jQuery('.fspr_register_error').length)
             jQuery('.fspr_register_error').remove();
         
-        if(firstname=="")            
+        //FirstName field validation
+        if(firstname==""){            
             jQuery('.fsNameFirst').append( '<label class="fspr_register_error">This field is required.</label>' );
+        }else if(firstname.length>20){
+            jQuery('.fsNameFirst').append( '<label class="fspr_register_error">First name cannot be more than 20 characters</label>' );
+        }else if(/[^a-zA-Z0-9\-]/.test( firstname )){
+            jQuery('.fsNameFirst').append( '<label class="fspr_register_error">First name can only contain alphanumeric characters and hyphens(-)</label>' );
+        }
             
-        if(lastname=="")
+        //LastName field validation
+        if(lastname==""){
             jQuery('.fsNameLast').append( '<label class="fspr_register_error">This field is required.</label>' );
+        }else if(lastname.length>20){
+            jQuery('.fsNameLast').append( '<label class="fspr_register_error">Last name cannot be more than 20 characters</label>' );
+        }else if(/[^a-zA-Z0-9\-]/.test( lastname )){
+            jQuery('.fsNameLast').append( '<label class="fspr_register_error">Last name can only contain alphanumeric characters and hyphens(-)</label>' );
+        }
         
+        //Email Validation
         if(email==""){
             jQuery('#fsCell43284833').append( '<label class="fspr_register_error">This field is required.</label>' );
         }else {
@@ -54,6 +67,7 @@ jQuery(document).ready(function ()
             }
         }
         
+        //Zip Code validation
         if(zipcode==""){
             jQuery('#fsCell43284990').append( '<label class="fspr_register_error">This field is required.</label>' );            
         }else{
@@ -64,7 +78,9 @@ jQuery(document).ready(function ()
                   jQuery('#fsCell43284990').append( '<label class="fspr_register_error">This must be a valid zipcode.</label>' );
               }
             }
-        }        
+        }   
+        
+        //Age validation
         if(age=="")
             jQuery('#fsCell43284944').append( '<label class="fspr_register_error">This field is required.</label>' );
         
