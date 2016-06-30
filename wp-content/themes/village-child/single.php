@@ -6,7 +6,13 @@
 	<div class="mkd-container">
 		<?php do_action('discussion_after_container_open'); ?>
 		<div class="mkd-container-inner">
-			<?php discussion_get_blog_single(); ?>
+			  <?php
+                            if (get_post_type(get_the_ID()) == 'videos') {
+                                get_template_part('template-videos-single');
+                            } else {
+                                discussion_get_blog_single();
+                            }
+                            ?>
 		</div>
 		<?php do_action('discussion_before_container_close'); ?>
 	</div>
