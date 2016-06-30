@@ -140,7 +140,7 @@ li{
 }
 
 
-/*Category menu right side css starts here*/
+/*Category menu right side css starts here
 @media only screen and (min-width: 1025px) {
     .mkd-sticky-holder .mkd-vertical-align-containers .mkd-position-left{
         float: left;
@@ -188,8 +188,8 @@ li{
     .mkd-sticky-holder .mkd-main-menu {
         width: 85%;
     }
-}
-/*Category menu right side css ends here*/
+} 
+Category menu right side css ends here*/
 
 @media only screen and (min-width: 768px) {
     .top-bar-section-mobile{
@@ -572,6 +572,7 @@ footer .mkd-footer-top-holder {
 .ctg_list span{
     float: right;
     font-size: 18px;
+    cursor: pointer;
 }
 .ctg_list img{
     width: 100%;

@@ -26,7 +26,7 @@
                             action: 'custom_scroll_post_load',
                             offset: parseInt(jQuery('#current_post').val()),                         
                             cat_id:'<?php echo $cat_id; ?>',                        
-                            post_type:'post',
+                            post_type:'<?php echo $post_type; ?>',
                             perpage: '6'
                         },
                         success: function(data)
