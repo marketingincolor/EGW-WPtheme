@@ -196,12 +196,12 @@ function fspr_login_form_fields() {
         <fieldset>
             <ul>
                 <li>
-                     <label for="fspr_user_Login">Username</label>
-                <input name="fspr_user_login" id="fspr_user_login" class="required" type="text"/>
+                    <div class="lg-fm-lft"><label for="fspr_user_Login">Username</label></div>
+                <div class="lg-fm-rgt"><input name="fspr_user_login" id="fspr_user_login" class="required" type="text"/></div>
                 </li>
                 <li>
-                    <label for="fspr_user_pass">Password</label>
-                <input name="fspr_user_pass" id="fspr_user_pass" class="required" type="password"/>
+                    <div class="lg-fm-lft"><label for="fspr_user_pass">Password</label></div>
+                <div class="lg-fm-rgt"><input name="fspr_user_pass" id="fspr_user_pass" class="required" type="password"/></div>
                 </li>
             </ul>
             <p>

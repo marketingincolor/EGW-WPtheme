@@ -3,7 +3,19 @@
     <div class="mkd-section-title-holder clearfix">
         <span class="mkd-st-title">Share</span>
     </div>
-    <?php echo do_shortcode('[aps-counter theme="theme-2"]'); ?>  
+   <div class="sidebar-social-icons">
+        <div class="social-icon-wd-container">
+            <ul>
+                <ul>
+                <li class="wd-fb"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                <li class="wd-twitter"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                <li class="wd-googleplus"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                <li class="wd-pinterest"><a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+                <li class="wd-linkedin"><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+            </ul>
+            </ul>
+        </div>
+    </div>
 </div>
 <div class="widget mkd-rpc-holder">
     <div class="widget widget_categories">
