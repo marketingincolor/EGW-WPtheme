@@ -1,4 +1,4 @@
-<div style="" class="vc_row wpb_row vc_row-fluid mkd-section mkd-content-aligment-left">
+<div id="category_banner" class="vc_row wpb_row vc_row-fluid mkd-section mkd-content-aligment-left">
     <div class="clearfix mkd-full-section-inner">
         <div class="wpb_column vc_column_container vc_col-sm-12">
             <div class="vc_column-inner ">
@@ -12,41 +12,29 @@
                                 'display_date' => 'no',
                                 'date_format' => 'd. F Y',
                                 'display_comments' => 'no',
-                                'display_count' => 'yes',
+                                'display_count' => 'no',
                                 'display_share' => 'no',
                                 'slider_height' => ''
                             );
-                            
-
-                            $params = shortcode_atts($args, $atts);
-
-                            $html = '';
-                            $thumb_html = '';
-
 
                             if (have_posts()):
                                 $title_ta = 'h2';
                                 $display_category = 'no';
-                                $display_date = 'yes';
+                                $display_date = 'no';
                                 $date_format = 'd. F Y';
-                                $display_comments = 'yes';
-                                $display_count = 'yes';
-                                $display_share = 'yes';
+                                $display_comments = 'no';
+                                $display_count = 'no';
+                                $display_share = 'no';
                                 $slider_height = '';
-
+                                $params = shortcode_atts($args, $atts);
                                 while (have_posts()) : the_post();
                                     $id = get_the_ID();
                                     $image_params = discussion_custom_getImageParams($id);
                                     $params = array_merge($params, $image_params);
                                     $redirect_url = esc_url(get_permalink());
-                                    $post_redirect_data = get_post_meta($id, 'feature_article_url');
-                                    if (!empty($post_redirect_data) && isset($post_redirect_data[0]) && !empty($post_redirect_data[0])) {
-                                        $redirect_url = esc_url($post_redirect_data[0]);
-                                    }
                                     ?>
-                                    <div class="mkd-psi-slider">      
-
-                                        <div onclick="window.location.href = '<?php echo $redirect_url; ?>'" class="mkd-psi-slide" data-image-proportion="<?php echo esc_attr($params['proportion']) ?>" <?php discussion_inline_style($params['background_image']); ?>>
+                                    <div class="mkd-psi-slider"> 
+                                        <div class="mkd-psi-slide" data-image-proportion="<?php echo esc_attr($params['proportion']) ?>" <?php discussion_inline_style($params['background_image']); ?>>
                                             <div class="mkd-psi-content">
                                                 <div class="mkd-grid">
                                                     <?php
@@ -55,7 +43,9 @@
                                                     ))
                                                     ?>
                                                     <h2 class="mkd-psi-title">
-                                                        <a itemprop="url" href="<?php echo $redirect_url; ?>" target="_self"><?php echo esc_attr(the_title()) ?></a>
+<!--                                                        <a itemprop="url" href="javascript:void(0)" target="_self">-->
+                                                            <?php echo esc_attr(get_the_title()) ?>
+<!--                                                        </a>-->
                                                     </h2>
                                                     <?php
                                                     discussion_post_info_date(array(
@@ -86,13 +76,13 @@
                                     </div>
                                     <?php
                                 endwhile;
-                                $html .= '<div class="mkd-psi-slider">  </div>';
+                             
                             else:
                                 discussion_get_module_template_part('templates/parts/no-posts', 'blog');
 
                             endif;
                             wp_reset_postdata();
-                            echo $html;
+                           
                             ?>
 
 
