@@ -209,7 +209,8 @@ function fspr_login_form_fields() {
                 <input id="fspr_login_submit" name="fspr_login_submit" type="submit" value="Login" class="fsplogin_btn"/>
             </p>
             <div class="fs_forgot_password">
-                 <a href="<?php echo home_url('/forgot-password')?>">Forgot your password?</a>
+                <a href="<?php echo home_url('/register')?>">Register</a> |
+                <a href="<?php echo home_url('/forgot-password')?>">Forgot your password?</a>                 
             </div>
         </fieldset>
     </form>
@@ -228,19 +229,19 @@ function fspr_login_member() {
 
         if (!$user) {
             // if the user name doesn't exist
-            fspr_errors()->add('empty_username', __('Invalid username'));
+            fspr_errors()->add('empty_username', __('Invalid Username or Password'));
         }
 
-        if (!isset($_POST['fspr_user_pass']) || $_POST['fspr_user_pass'] == '') {
-            // if no password was entered
-            fspr_errors()->add('empty_password', __('Please enter a password'));
-        }
-
-        // check the user's login with their password
-        if (!wp_check_password($_POST['fspr_user_pass'], $user->user_pass, $user->ID)) {
-            // if the password is incorrect for the specified user
-            fspr_errors()->add('empty_password', __('Incorrect password'));
-        }
+//        if (!isset($_POST['fspr_user_pass']) || $_POST['fspr_user_pass'] == '') {
+//            // if no password was entered
+//            fspr_errors()->add('empty_password', __('Please enter a password'));
+//        }
+//
+//        // check the user's login with their password
+//        if (!wp_check_password($_POST['fspr_user_pass'], $user->user_pass, $user->ID)) {
+//            // if the password is incorrect for the specified user
+//            fspr_errors()->add('empty_password', __('Incorrect password'));
+//        }
 
         // retrieve all error messages
         $errors = fspr_errors()->get_error_messages();

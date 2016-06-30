@@ -160,6 +160,11 @@ if (!function_exists('discussion_scripts')) {
            wp_enqueue_script( 'custom-remove-save-article',  MIKADO_ASSETS_ROOT . '/js/fsp-remove-save-article.js'); 
         }
         
+         //Remove article from the user profile page
+        if(is_page('login')){
+           wp_enqueue_script( 'jquery validation',  MIKADO_ASSETS_ROOT . '/js/jquery.validate.js'); 
+        }
+        
     }
 
     add_action('wp_enqueue_scripts', 'discussion_scripts');
