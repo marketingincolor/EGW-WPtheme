@@ -71,7 +71,24 @@ if (!empty($_POST['action'])) {
 
 get_header();
 ?>
-
+<script type = "text/javascript">
+    jQuery(function () {
+        jQuery(".ion-android-close").unbind().click(function () {
+            var dataString = jQuery('#requiredvalues :input').serialize() + '&categoryid=' + this.id;
+            jQuery.ajax({
+                type: "POST",
+                url: "wp-content/themes/discussionwp/unfollowajax.php",
+                data: dataString,
+                cache: false,
+                success: function (successvalue) {
+                    jQuery('.followed_ctg_content').html(successvalue);
+                    jQuery('#unfollowedmsg').html("<i aria-hidden='true' class='fa fa-check'></i> Unfollowed successfully").fadeOut(3000);
+                }
+            });
+            return false;
+        });
+    });
+</script>
 <div class="mkd-full-width">
     <div class="mkd-full-width-inner"> 
         <div class="mkd-grid-section">
@@ -237,19 +254,27 @@ get_header();
                 <div class="clearfix fsp-page-container">
                     <div class="fsp-followed-categories">
                         <h2>Followed Subcategories</h2>
+                        
                         <div class="followed_ctg_content">
                             <?php
                             $userid = get_current_user_id();
                             $fetchresult = $wpdb->get_results("SELECT *from wp_follow_category where userid=" . $userid . " and flag=1");
                             $rowresult = $wpdb->num_rows;
                             ?>
-
+                            <span><a href="#" id="unfollowedmsg" style="color: green; font-size: 12px;"></a></span>
+                            <div id="requiredvalues">
+                                <!-- TO update the div after unfollowed any category from profile. "unfollowedCat" is just page reference -->
+                                <input type="hidden" name="updateflag" id="flagvalue" value="0">                                
+                                <input type="hidden" name="ajaxupdate" id="flagvalue" value="unfollowedCat">
+                                <input type="hidden" name="submit" id="submitvalue" value="update">
+                                <input type="hidden" name="userid" value="<?php echo $userid; ?>">
+                            </div>
                             <ul>
-
                                 <?php
                                 foreach ($fetchresult as $results) {
                                     ?>
                                     <li class="vc_col-md-3 vc_col-sm-6 vc_col-xs-6">
+
                                         <div class="ctg_list">
                                             <?php
                                             $attr = array(
@@ -262,54 +287,16 @@ get_header();
                                             z_taxonomy_image($results->categoryid, 'full', $attr);
                                             ?>
 
-                                            <h4><?php echo get_the_category_by_ID($results->categoryid); ?> <span class="ion-android-close"></span></h4>
+                                            <h4><?php echo get_the_category_by_ID($results->categoryid); ?> <span class="ion-android-close" id="<?php echo $results->categoryid; ?>"></span></h4>
                                         </div>
                                     </li>
-                                    <?php
-                                }
-                                ?>
-                                <!--                                <li class="vc_col-md-3 vc_col-sm-6 vc_col-xs-6">
-                                                                    <div class="ctg_list">
-                                                                        <img src="wp-content/wp-content/uploads/2016/03/Member-01.jpg" />
-                                                                        <h4>Mind - Spirit<span class="ion-android-close"></span></h4>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="vc_col-md-3 vc_col-sm-6 vc_col-xs-6">
-                                                                    <div class="ctg_list">
-                                                                        <img src="wp-content/wp-content/uploads/2016/03/Member-01.jpg" />
-                                                                        <h4>Nutrition<span class="ion-android-close"></span></h4>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="vc_col-md-3 vc_col-sm-6 vc_col-xs-6">
-                                                                    <div class="ctg_list">
-                                                                        <img src="wp-content/wp-content/uploads/2016/03/Member-01.jpg" />
-                                                                        <h4>Relationships<span class="ion-android-close"></span></h4>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="vc_col-md-3 vc_col-sm-6 vc_col-xs-6">
-                                                                    <div class="ctg_list">
-                                                                        <img src="wp-content/wp-content/uploads/2016/03/Member-01.jpg" />
-                                                                        <h4>Activity <span class="ion-android-close"></span></h4>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="vc_col-md-3 vc_col-sm-6 vc_col-xs-6">
-                                                                    <div class="ctg_list">
-                                                                        <img src="wp-content/wp-content/uploads/2016/03/Member-01.jpg" />
-                                                                        <h4>Mind - Spirit<span class="ion-android-close"></span></h4>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="vc_col-md-3 vc_col-sm-6 vc_col-xs-6">
-                                                                    <div class="ctg_list">
-                                                                        <img src="wp-content/wp-content/uploads/2016/03/Member-01.jpg" />
-                                                                        <h4>Nutrition<span class="ion-android-close"></span></h4>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="vc_col-md-3 vc_col-sm-6 vc_col-xs-6">
-                                                                    <div class="ctg_list">
-                                                                        <img src="wp-content/wp-content/uploads/2016/03/Member-01.jpg" />
-                                                                        <h4>Relationships<span class="ion-android-close"></span></h4>
-                                                                    </div>
-                                                                </li>-->
+                                <?php } ?>
+                                <?php if ($rowresult == 0) { ?>
+
+                                    <li class="vc_col-md-8">
+                                        No Record found.
+                                    </li>
+                                <?php } ?>
                             </ul>
                         </div>
                     </div>
