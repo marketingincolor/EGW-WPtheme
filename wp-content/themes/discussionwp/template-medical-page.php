@@ -29,10 +29,11 @@ list($post_per_section,$post_type)=scroll_loadpost_settings();
                             ?>
                             </div>
                         </div><!-- #content -->
-                    </div>
                 </div>
-            </div></div>
+            </div>
+        </div>
     </div>
+</div>
     <?php
      /**
      * For loading scroll based post loading
