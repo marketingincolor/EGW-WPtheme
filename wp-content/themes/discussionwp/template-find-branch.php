@@ -51,18 +51,18 @@
 //                       
 //        });
 
-        $(document).on('click', '#myevergreen',  function() {
+        
+        jQuery('#findavillage').click(function () { 
+                var blog_id=jQuery('#current-blog').text();
+                jQuery("#findavillage option[id='"+blog_id+"']").remove();
+            });
+    });
+    jQuery(document).on('click', '#myevergreen',  function() {
             if (jQuery("#findavillage").val() == "") {
                 return false;
             } else {       
                 alert("ok");
                 document.location.href=jQuery("#findavillage").val();
             }
-        });
-        jQuery('#findavillage').click(function () { 
-                var blog_id=jQuery('#current-blog').text();
-                jQuery("#findavillage option[id='"+blog_id+"']").remove();
-            });
     });
-
 </script>
