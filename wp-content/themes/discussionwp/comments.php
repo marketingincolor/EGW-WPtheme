@@ -49,6 +49,7 @@ $args = array(
 	'comment_field' => '<textarea id="comment" placeholder="'.esc_html__( 'Type Message:','discussionwp' ).'" name="comment" cols="45" rows="8" aria-required="true"></textarea>',
 	'comment_notes_before' => '',
 	'comment_notes_after' => '',
+        'must_log_in' => '<p class="must-log-in">' .  sprintf( __( 'You must be <a href="%s">logged in</a> to post a comment.' ), home_url('/login') ) . '</p>',
 	'fields' => apply_filters( 'comment_form_default_fields', array(
 		'author' => '<div class="mkd-three-columns clearfix"><div class="mkd-three-columns-inner"><div class="mkd-column"><div class="mkd-column-inner"><input id="author" name="author" placeholder="'. esc_html__( 'Name:','discussionwp' ) .'" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '"' . $aria_req . ' /></div></div>',
 		'url' => '<div class="mkd-column"><div class="mkd-column-inner"><input id="email" name="email" placeholder="'. esc_html__( 'E-mail:','discussionwp' ) .'" type="text" value="' . esc_attr(  $commenter['comment_author_email'] ) . '"' . $aria_req . ' /></div></div>',
