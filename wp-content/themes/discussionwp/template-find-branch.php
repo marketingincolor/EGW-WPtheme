@@ -35,7 +35,7 @@
             </select>
         </div>
         <div class="ev-btn-container">
-            <input type="button" id="myevergreen" value="Submit">
+            <button type="button" id="myevergreen">Submit</button>
         </div>
     </div>
 </div>
@@ -45,27 +45,16 @@
 //            if (jQuery("#findavillage").val() == "") {
 //                return false;
 //            } else {       
-//                alert("ok");
+//                
 //                document.location.href=jQuery("#findavillage").val();
 //            }
 //                       
 //        });
-
         
         jQuery('#findavillage').click(function () { 
                 var blog_id=jQuery('#current-blog').text();
                 jQuery("#findavillage option[id='"+blog_id+"']").remove();
             });
-              jQuery('#myevergreen').css('cursor','pointer');
     });
-  
-    jQuery(document).on('click', '#myevergreen',  function() {
-        alert("dfdfd");
-            if (jQuery("#findavillage").val() == "") {
-                return false;
-            } else {       
-                alert("ok");
-                document.location.href=jQuery("#findavillage").val();
-            }
-    });
+
 </script>
