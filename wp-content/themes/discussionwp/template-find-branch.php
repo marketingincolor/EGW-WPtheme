@@ -35,7 +35,7 @@
             </select>
         </div>
         <div class="ev-btn-container">
-            <button type="button" id="myevergreen">Submit</button>
+            <input type="button" id="myevergreen" value="Submit">
         </div>
     </div>
 </div>
