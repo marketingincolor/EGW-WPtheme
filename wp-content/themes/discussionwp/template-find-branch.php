@@ -44,12 +44,10 @@
         jQuery("#myevergreen").click(function () {
             if (jQuery("#findavillage").val() == "") {
                 return false;
-            } else {
-                window.open(jQuery("#findavillage").val(), '_blank');
+            } else {                
+                document.location.href=jQuery("#findavillage").val();
             }
-            
-            
-
+                       
         });
         
         jQuery('#findavillage').click(function () { 
