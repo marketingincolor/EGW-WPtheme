@@ -56,7 +56,7 @@
                 var blog_id=jQuery('#current-blog').text();
                 jQuery("#findavillage option[id='"+blog_id+"']").remove();
             });
-              $('#myevergreen').css('cursor','pointer');
+              jQuery('#myevergreen').css('cursor','pointer');
     });
   
     jQuery(document).on('click', '#myevergreen',  function() {
