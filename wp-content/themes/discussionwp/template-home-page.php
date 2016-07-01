@@ -143,7 +143,7 @@ $category='home';
                                     $my_query = discussion_custom_category_query($post_type,$category,$post_per_section);  
                                 }
                             } else {
-                                discussion_custom_categorylist_query($cat_id_ar,$post_per_section);
+                                $my_query = discussion_custom_category_query($post_type,$category,$post_per_section); 
                             }
                            
                            // $my_query = discussion_custom_category_query('post',$category);
