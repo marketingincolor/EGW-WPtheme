@@ -138,9 +138,19 @@ li{
 .topbar-rightcontainer{
     float: right;
 }
+/*Category menu css starts here*/
+.mkd-sticky-holder .mkd-main-menu > ul > li:nth-child(2){
+        background: #f79c49;
+    }
+      .mkd-main-menu > ul > li:nth-child(2){
+        background: #f79c49;
+    }
+    .mkd-main-menu > ul > li:nth-child(2):hover > a{
+        background: #cb8132;
+    }
+/*Category menu css ends here*/
 
-
-/*Category menu right side css starts here
+/*old Category menu right side css starts here
 @media only screen and (min-width: 1025px) {
     .mkd-sticky-holder .mkd-vertical-align-containers .mkd-position-left{
         float: left;
