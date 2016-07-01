@@ -1,4 +1,11 @@
-<!-- Post block start-->
+<?php
+/**
+ * Author - Akilan
+ * Date - 10-06-2016
+ * Purpose - For displaying article 3*3 based on category
+ * Modified - 01-07-2016
+ */
+?>
 <?php
 list($post_per_section, $post_type) = scroll_loadpost_settings();
 ?>
@@ -42,6 +49,9 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                 $thumb_image_height = '';
                                 $thumb_image_size = '150';
                                 $excerpt_length = '12';
+                                /**
+                                 * For hide some attributes for videos
+                                 */
                                 switch (get_post_type()) {
                                     case 'videos':
                                         $display_category = 'no';
@@ -56,8 +66,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                  * For implement two coloumn based post in one row
                                  */
                                 ?>
-
-
+                        
                                 <div class="mkd-pt-six-item mkd-post-item">
                                      <?php if (has_post_thumbnail()) { ?>
                                         <div class="mkd-pt-six-image-holder">
@@ -131,18 +140,17 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                    
 
 
-        <?php
-        $i++;
-    endwhile;
-} else {
-    discussion_get_module_template_part('templates/parts/no-posts', 'blog');
-}
-?>
+                            <?php
+                            $i++;
+                            endwhile;
+                        } else {
+                            discussion_get_module_template_part('templates/parts/no-posts', 'blog');
+                        }
+                        ?>
 
                     </div>
                 </div>
-<?php
-?>
+
                 <input type="hidden" id="processing" value="0">
                 <input type="hidden" id="currentloop" value="1">
                 <input type="hidden" id="total_post" value="<?php echo $wp_query->found_posts; ?>">
@@ -151,36 +159,38 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                 else: echo $post_per_section;
                 endif;
                 ?>">
-<?php
-//discussion_pagination($wp_query->max_num_pages, 6, get_query_var('paged') ? get_query_var('paged') : 1);
+                <?php wp_reset_query();  // Restore global post data stomped by the_post().?>
 
-wp_reset_query();  // Restore global post data stomped by the_post().
-?><!--/div-->
 
             </div>
-                       <?php
-                       /**
-                        * For displaying ads based on total count of post
-                        */
-                       if ($total_post >= $post_per_section) {
-                           $no_of_adds = floor($total_post / $post_per_section);
-                           for ($i = 1; $i <= $no_of_adds; $i++) {
-                               ?> 
+           <?php
+           /**
+            * For displaying ads based on total count of post
+            */
+            if ($total_post >= $post_per_section) {
+               $no_of_adds = floor($total_post / $post_per_section);
+                for ($i = 1; $i <= $no_of_adds; $i++) {
+                ?> 
 
-                    <div  class="wpb_single_image wpb_content_element vc_align_left"  id="adv_row_<?php echo $i; ?>" <?php if ($i != 1) { ?> style="display:none;clear:both" <?php } else { ?> style="clear:both" <?php } ?>>  
-                    <?php
-                    if (function_exists('drawAdsPlace'))
-                        drawAdsPlace(array('id' => 1), true);
-                    ?>
-                    </div>
+                    <div class="fsp-ads-homepage" id="adv_row_<?php echo $i; ?>" <?php if ($i != 1) { ?> style="display:none;clear:both" <?php } else { ?> style="clear:both" <?php } ?>>  
                         <?php
-                    }
+                        if (function_exists('drawAdsPlace'))
+                            drawAdsPlace(array('id' => 1), true);
+                        ?>
+                    </div>
+                 <?php
                 }
-                ?>
+            }
+             ?>
         </div>
     </div>
 
 </div>
+<?php
+/**
+ * jquery loading image icon display block
+ */
+?>
 
 <div class="mkd-ratings-holder" style="background:none;display:none" align="center">
     <div class="mkd-ratings-text-holder">                      
@@ -190,5 +200,4 @@ wp_reset_query();  // Restore global post data stomped by the_post().
             </div>
         </div>
     </div>
-
 </div>
