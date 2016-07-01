@@ -707,7 +707,7 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
 }
 @media only screen and (max-width: 480px) {
     .mkd-ratings-holder .mkd-ratings-stars-holder{
-        width: 100%;
+        width: 100% !important;
     }
 }
 /*Rating ends here*/
@@ -812,7 +812,10 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
     display: block;
 }      
 /*sidebar social icons styles ends here*/
-.fsp-ads-homepage img{
-    text-align:center;    
+
+.fsp-ads-homepage{
+    text-align:center; 
+}
+.fsp-ads-homepage img{   
     margin: 0 auto 10px;
 }
