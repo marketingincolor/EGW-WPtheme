@@ -381,15 +381,16 @@ footer .mkd-footer-top-holder {
         width: 87%;
     }
 }
- /***Register**/
-    .fspr_register_error{
-        color: red;
-        width: 100%;
-         font-size: 13px;
-    }   
-    .fspr_comment_error{
-        color: red ;
-    }
+/***Register**/
+.fsBody .fsLabel, .fsBody label.fspr_register_error{
+    color: red;
+    width: 100%;
+    font-size: 13px;
+}   
+.fspr_comment_error{
+    color: red ;
+    font-size: 13px;
+}
 /*Login css ends here*/
 
 /*find-a-branch-container popup css starts here*/
