@@ -44,7 +44,8 @@
         jQuery("#myevergreen").click(function () {
             if (jQuery("#findavillage").val() == "") {
                 return false;
-            } else {                
+            } else {       
+                alert("ok");
                 document.location.href=jQuery("#findavillage").val();
             }
                        
