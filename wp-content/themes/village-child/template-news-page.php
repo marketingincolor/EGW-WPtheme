@@ -5,7 +5,10 @@
  * 
  */
 ?>
-<?php get_header(); ?>
+<?php get_header(); 
+$post_per_section=6;
+$category = 'news';
+?>
 <div class="mkd-content">
     <div class="mkd-content-inner">
         <div class="mkd-full-width">
@@ -17,8 +20,7 @@
                         <div class="mkd-two-columns-75-25  mkd-content-has-sidebar clearfix">
                             <div class="mkd-column1 mkd-content-left-from-sidebar">
                                 <div class="mkd-column-inner">
-                                    <?php
-                                    $category = 'news';
+                                    <?php                                 
                                     $my_query = null;
                                     $my_query = discussion_custom_category_query('post', $category);
                                     global $wp_query;
@@ -42,7 +44,9 @@
         </div>
     </div>
 </div>
-
+<?php
+    include(locate_template('template-ajax-pagination.php'));    
+?>
 <?php get_footer(); ?>
 
 

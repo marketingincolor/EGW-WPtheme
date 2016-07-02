@@ -5,7 +5,9 @@
  * 
  */
 ?>
-<?php get_header(); ?>
+<?php get_header(); 
+$post_per_section=6;
+?>
 <div class="mkd-content">
     <div class="mkd-content-inner">
         <div class="mkd-full-width">
@@ -148,7 +150,9 @@
         </div>
     </div>
 </div>
-
+<?php
+    include(locate_template('template-ajax-pagination.php'));    
+?>
 <?php get_footer(); ?>
 
 
