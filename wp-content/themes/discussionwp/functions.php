@@ -1753,3 +1753,36 @@ function custom_comment($comment, $args, $depth) {
 		</div>
 		<?php
     }
+    
+    function SocialNetworkShareLink($net, $image) {
+                  
+    switch ($net) {
+        case 'facebook':
+            $link = 'window.open(\'http://www.facebook.com/sharer.php?s=100&amp;p[title]=' . urlencode(discussion_addslashes(get_the_title())) . '&amp;p[summary]=' . urlencode(discussion_addslashes(get_the_excerpt())) . '&amp;p[url]=' . urlencode(get_permalink()) . '&amp;p[images][0]=' . $image[0] . '\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
+            break;
+        case 'twitter':
+            $count_char = (isset($_SERVER['https'])) ? 23 : 22;
+            $twitter_via = (discussion_options()->getOptionValue('twitter_via') !== '') ? ' via ' . discussion_options()->getOptionValue('twitter_via') . ' ' : '';
+            $link = 'window.open(\'http://twitter.com/home?status=' . urlencode(discussion_the_excerpt_max_charlength($count_char) . $twitter_via) . get_permalink() . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+            break;
+        case 'google_plus':
+            $link = 'popUp=window.open(\'https://plus.google.com/share?url=' . urlencode(get_permalink()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+            break;
+        case 'linkedin':
+            $link = 'popUp=window.open(\'http://linkedin.com/shareArticle?mini=true&amp;url=' . urlencode(get_permalink()) . '&amp;title=' . urlencode(get_the_title()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+            break;
+        case 'tumblr':
+            $link = 'popUp=window.open(\'http://www.tumblr.com/share/link?url=' . urlencode(get_permalink()) . '&amp;name=' . urlencode(get_the_title()) . '&amp;description=' . urlencode(get_the_excerpt()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+            break;
+        case 'pinterest':
+            $link = 'popUp=window.open(\'http://pinterest.com/pin/create/button/?url=' . urlencode(get_permalink()) . '&amp;description=' . discussion_addslashes(get_the_title()) . '&amp;media=' . urlencode($image[0]) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+            break;
+        case 'vk':
+            $link = 'popUp=window.open(\'http://vkontakte.ru/share.php?url=' . urlencode(get_permalink()) . '&amp;title=' . urlencode(get_the_title()) . '&amp;description=' . urlencode(get_the_excerpt()) . '&amp;image=' . urlencode($image[0]) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+            break;
+        default:
+            $link = '';
+    }
+
+    return $link;
+}
