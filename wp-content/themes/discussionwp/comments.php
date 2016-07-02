@@ -17,7 +17,7 @@
 ?>
 <?php if ( have_comments() ) : ?>
 	<ul class="mkd-comment-list">
-		<?php wp_list_comments(array( 'callback' => 'discussion_comment')); ?>
+		<?php wp_list_comments(array( 'callback' => 'custom_comment')); ?>
 	</ul>
 <?php // End Comments ?>
 
