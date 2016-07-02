@@ -1,4 +1,10 @@
 <?php
+/*
+  Functionality : Create account based on Formstack.com Registeration form
+ * Author: Ramkumar.S
+ * Date: June 25,2016
+ * Updated : July 2, 2016
+ */
 
 // define some vars
 require_once '../wp-config.php';
@@ -40,11 +46,11 @@ if (!is_email($user_email)) {
     header('Refresh: 2;url= /register');
     exit();
 }
-if (email_exists($user_email)) {
-    echo '<div class="error notice"><p>Email Already in use. Please try again ! - Redirecting in 2 sec</p></div>';
-    header('Refresh: 2;url= /register');
-    exit();
-}
+//if (email_exists($user_email)) {
+//    echo '<div class="error notice"><p>Email Already in use. Please try again ! - Redirecting in 2 sec</p></div>';
+//    header('Refresh: 2;url= /register');
+//    exit();
+//}
 
 // needed to prevent wordpress to load the complete environment. we need only a basic wordpress
 define('SHORTINIT', TRUE);
@@ -94,8 +100,12 @@ $register_page = home_url('/register');
 if (!is_wp_error($new_user)) {
 
     $subject = "Evergreen Wellness remote registration";
-    $message = "Hi there! \n You have successfully registered to the site. Your login name is {$user_email} and your password is {$random_password}\nPlease change your password immediately!\n\n"
-            . "<a href='$login_page'>Click Here </a> to login";
+    $message = "Hi there! \n You have successfully registered to the site. Your login name is {$user_email} and your password is {$random_password}\nPlease change your password immediately!\n\nTesting content\n"
+            . "<a href='$login_page'>Click Here </a> to login\n";
+    foreach($_POST as $key => $val){
+        $message .= 'key=>'.$key;
+        $message .= 'val=>'.$val;
+    }
     $sender = 'From: Admin <ramfsp@gmail.com>' . "\r\n";
     $headers[] = 'MIME-Version: 1.0' . "\r\n";
     $headers[] = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
