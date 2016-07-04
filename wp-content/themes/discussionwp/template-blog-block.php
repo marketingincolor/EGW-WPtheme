@@ -56,8 +56,8 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                     case 'videos':
                                         $display_category = 'no';
                                         $display_share = 'no';
-                                        $display_comments = 'no';
-                                        $display_date = 'no';
+//                                        $display_comments = 'no';
+//                                        $display_date = 'no';
                                         break;
                                 }
                                 ?>        
