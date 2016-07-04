@@ -6,11 +6,10 @@
  */
 ?>
 
-<?php
-get_header();
-$post_per_section = 6;
-$post_type = 'post';
-$category = 'home';
+<?php get_header();
+$post_per_section=6;
+$post_type='post';
+$category='home';
 ?>
 
 <div class="mkd-content">
@@ -36,7 +35,7 @@ $category = 'home';
                                                 'slider_height' => ''
                                             );
 
-
+                                           
 
 
 
@@ -61,10 +60,10 @@ $category = 'home';
                                                     $image_params = discussion_custom_getImageParams($id);
                                                     $params = array_merge($params, $image_params);
                                                     $redirect_url = esc_url(get_permalink());
-                                                    $post_redirect_data = get_post_meta($id, 'feature_article_url');
-                                                    if (!empty($post_redirect_data) && isset($post_redirect_data[0]) && !empty($post_redirect_data[0])) {
+                                                    $post_redirect_data = get_post_meta($id, 'feature_article_url');                                                    
+                                                    if (!empty($post_redirect_data) && isset($post_redirect_data[0]) && !empty($post_redirect_data[0])){                                                        
                                                         $redirect_url = esc_url($post_redirect_data[0]);
-                                                    }
+                                                    }                                                   
                                                     ?>
                                                     <div class="mkd-psi-slider">      
 
@@ -108,7 +107,7 @@ $category = 'home';
                                                     </div>
                                                     <?php
                                                 endwhile;
-
+                                               
                                             else:
                                                 discussion_get_module_template_part('templates/parts/no-posts', 'blog');
 
@@ -125,74 +124,33 @@ $category = 'home';
                         </div>    
                     </div>
                 </div>
-                <!-- For mobile banner section START-->
-                <div data-max_pages="1" data-paged="1" data-sort="featured_first" data-post_in="205, 215, 218, 225, 232" data-category_id="4" data-number_of_posts="5" data-slider_height="735" data-base="mkd_post_slider_interactive" class="mkd-bnl-holder mkd-psi-holder  mkd-psi-number-5" style="opacity: 1;">
-                    <div class="mkd-bnl-outer">
-                        <div class="mkd-psi-slider">      
-                            <div class="mkd-psi-slide" style="height: 145px;">
-                                <div class="mkd-psi-content">
-                                    <div class="mkd-grid">
-                                        <?php
-                                        discussion_post_info_category(array(
-                                            'category' => $display_category
-                                        ))
-                                        ?>                                        
-                                        <?php
-                                        discussion_post_info_date(array(
-                                            'date' => $display_date,
-                                            'date_format' => $date_format
-                                        ));
-                                        ?>
-                                        <?php if ($display_share == 'yes' || $display_comments == 'yes' || $display_count == 'yes') { ?>
-                                            <div class="mkd-pt-info-section clearfix">
-                                                <div>
-                                                    <?php
-                                                    discussion_post_info_share(array(
-                                                        'share' => $display_share
-                                                    ));
-                                                    discussion_post_info_comments(array(
-                                                        'comments' => $display_comments
-                                                    ));
-                                                    discussion_post_info_count(array(
-                                                        'count' => $display_count
-                                                            ), 'list');
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- For mobile banner section END-->
                 <div style="" class="vc_row wpb_row vc_row-fluid mkd-section mkd-content-aligment-left mkd-grid-section">
                     <div class="mkd-container-inner clearfix">
                         <div class="mkd-section-inner-margin clearfix">
                             <?php
                             $my_query = null;
-
-                            $cat_id_ar = array();
-                            if (is_user_logged_in()) {
-                                $userid = get_current_user_id();
-                                $fetchresult = $wpdb->get_results("SELECT categoryid FROM wp_follow_category where userid=" . $userid . " AND flag=1");
-                                if (!empty($fetchresult)) {
-                                    foreach ($fetchresult as $results) {
-                                        $cat_id_ar[] = $results->categoryid;
-                                    }
-                                    discussion_custom_categorylist_query($cat_id_ar, $post_per_section);
+                           
+                            $cat_id_ar=array();
+                            if(is_user_logged_in()){   
+                                $userid = get_current_user_id();  
+                                $fetchresult = $wpdb->get_results("SELECT categoryid FROM wp_follow_category where userid=" . $userid." AND flag=1");
+                                if(!empty($fetchresult)){                           
+                                    foreach ($fetchresult as $results) {                                       
+                                        $cat_id_ar[]=$results->categoryid;
+                                    }                             
+                                     discussion_custom_categorylist_query($cat_id_ar,$post_per_section);
                                 } else {
-                                    $my_query = discussion_custom_category_query($post_type, $category, $post_per_section);
+                                    $my_query = discussion_custom_category_query($post_type,$category,$post_per_section);  
                                 }
                             } else {
-                                $my_query = discussion_custom_category_query($post_type, $category, $post_per_section);
+                                $my_query = discussion_custom_category_query($post_type,$category,$post_per_section); 
                             }
-
-                            // $my_query = discussion_custom_category_query('post',$category);
+                           
+                           // $my_query = discussion_custom_category_query('post',$category);
 //                            $my_query = discussion_custom_category_query($post_type,$category,$post_per_section);     
                             global $wp_query;
-                            get_template_part('template-blog-block');
+                            get_template_part('template-blog-block');                  
+
                             ?>      
                         </div>
                     </div>
@@ -201,11 +159,11 @@ $category = 'home';
         </div>
     </div>
 </div>
-<!-- For post pagintation maintain -->
-
-<?php
-include(locate_template('template-ajax-pagination.php'));
+     <!-- For post pagintation maintain -->
+    
+    <?php
+    include(locate_template('template-ajax-pagination.php'));
 //    get_template_part('template-ajax-pagination');      
-?>
-<?php get_footer(); ?>
+    ?>
+    <?php get_footer(); ?>
 
