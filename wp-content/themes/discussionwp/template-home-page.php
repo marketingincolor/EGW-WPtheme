@@ -40,16 +40,11 @@ $category='home';
 
 
                                             $my_query = null;
-
                                             $atts['query_result'] = discussion_custom_featured_query('home', 'featured_article');
-
                                             $params = shortcode_atts($args, $atts);
-
                                             $html = '';
                                             $thumb_html = '';
-
                                             $data = discussion_custom_getData($params, $atts);
-
                                             if (have_posts()):
                                                 $title_ta = 'h2';
                                                 $display_category = 'no';
@@ -89,7 +84,7 @@ $category='home';
                                                                         'date_format' => $date_format
                                                                     ));
                                                                     ?>
-                                                                            <?php if ($display_share == 'yes' || $display_comments == 'yes' || $display_count == 'yes') { ?>
+                                                                    <?php if ($display_share == 'yes' || $display_comments == 'yes' || $display_count == 'yes') { ?>
                                                                         <div class="mkd-pt-info-section clearfix">
                                                                             <div>
                                                                                 <?php
@@ -105,14 +100,14 @@ $category='home';
                                                                                 ?>
                                                                             </div>
                                                                         </div>
-                                                    <?php } ?>
+                                                                    <?php } ?>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <?php
                                                 endwhile;
-                                                $html .= '<div class="mkd-psi-slider">  </div>';
+                                               
                                             else:
                                                 discussion_get_module_template_part('templates/parts/no-posts', 'blog');
 
@@ -134,8 +129,25 @@ $category='home';
                         <div class="mkd-section-inner-margin clearfix">
                             <?php
                             $my_query = null;
+                           
+                            $cat_id_ar=array();
+                            if(is_user_logged_in()){   
+                                $userid = get_current_user_id();  
+                                $fetchresult = $wpdb->get_results("SELECT categoryid FROM wp_follow_category where userid=" . $userid." AND flag=1");
+                                if(!empty($fetchresult)){                           
+                                    foreach ($fetchresult as $results) {                                       
+                                        $cat_id_ar[]=$results->categoryid;
+                                    }                             
+                                     discussion_custom_categorylist_query($cat_id_ar,$post_per_section);
+                                } else {
+                                    $my_query = discussion_custom_category_query($post_type,$category,$post_per_section);  
+                                }
+                            } else {
+                                $my_query = discussion_custom_category_query($post_type,$category,$post_per_section); 
+                            }
+                           
                            // $my_query = discussion_custom_category_query('post',$category);
-                            $my_query = discussion_custom_category_query($post_type,$category,$post_per_section);     
+//                            $my_query = discussion_custom_category_query($post_type,$category,$post_per_section);     
                             global $wp_query;
                             get_template_part('template-blog-block');                  
 

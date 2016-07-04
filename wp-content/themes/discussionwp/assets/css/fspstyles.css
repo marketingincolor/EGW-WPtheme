@@ -138,9 +138,19 @@ li{
 .topbar-rightcontainer{
     float: right;
 }
+/*Category menu css starts here*/
+.mkd-sticky-holder .mkd-main-menu > ul > li:nth-child(2){
+        background: #f79c49;
+    }
+      .mkd-main-menu > ul > li:nth-child(2){
+        background: #f79c49;
+    }
+    .mkd-main-menu > ul > li:nth-child(2):hover > a{
+        background: #cb8132;
+    }
+/*Category menu css ends here*/
 
-
-/*Category menu right side css starts here
+/*old Category menu right side css starts here
 @media only screen and (min-width: 1025px) {
     .mkd-sticky-holder .mkd-vertical-align-containers .mkd-position-left{
         float: left;
@@ -336,18 +346,21 @@ footer .mkd-footer-top-holder {
     padding-bottom: 15px;
     overflow: hidden;
 }
-.login-container ul li label{
-    line-height: 37px;
-    float: left;
-    text-align: left;
-    width: 30%;
-}
 .login-container ul li input{
     outline: none;
-    padding: 10px;
     border: 1px solid #e6e7e8;
+    padding: 5% 2%;
+    width: 95%
+}
+.login-container ul li .lg-fm-lft{
+    line-height: 37px;
+    text-align: left;
+    width: 30%;
+    float: left;
+}
+.login-container ul li .lg-fm-rgt{
     float: right;
-    width: 60%;
+    width: 70%;
 }
 .fsplogin_btn{
     background: #f99d3e;
@@ -364,11 +377,29 @@ footer .mkd-footer-top-holder {
 .fs_forgot_password a:hover{
     text-decoration: none;
 }
+#fspr_user_login-error, #fspr_user_pass-error {
+    color: red; 
+    float: left;
+    font-size: 13px;
+}
+.login-container .error{
+    color:red
+}    
 @media only screen and (max-width: 480px) {
-    .login-container ul li input{
+    .login-container ul li .lg-fm-rgt{
         float: left;
         width: 87%;
     }
+}
+/***Register**/
+.fsBody .fsLabel, .fsBody label.fspr_register_error{
+    color: red;
+    width: 100%;
+    font-size: 13px;
+}   
+.fspr_comment_error{
+    color: red ;
+    font-size: 13px;
 }
 /*Login css ends here*/
 
@@ -685,6 +716,11 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
 .mkd-ratings-holder-container .post-ratings img{
     padding: 0 10px;
 }
+@media only screen and (max-width: 480px) {
+    .mkd-ratings-holder .mkd-ratings-stars-holder{
+        width: 100% !important;
+    }
+}
 /*Rating ends here*/
 
 /*single article page styles starts here*/
@@ -706,13 +742,91 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
     position: relative;
     top: -10px;
 }
-.mkd-follow-category a{
+.mkd-follow-category button{
     background: #f79c49;
     color: #fff;
     border: 3px solid #fff;
     text-transform: uppercase;
-    padding: 5px 30px;
+    padding: 10px 30px;
     float: right;
     margin-right: 50px;
 }
+@media only screen and (max-width: 767px) {
+    .mkd-follow-category button{
+        margin-right: 0px;
+    }
+}
+@media only screen and (max-width: 480px) {
+    .mkd-follow-category{
+        position: relative;
+        top:0px;
+    }
+    .mkd-follow-category button{
+        float: left;
+    }
+}
 /*follow-category styles ends here*/
+
+/*sidebar social icons styles starts here*/
+.sidebar-social-icons{
+    overflow: hidden;
+}
+.social-icon-wd-container ul li.wd-fb{
+    background-color: #3b5998;
+}
+.social-icon-wd-container ul li.wd-twitter{
+    background-color: #1dcaff;
+}
+.social-icon-wd-container ul li.wd-googleplus{
+    background-color: #dd4b39;
+}
+.social-icon-wd-container ul li.wd-pinterest{
+    background-color: #e91e25;
+}
+.social-icon-wd-container ul li.wd-linkedin{
+    background-color: #067aba;
+}
+.social-icon-wd-container ul li.wd-fb:hover{
+    background-color: #4664a2;
+}
+.social-icon-wd-container ul li.wd-twitter:hover{
+    background-color: #3ed2ff;
+}
+.social-icon-wd-container ul li.wd-googleplus:hover{
+    background-color: #ed5d4b;
+}
+.social-icon-wd-container ul li.wd-pinterest:hover{
+    background-color: #f72c33;
+}
+.social-icon-wd-container ul li.wd-linkedin:hover{
+    background-color: #158acb;
+}
+.social-icon-wd-container ul li{
+    float: left;
+    width: 33.33%;
+    margin: 0 !important;
+    position: relative;
+    border-right: 1px solid #e6e7e8;
+    border-bottom: 1px solid #e6e7e8;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}    
+.social-icon-wd-container ul li a{
+    height: 100%;
+    width: 100%;
+    -webkit-border-radius: 0;
+    padding: 40% 0;
+    font-size: 24px;
+    color: #ffffff;
+    text-align: center;
+    display: block;
+}      
+/*sidebar social icons styles ends here*/
+
+.fsp-ads-homepage{
+    text-align:center; 
+}
+.fsp-ads-homepage img{   
+    margin: 0 auto 10px;
+}

@@ -30,4 +30,16 @@ jQuery('.f-newsletter').magnificPopup({
 },
 closeOnBgClick :false
 });
+
+
+    jQuery(document).on('click', '#myevergreen',  function() {        
+            if (jQuery("#findavillage").val() == "") {
+                return false;
+            } else {                                                      
+                window.open(jQuery("#findavillage").val(),'_blank');
+                jQuery('.f-newsletter').magnificPopup('close');
+                
+                    
+            }
+    });
 </script>

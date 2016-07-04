@@ -1421,25 +1421,6 @@ function userpage_rewrite_catch() {
 
 add_action('template_redirect', 'userpage_rewrite_catch');
 
-/**
- * Author -Vinoth Raja
- * Date  - 21-06-2016
- * Purpose - For custom post(videos feature article)query
- */
-if (!function_exists('discussion_custompost_featured_query')) {
-
-    function discussion_custompost_featured_query($title, $type) {
-        $args1 = array(
-            'post_type' => $type,
-            'post_status' => 'publish',
-            'order' => 'DESC',
-            'posts_per_page' => 1
-        );
-        return $result = query_posts($args1);
-    }
-
-}
-
 
 /**
  * Author- Vinoth Raja
@@ -1698,3 +1679,110 @@ function scroll_loadpost_settings(){
     return array(6,'post');   
 }
 
+
+/**
+ * Author : Vinoth Raja
+ * Date : 02-07-2016
+ * Purpose - For display comment section with loggined user profile image
+*/
+
+function custom_comment($comment, $args, $depth) {
+                
+                $GLOBALS['comment'] = $comment;
+		global $post;
+
+		$is_pingback_comment = $comment->comment_type == 'pingback';
+		$is_author_comment  = $post->post_author == $comment->user_id;
+
+		$comment_class = 'mkd-comment clearfix';
+
+		if($is_author_comment) {
+			$comment_class .= ' mkd-post-author-comment';
+		}
+
+		if($is_pingback_comment) {
+			$comment_class .= ' mkd-pingback-comment';
+		}
+		?>
+		<li>
+		<div class="<?php echo esc_attr($comment_class); ?>">
+			<?php if(!$is_pingback_comment) { ?>
+				<div class="mkd-comment-image"> 
+                                <?php $user = get_current_user_id();                                
+                                      $custom_avatar_meta_data = get_user_meta($user,'custom_avatar');                                                  
+                                      if(isset($custom_avatar_meta_data) && !empty($custom_avatar_meta_data[0])):
+                                      $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0]);                              
+                                ?>
+                                <img src="<?php echo $attachment[0]; ?>" width="85px" height="85px"/>
+                                <?php else : ?>                                                    
+                                <img src="<?php echo MIKADO_ASSETS_ROOT.'/img/aavathar.jpg' ?>" width="85px" height="85px" />
+                                <?php endif; ?>
+                                </div>
+			<?php } ?>
+			<div class="mkd-comment-text-and-info">
+				<div class="mkd-comment-info-and-links">
+					<h6 class="mkd-comment-name">
+						<?php if($is_pingback_comment) { esc_html_e('Pingback:', 'discussionwp'); } ?><span class="mkd-comment-author"><?php echo wp_kses_post(get_comment_author_link()); ?></span>
+						<?php if($is_author_comment) { ?>
+						<span class="mkd-comment-mark"><?php esc_html_e('/', 'discussionwp'); ?></span>
+						<span class="mkd-comment-author-label"><?php esc_html_e('Author', 'discussionwp'); ?></span>
+						<?php } ?>
+					</h6>
+					<h6 class="mkd-comment-links">
+						<?php   if ( !is_user_logged_in() ) : ?>
+                                                        <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>
+                                                <?php   else :
+                                                            comment_reply_link( array_merge( $args, array('reply_text' => esc_html__('Reply', 'discussionwp'), 'depth' => $depth, 'max_depth' => $args['max_depth']) ) );
+                                                        endif;
+						?>
+							<span class="mkd-comment-mark"><?php esc_html_e('/', 'discussionwp'); ?></span>
+						<?php
+							edit_comment_link(esc_html__('Edit','discussionwp'));
+						?>
+					</h6>
+				</div>
+				<?php if(!$is_pingback_comment) { ?>
+					<div class="mkd-comment-text">
+						<div class="mkd-text-holder" id="comment-<?php echo comment_ID(); ?>">
+							<?php comment_text(); ?>
+							<span class="mkd-comment-date"><?php comment_time(get_option('date_format')); ?></span>
+						</div>
+					</div>
+				<?php } ?>
+			</div>
+		</div>
+		<?php
+    }
+    
+    function SocialNetworkShareLink($net, $image) {
+                  
+    switch ($net) {
+        case 'facebook':
+            $link = 'window.open(\'http://www.facebook.com/sharer.php?s=100&amp;p[title]=' . urlencode(discussion_addslashes(get_the_title())) . '&amp;p[summary]=' . urlencode(discussion_addslashes(get_the_excerpt())) . '&amp;p[url]=' . urlencode(get_permalink()) . '&amp;p[images][0]=' . $image[0] . '\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
+            break;
+        case 'twitter':
+            $count_char = (isset($_SERVER['https'])) ? 23 : 22;
+            $twitter_via = (discussion_options()->getOptionValue('twitter_via') !== '') ? ' via ' . discussion_options()->getOptionValue('twitter_via') . ' ' : '';
+            $link = 'window.open(\'http://twitter.com/home?status=' . urlencode(discussion_the_excerpt_max_charlength($count_char) . $twitter_via) . get_permalink() . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+            break;
+        case 'google_plus':
+            $link = 'popUp=window.open(\'https://plus.google.com/share?url=' . urlencode(get_permalink()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+            break;
+        case 'linkedin':
+            $link = 'popUp=window.open(\'http://linkedin.com/shareArticle?mini=true&amp;url=' . urlencode(get_permalink()) . '&amp;title=' . urlencode(get_the_title()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+            break;
+        case 'tumblr':
+            $link = 'popUp=window.open(\'http://www.tumblr.com/share/link?url=' . urlencode(get_permalink()) . '&amp;name=' . urlencode(get_the_title()) . '&amp;description=' . urlencode(get_the_excerpt()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+            break;
+        case 'pinterest':
+            $link = 'popUp=window.open(\'http://pinterest.com/pin/create/button/?url=' . urlencode(get_permalink()) . '&amp;description=' . discussion_addslashes(get_the_title()) . '&amp;media=' . urlencode($image[0]) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+            break;
+        case 'vk':
+            $link = 'popUp=window.open(\'http://vkontakte.ru/share.php?url=' . urlencode(get_permalink()) . '&amp;title=' . urlencode(get_the_title()) . '&amp;description=' . urlencode(get_the_excerpt()) . '&amp;image=' . urlencode($image[0]) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+            break;
+        default:
+            $link = '';
+    }
+
+    return $link;
+}
