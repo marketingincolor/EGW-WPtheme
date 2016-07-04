@@ -276,6 +276,32 @@ footer .mkd-footer-top-holder {
     color: #f99d3e;
 }  
 /*footer css ends here*/
+@media only screen and (max-width: 480px){
+   .mkd-psi-title a{
+    display: block;
+    font-size: 17px;
+    line-height: 24px;
+}
+.mkd-psi-holder .mkd-psi-slide .mkd-post-info-date, .mkd-psi-holder .mkd-psi-slide-thumb .mkd-post-info-date{
+    margin-top: 0px;
+}
+.mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section{
+    margin-top: 5px;
+} 
+.mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section > div > div.mkd-post-info-count::before {
+    font-size: 21px;
+}
+.mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section > div > div .mkd-post-info-comments::before {
+    font-size: 16px;
+}
+.mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section > div > div a, .mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section > div > div span{
+     line-height: 27px;
+}
+.mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section > div > div {
+    font-size: 11px;
+    line-height: 28px;
+}
+}
 /*video menu styles start here*/
 .mdk-videos-submenu .mkd-menu-second .mkd-menu-inner > ul, li.mkd-menu-narrow .mkd-menu-second .mkd-menu-inner ul {
     background: rgba(255,255,255,0.8)!important;
@@ -436,6 +462,9 @@ footer .mkd-footer-top-holder {
 .fspr_comment_error{
     color: red ;
     font-size: 13px;
+}
+#no_comments_description {
+    color: #121212;
 }
 /*Login css ends here*/
 
@@ -865,3 +894,37 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
 }
 /*sidebar social icons styles ends here*/
 
+/*single article page styles starts here*/
+.single-article-fsp-info{
+    position: relative;
+}
+.single-article-fsp-info article{
+    background: transparent;
+}
+.single-article-fsp-info article{
+    margin: 0;
+}
+.single-article-fsp-info article{
+    position: absolute;
+    top: -28px;
+}
+@media only screen and (max-width: 599px) {
+    .single-article-fsp-info{
+    position: relative;
+    margin-bottom: 28px;
+}
+ .single-article-fsp-info article{
+    position: static;
+    top: 0px;
+}
+.single-article-fsp-info article .mkd-post-info{
+   width: 100% !important;
+}
+.single-article-fsp-info article .mkd-post-info{
+    position: static !important;
+}
+.mkd-fsp-blog-holder article{
+    margin: 0;
+}
+}
+/*single article page styles ends here*/
