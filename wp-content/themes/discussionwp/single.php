@@ -12,7 +12,8 @@
                               }
                               else
                               {
-                              discussion_get_blog_single(); 
+                              //discussion_get_blog_single(); 
+                              get_template_part('template-events-single');
                               }
                               ?>
 		</div>
