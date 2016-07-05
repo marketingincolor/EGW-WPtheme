@@ -16,8 +16,8 @@
                             <?php
                             $category_id = get_cat_id(single_cat_title("", false));
                             $cat = get_category($category_id);
-
-
+                            $parent_category_id = category_top_parent_id($category_id);
+                            
 
                             $args = array(
                                 'title_tag' => 'h2',
@@ -143,8 +143,10 @@
                                                                         $processDo = "insert";
                                                                         $setValue = 1;
                                                                     }
+                                                                    if($parent_category_id!=$category_id) {
                                                                     ?>
                                                                     <button type="button" value="<?php echo $label; ?>" name="follow" class="comment_button"><?php echo $label; ?></button>
+                                                                    <?php } ?>
                                                                     <input type="hidden" name="updateflag" id="flagvalue" value="<?php echo $setValue; ?>">
                                                                     <input type="hidden" name="submit" id="submitvalue" value="<?php echo $processDo; ?>">
                                                                     <input type="hidden" name="userid" value="<?php echo $userid; ?>">
