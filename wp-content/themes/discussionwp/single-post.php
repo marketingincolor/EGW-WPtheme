@@ -128,34 +128,34 @@
                     // discussion_get_module_template_part('templates/single/parts/author-info', 'blog');
                     //discussion_get_single_related_posts();
                     ?>
-                    <div class="mkd-single-tags-holder">
-                        <?php if (function_exists('the_tags')) { ?>
+                    <?php if (function_exists('the_tags')) { ?>
+                        <div class="mkd-single-tags-holder">
                             <span class="mkd-single-tags-title"><strong>Tags: </strong></span>
                             <div class="mkd-tags">
                                 <?php the_tags('', ' ', ''); ?><br />
                             </div>
-                        <?php } ?>
-
-                        <div class="fsp-recommended-stories-cont">
-                            <?php echo do_shortcode('[AuthorRecommendedPosts]'); ?>
                         </div>
-                        <?php
-                        if (discussion_show_comments()) {
-                            comments_template('', true);
-                        }
-                        ?>
+                    <?php } ?>
+                    <div class="fsp-recommended-stories-cont">
+                        <?php echo do_shortcode('[AuthorRecommendedPosts]'); ?>
                     </div>
-                </div>
-            </div>
-            <div class="mkd-column2">
-                <div class="mkd-column-inner">
-                    <aside class="mkd-sidebar" style="transform: translateY(0px);">
-                        <?php get_template_part('sidebar/template-sidebar-single'); ?>
-                    </aside>
+                    <?php
+                    if (discussion_show_comments()) {
+                        comments_template('', true);
+                    }
+                    ?>
                 </div>
             </div>
         </div>
+        <div class="mkd-column2">
+            <div class="mkd-column-inner">
+                <aside class="mkd-sidebar" style="transform: translateY(0px);">
+                    <?php get_template_part('sidebar/template-sidebar-single'); ?>
+                </aside>
+            </div>
+        </div>
     </div>
+</div>
 
 
-    <?php get_footer(); ?>
+<?php get_footer(); ?>
