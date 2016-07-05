@@ -47,6 +47,9 @@ h5 { font-family: Roboto;font-style: normal;}
 
 h6 { font-family: Roboto;font-style: normal;}
 
+.fsp-pad-top-10{padding-top:10px;}
+.fsp-pad-top-20{padding-top:20px;}
+.fsp-pad-top-30{padding-top:30px;}
 .fsp-pad-btm-10{padding-bottom:10px;}
 .fsp-pad-btm-20{padding-bottom:20px;}
 .fsp-pad-btm-30{padding-bottom:30px;}
@@ -531,12 +534,29 @@ footer .mkd-footer-top-holder {
     text-align: center;
     font-size: 18px;
 }
-.fs-custom-select {
+.fs-custom-select-new {
     width: 60%;
     overflow: hidden;
-    cursor: pointer;
-    background: #fff url("../img/select-arrow.png") no-repeat scroll 95% 50%;
+    margin: 40px auto 70px;
+}
+.egw-homesite{
+    text-align: center;
+    padding-bottom: 20px;
+}
+.egw-homesite a{
+    color:#b3cc36;
+}
+.egw-homesite a:hover{
+    color: #f99d3e;
+}
+.fs-custom-select-container{
+    width: 60%;
+    overflow: hidden;
     margin: 60px auto;
+}
+.fs-custom-select {
+    background: #fff url("../img/select-arrow.png") no-repeat scroll 95% 50%;
+    cursor: pointer;
 }
 .fs-custom-select select {
     background-color: transparent;
@@ -571,9 +591,11 @@ footer .mkd-footer-top-holder {
 .ev-btn-container button{
     background: #b3cc36;
     border: 1px solid #a4bb6a;
-    padding: 10px 20px;
-    color:#ffffff;
+    padding: 10px 40px;
+    color: #ffffff;
     cursor: pointer;
+    font-size: 16px;
+    letter-spacing: 1px;
 }
 /*find-a-branch-container popup ends starts here*/
 

@@ -12,30 +12,37 @@
     $my_url = explode('wp-content', $url);
     $path = $_SERVER['DOCUMENT_ROOT'] . $my_url[0];
     define('WP_USE_THEMES', false);
-    require($path . 'wp-load.php');    
+    require($path . 'wp-load.php');
     $blog_list = wp_get_sites();
-    
+
     //echo "<li type='square'><a href='http://" . $blog['domain'] . $blog['path'] . "' target='_blank'>" . $blog['domain'] . $blog['path'] . "</a></li>";
     ?>
 </div>
-<span style="display:none"><?php print_r($blog_list);?></span>
+<span style="display:none"><?php print_r($blog_list); ?></span>
 <div class="white-popup-block">
     <div class="find-a-branch-container">
-        <h4>Visit A Branch</h4>
-        <div class="fs-custom-select">
-            <select id="findavillage">
-                <option value="" selected="selected">Select Your Village</option>
-                <?php foreach ($blog_list AS $blog) { 
-                        if($blog['blog_id']!=1){
-                            $getRel = explode('/', $blog['path']);                    
-                ?>
+        <h4>Select A Branch</h4>
+        <div class="fs-custom-select-container">
+            <div class="egw-homesite">
+                <a href="<?php echo network_site_url(); ?>">Go back to myEvergreenWellness homepage</a>
+            </div>
+            <div class="fs-custom-select">
+                <select id="findavillage">
+                    <option value="" selected="selected">Select Your Village</option>
+                    <?php
+                    foreach ($blog_list AS $blog) {
+                        if ($blog['blog_id'] != 1) {
+                            $getRel = explode('/', $blog['path']);
+                            ?>
                             <option id="<?php echo $blog['blog_id']; ?>" value="<?php echo "http://" . $blog['domain'] . $blog['path'] ?>"><?php echo $getRel[count($getRel) - 2]; ?></option>
-                        <?php } 
-                    } ?>
-            </select>
+                        <?php }
+                    }
+                    ?>
+                </select>
+            </div>
         </div>
         <div class="ev-btn-container">
-            <button type="button" id="myevergreen">Submit</button>
+            <button type="button" id="myevergreen">Visit</button>
         </div>
     </div>
 </div>
@@ -50,11 +57,11 @@
 //            }
 //                       
 //        });
-        
-        jQuery('#findavillage').click(function () { 
-                var blog_id=jQuery('#current-blog').text();
-                jQuery("#findavillage option[id='"+blog_id+"']").remove();
-            });
+
+        jQuery('#findavillage').click(function () {
+            var blog_id = jQuery('#current-blog').text();
+            jQuery("#findavillage option[id='" + blog_id + "']").remove();
+        });
     });
 
 </script>
