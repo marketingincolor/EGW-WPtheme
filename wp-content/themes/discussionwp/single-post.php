@@ -19,7 +19,7 @@
     $excerpt_length = '12';
     ?>
     <?php if (has_post_thumbnail()) { ?>
-        <div class="mkd-blog-holder mkd-blog-single">
+        <div class="mkd-blog-holder mkd-blog-single mkd-fsp-blog-holder">
             <?php ?>
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                 <div class="mkd-post-content">
@@ -27,21 +27,24 @@
                         <div class="mkd-post-image-area">
                             <?php discussion_post_info_category(array('category' => 'no')) ?>
                             <?php discussion_get_module_template_part('templates/single/parts/image', 'blog'); ?>
-                            <div class="mkd-post-info">
-                                <?php
-                                discussion_post_info(array(
-                                    'date' => $display_date,
-                                    'category_singlepost' => $display_category_singlepost,
-                                    'save_stories' => $save_stories,
-                                ))
-                                ?>
-                            </div>
-
                         </div>
                     <?php } ?>
                 </div>
                 <?php do_action('discussion_before_blog_article_closed_tag'); ?>
             </article>
+            <div class="single-article-fsp-info">
+                <article>
+                    <div class="mkd-post-info">
+                        <?php
+                        discussion_post_info(array(
+                            'date' => $display_date,
+                            'category_singlepost' => $display_category_singlepost,
+                            'save_stories' => $save_stories,
+                        ))
+                        ?>
+                    </div>
+                </article>
+            </div>
         </div>
     <?php } ?>
     <div class="mkd-two-columns-75-25  mkd-content-has-sidebar clearfix">
@@ -125,7 +128,6 @@
                     // discussion_get_module_template_part('templates/single/parts/author-info', 'blog');
                     //discussion_get_single_related_posts();
                     ?>
-
                     <div class="mkd-single-tags-holder">
                         <?php if (function_exists('the_tags')) { ?>
                             <span class="mkd-single-tags-title"><strong>Tags: </strong></span>

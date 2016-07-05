@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+ //Forgot Password 
 jQuery(document).ready(function ()
 {
     jQuery('form .submit_button').on('click', function (e) {
@@ -139,4 +140,9 @@ jQuery(document).ready(function ()
 });
 
 
+//Comment cancelation link
 
+    jQuery('#cancel-comment-reply-link').on('click', function () 
+    {
+        jQuery('#comment').val("");
+    });

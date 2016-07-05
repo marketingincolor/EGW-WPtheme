@@ -42,8 +42,8 @@
                         case 'videos':
                             $display_category = 'no';
                             $display_share = 'no';
-                            $display_comments = 'no';
-                            $display_date = 'no';
+//                            $display_comments = 'no';
+//                            $display_date = 'no';
                             break;
                     }
                     /**
