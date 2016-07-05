@@ -976,6 +976,10 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
     position: absolute;
     top: -28px;
 }
+ .mdk-sng-pst ul li{
+        list-style-type: disc;
+        list-style: inherit;
+    }
 @media only screen and (max-width: 599px) {
     .single-article-fsp-info{
         position: relative;
@@ -993,10 +997,6 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
     }
     .mkd-fsp-blog-holder article{
         margin: 0;
-    }
-    .mdk-sng-pst ul li{
-        list-style-type: disc;
-        list-style: inherit;
     }
 }
 /*single article page styles ends here*/
