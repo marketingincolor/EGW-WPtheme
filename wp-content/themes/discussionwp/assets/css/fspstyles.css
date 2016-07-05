@@ -73,6 +73,48 @@ li{
 /*dynamic css ends here*/
 
 /*header css starts here*/
+.mkd-logo-wrapper{
+    float:left;
+}
+.mkd-mobile-logo-wrapper{
+    float:left;
+}
+.sub-site-logo{
+    float: left;
+    line-height: 150px;
+    border-left: 1px solid #cccccc;
+    margin-left: 20px;
+}
+.sub-site-logo h2{
+    line-height: 73px;
+    padding: 0 20px;
+    color: #3a7d3b;
+}
+@media only screen and (max-width: 1023px) {
+    .sub-site-logo{
+        margin-left: 15px;
+    }
+    .sub-site-logo h2{
+        line-height: 50px;
+        padding: 0 0 0 15px;
+        color: #3a7d3b;
+        font-size: 16px;
+    }
+} 
+@media only screen and (max-width: 500px) {
+    .mkd-mobile-header-holder .mkd-grid{
+        width:92%;
+    }
+    .sub-site-logo{
+        margin-left: 5px;
+    }
+    .sub-site-logo h2{
+        line-height: 48px;
+        padding: 0 0 0 5px;
+        color: #3a7d3b;
+        font-size: 13px;
+    }
+}
 .mkd-top-bar{
     font-size: 16px;
 }
@@ -262,6 +304,10 @@ Category menu right side css ends here*/
     .mkd-top-bar .widget.widget_nav_menu ul li {
         margin: 0 5px 0px 0 !important;
     }
+    .mkd-mobile-header .mkd-mobile-header-inner .mkd-mobile-header-holder .mkd-position-right-inner > div{
+        margin-right: 0px;
+        margin-left: 5px;
+    }
 }
 /*header css ends here*/
 
@@ -277,30 +323,30 @@ footer .mkd-footer-top-holder {
 }  
 /*footer css ends here*/
 @media only screen and (max-width: 480px){
-   .mkd-psi-title a{
-    display: block;
-    font-size: 17px;
-    line-height: 24px;
-}
-.mkd-psi-holder .mkd-psi-slide .mkd-post-info-date, .mkd-psi-holder .mkd-psi-slide-thumb .mkd-post-info-date{
-    margin-top: 0px;
-}
-.mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section{
-    margin-top: 5px;
-} 
-.mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section > div > div.mkd-post-info-count::before {
-    font-size: 21px;
-}
-.mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section > div > div .mkd-post-info-comments::before {
-    font-size: 16px;
-}
-.mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section > div > div a, .mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section > div > div span{
-     line-height: 27px;
-}
-.mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section > div > div {
-    font-size: 11px;
-    line-height: 28px;
-}
+    .mkd-psi-title a{
+        display: block;
+        font-size: 17px;
+        line-height: 24px;
+    }
+    .mkd-psi-holder .mkd-psi-slide .mkd-post-info-date, .mkd-psi-holder .mkd-psi-slide-thumb .mkd-post-info-date{
+        margin-top: 0px;
+    }
+    .mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section{
+        margin-top: 5px;
+    } 
+    .mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section > div > div.mkd-post-info-count::before {
+        font-size: 21px;
+    }
+    .mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section > div > div .mkd-post-info-comments::before {
+        font-size: 16px;
+    }
+    .mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section > div > div a, .mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section > div > div span{
+        line-height: 27px;
+    }
+    .mkd-psi-holder .mkd-psi-slider .mkd-psi-content .mkd-pt-info-section > div > div {
+        font-size: 11px;
+        line-height: 28px;
+    }
 }
 /*video menu styles start here*/
 .mdk-videos-submenu .mkd-menu-second .mkd-menu-inner > ul, li.mkd-menu-narrow .mkd-menu-second .mkd-menu-inner ul {
@@ -910,21 +956,21 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
 }
 @media only screen and (max-width: 599px) {
     .single-article-fsp-info{
-    position: relative;
-    margin-bottom: 28px;
-}
- .single-article-fsp-info article{
-    position: static;
-    top: 0px;
-}
-.single-article-fsp-info article .mkd-post-info{
-   width: 100% !important;
-}
-.single-article-fsp-info article .mkd-post-info{
-    position: static !important;
-}
-.mkd-fsp-blog-holder article{
-    margin: 0;
-}
+        position: relative;
+        margin-bottom: 28px;
+    }
+    .single-article-fsp-info article{
+        position: static;
+        top: 0px;
+    }
+    .single-article-fsp-info article .mkd-post-info{
+        width: 100% !important;
+    }
+    .single-article-fsp-info article .mkd-post-info{
+        position: static !important;
+    }
+    .mkd-fsp-blog-holder article{
+        margin: 0;
+    }
 }
 /*single article page styles ends here*/
