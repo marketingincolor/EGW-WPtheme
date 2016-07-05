@@ -184,36 +184,36 @@ function fspr_login_form_fields() {
 
     ob_start();
     ?>
-<div class="login-container">
-    <h3 class="fspr_header"><?php _e('Login'); ?></h3>
+    <div class="login-container">
+        <h3 class="fspr_header"><?php _e('Login'); ?></h3>
 
-    <?php
-    // show any error messages after form submission
-    fspr_show_error_messages();
-    ?>
+        <?php
+        // show any error messages after form submission
+        fspr_show_error_messages();
+        ?>
 
-    <form id="fspr_login_form"  class="fspr_form"action="" method="post">
-        <fieldset>
-            <ul>
-                <li>
-                    <div class="lg-fm-lft"><label for="fspr_user_Login">Username</label></div>
-                <div class="lg-fm-rgt"><input name="fspr_user_login" id="fspr_user_login" class="required" type="text"/></div>
-                </li>
-                <li>
-                    <div class="lg-fm-lft"><label for="fspr_user_pass">Password</label></div>
-                <div class="lg-fm-rgt"><input name="fspr_user_pass" id="fspr_user_pass" class="required" type="password"/></div>
-                </li>
-            </ul>
-            <p>
-                <input type="hidden" name="fspr_login_nonce" value="<?php echo wp_create_nonce('fspr-login-nonce'); ?>"/>
-                <input id="fspr_login_submit" name="fspr_login_submit" type="submit" value="Login" class="fsplogin_btn"/>
-            </p>
-            <div class="fs_forgot_password">
-                <a href="<?php echo home_url('/register')?>">Register</a> |
-                <a href="<?php echo home_url('/forgot-password')?>">Forgot your password?</a>                 
-            </div>
-        </fieldset>
-    </form>
+        <form id="fspr_login_form"  class="fspr_form"action="" method="post">
+            <fieldset>
+                <ul>
+                    <li><input type="hidden" name="redirect" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" />
+                        <div class="lg-fm-lft"><label for="fspr_user_Login">Username</label></div>
+                        <div class="lg-fm-rgt"><input name="fspr_user_login" id="fspr_user_login" class="required" type="text"/></div>
+                    </li>
+                    <li>
+                        <div class="lg-fm-lft"><label for="fspr_user_pass">Password</label></div>
+                        <div class="lg-fm-rgt"><input name="fspr_user_pass" id="fspr_user_pass" class="required" type="password"/></div>
+                    </li>
+                </ul>
+                <p>
+                    <input type="hidden" name="fspr_login_nonce" value="<?php echo wp_create_nonce('fspr-login-nonce'); ?>"/>
+                    <input id="fspr_login_submit" name="fspr_login_submit" type="submit" value="Login" class="fsplogin_btn"/>
+                </p>
+                <div class="fs_forgot_password">
+                    <a href="<?php echo home_url('/register') ?>">Register</a> |
+                    <a href="<?php echo home_url('/forgot-password') ?>">Forgot your password?</a>                 
+                </div>
+            </fieldset>
+        </form>
     </div>
     <?php
     return ob_get_clean();
@@ -242,7 +242,6 @@ function fspr_login_member() {
 //            // if the password is incorrect for the specified user
 //            fspr_errors()->add('empty_password', __('Incorrect password'));
 //        }
-
         // retrieve all error messages
         $errors = fspr_errors()->get_error_messages();
 
@@ -255,8 +254,13 @@ function fspr_login_member() {
             //wp_redirect(home_url('/user-profile'));
             if ((current_user_can('administrator') && is_admin()) || (is_super_admin())) {
                 wp_redirect(home_url('/wp-admin'));
-            }else{
-                wp_redirect(home_url('/user-profile'));
+            } else {
+                $location = $_POST['redirect'];
+                if (strpos($location, 'blog') !== false) {
+                    wp_redirect($location);
+                } else {
+                    wp_redirect(home_url('/user-profile'));
+                }
             }
             exit;
         }
@@ -319,7 +323,7 @@ function fsp_template_redirect() {
     if ((is_page('login') || is_page('register')) && is_user_logged_in()) {
         if ((current_user_can('administrator') && is_admin()) || (is_super_admin())) {
             wp_redirect(home_url('/wp-admin'));
-        }else{
+        } else {
             wp_redirect(home_url('/user-profile'));
         }
         exit();
