@@ -291,8 +291,8 @@ if (!function_exists('discussion_header_meta')) {
         ?>
 
         <meta charset="<?php bloginfo('charset'); ?>"/>
-
-        <link rel="profile" href="http://gmpg.org/xfn/11"/>
+        <meta property = "og:image" content="imageAbsolutePath" />
+<!--        <link rel="profile" href="http://gmpg.org/xfn/11"/>-->
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>"/>
         <?php
     }
