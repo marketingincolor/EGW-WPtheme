@@ -1758,7 +1758,7 @@ function custom_comment($comment, $args, $depth) {
                   
     switch ($net) {
         case 'facebook':
-            $link = 'window.open(\'http://www.facebook.com/sharer.php?s=100&amp;p[title]=' . urlencode(discussion_addslashes(get_the_title())) . '&amp;p[summary]=' . urlencode(discussion_addslashes(get_the_excerpt())) . '&amp;p[url]=' . urlencode(get_permalink()) . '&amp;p[images][0]=' . $image[0] . '\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
+            $link = 'window.open(\'http://www.facebook.com/sharer.php?s=100&amp;p[title]=' . urlencode(discussion_addslashes(get_the_title())) . '&amp;p[summary]=' . urlencode(discussion_addslashes(get_the_excerpt())) . '&amp;p[url]=' . urlencode(get_permalink()) . '&amp;p[images][0]=' . $image[0] . '&v='.rand().'\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
             break;
         case 'twitter':
             $count_char = (isset($_SERVER['https'])) ? 23 : 22;
