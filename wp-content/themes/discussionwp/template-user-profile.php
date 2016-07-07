@@ -82,7 +82,7 @@ get_header();
                 cache: false,
                 success: function (successvalue) {
                     jQuery('.followed_ctg_content').html(successvalue);
-                    jQuery('#unfollowedmsg').html("<div class="fspfollow-msg"><i aria-hidden='true' class='fa fa-check'></i> Unfollowed successfully</div>").fadeOut(3000);
+                    jQuery('#unfollowedmsg').html("<div class='fspfollow-msg'><i aria-hidden='true' class='fa fa-check'></i> Unfollowed successfully</div>").fadeOut(3000);
                 }
             });
             return false;

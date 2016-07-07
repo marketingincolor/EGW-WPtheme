@@ -165,7 +165,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                 for ($i = 1; $i <= $no_of_adds; $i++) {
                     ?> 
 
-                    <div  class="wpb_single_image wpb_content_element vc_align_left"  id="adv_row_<?php echo $i; ?>" <?php if ($i != 1) { ?> style="display:none;clear:both" <?php } else { ?> style="clear:both" <?php } ?>>  
+                    <div  class="fsp-ads-homepage"  id="adv_row_<?php echo $i; ?>" <?php if ($i != 1) { ?> style="display:none;clear:both" <?php } else { ?> style="clear:both" <?php } ?>>  
                         <?php
                         if (function_exists('drawAdsPlace'))
                             drawAdsPlace(array('id' => 1), true);

@@ -12,6 +12,7 @@ $post_per_section = 6;
 <div class="mkd-full-width">
     <div class="mkd-full-width-inner">   
         <div class="wpb_wrapper">
+            <div class="vc_empty_space" style="height: 40px"><span class="vc_empty_space_inner"></span></div>
             <div data-max_pages="1" data-paged="1" data-sort="featured_first" data-post_in="205, 215, 218, 225, 232" data-category_id="4" data-number_of_posts="5" data-slider_height="735" data-base="mkd_post_slider_interactive" class="mkd-bnl-holder mkd-psi-holder  mkd-psi-number-5" style="opacity: 1;">
                 <div class="mkd-bnl-outer">
                     <?php
