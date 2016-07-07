@@ -36,7 +36,7 @@ closeOnBgClick :false
             if (jQuery("#findavillage").val() == "") {
                 return false;
             } else {                                                      
-                window.open(jQuery("#findavillage").val(),'_blank');
+                window.open(jQuery("#findavillage").val(),"_self");
                 jQuery('.f-newsletter').magnificPopup('close');
                 
                     
