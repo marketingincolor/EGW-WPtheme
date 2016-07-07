@@ -1000,3 +1000,9 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
     }
 }
 /*single article page styles ends here*/
+.fspfollow-msg{
+           background-color: rgba(179, 204, 54, 1);
+    padding: 10px 15px;
+    color: #fff;
+    margin-top: 15px;
+}

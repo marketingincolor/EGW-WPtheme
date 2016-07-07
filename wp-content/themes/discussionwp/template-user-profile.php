@@ -82,7 +82,7 @@ get_header();
                 cache: false,
                 success: function (successvalue) {
                     jQuery('.followed_ctg_content').html(successvalue);
-                    jQuery('#unfollowedmsg').html("<i aria-hidden='true' class='fa fa-check'></i> Unfollowed successfully").fadeOut(3000);
+                    jQuery('#unfollowedmsg').html("<div class="fspfollow-msg"><i aria-hidden='true' class='fa fa-check'></i> Unfollowed successfully</div>").fadeOut(3000);
                 }
             });
             return false;
@@ -261,7 +261,7 @@ get_header();
                             $fetchresult = $wpdb->get_results("SELECT *from wp_follow_category where userid=" . $userid . " and flag=1");
                             $rowresult = $wpdb->num_rows;
                             ?>
-                            <span><a href="#" id="unfollowedmsg" style="color: green; font-size: 12px;"></a></span>
+                            <div id="unfollowedmsg"></div>
                             <div id="requiredvalues">
                                 <!-- TO update the div after unfollowed any category from profile. "unfollowedCat" is just page reference -->
                                 <input type="hidden" name="updateflag" id="flagvalue" value="0">                                
