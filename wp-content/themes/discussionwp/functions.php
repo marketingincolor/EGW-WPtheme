@@ -1070,6 +1070,11 @@ if (!function_exists('get_videoid_from_url')) {
             $urlParts = explode("/", parse_url($url, PHP_URL_PATH));
             $arg['video_url'] = 'http://player.vimeo.com/video/';
             return $arg['video_url'] . $arg['video_id'] = (int) $urlParts[count($urlParts) - 1];
+        } elseif (preg_match('%https*://.*(?:wistia\.com|wi\.st)/(?:medias|embed)/(.*?)\?%',$url, $matched)) {           
+            $videoId = $matched[1];            
+            $arg['video_url']='http://fast.wistia.net/embed/iframe/';
+            $arg['video_id']=$videoId.'?videoFoam=true';
+            return $arg['video_url'] . $arg['video_id'];
         }
     }
 
@@ -1786,27 +1791,32 @@ function custom_comment($comment, $args, $depth) {
     return $link;
 }
 
+
+/**
+ * Author - Akilan 
+ * Date - 08-06-2016
+ * Purpose - For adding thumb image for facebook sharing
+ */
 add_action('wp_head', 'fbfixheads');
-
 function fbfixheads(){
-global $post;
-$ftf_head="";
-if (has_post_thumbnail()) {
-$featuredimg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), "Full");
-$ftf_description = get_the_excerpt($post->ID);
-$ftf_head = '
-    <!--/ Facebook Thumb Fixer Open Graph /-->
-    <meta property="og:type" content="'. $default . '" />
-    <meta property="og:url" content="' . get_permalink() . '" />
-    <meta property="og:title" content="' . wp_kses_data(get_the_title($post->ID)) . '" />
-    <meta property="og:description" content="' . wp_kses($ftf_description, array ()) . '" />
-    <meta property="og:site_name" content="' . wp_kses_data(get_bloginfo('name')) . '" />
-    <meta property="og:image" content="' . $featuredimg[0] . '" />
+    global $post;
+    $ftf_head="";
+    if (has_post_thumbnail()) {
+    $featuredimg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), "Full");
+    $ftf_description = get_the_excerpt($post->ID);
+    $ftf_head = '
+        <!--/ Facebook Thumb Fixer Open Graph /-->
+        <meta property="og:type" content="'. $default . '" />
+        <meta property="og:url" content="' . get_permalink() . '" />
+        <meta property="og:title" content="' . wp_kses_data(get_the_title($post->ID)) . '" />
+        <meta property="og:description" content="' . wp_kses($ftf_description, array ()) . '" />
+        <meta property="og:site_name" content="' . wp_kses_data(get_bloginfo('name')) . '" />
+        <meta property="og:image" content="' . $featuredimg[0] . '" />
 
-    <meta itemscope itemtype="'. $default . '" />
-    <meta itemprop="description" content="' . wp_kses($ftf_description, array ()) . '" />
-    <meta itemprop="image" content="' . $featuredimg[0] . '" />
-    ';
-}
-echo $ftf_head;
+        <meta itemscope itemtype="'. $default . '" />
+        <meta itemprop="description" content="' . wp_kses($ftf_description, array ()) . '" />
+        <meta itemprop="image" content="' . $featuredimg[0] . '" />
+        ';
+    }
+    echo $ftf_head;
 }
