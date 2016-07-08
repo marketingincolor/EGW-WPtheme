@@ -26,7 +26,7 @@
                 <?php
             } else {
                 ?>
-                <iframe width="600" height="338"  src="<?php echo $val; ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                <iframe width="600" height="338" class="wistia_embed"  src="<?php echo $val; ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
                 <?php
             }
@@ -142,3 +142,5 @@
         </div>
     </div>
 </div>
+<!--added script for loading videos wistia url-->
+<script src="http://fast.wistia.net/assets/external/iframe-api-v1.js"></script>
