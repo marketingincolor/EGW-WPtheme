@@ -385,7 +385,7 @@ footer .mkd-footer-top-holder {
 }
 .light-theme.wp-posts-carousel .wp-posts-carousel-title {
     text-align: center;
-    font-size: 14px;
+    font-size: 14px !important;
     min-height: 38px;
 }
 /*video menu styles ends here*/
