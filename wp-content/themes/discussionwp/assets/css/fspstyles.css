@@ -976,10 +976,10 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
     position: absolute;
     top: -28px;
 }
- .mdk-sng-pst ul li{
-        list-style-type: disc;
-        list-style: inherit;
-    }
+.mdk-sng-pst ul li{
+    list-style-type: disc;
+    list-style: inherit;
+}
 @media only screen and (max-width: 599px) {
     .single-article-fsp-info{
         position: relative;
@@ -1001,8 +1001,31 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
 }
 /*single article page styles ends here*/
 .fspfollow-msg{
-           background-color: rgba(179, 204, 54, 1);
+    background-color: rgba(179, 204, 54, 1);
     padding: 10px 15px;
     color: #fff;
     margin-top: 15px;
 }
+
+/*Live events css starts here*/
+.ai1ec-month-view .ai1ec-multiday-arrow2 {
+    border: 12px solid #b3cc36;
+    border-left-color: #fff;
+    border-right-width: 2px;
+}
+.ai1ec-month-view .ai1ec-multiday-arrow1 {
+    border: 12px solid #fff;
+    border-left-color: #b3cc36;
+    border-right-width: 0;
+}
+.ai1ec-month-view .ai1ec-multiday-bar{
+    height: 24px !important;
+}
+.ai1ec-month-view .ai1ec-multiday-bar .ai1ec-event {
+    margin: 5px;
+}
+.ai1ec-month-view .ai1ec-multiday-bar .ai1ec-event-title {
+    margin-left: 7px;
+    font-size: 14px;
+}
+/*Live events css ends here*/
