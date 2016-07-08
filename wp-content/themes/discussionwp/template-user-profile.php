@@ -77,7 +77,7 @@ get_header();
             var dataString = jQuery('#requiredvalues :input').serialize() + '&categoryid=' + this.id;
             jQuery.ajax({
                 type: "POST",
-                url: "wp-content/themes/discussionwp/unfollowajax.php",
+                url: "<?php echo get_template_directory_uri();?>/unfollowajax.php",
                 data: dataString,
                 cache: false,
                 success: function (successvalue) {
@@ -99,7 +99,7 @@ get_header();
                         <!-- Info container starts here -->
                         <div class="vc_col-md-6 vc_col-sm-12">
                             <div class="user-profile-container"> 
-                                <form name="profile" action="" method="post" enctype="multipart/form-data">
+                                <form name="profile" action="" method="post" enctype="multipart/form-data" id="user-profile-form">
                                     <!-- info left starts here -->
                                     <div class=" vc_column_container vc_col-md-5">
                                         <div class="user-profile-lft">
@@ -160,7 +160,7 @@ get_header();
                                                 <li><input type="text" name="first_name" id="first_name" placeholder="First Name" value="<?php echo $userdata->first_name ?>"/></li>
                                                 <li><input type="text" name="last_name" class="mid2" id="last_name" placeholder="Last Name" value="<?php echo $userdata->last_name ?>" /></li>
                                                 <li style="padding:0px;"><input type="hidden" name="nickname" class="mid2" id="nickname" value="<?php echo $userdata->nickname ?>"  /></li>
-                                                <li><input type="text" name="email" class="mid2" id="email" placeholder="Email" value="<?php echo $userdata->user_email ?>" /></li>
+                                                <li><input type="text" name="email" class="mid2" id="email" placeholder="Email" value="<?php echo $userdata->user_email ?>" readonly /></li>
                                                 <li><input type="password" name="pass1" placeholder="New Password" class="mid2" id="pass1" value="" /></li>
                                                 <li><input type="password" name="pass2" placeholder="New Password Confirm" class="mid2" id="pass2" value="" /></li>
                                                 <li><input type="text" name="city" id="city" placeholder="City" value="<?php echo esc_attr(get_the_author_meta('city', $userdata->ID)); ?>"  /></li>
