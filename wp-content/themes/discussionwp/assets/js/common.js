@@ -228,7 +228,7 @@ function zipcodeValidation(zipcode, current_element, error_element) {
 function passwordValidation(password, current_element, error_element) {
 
     if (password) {
-        passwordExp = new RegExp(/^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,}$/);
+        passwordExp = new RegExp(/^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#\$%\^&\*\(\)\+=\|;'"{}<>\.\?\-_\\/:,~`]{8,}$/);
         if (!passwordExp.test(password)) {
             jQuery('<label class="' + error_element + '">Password should contains minimum 8 characters length,one character(A to Z or a to z) and one number(0-9).</label>').insertAfter(current_element);
         }
