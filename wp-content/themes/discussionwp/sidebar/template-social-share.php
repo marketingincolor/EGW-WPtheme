@@ -7,11 +7,7 @@
             <ul>
                 <ul>            
                 <?php $image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full'); ?>
-                <meta http-equiv="refresh" content="30">
-                <meta property="og:image" content="<?php echo $image[0]; ?>" />
-                <meta property="og:url" content="<?php echo get_permalink();?>"/>
-                <meta property="og:title" content="<?php echo urlencode(discussion_addslashes(get_the_title())); ?>"/>                              
-                <meta property="og:description" content="<?php echo urlencode(discussion_addslashes(get_the_excerpt())) ?>"/>
+                
                 <li class="wd-fb"><a onclick="<?php echo SocialNetworkShareLink('facebook',$image); ?>" href="javascript: void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                 <li class="wd-twitter"><a onclick="<?php echo SocialNetworkShareLink('twitter',$image); ?>" href="javascript: void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                 <li class="wd-googleplus"><a onclick="<?php echo SocialNetworkShareLink('google_plus',$image); ?>" href="javascript: void(0)"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
