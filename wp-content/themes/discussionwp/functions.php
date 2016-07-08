@@ -289,10 +289,14 @@ if (!function_exists('discussion_header_meta')) {
      */
     function discussion_header_meta() {
         ?>
-
-        <meta charset="<?php bloginfo('charset'); ?>"/>
-
-        <link rel="profile" href="http://gmpg.org/xfn/11"/>
+        <meta http-equiv="refresh" content="30">
+                
+          <meta property="og:image" content="http://dev.myevergreenwellness.com/wp-content/uploads/2016/07/Bingeing-of-Any-Kind-Probably-Isnt-Good-for-You.-Looking-at-You-Netflix.jpg" />
+                <meta property="og:url" content="http://dev.myevergreenwellness.com/blog/2016/07/05/bingeing-of-any-kind-probably-isnt-good-for-you-looking-at-you-netflix/"/>
+                <meta property="og:title" content="Bingeing+of+Any+Kind+Probably+Isn%E2%80%99t+Good+for+You.+Looking+at+You%2C+Netflix."/>                              
+                <meta property="og:description" content="You%E2%80%99ve+probably+heard+the+phrase+%E2%80%9CBinge-watch.%E2%80%9D+The+term+is+so+ubiquitous%2C+it+was+the%C2%A0Collins+English+Dictionary%E2%80%99s+2015+Word+of+The+Year.+It+seems+to+have+become+something+of+a+catch-all+description+for+the+way+people+experience+streaming+television.+With+Netflix+and+other+streaming+services+releasing+%5B%26hellip%3B%5D"/>
+        <meta charset="<?php bloginfo('charset'); ?>"/>       
+<!--        <link rel="profile" href="http://gmpg.org/xfn/11"/>-->
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>"/>
         <?php
     }
@@ -1758,7 +1762,7 @@ function custom_comment($comment, $args, $depth) {
                   
     switch ($net) {
         case 'facebook':
-            $link = 'window.open(\'http://www.facebook.com/sharer.php?s=100&amp;p[title]=' . urlencode(discussion_addslashes(get_the_title())) . '&amp;p[summary]=' . urlencode(discussion_addslashes(get_the_excerpt())) . '&amp;p[url]=' . urlencode(get_permalink()) . '&amp;p[images][0]=' . $image[0] . '\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
+            $link = 'window.open(\'http://www.facebook.com/sharer/sharer.php?s=100&amp;p[title]=' . urlencode(discussion_addslashes(get_the_title())) . '&amp;p[summary]=' . urlencode(discussion_addslashes(get_the_excerpt())) . '&amp;p[url]=' . urlencode(get_permalink()) . '&amp;p[images][0]=' . $image[0] . '&v='.rand().'\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
             break;
         case 'twitter':
             $count_char = (isset($_SERVER['https'])) ? 23 : 22;
