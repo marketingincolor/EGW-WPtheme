@@ -288,8 +288,7 @@ if (!function_exists('discussion_header_meta')) {
      * Function that echoes meta data if our seo is enabled
      */
     function discussion_header_meta() {
-        ?>
-        <meta http-equiv="refresh" content="30">         
+        ?>          
         
         <meta charset="<?php bloginfo('charset'); ?>"/>       
 <!--        <link rel="profile" href="http://gmpg.org/xfn/11"/>-->
@@ -1758,7 +1757,7 @@ function custom_comment($comment, $args, $depth) {
                   
     switch ($net) {
         case 'facebook':
-            $link = 'window.open(\'http://www.facebook.com/sharer/sharer.php?s=100&amp;p[title]=' . urlencode(discussion_addslashes(get_the_title())) . '&amp;p[summary]=' . urlencode(discussion_addslashes(get_the_excerpt())) . '&amp;p[url]=' . urlencode(get_permalink()) . '&amp;p[images][0]=' . $image[0] . '&v='.rand().'\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
+            $link = 'window.open(\'http://www.facebook.com/sharer/sharer.php?s=100&amp;p[title]=' . urlencode(discussion_addslashes(get_the_title())) . '&amp;p[summary]=' . urlencode(discussion_addslashes(get_the_excerpt())) . '&amp;p[url]=' . urlencode(get_permalink()).'/'.rand(). '&amp;p[images][0]=' . $image[0]. '&v='.rand().'\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
             break;
         case 'twitter':
             $count_char = (isset($_SERVER['https'])) ? 23 : 22;
@@ -1785,4 +1784,29 @@ function custom_comment($comment, $args, $depth) {
     }
 
     return $link;
+}
+
+add_action('wp_head', 'fbfixheads');
+
+function fbfixheads(){
+global $post;
+$ftf_head="";
+if (has_post_thumbnail()) {
+$featuredimg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), "Full");
+$ftf_description = get_the_excerpt($post->ID);
+$ftf_head = '
+    <!--/ Facebook Thumb Fixer Open Graph /-->
+    <meta property="og:type" content="'. $default . '" />
+    <meta property="og:url" content="' . get_permalink() . '" />
+    <meta property="og:title" content="' . wp_kses_data(get_the_title($post->ID)) . '" />
+    <meta property="og:description" content="' . wp_kses($ftf_description, array ()) . '" />
+    <meta property="og:site_name" content="' . wp_kses_data(get_bloginfo('name')) . '" />
+    <meta property="og:image" content="' . $featuredimg[0] . '" />
+
+    <meta itemscope itemtype="'. $default . '" />
+    <meta itemprop="description" content="' . wp_kses($ftf_description, array ()) . '" />
+    <meta itemprop="image" content="' . $featuredimg[0] . '" />
+    ';
+}
+echo $ftf_head;
 }
