@@ -289,12 +289,8 @@ if (!function_exists('discussion_header_meta')) {
      */
     function discussion_header_meta() {
         ?>
-        <meta http-equiv="refresh" content="30">
-                
-          <meta property="og:image" content="http://dev.myevergreenwellness.com/wp-content/uploads/2016/07/Bingeing-of-Any-Kind-Probably-Isnt-Good-for-You.-Looking-at-You-Netflix.jpg" />
-                <meta property="og:url" content="http://dev.myevergreenwellness.com/blog/2016/07/05/bingeing-of-any-kind-probably-isnt-good-for-you-looking-at-you-netflix/"/>
-                <meta property="og:title" content="Bingeing+of+Any+Kind+Probably+Isn%E2%80%99t+Good+for+You.+Looking+at+You%2C+Netflix."/>                              
-                <meta property="og:description" content="You%E2%80%99ve+probably+heard+the+phrase+%E2%80%9CBinge-watch.%E2%80%9D+The+term+is+so+ubiquitous%2C+it+was+the%C2%A0Collins+English+Dictionary%E2%80%99s+2015+Word+of+The+Year.+It+seems+to+have+become+something+of+a+catch-all+description+for+the+way+people+experience+streaming+television.+With+Netflix+and+other+streaming+services+releasing+%5B%26hellip%3B%5D"/>
+        <meta http-equiv="refresh" content="30">         
+        
         <meta charset="<?php bloginfo('charset'); ?>"/>       
 <!--        <link rel="profile" href="http://gmpg.org/xfn/11"/>-->
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>"/>
