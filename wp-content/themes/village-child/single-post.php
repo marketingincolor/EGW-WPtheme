@@ -19,7 +19,7 @@
     $excerpt_length = '12';
     ?>
     <?php if (has_post_thumbnail()) { ?>
-        <div class="mkd-blog-holder mkd-blog-single">
+        <div class="mkd-blog-holder mkd-blog-single mkd-fsp-blog-holder">
             <?php ?>
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                 <div class="mkd-post-content">
