@@ -10,7 +10,7 @@ Purpose - For reset password functionality
 <?php get_header(); ?>
 
 <script type="text/javascript">
-    var resetpassword_ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
+    var admin_ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
 </script>
 
 <div class="login-container">
