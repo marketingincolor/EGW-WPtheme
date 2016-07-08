@@ -383,6 +383,11 @@ footer .mkd-footer-top-holder {
     text-align: center;
     color: #ffffff !important;
 }
+.light-theme.wp-posts-carousel .wp-posts-carousel-title {
+    text-align: center;
+    font-size: 14px !important;
+    min-height: 38px;
+}
 /*video menu styles ends here*/
 
 .fsp-ads-homepage{
@@ -514,6 +519,14 @@ footer .mkd-footer-top-holder {
 }
 #no_comments_description {
     color: #121212;
+}
+.fspr_user_profile_error{
+    color:red;
+    font-size: 13px;
+} 
+.fspr_user_profile_upload_error{
+    color:red;
+    font-size: 13px;
 }
 /*Login css ends here*/
 
