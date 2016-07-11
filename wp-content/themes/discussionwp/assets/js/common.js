@@ -36,12 +36,19 @@ function resetpassword(){
         e.preventDefault();
     });
 }
-
+/**
+ * Modifier - Akilan
+ * Date - 11-07-2016 
+ * Purpose - For clearing comment text when clicking cancel reply text and reply text.
+ */
 //clear comment textarea content in comment form
 function clearCommentText(){
    jQuery('#cancel-comment-reply-link').on('click', function () {
         jQuery('#comment').val("");
     }); 
+    jQuery('.comment-reply-link').on('click',function(){
+        jQuery('#comment').val("");
+    });
 }
 
 //Login Form Validation
