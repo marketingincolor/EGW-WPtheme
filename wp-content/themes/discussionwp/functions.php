@@ -1794,7 +1794,7 @@ function custom_comment($comment, $args, $depth) {
 
 /**
  * Author - Akilan 
- * Date - 08-06-2016
+ * Date - 08-07-2016
  * Purpose - For adding thumb image for facebook sharing
  */
 add_action('wp_head', 'fbfixheads');
@@ -1819,4 +1819,34 @@ function fbfixheads(){
         ';
     }
     echo $ftf_head;
+}
+
+/**
+ * Author - Akilan
+ * Date - 11-07-2016
+ * Purpose - For getting main category name
+ */
+
+function main_category_name(){
+    return array('activity','medical','financial','relationships','nutrition','mind-spirit');
+}
+
+
+/**
+ * Author - Akilan
+ * Date - 11-07-2016
+ * Purpose - For getting category id from category name
+ */
+
+function get_main_category_detail(){
+    $cat_ar=main_category_name();
+    if(!empty($cat_ar)){
+        foreach($cat_ar as $our_cat_each){              
+            $cat = get_term_by( 'slug', $our_cat_each, 'category' );
+            if ( $cat ){
+                $cat_id_ar[$cat->term_id]=$cat->term_id;                 
+            }
+        }
+    }
+    return $cat_id_ar;
 }
