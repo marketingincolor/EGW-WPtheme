@@ -47,9 +47,12 @@
                     <?php }
                     ?>
                 </div>
-                <div class="mkd-post-text">
-                    <div class="mkd-post-text-inner clearfix">
-                        <div class="mkd-post-info">
+            </div>
+            <?php do_action('discussion_before_blog_article_closed_tag'); ?>
+        </article>
+         <div class="single-article-video-fsp-info">
+                <article>
+                    <div class="mkd-post-info">
                             <?php
                             discussion_post_info(array(
                                 'date' => $display_date,
@@ -59,11 +62,8 @@
                             ))
                             ?>
                         </div>
-                    </div>
-                </div>
+                </article>
             </div>
-            <?php do_action('discussion_before_blog_article_closed_tag'); ?>
-        </article>
     </div>
     <div class="mkd-two-columns-75-25  mkd-content-has-sidebar clearfix">
         <div class="mkd-column1 mkd-content-left-from-sidebar">
@@ -80,6 +80,9 @@
                         </div>
                         <?php do_action('discussion_before_blog_article_closed_tag'); ?>
                     </article>
+                    <div class="disclamier">
+                        <p><span>Disclaimer:</span> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis Theme natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+                    </div>
                 </div>
                 <?php
                 if ($post_format === false) {
