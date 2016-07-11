@@ -1850,3 +1850,15 @@ function get_main_category_detail(){
     }
     return $cat_id_ar;
 }
+
+/**
+ * Author - Akilan
+ * Date  - 11-07-2016
+ * Purpose - For hiding pages from search
+ * 
+ */
+function remove_pages_from_search() {
+    global $wp_post_types;
+    $wp_post_types['page']->exclude_from_search = true;
+}
+add_action('init', 'remove_pages_from_search');
