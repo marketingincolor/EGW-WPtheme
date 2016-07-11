@@ -4,7 +4,12 @@
       get_template_part( 'sidebar/template-ads', 'page' );
       if(is_single() && get_post_type() == 'videos'){
           get_template_part( 'sidebar/template-related-articles', 'page' );
-      }else {
+      }
+      else if(is_single() && get_post_type() == 'ai1ec_event')
+      {
+          get_template_part( 'sidebar/template-upcoming-events', 'page' );
+      }
+      else {
           get_template_part( 'sidebar/template-related-stories', 'page' );
       }
        
