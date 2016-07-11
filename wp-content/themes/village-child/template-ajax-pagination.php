@@ -80,7 +80,7 @@ if (isset($category_id))
                 jQuery('#adv_row_' + active_loop).show();
                 jQuery(data).insertAfter('#adv_row_' + Current_loop);
                 current_total = parseInt(jQuery('#current_post').val()) + post_per_section;
-                if ((current_total % load_more_display === 0) && total_post > current_post_total) {
+                if ((current_total % load_more_display === 0) && total_post > current_total) {
                     jQuery('#showmore').show();
                 } else {
                     jQuery('#loading').hide();

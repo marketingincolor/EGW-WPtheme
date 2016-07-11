@@ -78,7 +78,7 @@ $category='home';
                                                 'date_format' => $date_format
                                             ));
                                             ?>
-                         <?php if ($display_share == 'yes' || $display_comments == 'yes' || $display_count == 'yes') { ?>
+                                          <?php if ($display_share == 'yes' || $display_comments == 'yes' || $display_count == 'yes') { ?>
                                                 <div class="mkd-pt-info-section clearfix">
                                                     <div>
                                                         <?php
@@ -94,7 +94,7 @@ $category='home';
                                                         ?>
                                                     </div>
                                                 </div>
-                        <?php } ?>
+                                        <?php } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -117,9 +117,8 @@ $category='home';
                 <div class="mkd-two-columns-75-25  mkd-content-has-sidebar clearfix">
                     <div class="mkd-column1 mkd-content-left-from-sidebar">
                         <div class="mkd-column-inner">
-                            <?php
-                            $my_query = null;
-                           
+                           <?php
+                            $my_query = null;                           
                             $cat_id_ar=array();
                             if(is_user_logged_in()){   
                                 $userid = get_current_user_id();  
@@ -130,16 +129,17 @@ $category='home';
                                     }                             
                                      discussion_custom_categorylist_query($cat_id_ar,$post_per_section);
                                 } else {
-                                    $my_query = discussion_custom_category_query($post_type,$category,$post_per_section);  
+                                    $cat_id_ar=get_main_category_detail();
+                                    $my_query =  discussion_custom_categorylist_query($cat_id_ar,$post_per_section); 
                                 }
                             } else {
-                                $my_query = discussion_custom_category_query($post_type,$category,$post_per_section); 
+                                $cat_id_ar=get_main_category_detail();
+                                $my_query =  discussion_custom_categorylist_query($cat_id_ar,$post_per_section);
                             }
-                               
+                              
                             global $wp_query;
                             get_template_part('template-blog-block');                  
-  
-                            ?>                            
+                            ?>                   
                         </div>
                     </div>		
                     <div class="mkd-column2">
