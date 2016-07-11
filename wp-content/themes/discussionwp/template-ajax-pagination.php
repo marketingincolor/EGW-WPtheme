@@ -60,6 +60,7 @@ if (isset($category_id))
      * @returns {undefined}     */
     function load_post() {
         jQuery('#processing').val(1);
+        total_post = parseInt(jQuery('#total_post').val());
         jQuery.ajax({
             type: "POST",
             url: "<?php echo bloginfo('wpurl'); ?>/wp-admin/admin-ajax.php",
@@ -79,8 +80,8 @@ if (isset($category_id))
                 jQuery('#currentloop').val(active_loop)
                 jQuery('#adv_row_' + active_loop).show();
                 jQuery(data).insertAfter('#adv_row_' + Current_loop);
-                current_total = parseInt(jQuery('#current_post').val()) + post_per_section;
-                if ((current_total % load_more_display === 0) && total_post > current_post_total) {
+                current_total = parseInt(parseInt(jQuery('#current_post').val()) + post_per_section);                
+                if ((current_total % load_more_display === 0) && (total_post > current_total)) {                    
                     jQuery('#showmore').show();
                 } else {
                     jQuery('#loading').hide();

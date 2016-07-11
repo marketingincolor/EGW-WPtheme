@@ -78,6 +78,9 @@
                         </div>
                         <?php do_action('discussion_before_blog_article_closed_tag'); ?>
                     </article>
+                    <div class="disclamier">
+                        <p><span>Disclaimer:</span> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis Theme natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+                    </div>
                 </div>
                 <?php
                 if ($post_format === false) {

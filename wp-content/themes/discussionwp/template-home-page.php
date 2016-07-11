@@ -9,7 +9,7 @@
 <?php get_header();
 $post_per_section=6;
 $post_type='post';
-$category='home';
+
 ?>
 
 <div class="mkd-content">
@@ -34,11 +34,6 @@ $category='home';
                                                 'display_share' => 'no',
                                                 'slider_height' => ''
                                             );
-
-                                           
-
-
-
                                             $my_query = null;
                                             $atts['query_result'] = discussion_custom_featured_query('home', 'featured_article');
                                             $params = shortcode_atts($args, $atts);
@@ -128,8 +123,7 @@ $category='home';
                     <div class="mkd-container-inner clearfix">
                         <div class="mkd-section-inner-margin clearfix">
                             <?php
-                            $my_query = null;
-                           
+                            $my_query = null;                           
                             $cat_id_ar=array();
                             if(is_user_logged_in()){   
                                 $userid = get_current_user_id();  
@@ -140,10 +134,12 @@ $category='home';
                                     }                             
                                      discussion_custom_categorylist_query($cat_id_ar,$post_per_section);
                                 } else {
-                                    $my_query = discussion_custom_category_query($post_type,$category,$post_per_section);  
+                                    $cat_id_ar=get_main_category_detail();
+                                    $my_query =  discussion_custom_categorylist_query($cat_id_ar,$post_per_section); 
                                 }
                             } else {
-                                $my_query = discussion_custom_category_query($post_type,$category,$post_per_section); 
+                                $cat_id_ar=get_main_category_detail();
+                                $my_query =  discussion_custom_categorylist_query($cat_id_ar,$post_per_section);
                             }
                            
                            // $my_query = discussion_custom_category_query('post',$category);
