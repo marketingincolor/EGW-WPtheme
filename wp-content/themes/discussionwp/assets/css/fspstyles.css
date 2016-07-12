@@ -896,6 +896,10 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
     padding: 10px 30px;
     float: right;
     margin-right: 50px;
+    cursor: pointer;
+}
+.mkd-follow-category button:hover{
+    background: #7e3b5a;
 }
 @media only screen and (max-width: 767px) {
     .mkd-follow-category button{
@@ -1009,7 +1013,7 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
     }
     .single-article-fsp-info article .mkd-post-info{
         width: 100% !important;
-         position: static !important;
+        position: static !important;
     }
     .mkd-fsp-blog-holder article{
         margin: 0;
