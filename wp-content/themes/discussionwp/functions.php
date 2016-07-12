@@ -1429,26 +1429,24 @@ add_action('template_redirect', 'userpage_rewrite_catch');
 /**
  * Author- Vinoth Raja
  * Date  - 21-06-2016
- * Purpose - For Related Videos Display(Sidebar)
+ * Purpose - For related videos using tags
  */
-if (!function_exists('discussion_related_posts')) {
+if (!function_exists('custom_related_posts')) {
 
-function discussion_related_posts($post_id, $post_type, $options = array()) {
+function custom_related_posts($post_id, $post_type, $tag_ids) {
 
 		$posts_per_page = 5;
 
-		extract($options);
-
 		$args = array(
 			'post__not_in'   => array($post_id),
+                        'post_type'=> $post_type,
+                        'tag_id'=> implode(",",$tag_ids),
 			'order'          => 'DESC',
 			'orderby'        => 'date',
-			'posts_per_page' => $posts_per_page,
-                        'post_type'=>$post_type
-            
+			'posts_per_page' => $posts_per_page
 		);
 
-		$related_posts = new WP_Query($args);
+		$related_posts = query_posts($args);
 
 		return $related_posts;
 	}
