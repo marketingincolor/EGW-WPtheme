@@ -399,6 +399,7 @@ footer .mkd-footer-top-holder {
     background: #b3cc36 !important;
     border-radius: 0% !important;
     -webkit-border-radius: 0 !important;
+    color: #ffffff !important;
     height: 100px !important;
     line-height: 100px !important;
 }
@@ -406,7 +407,12 @@ footer .mkd-footer-top-holder {
     opacity: 1;
     color: #ffffff !important;
 }
-
+.light-theme.wp-posts-carousel:hover .owl-controls .owl-nav .owl-prev { 
+    opacity: 1 !important;
+}
+.light-theme.wp-posts-carousel:hover .owl-controls .owl-nav .owl-next  { 
+    opacity: 1 !important; 
+}
 /*video menu styles ends here*/
 
 .fsp-ads-homepage{

@@ -81,7 +81,7 @@
                         <?php do_action('discussion_before_blog_article_closed_tag'); ?>
                     </article>
                     <div class="disclamier">
-                        <p><span>Disclaimer:</span> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis Theme natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+                        <p><span>Disclaimer:</span> This content is for entertainment purposes only and it is not meant to be relied on as medical advice, diagnosis, or treatment. Consult your physician before starting any exercise or dietary program or taking any other action respecting your health. In case of a medical emergency, call 911. </p>
                     </div>
                 </div>
                 <?php
