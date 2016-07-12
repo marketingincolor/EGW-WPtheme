@@ -30,28 +30,11 @@ list($post_per_section,$post_type)=scroll_loadpost_settings();
                         <div class="mkd-column-inner">
                               <div class="vc_empty_space" style="height: 20px"><span class="vc_empty_space_inner"></span></div> 
                             <?php
-                            $my_query = null;                           
-                            $cat_id_ar=array();
-                            if(is_user_logged_in()){   
-                                $userid = get_current_user_id();  
-                                $fetchresult = $wpdb->get_results("SELECT categoryid FROM wp_follow_category where userid=" . $userid." AND flag=1");
-                                if(!empty($fetchresult)){                           
-                                    foreach ($fetchresult as $results) {                                       
-                                        $cat_id_ar[]=$results->categoryid;
-                                    }                             
-                                     discussion_custom_categorylist_query($cat_id_ar,$post_per_section);
-                                } else {
-                                    $cat_id_ar=get_main_category_detail();
-                                    $my_query =  discussion_custom_categorylist_query($cat_id_ar,$post_per_section); 
-                                }
-                            } else {
-                                $cat_id_ar=get_main_category_detail();
-                                $my_query =  discussion_custom_categorylist_query($cat_id_ar,$post_per_section);
-                            }
-                              
+                            $my_query = null;
+                            $my_query = discussion_custom_category_query($post_type,$category,$post_per_section); 
                             global $wp_query;
-                            get_template_part('template-blog-block');                               
-                            ?>      
+                            get_template_part('template-blog-block');   
+                            ?>
                         </div>
                     </div><!-- #content -->
                     <div class="mkd-column2">
