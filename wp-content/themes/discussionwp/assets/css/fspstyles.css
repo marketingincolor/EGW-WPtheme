@@ -245,6 +245,13 @@ li{
     }
 } 
 Category menu right side css ends here*/
+.mkd-search-opener > i{
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
 @media only screen and (max-width: 900px) {
     .mkd-mobile-header .mkd-mobile-header-inner .mkd-mobile-header-holder .mkd-position-right-inner > div{
         margin-right: 15px 
@@ -388,6 +395,18 @@ footer .mkd-footer-top-holder {
     font-size: 14px !important;
     min-height: 38px;
 }
+.light-theme.wp-posts-carousel .owl-controls .owl-nav div {
+    background: #b3cc36 !important;
+    border-radius: 0% !important;
+    -webkit-border-radius: 0 !important;
+    height: 100px !important;
+    line-height: 100px !important;
+}
+.light-theme.wp-posts-carousel:hover .owl-controls .owl-nav .owl-prev:hover, .light-theme.wp-posts-carousel:hover .owl-controls .owl-nav .owl-next:hover {
+    opacity: 1;
+    color: #ffffff !important;
+}
+
 /*video menu styles ends here*/
 
 .fsp-ads-homepage{
@@ -636,6 +655,7 @@ footer .mkd-footer-top-holder {
     border: none;
     color: #fff;
     font-weight: bold;
+    cursor:pointer;
 }
 .fspgray_btn{
     text-align: center;
@@ -953,7 +973,7 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
 }
 .social-icon-wd-container ul li{
     float: left;
-    width: 33.33%;
+    width: 20%;
     margin: 0 !important;
     position: relative;
     border-right: 1px solid #e6e7e8;
@@ -966,15 +986,15 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
     height: 100%;
     width: 100%;
     -webkit-border-radius: 0;
-    padding: 40% 0;
-    font-size: 24px;
+    padding: 25% 0;
+    font-size: 20px;
     color: #ffffff;
     text-align: center;
     display: block;
 }     
 @media only screen and (max-width: 1023px) {
     .social-icon-wd-container ul li{
-        max-width: 100px;
+        max-width: 60px;
     }
 }
 /*sidebar social icons styles ends here*/
@@ -1050,6 +1070,30 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
 .ai1ec-month-view .ai1ec-multiday-bar .ai1ec-event-title {
     margin-left: 7px;
     font-size: 14px;
+}
+.ai1ec-main-container p{
+    margin: 0px;
+}
+.ai1ec-btn-group > .ai1ec-btn-sm{
+    font-size: 15px;
+}
+.ai1ec-calendar-toolbar{
+    border:0 none;
+    margin: 0;
+}
+.ai1ec-title-buttons .ai1ec-btn-group{
+    margin-left: 0px;
+}
+.ai1ec-btn-toolbar .ai1ec-btn-group{
+    margin-bottom: 19px;
+}
+table.ai1ec-month-view {
+    margin-bottom: 20px !important;
+}
+@media only screen and (max-width: 599px) {
+    .ai1ec-btn-group > .ai1ec-btn-sm{
+        font-size: 13px;
+    }
 }
 /*Live events css ends here*/
 
