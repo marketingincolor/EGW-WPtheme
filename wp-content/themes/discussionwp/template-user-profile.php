@@ -20,7 +20,7 @@ if (!empty($_POST['action'])) {
 
     /*     * ********* Upload User profile Image:start **************** */
 
-    if (!empty($_FILES)) {
+    if (!empty($_FILES['userProfileImage']['name'])) {
 
         require_once(ABSPATH . '/wp-load.php');
         require_once(ABSPATH . "wp-admin" . '/includes/file.php');
