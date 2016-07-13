@@ -97,7 +97,7 @@ get_header();
                 <div class="clearfix fsp-page-container">
                     <div class="mkd-section-inner-margin clearfix">
                         <!-- Info container starts here -->
-                        <div class="vc_col-md-6 vc_col-sm-12">
+                        <div class="vc_col-1g-6 vc_col-md-6 vc_col-sm-12 user-profile-resize">
                             <div class="user-profile-container"> 
                                 <form name="profile" action="" method="post" enctype="multipart/form-data" id="user-profile-form">
                                     <!-- info left starts here -->
@@ -199,7 +199,7 @@ get_header();
 
 
                         <!-- saved articles starts here -->
-                        <div class="wpb_column vc_col-md-6 vc_col-sm-12">
+                        <div class="wpb_column vc_col-lg-6 vc_col-md-6 vc_col-sm-12 user-profile-resize">
                             <div class="fsp-saved-articles">
                                 <h2>Saved Articles</h2>
                                 <div class="saved-articles-container">                                    
@@ -243,7 +243,10 @@ get_header();
                                         </ul> 
                                     <?php else: ?>
                                         <span>No articles found</span> 
-                                    <?php endif; ?>                                                                                
+                                    <?php endif; ?>  
+                                        <div class="fsporange_btn">
+                                                <input type="submit" value="Load More" name="Load More">
+                                            </div>    
                                 </div>
                             </div>
                         </div>
