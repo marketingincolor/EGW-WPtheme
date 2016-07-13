@@ -15,7 +15,7 @@
                 'category' => $_POST['cat_id'],
                 'post_status' => 'publish',
                 'order' => 'DESC',
-                'post_type' => $_POST['post_type'],
+                'post_type' => explode(",",$_POST['post_type']),
                 'offset'=>$_POST['offset'],
                 'numberposts'=>$_POST['perpage']
               
@@ -38,14 +38,7 @@
                     $thumb_image_height = '';
                     $thumb_image_size = '150';
                     $excerpt_length = '12';
-                    switch ($_POST['post_type']) {
-                        case 'videos':
-                            $display_category = 'no';
-                            $display_share = 'no';
-//                            $display_comments = 'no';
-//                            $display_date = 'no';
-                            break;
-                    }
+                    
                     /**
                      * For counting no of posts exist
                      */

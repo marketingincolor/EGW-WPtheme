@@ -20,6 +20,7 @@ list($post_per_section,$post_type)=scroll_loadpost_settings();
                     $parent_category_id = category_top_parent_id($category_id);
                     $cat = get_category($parent_category_id);
                 }
+                $main_cat=get_main_category_detail();
                 get_template_part('template_category_page_banner');
                 ?>
                 
@@ -28,7 +29,7 @@ list($post_per_section,$post_type)=scroll_loadpost_settings();
                         <div class="mkd-section-inner-margin clearfix">
                             <?php
                             $my_query = null;
-                            $my_query = discussion_custom_categorylist_query($category_id,$post_per_section);   
+                            $my_query = discussion_custom_categorylist_query($post_type,$category_id,$post_per_section);   
 //                            $my_query = discussion_custom_categorylist_query($category_id);
                             global $wp_query;
                             get_template_part('template-blog-block');

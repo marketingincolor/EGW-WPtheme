@@ -1294,12 +1294,12 @@ if (!function_exists('discussion_custom_category_query')) {
  */
 if (!function_exists('discussion_custom_categorylist_query')) {
 
-    function discussion_custom_categorylist_query($category,$post_per_section) {
+    function discussion_custom_categorylist_query($post_type,$category,$post_per_section) {
         $args = array(
             'cat' => $category,
             'post_status' => 'publish',
             'order' => 'DESC',
-//            'post_type'=>$type,
+            'post_type'=>$post_type,
             'posts_per_page' => $post_per_section,
             'paged' => 1
         );
@@ -1678,7 +1678,7 @@ function ajax_forgotPassword()
  * second parameter => post type
  */
 function scroll_loadpost_settings(){    
-    return array(6,'post');   
+    return array(6,array('post','videos'));   
 }
 
 
