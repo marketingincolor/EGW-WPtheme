@@ -28,7 +28,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                  * For hide date/category for videos section
                                  */
                                 $title_tag = 'h3';
-                                $title_length = '20';
+                                $title_length = '';
                                 $display_date = 'yes';
                                 $date_format = 'd. F Y';
                                 $display_category = 'yes';
@@ -54,8 +54,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                  * For implement two coloumn based post in one row
                                  */
                                 ?>
-
-
+                        
                                 <div class="mkd-pt-six-item mkd-post-item">
                                     <?php if (has_post_thumbnail()) { ?>
                                         <div class="mkd-pt-six-image-holder">

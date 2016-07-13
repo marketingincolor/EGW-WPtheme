@@ -365,6 +365,7 @@ footer .mkd-footer-top-holder {
 .mkd-drop-down .mkd-menu-wide .mkd-menu-second > .mkd-menu-inner > ul {
     padding: 20px 0px 20px;
 }
+.light-theme.wp-posts-carousel { overflow: inherit !important; }
 .light-theme.wp-posts-carousel .wp-posts-carousel-container {
     border: 1px solid #b3cb35 !important;
     background: #ffffff !important;
@@ -412,6 +413,16 @@ footer .mkd-footer-top-holder {
 }
 .light-theme.wp-posts-carousel:hover .owl-controls .owl-nav .owl-next  { 
     opacity: 1 !important; 
+}
+.light-theme.wp-posts-carousel .owl-controls .owl-nav .owl-next { 
+    right: -25px !important; 
+    opacity: 1 !important;
+        padding: 0px 18px 0px 12px !important;
+}
+.light-theme.wp-posts-carousel .owl-controls .owl-nav .owl-prev { 
+    left: -25px !important; 
+    opacity: 1 !important;
+    padding: 0px 18px 0px 12px !important;
 }
 /*video menu styles ends here*/
 
