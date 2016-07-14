@@ -6,6 +6,9 @@
  * Updated : July 2, 2016
  */
 
+//Removed functionality for theme account create setup
+  exit();
+
 // define some vars
 require_once '../wp-config.php';
 if (defined('ABSPATH'))
@@ -47,7 +50,7 @@ if (!is_email($user_email)) {
     exit();
 }
 //if (email_exists($user_email)) {
-//    echo '<div class="error notice"><p>Email Already in use. Please try again ! - Redirecting in 2 sec</p></div>';
+//    echo '<dirname(path)                                                                                                                                                      v class="error notice"><p>Email Already in use. Please try again ! - Redirecting in 2 sec</p></div>';
 //    header('Refresh: 2;url= /register');
 //    exit();
 //}
@@ -103,8 +106,9 @@ if (!is_wp_error($new_user)) {
     $message = "Hi there! \n You have successfully registered to the site. Your login name is {$user_email} and your password is {$random_password}\nPlease change your password immediately!\n\nTesting content\n"
             . "<a href='$login_page'>Click Here </a> to login\n";
     foreach($_POST as $key => $val){
-        $message .= 'key=>'.$key;
-        $message .= 'val=>'.$val;
+        $message .= 'key=> '.$key;
+        $message .= '\n';
+        $message .= 'val=> '.$val;
     }
     $sender = 'From: Admin <ramfsp@gmail.com>' . "\r\n";
     $headers[] = 'MIME-Version: 1.0' . "\r\n";

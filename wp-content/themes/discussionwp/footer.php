@@ -45,4 +45,3 @@ closeOnBgClick :false
 </script>
 
 <input type="hidden" id="accountvalid" value="test"/>
-<div class="register_error hide"></div>
