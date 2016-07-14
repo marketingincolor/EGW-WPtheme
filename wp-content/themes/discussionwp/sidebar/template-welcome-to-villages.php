@@ -3,9 +3,9 @@
     <div class="fsp-branch-content">        
         <ul>
             <?php if (!is_user_logged_in()) { ?>
-            <li><a href = "<?php echo network_site_url(); ?>register"><i class="fa fa-check" aria-hidden="true"></i> Join This The Villages?</a></li>
+            <li><a href = "<?php echo network_site_url(); ?>register"><i class="fa fa-check" aria-hidden="true"></i> Join This Branch?</a></li>
             <?php } ?>
-            <li class="welcome-my-pop"><a href = "<?php echo network_site_url(); ?>wp-content/themes/discussionwp/template-find-branch.php"><i class="fa fa-search" aria-hidden="true"></i> Find Another The Villages</a></li>
+            <li class="welcome-my-pop"><a href = "<?php echo network_site_url(); ?>wp-content/themes/discussionwp/template-find-branch.php"><i class="fa fa-search" aria-hidden="true"></i> Find Another Branch</a></li>
             <li><a href = "<?php echo network_site_url(); ?>"><i class="fa fa-reply" aria-hidden="true"></i> Return to Main Site</a></li>
         </ul>    
     </div>

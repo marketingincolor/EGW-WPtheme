@@ -1,12 +1,13 @@
 <?php
 /**
- * Modifier - Akilan
+ * Author - Akilan 
  * Date - 14-07-2016
- * Purpose - Added hidden xs class for hiding in mobile view
+ * Purpose - For display sidebar in mobile view as first
+ * hidden sm,hidden-md hidden-lg => for showing in mobile view
  */
-?>
 
-<div class="widget mkd-rpc-holder hidden-xs">
+?>
+<div class="widget mkd-rpc-holder hidden-sm hidden-md hidden-lg">
     <div class="widget widget_categories">
         <div class="mkd-rpc-content">  
             <!--- Insert Ads here --->

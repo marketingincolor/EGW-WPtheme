@@ -1,5 +1,5 @@
 
-<div class="mkd-section-title-holder clearfix"><span class="mkd-st-title">Local Events</span></div>
+<div class="mkd-section-title-holder clearfix"><span class="mkd-st-title">Live Events</span></div>
 <?php $posts = new WP_Query(array('post_type' => 'ai1ec_event', 'post_status' => 'publish', 'posts_per_page' => -1, 'order' => 'ASC')); ?>  
 <div class="widget mkd-ptw-holder mkd-tabs  ui-tabs ui-widget ui-widget-content ui-corner-all village-sidebar-local-events">
     <div id="mkd-widget-tab-4" class="mkd-ptw-content mkd-tab-container ui-tabs-panel ui-widget-content ui-corner-bottom" aria-labelledby="ui-id-5" role="tabpanel" aria-hidden="false">

@@ -159,14 +159,13 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
             if ($total_post >= $post_per_section) {
                $no_of_adds = floor($total_post / $post_per_section);
                 for ($i = 1; $i <= $no_of_adds; $i++) {
-                ?> 
-
+                ?>                    
                     <div class="fsp-ads-homepage" id="adv_row_<?php echo $i; ?>" <?php if ($i != 1) { ?> style="display:none;clear:both" <?php } else { ?> style="clear:both" <?php } ?>>  
                         <?php
                         if (function_exists('drawAdsPlace'))
                             drawAdsPlace(array('id' => 1), true);
                         ?>
-                    </div>
+                    </div>                    
                  <?php
                 }
             }
@@ -179,19 +178,5 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
 /**
  * jquery loading image icon display block
  */
+get_template_part('sidebar/template-ajax-image');
 ?>
-
-<div class="fsp-ads-homepage loader_img" style="display:none">
-    <img src="<?php echo MIKADO_ASSETS_ROOT . '/img/loading.svg'; ?>" width="75">
-</div>
-
-<div class="fsp-ads-homepage">
-    <div class="mkd-bnl-navigation-holder">
-        <div id="showmore" style="display:none" class="mkd-btn mkd-bnl-load-more mkd-load-more mkd-btn-solid">
-            <?php echo esc_html__('Show More', 'discussionwp') ?>
-        </div>
-        <div id="loading" style="display:none" class="mkd-btn mkd-bnl-load-more mkd-load-more mkd-btn-solid">            
-                <?php echo esc_html__('LOADING...', 'discussionwp') ?>            
-        </div>
-    </div>
-</div>
