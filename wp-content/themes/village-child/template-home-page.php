@@ -7,8 +7,7 @@
 ?>
 <?php
 get_header();
-$post_per_section = 6;
-$post_type='post';
+list($post_per_section,$post_type)=scroll_loadpost_settings();
 $category='home';
 ?>
 <div class="mkd-full-width">
@@ -127,14 +126,14 @@ $category='home';
                                     foreach ($fetchresult as $results) {                                       
                                         $cat_id_ar[]=$results->categoryid;
                                     }                             
-                                     discussion_custom_categorylist_query($cat_id_ar,$post_per_section);
+                                     discussion_custom_categorylist_query($post_type,$cat_id_ar,$post_per_section);
                                 } else {
                                     $cat_id_ar=get_main_category_detail();
-                                    $my_query =  discussion_custom_categorylist_query($cat_id_ar,$post_per_section); 
+                                    $my_query =  discussion_custom_categorylist_query($post_type,$cat_id_ar,$post_per_section); 
                                 }
                             } else {
                                 $cat_id_ar=get_main_category_detail();
-                                $my_query =  discussion_custom_categorylist_query($cat_id_ar,$post_per_section);
+                                $my_query =  discussion_custom_categorylist_query($post_type,$cat_id_ar,$post_per_section);
                             }
                               
                             global $wp_query;

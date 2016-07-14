@@ -68,7 +68,7 @@ if (isset($category_id))
                 action: 'custom_scroll_post_load',
                 offset: parseInt(jQuery('#current_post').val()),
                 cat_id: '<?php echo $cat_id; ?>',
-                post_type: '<?php echo $post_type; ?>',
+                post_type: '<?php echo implode(",", $post_type); ?>',
                 perpage: post_per_section,
             },
             success: function(data)
