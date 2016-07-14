@@ -1896,3 +1896,18 @@ function notify_author_of_reply($comment_id, $approved){
     }
   }
 }
+
+
+/**
+ * Author - Akilan
+ * Date  - 14-07-2016
+ * Purpose - change link layout to have a pipe prepended (safety comment)
+ */
+
+add_filter( 'safe_report_comments_flagging_link', 'adjust_flagging_link' );
+function adjust_flagging_link( $link ) {
+	return ' / ' . $link;
+}
+
+
+

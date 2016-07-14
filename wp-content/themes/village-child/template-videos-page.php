@@ -12,7 +12,7 @@
 get_header();
 $category = '';
 list($post_per_section, $post_type) = scroll_loadpost_settings();
-$post_type='videos';
+$post_type=array('videos');
 ?>
 <div class="mkd-content">
     <div class="mkd-content-inner">         
