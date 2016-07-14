@@ -6,7 +6,7 @@
 
 //Forgot Password 
 jQuery(document).ready(function ()
-{    
+{
     resetpassword();
     clearCommentText();
     loginFormValidation();
@@ -14,11 +14,11 @@ jQuery(document).ready(function ()
     commentFormValidation();
     userProfileUpload();
     userProfileFormValidation();
-    
+
 });
 
-function resetpassword(){
-    
+function resetpassword() {
+
     jQuery('form .submit_button').on('click', function (e) {
 
         jQuery.ajax({
@@ -38,10 +38,10 @@ function resetpassword(){
 }
 
 //clear comment textarea content in comment form
-function clearCommentText(){
-   jQuery('#cancel-comment-reply-link').on('click', function () {
+function clearCommentText() {
+    jQuery('#cancel-comment-reply-link').on('click', function () {
         jQuery('#comment').val("");
-    }); 
+    });
 }
 
 //Login Form Validation
@@ -52,23 +52,64 @@ function loginFormValidation() {
 }
 
 //Registration Form Validation
-function registrationFormValidation(){
-jQuery('#fsForm2394143').submit(function (e) {
-    var firstname = jQuery('#field43284834-first').val();
-    var lastname = jQuery('#field43284834-last').val();
-    var email = jQuery('#field43284833').val();
-    var zipcode = jQuery('#field43284990').val();
-    var age = jQuery('#field43284944').val();
-    if (jQuery('.fspr_register_error').length)
-        jQuery('.fspr_register_error').remove();
-    firstNameValidation(firstname, '#field43284834-first', 'fspr_register_error');
-    lastNameValidation(lastname, '#field43284834-last', 'fspr_register_error');
-    emailValidation(email, '#field43284833', 'fspr_register_error');
-    zipcodeValidation(zipcode, '#field43284990', 'fspr_register_error');
-    ageValidation(age, '#field43284944', 'fspr_register_error');
-    if (jQuery('.fspr_register_error').length)
-        e.preventDefault();
-});
+function registrationFormValidation() {
+    jQuery('#fsForm2394143').on('submit', function (e) {
+        var firstname = jQuery('#field43284834-first').val();
+        var lastname = jQuery('#field43284834-last').val();
+        var email = jQuery('#field43284833').val();
+        var zipcode = jQuery('#field43284990').val();
+        var age = jQuery('#field43284944').val();
+        if (jQuery('.fspr_register_error').length)
+            jQuery('.fspr_register_error').remove();
+        firstNameValidation(firstname, '#field43284834-first', 'fspr_register_error');
+        lastNameValidation(lastname, '#field43284834-last', 'fspr_register_error');
+        emailValidation(email, '#field43284833', 'fspr_register_error');
+        zipcodeValidation(zipcode, '#field43284990', 'fspr_register_error');
+        ageValidation(age, '#field43284944', 'fspr_register_error');
+        if (jQuery('.fspr_register_error').length) {
+            e.preventDefault();
+        }
+        else {
+            var data = {
+                action: 'register_user',
+                userfname: firstname,
+                userlname: lastname,
+                userzipcode: zipcode,
+                userage: age,
+                Email: email,
+            };
+            var homeurl = jQuery('.mkd-logo-area .mkd-logo-wrapper a').attr('href');
+            var ajaxurl = homeurl + "account-create";
+            jQuery.ajax({
+                type: "POST",
+                url: ajaxurl,
+                data: data,
+                cache: false,
+                async: false,
+                success: function (successvalue) {
+                    console.log(successvalue);
+                    if (jQuery.trim(successvalue) == 'success') {
+                        jQuery('#accountvalid').val('valid');
+                    } else {
+                        jQuery('.register_error').html(successvalue);
+                        jQuery('.register_error').fadeIn();
+                    }
+                },
+                error: function (successvalue) {
+                    alert('Error occurs Please try again.');
+                }
+            });
+            console.log(jQuery('#accountvalid').val());
+            if ((jQuery('#accountvalid').val()) != 'valid') {
+                e.preventDefault();
+                console.log('not valid');
+            }
+            else {
+                console.log('valid and form submitted');
+                // e.preventDefault();
+            }
+        }
+    });
 }
 
 function commentFormValidation() {
@@ -249,4 +290,3 @@ function ageValidation(age, current_element, error_element) {
     }
 
 }
-
