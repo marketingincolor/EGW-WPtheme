@@ -1860,3 +1860,39 @@ function remove_pages_from_search() {
     $wp_post_types['page']->exclude_from_search = true;
 }
 add_action('init', 'remove_pages_from_search');
+
+/**
+ * Author - Vinoth Raja
+ * Date  - 14-07-2016
+ * Purpose - For adding comment approved email functionality
+ * 
+ */
+  
+add_filter('wp_mail_content_type',create_function('', 'return "text/html"; ')); //for adding html content in wp_mail
+
+//for except admin users
+add_action('wp_set_comment_status', 'custom_set_comment_status',10,2);
+
+function custom_set_comment_status($comment_id, $comment_status) {
+    if($comment_status == 'approve')
+    {
+      $comment = get_comment($comment_id);
+      if($comment->comment_parent){
+      $parent_comment = get_comment($comment->comment_parent);
+      wp_mail($parent_comment->comment_author_email, 'myEvergreenWellness', 'New comment on your post '.get_the_title($comment->comment_post_ID).'<br>Author:'.$comment->comment_author .'<br>Email:'.$comment->comment_author_email.'<br>Comment:'.$comment->comment_content.'<br>You can see all comments on this post here:'.get_comment_link($comment->comment_ID));
+      }
+    }   
+}
+
+//for admin user
+add_action('comment_post', 'notify_author_of_reply', 10, 2);
+
+function notify_author_of_reply($comment_id, $approved){
+  if($approved){
+    $comment = get_comment($comment_id);
+    if($comment->comment_parent){
+      $parent_comment = get_comment($comment->comment_parent);
+      wp_mail($parent_comment->comment_author_email, 'myEvergreenWellness', 'New comment on your post '.get_the_title($comment->comment_post_ID).'<br>Author:'.$comment->comment_author .'<br>Email:'.$comment->comment_author_email.'<br>Comment:'.$comment->comment_content.'<br>You can see all comments on this post here:'.get_comment_link($comment->comment_ID));
+    }
+  }
+}
