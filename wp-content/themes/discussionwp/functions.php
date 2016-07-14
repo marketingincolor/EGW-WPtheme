@@ -1294,12 +1294,12 @@ if (!function_exists('discussion_custom_category_query')) {
  */
 if (!function_exists('discussion_custom_categorylist_query')) {
 
-    function discussion_custom_categorylist_query($category,$post_per_section) {
+    function discussion_custom_categorylist_query($post_type,$category,$post_per_section) {
         $args = array(
             'cat' => $category,
             'post_status' => 'publish',
             'order' => 'DESC',
-//            'post_type'=>$type,
+            'post_type'=>$post_type,
             'posts_per_page' => $post_per_section,
             'paged' => 1
         );
@@ -1429,26 +1429,24 @@ add_action('template_redirect', 'userpage_rewrite_catch');
 /**
  * Author- Vinoth Raja
  * Date  - 21-06-2016
- * Purpose - For Related Videos Display(Sidebar)
+ * Purpose - For related videos using tags
  */
-if (!function_exists('discussion_related_posts')) {
+if (!function_exists('custom_related_posts')) {
 
-function discussion_related_posts($post_id, $post_type, $options = array()) {
+function custom_related_posts($post_id, $post_type, $tag_ids) {
 
 		$posts_per_page = 5;
 
-		extract($options);
-
 		$args = array(
 			'post__not_in'   => array($post_id),
+                        'post_type'=> $post_type,
+                        'tag_id'=> implode(",",$tag_ids),
 			'order'          => 'DESC',
 			'orderby'        => 'date',
-			'posts_per_page' => $posts_per_page,
-                        'post_type'=>$post_type
-            
+			'posts_per_page' => $posts_per_page
 		);
 
-		$related_posts = new WP_Query($args);
+		$related_posts = query_posts($args);
 
 		return $related_posts;
 	}
@@ -1680,7 +1678,7 @@ function ajax_forgotPassword()
  * second parameter => post type
  */
 function scroll_loadpost_settings(){    
-    return array(6,'post');   
+    return array(6,array('post','videos'));   
 }
 
 
@@ -1794,7 +1792,7 @@ function custom_comment($comment, $args, $depth) {
 
 /**
  * Author - Akilan 
- * Date - 08-06-2016
+ * Date - 08-07-2016
  * Purpose - For adding thumb image for facebook sharing
  */
 add_action('wp_head', 'fbfixheads');
@@ -1820,3 +1818,45 @@ function fbfixheads(){
     }
     echo $ftf_head;
 }
+
+/**
+ * Author - Akilan
+ * Date - 11-07-2016
+ * Purpose - For getting main category name
+ */
+
+function main_category_name(){
+    return array('activity','medical','financial','relationships','nutrition','mind-spirit');
+}
+
+
+/**
+ * Author - Akilan
+ * Date - 11-07-2016
+ * Purpose - For getting category id from category name
+ */
+
+function get_main_category_detail(){
+    $cat_ar=main_category_name();
+    if(!empty($cat_ar)){
+        foreach($cat_ar as $our_cat_each){              
+            $cat = get_term_by( 'slug', $our_cat_each, 'category' );
+            if ( $cat ){
+                $cat_id_ar[$cat->term_id]=$cat->term_id;                 
+            }
+        }
+    }
+    return $cat_id_ar;
+}
+
+/**
+ * Author - Akilan
+ * Date  - 11-07-2016
+ * Purpose - For hiding pages from search
+ * 
+ */
+function remove_pages_from_search() {
+    global $wp_post_types;
+    $wp_post_types['page']->exclude_from_search = true;
+}
+add_action('init', 'remove_pages_from_search');

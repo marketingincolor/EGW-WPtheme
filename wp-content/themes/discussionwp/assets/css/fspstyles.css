@@ -54,6 +54,55 @@ h6 { font-family: Roboto;font-style: normal;}
 .fsp-pad-btm-20{padding-bottom:20px;}
 .fsp-pad-btm-30{padding-bottom:30px;}
 
+@-ms-viewport {
+    width: device-width;
+}
+.visible-xs,
+.visible-sm,
+.visible-md,
+.visible-lg {
+    display: none !important;
+}
+@media (max-width: 767px) {
+    .visible-xs {
+        display: block !important;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .visible-sm {
+        display: block !important;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .visible-md {
+        display: block !important;
+    }
+}
+@media (min-width: 1200px) {
+    .visible-lg {
+        display: block !important;
+    }
+}
+@media (max-width: 767px) {
+    .hidden-xs {
+        display: none !important;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .hidden-sm {
+        display: none !important;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .hidden-md {
+        display: none !important;
+    }
+}
+@media (min-width: 1200px) {
+    .hidden-lg {
+        display: none !important;
+    }
+}
 li{
     list-style: none;
 }
@@ -245,6 +294,13 @@ li{
     }
 } 
 Category menu right side css ends here*/
+.mkd-search-opener > i{
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
 @media only screen and (max-width: 900px) {
     .mkd-mobile-header .mkd-mobile-header-inner .mkd-mobile-header-holder .mkd-position-right-inner > div{
         margin-right: 15px 
@@ -358,6 +414,7 @@ footer .mkd-footer-top-holder {
 .mkd-drop-down .mkd-menu-wide .mkd-menu-second > .mkd-menu-inner > ul {
     padding: 20px 0px 20px;
 }
+.light-theme.wp-posts-carousel { overflow: inherit !important; }
 .light-theme.wp-posts-carousel .wp-posts-carousel-container {
     border: 1px solid #b3cb35 !important;
     background: #ffffff !important;
@@ -388,13 +445,41 @@ footer .mkd-footer-top-holder {
     font-size: 14px !important;
     min-height: 38px;
 }
+.light-theme.wp-posts-carousel .owl-controls .owl-nav div {
+    background: #b3cc36 !important;
+    border-radius: 0% !important;
+    -webkit-border-radius: 0 !important;
+    color: #ffffff !important;
+    height: 100px !important;
+    line-height: 100px !important;
+}
+.light-theme.wp-posts-carousel:hover .owl-controls .owl-nav .owl-prev:hover, .light-theme.wp-posts-carousel:hover .owl-controls .owl-nav .owl-next:hover {
+    opacity: 1;
+    color: #ffffff !important;
+}
+.light-theme.wp-posts-carousel:hover .owl-controls .owl-nav .owl-prev { 
+    opacity: 1 !important;
+}
+.light-theme.wp-posts-carousel:hover .owl-controls .owl-nav .owl-next  { 
+    opacity: 1 !important; 
+}
+.light-theme.wp-posts-carousel .owl-controls .owl-nav .owl-next { 
+    right: -25px !important; 
+    opacity: 1 !important;
+    padding: 0px 18px 0px 12px !important;
+}
+.light-theme.wp-posts-carousel .owl-controls .owl-nav .owl-prev { 
+    left: -25px !important; 
+    opacity: 1 !important;
+    padding: 0px 18px 0px 12px !important;
+}
 /*video menu styles ends here*/
 
 .fsp-ads-homepage{
     text-align:center; 
 }
 .fsp-ads-homepage img{   
-    margin: 0 auto 10px;
+    margin: 10px auto 20px;
 }
 
 .fsp-inner-container{
@@ -636,6 +721,7 @@ footer .mkd-footer-top-holder {
     border: none;
     color: #fff;
     font-weight: bold;
+    cursor:pointer;
 }
 .fspgray_btn{
     text-align: center;
@@ -646,6 +732,7 @@ footer .mkd-footer-top-holder {
     border: none;
     color: #fff;
     font-weight: bold;
+    cursor: pointer;
 }
 .fsporange_btn input{
     background: #f69c4a;
@@ -653,6 +740,7 @@ footer .mkd-footer-top-holder {
     border: none;
     color: #fff;
     font-weight: bold;
+    cursor: pointer;
 }
 .fsp-page-container{
     background: #ffffff;
@@ -754,13 +842,50 @@ footer .mkd-footer-top-holder {
 .ctg_list img{
     width: 100%;
 }
+.saved-articles-container ul{
+    margin-bottom: 0;
+}
+.saved-articles-container .fsporange_btn input{
+    padding: 10px 25px;
+    float: right;
+}
+@media screen and (max-width: 1200px) and (min-width: 992px){
+    .user-profile-resize{
+        width:100% !important;
+    }
+    .fsp-saved-articles{
+        padding-top: 20px;
+    }
+    .saved_art_cont{
+        width: 70%;
+    }
+    .saved_art_cont_btns {
+        padding: 3% 2.5% 0 0;
+    }
+}
+@media only screen and (max-width: 1024px) {
+    .saved_art_cont{
+        width: 60%;
+    }
+    .user-profile-rgtinfo{
+        padding: 0px;
+    }
+    .fsp-saved-articles{
+        padding-top: 30px;
+    }
+}
+@media only screen and (max-width: 767px) {
 
-@media only screen and (max-width: 1200px) {
+    .saved_art_cont{
+        width: 56%;
+    }
+}
+@media only screen and (max-width: 610px) {
     .fsp-page-container {
         padding: 40px 30px 0;
     }
     .user-profile-rgtinfo {
-        padding: 10% 0;
+        padding: 10% 0 0;
     }
     .saved_art_img {
         float: none;
@@ -784,6 +909,11 @@ footer .mkd-footer-top-holder {
     .saved_art_cont_btns a{
         float: none;
         display: inline-block;
+    }
+    .saved-articles-container .fsporange_btn input{
+        float:none;
+        margin: 0 auto 30px;
+        display: block;
     }
 }
 @media only screen and (max-width: 600px) {
@@ -896,6 +1026,10 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
     padding: 10px 30px;
     float: right;
     margin-right: 50px;
+    cursor: pointer;
+}
+.mkd-follow-category button:hover{
+    background: #7e3b5a;
 }
 @media only screen and (max-width: 767px) {
     .mkd-follow-category button{
@@ -949,7 +1083,7 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
 }
 .social-icon-wd-container ul li{
     float: left;
-    width: 33.33%;
+    width: 20%;
     margin: 0 !important;
     position: relative;
     border-right: 1px solid #e6e7e8;
@@ -962,15 +1096,15 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
     height: 100%;
     width: 100%;
     -webkit-border-radius: 0;
-    padding: 40% 0;
-    font-size: 24px;
+    padding: 25% 0;
+    font-size: 20px;
     color: #ffffff;
     text-align: center;
     display: block;
 }     
 @media only screen and (max-width: 1023px) {
     .social-icon-wd-container ul li{
-        max-width: 100px;
+        max-width: 60px;
     }
 }
 /*sidebar social icons styles ends here*/
@@ -981,13 +1115,18 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
 }
 .single-article-fsp-info article{
     background: transparent;
-}
-.single-article-fsp-info article{
-    margin: 0;
-}
-.single-article-fsp-info article{
     position: absolute;
+    margin: 0;
     top: -28px;
+}
+.single-article-video-fsp-info article{
+    background: transparent !important;
+    margin: 0;
+    position: static;
+    top: 0px;
+}
+.mkd-blog-holder .single-article-video-fsp-info article .mkd-post-info{
+    position: static;
 }
 .mdk-sng-pst ul li{
     list-style-type: disc;
@@ -1004,12 +1143,13 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
     }
     .single-article-fsp-info article .mkd-post-info{
         width: 100% !important;
-    }
-    .single-article-fsp-info article .mkd-post-info{
         position: static !important;
     }
     .mkd-fsp-blog-holder article{
         margin: 0;
+    }
+    .mkd-blog-holder .single-article-video-fsp-info article .mkd-post-info{
+        width: 100%;
     }
 }
 /*single article page styles ends here*/
@@ -1041,4 +1181,45 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
     margin-left: 7px;
     font-size: 14px;
 }
+.ai1ec-main-container p{
+    margin: 0px;
+}
+.ai1ec-btn-group > .ai1ec-btn-sm{
+    font-size: 15px;
+}
+.ai1ec-calendar-toolbar{
+    border:0 none;
+    margin: 0;
+}
+.ai1ec-title-buttons .ai1ec-btn-group{
+    margin-left: 0px;
+}
+.ai1ec-btn-toolbar .ai1ec-btn-group{
+    margin-bottom: 19px;
+}
+table.ai1ec-month-view {
+    margin-bottom: 20px !important;
+}
+@media only screen and (max-width: 599px) {
+    .ai1ec-btn-group > .ai1ec-btn-sm{
+        font-size: 13px;
+    }
+}
 /*Live events css ends here*/
+
+.disclamier{
+    padding-bottom: 20px;
+}
+.disclamier p{
+    font-style: italic;
+}
+.disclamier span{
+    font-style: normal;
+    font-weight: bold;
+}
+
+#showmore, #loading{    
+    padding: 0 50px;
+    font-size: 16px;
+    margin-top: 10px;
+}

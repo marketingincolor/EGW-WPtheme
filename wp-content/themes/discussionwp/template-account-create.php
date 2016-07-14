@@ -28,7 +28,7 @@ $form_email = 'Email';
 /*
  * fetch post data
  */
-$user_email = ( isset($_POST[$form_email]) && !empty($_POST[$form_email]) ) ? $_POST[$form_email] : '';
+$user_email = ( isset($_POST[$form_email]) && !empty($_POST[$form_email]) ) ? sanitize_email($_POST[$form_email]) : '';
 $branch0 = ( isset($_POST['BranchVillages']) && !empty($_POST['BranchVillages']) ) ? $_POST['BranchVillages'] : '';
 $branch1 = ( isset($_POST['BranchOther']) && !empty($_POST['BranchOther']) ) ? $_POST['BranchOther'] : '';
 // TODO: Add additional branches above as required by site

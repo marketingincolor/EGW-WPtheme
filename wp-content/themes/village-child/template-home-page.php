@@ -8,6 +8,8 @@
 <?php
 get_header();
 $post_per_section = 6;
+$post_type='post';
+$category='home';
 ?>
 <div class="mkd-full-width">
     <div class="mkd-full-width-inner">   
@@ -76,7 +78,7 @@ $post_per_section = 6;
                                                 'date_format' => $date_format
                                             ));
                                             ?>
-        <?php if ($display_share == 'yes' || $display_comments == 'yes' || $display_count == 'yes') { ?>
+                                          <?php if ($display_share == 'yes' || $display_comments == 'yes' || $display_count == 'yes') { ?>
                                                 <div class="mkd-pt-info-section clearfix">
                                                     <div>
                                                         <?php
@@ -92,7 +94,7 @@ $post_per_section = 6;
                                                         ?>
                                                     </div>
                                                 </div>
-        <?php } ?>
+                                        <?php } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -115,20 +117,36 @@ $post_per_section = 6;
                 <div class="mkd-two-columns-75-25  mkd-content-has-sidebar clearfix">
                     <div class="mkd-column1 mkd-content-left-from-sidebar">
                         <div class="mkd-column-inner">
-                            <?php
-                            $category = 'home';
-                            $my_query = null;
-                            $my_query = discussion_custom_category_query('post', $category);
+                           <?php
+                            $my_query = null;                           
+                            $cat_id_ar=array();
+                            if(is_user_logged_in()){   
+                                $userid = get_current_user_id();  
+                                $fetchresult = $wpdb->get_results("SELECT categoryid FROM wp_follow_category where userid=" . $userid." AND flag=1");
+                                if(!empty($fetchresult)){                           
+                                    foreach ($fetchresult as $results) {                                       
+                                        $cat_id_ar[]=$results->categoryid;
+                                    }                             
+                                     discussion_custom_categorylist_query($cat_id_ar,$post_per_section);
+                                } else {
+                                    $cat_id_ar=get_main_category_detail();
+                                    $my_query =  discussion_custom_categorylist_query($cat_id_ar,$post_per_section); 
+                                }
+                            } else {
+                                $cat_id_ar=get_main_category_detail();
+                                $my_query =  discussion_custom_categorylist_query($cat_id_ar,$post_per_section);
+                            }
+                              
                             global $wp_query;
-                            get_template_part('template-blog-block');
-                            ?>                            
+                            get_template_part('template-blog-block');                  
+                            ?>                   
                         </div>
                     </div>		
                     <div class="mkd-column2">
                         <div class="mkd-column-inner">
                             <aside class="mkd-sidebar" style="transform: translateY(0px);">
                                 <div class="widget widget_apsc_widget">   
-<?php get_template_part('sidebar/template-sidebar-home'); ?>
+                               <?php get_template_part('sidebar/template-sidebar-home'); ?>
                                 </div>    
                             </aside>
                         </div>

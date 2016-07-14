@@ -17,7 +17,7 @@ get_header();?>
                         ?>
                     </div>
                     <div class="fspgreen_btn">
-                        <input type="submit" name="fspr_contact_submit" value="Contact Us">
+                        <input type="submit" name="fspr_contact_submit" value="Contact Us" onclick="location.href='<?php echo get_option("siteurl").'/contact-us' ?>'"/>
                     </div>
                 </div>
             </div>

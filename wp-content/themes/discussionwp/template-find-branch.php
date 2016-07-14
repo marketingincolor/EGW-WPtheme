@@ -13,8 +13,7 @@
     $path = $_SERVER['DOCUMENT_ROOT'] . $my_url[0];
     define('WP_USE_THEMES', false);
     require($path . 'wp-load.php');
-    $blog_list = wp_get_sites();
-
+    //$blog_list = wp_get_sites();
     //echo "<li type='square'><a href='http://" . $blog['domain'] . $blog['path'] . "' target='_blank'>" . $blog['domain'] . $blog['path'] . "</a></li>";
     ?>
 </div>
@@ -30,12 +29,30 @@
                 <select id="findavillage">
                     <option value="" selected="selected">Select Your Village</option>
                     <?php
-                    foreach ($blog_list AS $blog) {
-                        if ($blog['blog_id'] != 1) {
-                            $getRel = explode('/', $blog['path']);
+                    // Query for getting blogs
+                    $blogs = $wpdb->get_results($wpdb->prepare("SELECT blog_id, domain, path FROM $wpdb->blogs WHERE site_id = %d AND public = '1' AND archived = '0' AND mature = '0' AND spam = '0' AND deleted = '0' ORDER BY registered DESC", $wpdb->siteid), ARRAY_A);
+
+                    // put it in array  
+                    foreach ((array) $blogs as $details) {
+                        $blog_list[$details['blog_id']] = $details;
+                    }
+                    unset($blogs);
+                    $blogs = $blog_list;
+
+                    // if is valid array
+                    if (is_array($blogs)) {
+
+                        $array = array();
+                        // reorder
+                        $array = array_slice($blogs, 0, count($blogs));
+                        for ($i = 0; $i < count($array); $i++) {
+                            // get data for each id
+                            $blog = get_blog_details($array[$i]['blog_id']);
+                            // print it
                             ?>
-                            <option id="<?php echo $blog['blog_id']; ?>" value="<?php echo "http://" . $blog['domain'] . $blog['path'] ?>"><?php echo $getRel[count($getRel) - 2]; ?></option>
-                        <?php }
+                            <option id="<?php echo $array[$i]['blog_id']; ?>" value="<?php echo $blog->siteurl; ?>"><?php echo $blog->blogname; ?></option>
+                            <?php
+                        }
                     }
                     ?>
                 </select>

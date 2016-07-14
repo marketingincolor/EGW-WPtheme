@@ -8,8 +8,8 @@
 
 <?php get_header();
 $post_per_section=6;
-$post_type='post';
-$category='home';
+list($post_per_section,$post_type)=scroll_loadpost_settings();
+
 ?>
 
 <div class="mkd-content">
@@ -34,11 +34,6 @@ $category='home';
                                                 'display_share' => 'no',
                                                 'slider_height' => ''
                                             );
-
-                                           
-
-
-
                                             $my_query = null;
                                             $atts['query_result'] = discussion_custom_featured_query('home', 'featured_article');
                                             $params = shortcode_atts($args, $atts);
@@ -124,12 +119,15 @@ $category='home';
                         </div>    
                     </div>
                 </div>
+                <!-- Articles display block --->
                 <div style="" class="vc_row wpb_row vc_row-fluid mkd-section mkd-content-aligment-left mkd-grid-section">
                     <div class="mkd-container-inner clearfix">
                         <div class="mkd-section-inner-margin clearfix">
                             <?php
-                            $my_query = null;
-                           
+                            /**
+                             * Fetching category if user follows subcategory and displaying article based on that categories
+                             */
+                            $my_query = null;                           
                             $cat_id_ar=array();
                             if(is_user_logged_in()){   
                                 $userid = get_current_user_id();  
@@ -138,16 +136,19 @@ $category='home';
                                     foreach ($fetchresult as $results) {                                       
                                         $cat_id_ar[]=$results->categoryid;
                                     }                             
-                                     discussion_custom_categorylist_query($cat_id_ar,$post_per_section);
+                                     discussion_custom_categorylist_query($post_type,$cat_id_ar,$post_per_section);
                                 } else {
-                                    $my_query = discussion_custom_category_query($post_type,$category,$post_per_section);  
+                                    $cat_id_ar=get_main_category_detail();
+                                    $my_query =  discussion_custom_categorylist_query($post_type,$cat_id_ar,$post_per_section); 
                                 }
                             } else {
-                                $my_query = discussion_custom_category_query($post_type,$category,$post_per_section); 
-                            }
-                           
-                           // $my_query = discussion_custom_category_query('post',$category);
-//                            $my_query = discussion_custom_category_query($post_type,$category,$post_per_section);     
+                                /**
+                                 * if user not login
+                                 */
+                                $cat_id_ar=get_main_category_detail();
+                                $my_query =  discussion_custom_categorylist_query($post_type,$cat_id_ar,$post_per_section);
+                            }                           
+                              
                             global $wp_query;
                             get_template_part('template-blog-block');                  
 

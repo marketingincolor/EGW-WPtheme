@@ -28,7 +28,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                  * For hide date/category for videos section
                                  */
                                 $title_tag = 'h3';
-                                $title_length = '20';
+                                $title_length = '';
                                 $display_date = 'yes';
                                 $date_format = 'd. F Y';
                                 $display_category = 'yes';
@@ -54,8 +54,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                  * For implement two coloumn based post in one row
                                  */
                                 ?>
-
-
+                        
                                 <div class="mkd-pt-six-item mkd-post-item">
                                     <?php if (has_post_thumbnail()) { ?>
                                         <div class="mkd-pt-six-image-holder">
@@ -179,13 +178,23 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
 
 </div>
 
-<div class="mkd-ratings-holder" style="background:none;display:none" align="center">
-    <div class="mkd-ratings-text-holder">                      
-        <div class="mkd-ratings-stars-holder">
-            <div class="mkd-ratings-stars-inner">
-                <img src="<?php echo MIKADO_ASSETS_ROOT . '/img/loading.svg'; ?>" width="75">
-            </div>
+<?php
+/**
+ * jquery loading image icon display block
+ */
+?>
+
+<div class="fsp-ads-homepage loader_img" style="display:none">
+    <img src="<?php echo MIKADO_ASSETS_ROOT . '/img/loading.svg'; ?>" width="75">
+</div>
+
+<div class="fsp-ads-homepage">
+    <div class="mkd-bnl-navigation-holder">
+        <div id="showmore" style="display:none" class="mkd-btn mkd-bnl-load-more mkd-load-more mkd-btn-solid">
+            <?php echo esc_html__('Show More', 'discussionwp') ?>
+        </div>
+        <div id="loading" style="display:none" class="mkd-btn mkd-bnl-load-more mkd-load-more mkd-btn-solid">            
+                <?php echo esc_html__('LOADING...', 'discussionwp') ?>            
         </div>
     </div>
-
 </div>

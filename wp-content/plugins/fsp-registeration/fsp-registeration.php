@@ -255,8 +255,12 @@ function fspr_login_member() {
             if ((current_user_can('administrator') && is_admin()) || (is_super_admin())) {
                 wp_redirect(home_url('/wp-admin'));
             } else {
-                $location = $_POST['redirect'];
-                if (strpos($location, 'blog') !== false) {
+                $location = $_POST['redirect']; // referral URL fetch from post value
+                $findblog_page = url_to_postid($location); // Get Post ID from referral URL
+                echo $getwhichIs = get_post_type($findblog_page); // Find Post Type using Post ID
+                if ($getwhichIs == "videos") {
+                    wp_redirect($location);
+                } elseif ($getwhichIs == "post") {
                     wp_redirect($location);
                 } else {
                     wp_redirect(home_url('/user-profile'));

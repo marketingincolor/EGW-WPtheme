@@ -1,43 +1,69 @@
 <div class="mkd-container-inner clearfix">
-    <?php
+     <?php
     $title_tag = 'h3';
     $title_length = '20';
     $display_date = 'yes';
     $date_format = 'd. F Y';
-    $display_comments = 'yes';
     $display_category = 'no';
     $display_share = 'no';
-    $display_count = 'no';
+    $display_count = 'yes';
+    $display_comments = 'yes';
+    $save_stories = 'yes';
     ?>
-    <div class="mkd-post-image-area fsp-pad-btm-30">
-        <?php discussion_post_info_category(array('category' => 'no')) ?>
-        <?php
-        $video_url = get_field('video_url');
+   
+    <div class="mkd-blog-holder mkd-blog-single mkd-fsp-blog-holder">
+        <?php ?>
+        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+            <div class="mkd-post-content">
 
-        $video_file = get_field('video_file');
+                <div class="mkd-post-image-area">
 
-        if ($video_url != "") {
-            $val = get_videoid_from_url($video_url);
-            if (strpos($val, 'youtube') > 0) {
-                ?>
+                    <?php discussion_post_info_category(array('category' => 'no')) ?>
+                    <?php
+                    $video_url = get_field('video_url');
 
-                <iframe width="600" height="338" frameborder="0" src="<?php echo $val; ?>" allowfullscreen></iframe>
+                    $video_file = get_field('video_file');
 
-                <?php
-            } else {
-                ?>
-                <iframe width="600" height="338"  src="<?php echo $val; ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    if ($video_url != "") {
+                        $val = get_videoid_from_url($video_url);
+                        if (strpos($val, 'youtube') > 0) {
+                            ?>
 
-                <?php
-            }
-        }
-        if ($video_file != "") {
-            ?>                                                 
-            <video width="100%" height="100%" controls >
-                <source src="<?php echo $video_file; ?>" type="video/mp4">
-            </video>                                                    
-        <?php }
-        ?>
+                            <iframe width="600" height="338" frameborder="0" src="<?php echo $val; ?>" allowfullscreen></iframe>
+
+                            <?php
+                        } else {
+                            ?>
+                            <iframe width="600" height="338" class="wistia_embed" src="<?php echo $val; ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+                            <?php
+                        }
+                    }
+                    if ($video_file != "") {
+                        ?>                                                 
+                        <video width="100%" height="100%" controls >
+                            <source src="<?php echo $video_file; ?>" type="video/mp4">
+                        </video>                                                    
+                    <?php }
+                    ?>
+                </div>
+            </div>
+            <?php do_action('discussion_before_blog_article_closed_tag'); ?>
+        </article>
+         <div class="single-article-video-fsp-info">
+                <article>
+                    <div class="mkd-post-info">
+                            <?php
+                            discussion_post_info(array(
+                                'date' => $display_date,
+                                'count' => $display_count,
+                                'comments' => $display_comments,
+                                'save_stories' => $save_stories,
+                            ))
+                            ?>
+                        </div>
+                </article>
+            </div>
     </div>
     <div class="mkd-two-columns-75-25  mkd-content-has-sidebar clearfix">
         <div class="mkd-column1 mkd-content-left-from-sidebar">
@@ -46,38 +72,17 @@
                     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                         <div class="mkd-post-content">                                
                             <div class="mkd-post-text">
-                                <div class="mkd-post-text-inner clearfix">
-                                    <?php if (!has_post_thumbnail()) { ?>
-                                        <div class="mkd-post-info">
-                                            <?php
-                                            discussion_post_info(array(
-                                                'comments' => $display_comments,
-                                                'count' => $display_count,
-                                                'date' => $display_date,
-                                                'author' => $display_author,
-                                                'like' => $display_like,
-                                                'category' => $display_category
-                                            ));
-                                            ?>
-                                        </div>
-                                    <?php } ?>
-
-                                    <?php discussion_get_module_template_part('templates/single/parts/title', 'blog'); ?>
-                                    <br>
-                                    <div class="mkd-post-infoi" style="border-right">
-                                        <?php
-                                        discussion_post_info(array(
-                                            'date' => $display_date,
-                                        ))
-                                        ?>
-                                    </div>       
-                                    <a href="#">Social</a>
+                                <div class="mkd-post-text-inner clearfix">                          
+                                    <?php discussion_get_module_template_part('templates/single/parts/title', 'blog'); ?>                           
                                     <?php the_content(); ?>
                                 </div>
                             </div>
                         </div>
                         <?php do_action('discussion_before_blog_article_closed_tag'); ?>
                     </article>
+                    <div class="disclamier">
+                        <p><span>Disclaimer:</span> This content is for entertainment purposes only and it is not meant to be relied on as medical advice, diagnosis, or treatment. Consult your physician before starting any exercise or dietary program or taking any other action respecting your health. In case of a medical emergency, call 911. </p>
+                    </div>
                 </div>
                 <?php
                 if ($post_format === false) {
@@ -142,3 +147,5 @@
         </div>
     </div>
 </div>
+<!--added script for loading videos wistia url-->
+<script src="http://fast.wistia.net/assets/external/iframe-api-v1.js"></script>

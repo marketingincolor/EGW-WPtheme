@@ -48,18 +48,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                 $thumb_image_width = '';
                                 $thumb_image_height = '';
                                 $thumb_image_size = '150';
-                                $excerpt_length = '12';
-                                /**
-                                 * For hide some attributes for videos
-                                 */
-                                switch (get_post_type()) {
-                                    case 'videos':
-                                        $display_category = 'no';
-                                        $display_share = 'no';
-//                                        $display_comments = 'no';
-//                                        $display_date = 'no';
-                                        break;
-                                }
+                                $excerpt_length = '12';                              
                                 ?>        
                                 <?php
                                 /**

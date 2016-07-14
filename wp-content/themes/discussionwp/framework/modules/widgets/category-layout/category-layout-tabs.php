@@ -204,7 +204,7 @@ class DiscussionCategoryLayoutTabs extends DiscussionWidget {
 
 
             //check how menu category fields we have
-            $our_cat=array('activity','medical','financial','relationships','nutrition','mind-spirit');
+            $our_cat=main_category_name();
             $cat_id_ar=array();
             $cat_lnk=array();
             foreach($our_cat as $our_cat_each){              

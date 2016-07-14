@@ -594,7 +594,8 @@ function wp_allow_comment( $commentdata ) {
 
 	// Simple duplicate check
 	// expected_slashed ($comment_post_ID, $comment_author, $comment_author_email, $comment_content)
-	$dupe = $wpdb->prepare(
+        //Rajasingh has commented from here to
+	/*$dupe = $wpdb->prepare(
 		"SELECT comment_ID FROM $wpdb->comments WHERE comment_post_ID = %d AND comment_parent = %s AND comment_approved != 'trash' AND ( comment_author = %s ",
 		wp_unslash( $commentdata['comment_post_ID'] ),
 		wp_unslash( $commentdata['comment_parent'] ),
@@ -611,8 +612,9 @@ function wp_allow_comment( $commentdata ) {
 		wp_unslash( $commentdata['comment_content'] )
 	);
 
-	$dupe_id = $wpdb->get_var( $dupe );
-
+	$dupe_id = $wpdb->get_var( $dupe );*/
+        
+        //Rajasingh has commented to here. For remove the duplicate comment checking fuction.
 	/**
 	 * Filters the ID, if any, of the duplicate comment found when creating a new comment.
 	 *
@@ -623,9 +625,10 @@ function wp_allow_comment( $commentdata ) {
 	 * @param int   $dupe_id     ID of the comment identified as a duplicate.
 	 * @param array $commentdata Data for the comment being created.
 	 */
-	$dupe_id = apply_filters( 'duplicate_comment_id', $dupe_id, $commentdata );
+        //Rajasingh has commented From here to. For remove the duplicate comment checking fuction.
+	//$dupe_id = apply_filters( 'duplicate_comment_id', $dupe_id, $commentdata );
 
-	if ( $dupe_id ) {
+	/*if ( $dupe_id ) {*/
 		/**
 		 * Fires immediately after a duplicate comment is detected.
 		 *
@@ -633,12 +636,14 @@ function wp_allow_comment( $commentdata ) {
 		 *
 		 * @param array $commentdata Comment data.
 		 */
-		do_action( 'comment_duplicate_trigger', $commentdata );
+		
+	/*do_action( 'comment_duplicate_trigger', $commentdata );
 		if ( defined( 'DOING_AJAX' ) ) {
 			die( __('Duplicate comment detected; it looks as though you&#8217;ve already said that!') );
 		}
 		wp_die( __( 'Duplicate comment detected; it looks as though you&#8217;ve already said that!' ), 409 );
-	}
+	}*/
+        //Rajasingh has commented to here. For remove the duplicate comment checking fuction.
 
 	/**
 	 * Fires immediately before a comment is marked approved.

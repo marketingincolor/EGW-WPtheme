@@ -5,10 +5,21 @@
             <div class="mkd-bnl-outer">
                 <div class="mkd-bnl-inner">
                     <?php
-                    $id = get_the_ID();
+                    $post_id = get_the_ID();
+
+                    $tags = get_the_tags();
+
+		    $tag_ids = array();
+		    if ($tags) {
+			foreach ($tags as $tag) {
+				$tag_ids[] = $tag->term_id;
+			}
+		    }
+
                     $post_type = 'Videos';
-                    $related_posts = discussion_related_posts($id, $post_type);
-                    while ($related_posts->have_posts()) : $related_posts->the_post();
+                    $related_posts = custom_related_posts($post_id, $post_type, $tag_ids);
+ 
+                    while (have_posts()) : the_post();
                         ?>   
                         <div class="mkd-pt-seven-item mkd-post-item mkd-active-post-page">
                             <div class="mkd-pt-seven-item-inner clearfix">
