@@ -20,15 +20,15 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                         <?php
                         $i = 1;
                         $total_post = 0;
-                        $title_cls="";
+                        $title_cls = "";
                         if (have_posts()) {
-                            while (have_posts()) :the_post();           
-                                if($i%3==1):
-                                   /*for set out class article title based on fixed heights */
-                                   $title_cls=article_title_class($wp_query);                               
+                            while (have_posts()) :the_post();
+                                if ($i % 3 == 1):
+                                    /* for set out class article title based on fixed heights */
+                                    $title_cls = article_title_class($wp_query);
                                 endif;
-                               
-                                $id = get_the_ID();                                
+
+                                $id = get_the_ID();
                                 $background_image_style = discussion_custom_getImageBackground($id);
                                 $params['background_image_style'] = $background_image_style;
                                 $post_no_class = 'mkd-post-number-' . $post_no;
@@ -52,16 +52,16 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                 $thumb_image_width = '';
                                 $thumb_image_height = '';
                                 $thumb_image_size = '150';
-                                $excerpt_length = '12';                              
+                                $excerpt_length = '12';
                                 ?>        
                                 <?php
                                 /**
                                  * For implement two coloumn based post in one row
                                  */
                                 ?>
-                        
+
                                 <div class="mkd-pt-six-item mkd-post-item">
-                                     <?php if (has_post_thumbnail()) { ?>
+                                    <?php if (has_post_thumbnail()) { ?>
                                         <div class="mkd-pt-six-image-holder">
                                             <?php
                                             if ($display_category == 'yes') {
@@ -72,9 +72,25 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                                 }
                                                 ?>
                                                 <div  style="background: <?php echo $rl_category_color; ?>;" class="mkd-post-info-category">
-                                                <?php the_category(' / '); ?>
+                                                    <?php //the_category(' / '); ?>
+                                                    <?php
+                                                    $getPostcat = wp_get_post_categories($id);
+                                                    $getResultset = check_cat_subcat($getPostcat);
+                                                    count($getResultset);
+                                                    $i = 1;
+                                                    foreach ($getResultset as $getKeyrel) {
+                                                        echo '<a href="' . get_category_link($getKeyrel) . '">';
+                                                        echo get_cat_name($getKeyrel) . '</a>';
+                                                        if ($i > count($getResultset) - 1) {
+                                                            echo "";
+                                                        } else {
+                                                            echo "\x20/\x20";
+                                                        }
+                                                        $i++;
+                                                    }
+                                                    ?>
                                                 </div>
-                                                        <?php
+                                                <?php
                                             }
                                             ?>
                                             <a itemprop="url" class="mkd-pt-six-slide-link mkd-image-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self">
@@ -93,7 +109,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                                 ?>
                                             </a>
                                         </div>
-                                            <?php } ?>
+                                    <?php } ?>
                                     <div class="mkd-pt-six-content-holder">
                                         <div class="mkd-pt-six-title-holder <?php echo $title_cls; ?>">
                                             <<?php echo esc_html($title_tag) ?> class="mkd-pt-six-title">
@@ -105,13 +121,13 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                             'date' => $display_date,
                                             'date_format' => $date_format
                                         ));
-                                        if ($display_excerpt == 'yes') 
-                                        { ?>
+                                        if ($display_excerpt == 'yes') {
+                                            ?>
                                             <div class="mkd-pt-one-excerpt">
                                                 <?php discussion_excerpt($excerpt_length); ?>
                                             </div>
-                                        <?php
-                                        } 
+                                            <?php
+                                        }
                                         ?>
                                     </div>
                                     <?php if ($display_share == 'yes' || $display_comments == 'yes') { ?>
@@ -129,12 +145,12 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                             <div class="mkd-pt-info-section-background"></div>
                                         </div>
                                     <?php } ?> 
-                            </div>                      
-                                   
+                                </div>                      
 
 
-                            <?php
-                            $i++;
+
+                                <?php
+                                $i++;
                             endwhile;
                         } else {
                             discussion_get_module_template_part('templates/parts/no-posts', 'blog');
@@ -152,28 +168,28 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                 else: echo $post_per_section;
                 endif;
                 ?>">
-                <?php wp_reset_query();  // Restore global post data stomped by the_post().?>
+                       <?php wp_reset_query();  // Restore global post data stomped by the_post().?>
 
 
             </div>
-           <?php
-           /**
-            * For displaying ads based on total count of post
-            */
+            <?php
+            /**
+             * For displaying ads based on total count of post
+             */
             if ($total_post >= $post_per_section) {
-               $no_of_adds = floor($total_post / $post_per_section);
+                $no_of_adds = floor($total_post / $post_per_section);
                 for ($i = 1; $i <= $no_of_adds; $i++) {
-                ?>                    
+                    ?>                    
                     <div class="fsp-ads-homepage" id="adv_row_<?php echo $i; ?>" <?php if ($i != 1) { ?> style="display:none;clear:both" <?php } else { ?> style="clear:both" <?php } ?>>  
                         <?php
                         if (function_exists('drawAdsPlace'))
                             drawAdsPlace(array('id' => 1), true);
                         ?>
                     </div>                    
-                 <?php
+                    <?php
                 }
             }
-             ?>
+            ?>
         </div>
     </div>
 

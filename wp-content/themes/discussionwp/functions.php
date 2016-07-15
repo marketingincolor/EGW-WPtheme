@@ -1937,5 +1937,22 @@ function article_title_class($wp_query) {
     }
 }
 
+    /**
+     * Author - Rajasingh
+     * Date  - 15-07-2016
+     * Purpose - Check the post contains both category and subcategory.
+     */
+    function check_cat_subcat($getPostcat) {
+            $temp_cat = array_flip($getPostcat);
+            foreach ($temp_cat as $key => $val) {
+                    $top_parent = category_top_parent_id($key);
+                    if ($top_parent != $key) {
+                        if (isset($temp_cat[$top_parent]))
+                            unset($temp_cat[$top_parent]);
+                    }
+            }
+            $temp_catval = array_flip($temp_cat);
+            return $temp_catval;
+    }
 
 
