@@ -20,7 +20,7 @@
             $posts_array = get_posts($args);
 
             $i = 1;
-            $title_cls="";
+            $title_cls = "";
             if ($posts_array) {
                 $count = 0;
                 $title_tag = 'h4';
@@ -63,7 +63,7 @@
                         /* for set out class article title based on fixed heights */
                         $title_cls = article_title_class($wp_query);
                     endif;
-                  
+
                     /**
                      * For implement there coloumn based post in one row
                      */
@@ -80,10 +80,26 @@
                                         $rl_category_color = rl_color($the_category_id);
                                     }
                                     ?>
-                                        <div  style="background: <?php echo $rl_category_color; ?>;" class="mkd-post-info-category">
-                                        <?php the_category(' / '); ?>
-                                        </div>
+                                    <div  style="background: <?php echo $rl_category_color; ?>;" class="mkd-post-info-category">
+                                        <?php //the_category(' / '); ?>
                                         <?php
+                                        $getPostcat = wp_get_post_categories($id);
+                                        $getResultset = check_cat_subcat($getPostcat);
+                                        count($getResultset);
+                                        $i = 1;
+                                        foreach ($getResultset as $getKeyrel) {
+                                            echo '<a href="' . get_category_link($getKeyrel) . '">';
+                                            echo get_cat_name($getKeyrel) . '</a>';
+                                            if ($i > count($getResultset) - 1) {
+                                                echo "";
+                                            } else {
+                                                echo "\x20/\x20";
+                                            }
+                                            $i++;
+                                        }
+                                        ?>
+                                    </div>
+                                    <?php
                                 }
                                 ?>
                                 <a itemprop="url" class="mkd-pt-six-slide-link mkd-image-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self">
@@ -103,7 +119,7 @@
                                     ?>
                                 </a>
                             </div>
-                                <?php } ?>
+                        <?php } ?>
                         <div class="mkd-pt-six-content-holder">
                             <div class="mkd-pt-six-title-holder <?php echo $title_cls; ?>">
                                 <<?php echo esc_html($title_tag) ?> class="mkd-pt-six-title">
@@ -118,11 +134,11 @@
                             ?>
                             <?php if ($display_excerpt == 'yes') { ?>
                                 <div class="mkd-pt-one-excerpt">
-                                <?php discussion_excerpt($excerpt_length); ?>
+                                    <?php discussion_excerpt($excerpt_length); ?>
                                 </div>
                             <?php } ?>
                         </div>
-                            <?php if ($display_share == 'yes' || $display_comments == 'yes') { ?>
+                        <?php if ($display_share == 'yes' || $display_comments == 'yes') { ?>
                             <div class="mkd-pt-info-section clearfix">
                                 <div>
                                     <?php
@@ -136,17 +152,17 @@
                                 </div>
                                 <div class="mkd-pt-info-section-background"></div>
                             </div>
-                                <?php } ?>
+                        <?php } ?>
                     </div>                      
 
 
 
-        <?php
-        $i++;
+                    <?php
+                    $i++;
 
-    endforeach;
-    wp_reset_postdata();
-    ?>
+                endforeach;
+                wp_reset_postdata();
+                ?>
 
 
 
