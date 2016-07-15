@@ -1890,7 +1890,7 @@ function custom_set_comment_status($comment_id, $comment_status) {
 add_action('comment_post', 'notify_author_of_reply', 10, 2);
 
 function notify_author_of_reply($comment_id, $approved){
-  if($approved){
+  if($approved === 1){
     $comment = get_comment($comment_id);
     if($comment->comment_parent){
       $parent_comment = get_comment($comment->comment_parent);
