@@ -292,8 +292,8 @@ class DiscussionCategoryLayoutTabs extends DiscussionWidget {
                         $attr = array(
                         'class' => '',
                         'alt' => $category->name,
-                        'height' =>198,
-                        'width' => 302,
+//                        'height' =>198,
+//                        'width' => 302,
                         'title' => $category->name,
                         );
                         z_taxonomy_image($category->term_id, 'full', $attr); 

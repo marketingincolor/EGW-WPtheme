@@ -1910,4 +1910,32 @@ function adjust_flagging_link( $link ) {
 }
 
 
+/**
+ * Author - Akilan
+ * Date - 15-07-2016
+ * Purpose - for set out class article title based on fixed heights
+ */
+function article_title_class($wp_query) {
+    $next_post = $wp_query->posts[$wp_query->current_post + 1];
+    $next_next_post = $wp_query->posts[$wp_query->current_post + 2];
+    $data=array(get_the_title(),$next_post->post_title,$next_next_post->post_title);    
+    $lengths = array_map('strlen', $data);
+    $max_length=max($lengths);
+    switch($max_length){
+        case $max_length>75:
+            return 'title_length_four';
+            break;
+        case $max_length>50 && $max_length<=75:
+            return 'title_length_three';
+            break;
+        case $max_length<=50 && $max_length>25:
+            return 'title_length_two';
+            break;
+        case $max_length<=25:
+            return 'title_length_one';
+            break;
+    }
+}
+
+
 
