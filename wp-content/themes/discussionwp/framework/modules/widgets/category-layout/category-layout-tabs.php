@@ -273,7 +273,7 @@ class DiscussionCategoryLayoutTabs extends DiscussionWidget {
                         foreach($sub_categories as $category) { ?>
 
                           <?php   
-                        if($i==1 || $i%4==1): ?>
+                        if($i==1 || $i%3==1): ?>
                            <div class="mkd-bnl-holder mkd-pl-five-holder  mkd-post-columns-4">
                             <div class="mkd-bnl-outer">
                              <div class="mkd-bnl-inner">
@@ -324,7 +324,7 @@ class DiscussionCategoryLayoutTabs extends DiscussionWidget {
 
                        
                         <?php
-                        if($i%4==0 || $i==count($sub_categories)): ?>
+                        if($i%3==0 || $i==count($sub_categories)): ?>
                             </div>
                             </div>
                             </div>

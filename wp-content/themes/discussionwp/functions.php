@@ -1060,24 +1060,26 @@ if (!function_exists('get_videoid_from_url')) {
 
     function get_videoid_from_url($url) {
         $arg = array();
+        $videoId="";
         if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match)) {
             $url_string = parse_url($url, PHP_URL_QUERY);
             parse_str($url_string, $args);
             $arg['video_url'] = 'http://www.youtube.com/embed/';
             $arg['video_src'] = 'youtube';
-            return isset($args['v']) ? $arg['video_url'] . $args['v'] : false;
+            $url= isset($args['v']) ? $arg['video_url'] . $args['v'] : false;
         } else if (preg_match("/(https?:\/\/)?(www\.)?(player\.)?vimeo\.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/", $url, $output_array)) {
             $urlParts = explode("/", parse_url($url, PHP_URL_PATH));
             $arg['video_url'] = 'http://player.vimeo.com/video/';
-            return $arg['video_url'] . $arg['video_id'] = (int) $urlParts[count($urlParts) - 1];
+            $url= $arg['video_url'] . $arg['video_id'] = (int) $urlParts[count($urlParts) - 1];
         } elseif (preg_match('%https*://.*(?:wistia\.com|wi\.st)/(?:medias|embed)/(.*?)\?%',$url, $matched)) {           
             $videoId = $matched[1];            
             $arg['video_url']='http://fast.wistia.net/embed/iframe/';
             $arg['video_id']=$videoId.'?videoFoam=true';
-            return $arg['video_url'] . $arg['video_id'];
+            $url= $arg['video_url'] . $arg['video_id'];
         }
+         return array($videoId,$url);
     }
-
+   
 }
 
 

@@ -15,38 +15,7 @@
         <?php ?>
         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
             <div class="mkd-post-content">
-
-                <div class="mkd-post-image-area">
-
-                    <?php discussion_post_info_category(array('category' => 'no')) ?>
-                    <?php
-                    $video_url = get_field('video_url');
-
-                    $video_file = get_field('video_file');
-
-                    if ($video_url != "") {
-                        $val = get_videoid_from_url($video_url);
-                        if (strpos($val, 'youtube') > 0) {
-                            ?>
-
-                            <iframe width="600" height="338" frameborder="0" src="<?php echo $val; ?>" allowfullscreen></iframe>
-
-                            <?php
-                        } else {
-                            ?>
-                            <iframe width="600" height="338" class="wistia_embed" src="<?php echo $val; ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-
-                            <?php
-                        }
-                    }
-                    if ($video_file != "") {
-                        ?>                                                 
-                        <video width="100%" height="100%" controls >
-                            <source src="<?php echo $video_file; ?>" type="video/mp4">
-                        </video>                                                    
-                    <?php }
-                    ?>
-                </div>
+                  <?php get_template_part('block/template-single-video-block'); ?>
             </div>
             <?php do_action('discussion_before_blog_article_closed_tag'); ?>
         </article>
@@ -147,4 +116,4 @@
         </div>
     </div>
 </div>
-<script src="http://fast.wistia.net/assets/external/iframe-api-v1.js"></script>
+
