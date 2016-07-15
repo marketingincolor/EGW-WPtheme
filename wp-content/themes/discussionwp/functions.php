@@ -1710,7 +1710,7 @@ function custom_comment($comment, $args, $depth) {
 		<div class="<?php echo esc_attr($comment_class); ?>">
 			<?php if(!$is_pingback_comment) { ?>
 				<div class="mkd-comment-image"> 
-                                <?php $user = get_current_user_id();                                
+                                <?php $user = $comment->user_id;                                
                                       $custom_avatar_meta_data = get_user_meta($user,'custom_avatar');                                                  
                                       if(isset($custom_avatar_meta_data) && !empty($custom_avatar_meta_data[0])):
                                       $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0]);                              
