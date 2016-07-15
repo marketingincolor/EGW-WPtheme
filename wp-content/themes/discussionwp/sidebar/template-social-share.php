@@ -1,6 +1,6 @@
 <div id="apsc_widget-4" class="widget widget_apsc_widget">
     <div class="mkd-section-title-holder clearfix">
-        <span class="mkd-st-title">Share</span>
+        <span class="mkd-st-title">Share This Page</span>
     </div>
    <div class="sidebar-social-icons">
         <div class="social-icon-wd-container">                        
