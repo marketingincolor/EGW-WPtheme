@@ -28,7 +28,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                 /**
                                  * For hide date/category for videos section
                                  */
-                                $title_tag = 'h3';
+                                $title_tag = 'h4';
                                 $title_length = '';
                                 $display_date = 'yes';
                                 $date_format = 'd. F Y';
