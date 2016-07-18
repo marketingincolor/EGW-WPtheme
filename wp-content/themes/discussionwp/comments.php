@@ -77,7 +77,9 @@ if(isset($blog_id) && $blog_id != $user_blog_id): ?>
                     <span class="mkd-section-title-holder clearfix ">
                         <span class="mkd-st-title">Leave A Comment        </span>
                     </span> 
-                    <small><a style="display:none;" href="/egw/village/2016/06/15/pf-fashion/#respond" id="cancel-comment-reply-link" rel="nofollow">Cancel Reply</a></small></h3><p class="must-log-in">You must be <a href="http://192.168.1.24/egw/village/login">logged in</a> to post a comment.<br/>Only members of this branch can comment.</p>		</div><!-- #respond -->                    
+                    <small><a style="display:none;" href="#" id="cancel-comment-reply-link" rel="nofollow">Cancel Reply</a></small>
+                </h3>
+                <p class="must-log-in">You must be <a href="<?php echo home_url('/login'); ?>">logged in</a> to post a comment.<br/>Only members of this branch can comment.</p>		</div><!-- #respond -->                    
 		</div>
 <?php else: ?>
  <div class="mkd-comment-form">
