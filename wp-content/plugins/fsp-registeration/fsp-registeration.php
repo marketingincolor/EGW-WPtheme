@@ -222,26 +222,16 @@ function fspr_login_form_fields() {
 // logs a member in after submitting a form
 function fspr_login_member() {
 
-    if (isset($_POST['fspr_user_login']) && isset($_POST['fspr_login_submit']) && wp_verify_nonce($_POST['fspr_login_nonce'], 'fspr-login-nonce')) {
-
+    if (isset($_POST['fspr_user_login']) && isset($_POST['fspr_login_submit']) && wp_verify_nonce($_POST['fspr_login_nonce'], 'fspr-login-nonce')) {        
         // this returns the user ID and other info from the user name
         $user = get_userdatabylogin($_POST['fspr_user_login']);
 
-        if (!$user) {
-            // if the user name doesn't exist
-            fspr_errors()->add('empty_username', __('Invalid Username or Password'));
+        if (!$user) {            
+            fspr_errors()->add('wrong_username', __('Invalid Username or Password'));
+        }else if (!wp_check_password($_POST['fspr_user_pass'], $user->user_pass, $user->ID)) {            
+            fspr_errors()->add('worng_password', __('Invalid Username or Password'));
         }
-
-        if (!isset($_POST['fspr_user_pass']) || $_POST['fspr_user_pass'] == '') {
-            // if no password was entered
-            fspr_errors()->add('empty_password', __('Please enter a password'));
-        }
-
-        // check the user's login with their password
-        if (!wp_check_password($_POST['fspr_user_pass'], $user->user_pass, $user->ID)) {
-            // if the password is incorrect for the specified user
-            fspr_errors()->add('empty_password', __('Incorrect password'));
-        }
+                   
         // retrieve all error messages
         $errors = fspr_errors()->get_error_messages();
 
@@ -252,19 +242,30 @@ function fspr_login_member() {
             wp_set_current_user($user->ID, $_POST['fspr_user_login']);
             do_action('wp_login', $_POST['fspr_user_login']);
             //wp_redirect(home_url('/user-profile'));
-            if ((current_user_can('administrator') && is_admin()) || (is_super_admin())) {
+            $meta_data=get_user_meta(get_current_user_id(),'wp_capabilities',true);                        
+            if (is_super_admin()) {                                
                 wp_redirect(home_url('/wp-admin'));
-            } else {
-                $location = $_POST['redirect']; // referral URL fetch from post value
-                $findblog_page = url_to_postid($location); // Get Post ID from referral URL
-                echo $getwhichIs = get_post_type($findblog_page); // Find Post Type using Post ID
-                if ($getwhichIs == "videos") {
-                    wp_redirect($location);
-                } elseif ($getwhichIs == "post") {
-                    wp_redirect($location);
-                } else {
-                    wp_redirect(home_url('/user-profile'));
-                }
+            } else {                
+                if(isset($meta_data['subscriber'])){ 
+                    $location = $_POST['redirect']; // referral URL fetch from post value
+                    $findblog_page = url_to_postid($location); // Get Post ID from referral URL
+                    echo $getwhichIs = get_post_type($findblog_page); // Find Post Type using Post ID
+                    if ($getwhichIs == "videos") {
+                        wp_redirect($location);
+                    } elseif ($getwhichIs == "post") {
+                        wp_redirect($location);
+                    } else {
+                        wp_redirect(home_url('/user-profile'));
+                    } 
+                 }else {
+                     $site_url = other_user_profile_redirection();
+                     if($site_url){
+                        wp_redirect($site_url.'/wp-admin');
+                    }else {
+                        wp_redirect(home_url('/wp-admin'));
+                    } 
+                 } 
+                
             }
             exit;
         }
@@ -320,26 +321,77 @@ register_activation_hook(__FILE__, 'add_roles_on_plugin_activation');
 /* * * Login / Registeration Redirect 
  * Author : Ramkumar S
  * Create Date: May 25 2016
- * Updated Date: May 26 2016
+ * Updated Date: July 18 2016
+ * Updated by  : Muthupandi
  */
 
 function fsp_template_redirect() {
-    if ((is_page('login') || is_page('register')) && is_user_logged_in()) {
-        if ((current_user_can('administrator') && is_admin()) || (is_super_admin())) {
-            wp_redirect(home_url('/wp-admin'));
-        } else {
-            wp_redirect(home_url('/user-profile'));
+    
+    if(is_user_logged_in()){               
+        $meta_data=get_user_meta(get_current_user_id(),'wp_capabilities',true);
+        if ((is_page('login') || is_page('register'))) {  
+            
+            if(wp_get_referer()){
+                $location = wp_get_referer();
+                $findblog_page = url_to_postid($location); 
+                $getwhichIs = get_post_type($findblog_page); 
+                if ($getwhichIs == "videos" || $getwhichIs == "post") {
+                        wp_logout();                    
+                } 
+            }                                                   
+            if (is_super_admin()) {                                
+                wp_redirect(home_url('/wp-admin'));
+            } else {
+                 $webtype="/wp-admin";
+                 if(isset($meta_data['subscriber'])){ 
+                     $webtype="/user-profile";
+                 }                     
+                $site_url = other_user_profile_redirection();
+                if($site_url){
+                    wp_redirect($site_url.$webtype);
+                }else {
+                    wp_redirect(home_url($webtype));
+                }                
+            }                                      
+        }else if(is_page('user-profile')){ 
+            
+            if (is_super_admin()) {                                
+                wp_redirect(home_url('/wp-admin'));
+            }else {
+                $webtype="/wp-admin";
+                if(isset($meta_data['subscriber'])){ 
+                    $webtype="/user-profile";
+                }            
+                $site_url = other_user_profile_redirection();
+                if($site_url){
+                    wp_redirect($site_url.$webtype);
+                }
+            }
         }
-        exit();
+    }else {
+        if (is_page('user-profile')) {
+            wp_redirect(home_url('/login'));
+            exit();
+        }
     }
+                
+}
 
-    if (is_page('user-profile') && !is_user_logged_in()) {
-        wp_redirect(home_url('/login'));
-        exit();
+
+function other_user_profile_redirection(){
+    $userid=get_current_user_id();
+    $user_blog_id=get_user_meta($userid,'primary_blog',true);            
+    $blog_id = get_current_blog_id();            
+    if($blog_id != $user_blog_id){  
+        $blog = get_blog_details($user_blog_id);
+        return $blog->siteurl;        
     }
+    return 0;
 }
 
 add_action('template_redirect', 'fsp_template_redirect');
+
+add_action('wp_logout',create_function('','wp_redirect(home_url("/login"));exit();'));
 
 
 

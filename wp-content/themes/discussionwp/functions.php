@@ -1736,7 +1736,14 @@ function custom_comment($comment, $args, $depth) {
 						<?php   if ( !is_user_logged_in() ) : ?>
                                                         <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>
                                                 <?php   else :
-                                                            comment_reply_link( array_merge( $args, array('reply_text' => esc_html__('Reply', 'discussionwp'), 'depth' => $depth, 'max_depth' => $args['max_depth']) ) );
+                                                            $userid=get_current_user_id();
+                                                            $user_blog_id=get_user_meta($userid,'primary_blog',true);
+                                                            $blog_id = get_current_blog_id();
+                                                            if($blog_id != $user_blog_id): ?>
+                                                                <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>                                                                   
+                                                            <?php  else :
+                                                                comment_reply_link( array_merge( $args, array('reply_text' => esc_html__('Reply', 'discussionwp'), 'depth' => $depth, 'max_depth' => $args['max_depth']) ) );
+                                                            endif;
                                                         endif;
 						?>
 							<span class="mkd-comment-mark"><?php esc_html_e('/', 'discussionwp'); ?></span>

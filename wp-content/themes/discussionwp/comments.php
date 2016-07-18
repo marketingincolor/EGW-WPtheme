@@ -63,6 +63,24 @@ $args = array(
 		<p><?php paginate_comments_links(); ?></p>
 	</div>
 <?php } ?>
+
+<?php 
+if ( is_user_logged_in() ) :
+    $userid=get_current_user_id();
+    $user_blog_id=get_user_meta($userid,'primary_blog',true);
+    $blog_id = get_current_blog_id();    
+endif;
+if(isset($blog_id) && $blog_id != $user_blog_id): ?>
+        <div class="mkd-comment-form">
+            <div class="comment-respond" id="respond">
+                <h3 class="comment-reply-title" id="reply-title">
+                    <span class="mkd-section-title-holder clearfix ">
+                        <span class="mkd-st-title">Leave A Comment        </span>
+                    </span> 
+                    <small><a style="display:none;" href="/egw/village/2016/06/15/pf-fashion/#respond" id="cancel-comment-reply-link" rel="nofollow">Cancel Reply</a></small></h3><p class="must-log-in">You must be <a href="http://192.168.1.24/egw/village/login">logged in</a> to post a comment.<br/>Only members of this branch can comment.</p>		</div><!-- #respond -->                    
+		</div>
+<?php else: ?>
  <div class="mkd-comment-form">
-	<?php comment_form($args); ?>
+     <?php comment_form($args); ?>
 </div>
+<?php endif; ?>
