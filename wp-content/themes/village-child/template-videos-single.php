@@ -8,7 +8,6 @@
     $display_share = 'no';
     $display_count = 'yes';
     $display_comments = 'yes';
-    $save_stories = 'yes';
     ?>
    
     <div class="mkd-blog-holder mkd-blog-single mkd-fsp-blog-holder">
@@ -26,10 +25,14 @@
                             discussion_post_info(array(
                                 'date' => $display_date,
                                 'count' => $display_count,
-                                'comments' => $display_comments,
-                                'save_stories' => $save_stories,
+                                'comments' => $display_comments
                             ))
                             ?>
+                        <div class="mkd-post-fsp-savestories">
+                        <?php 
+                           customized_saved_stories();    
+                        ?>
+                        </div>
                         </div>
                 </article>
             </div>
