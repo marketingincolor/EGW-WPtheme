@@ -1990,3 +1990,36 @@ function get_title_class($data){
     }
 
 
+   /**
+   * Author - Vinoth Raja
+   * Date  - 16-07-2016
+   * Purpose - For customizing wp_favorite_posts plugin for remove star from remove favorites section  
+   * 
+   */
+   function customized_saved_stories()
+   {
+         global $post;
+         $post_id = &$post->ID;
+         extract($args);
+         $str = "";
+         if ($show_span)
+         $str = "<span class='wpfp-span'>";
+         $str .= wpfp_before_link_img();
+         $str .= wpfp_loading_img();
+         if ($action == "remove"):
+         $str .= "<a class='wpfp-link' href='?wpfpaction=remove&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('remove_favorite') . "' rel='nofollow'>" . wpfp_get_option('remove_favorite') . "</a>";
+         elseif ($action == "add"):
+         $str .= "<i class='fa fa-star-o' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
+         elseif (wpfp_check_favorited($post_id)):
+         $str .= "<a class='wpfp-link' href='?wpfpaction=remove&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('remove_favorite') . "' rel='nofollow'>" . wpfp_get_option('remove_favorite') . "</a>";
+         else:
+         $str .= "<i class='fa fa-star-o' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
+         endif;
+         if ($show_span)
+         $str .= "</span>";
+         if ($return) {
+         return $str;
+         } else {
+         echo $str;
+         }
+  }

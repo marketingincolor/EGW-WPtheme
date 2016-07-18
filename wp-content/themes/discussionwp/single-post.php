@@ -8,7 +8,6 @@
     $date_format = 'd. F Y';
     $display_category = 'yes';
     $display_category_singlepost = 'yes';
-    $save_stories = 'yes';
     $display_comments = 'yes';
     $display_share = 'yes';
     $display_count = 'yes';
@@ -38,10 +37,14 @@
                         <?php
                         discussion_post_info(array(
                             'date' => $display_date,
-                            'category_singlepost' => $display_category_singlepost,
-                            'save_stories' => $save_stories,
+                            'category_singlepost' => $display_category_singlepost
                         ))
                         ?>
+                        <div class="mkd-post-fsp-savestories">
+                        <?php 
+                           customized_saved_stories();    
+                        ?>
+                        </div>
                     </div>
                 </article>
             </div>
