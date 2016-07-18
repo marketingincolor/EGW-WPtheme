@@ -36,13 +36,17 @@
                 $thumb_image_height = '';
                 $thumb_image_size = '150';
                 $excerpt_length = '12';
-
+                $blog_title_ar=array();
                 /**
                  * For counting no of posts exist
                  */
+                $k=1;
                 foreach ($posts_array as $single_post) {
                     $count++;
+                    $blog_title_ar[$k]=$single_post->post_title;
+                    $k++;
                 }
+                
                 /**
                  * Generate blog detail with 3*3 design
                  */
@@ -61,7 +65,7 @@
 
                     if ($i % 3 == 1):
                         /* for set out class article title based on fixed heights */
-                        $title_cls = article_title_class($wp_query);
+                        $title_cls=next_post_scrollarticle($blog_title_ar,$i);                        
                     endif;
 
                     /**
@@ -86,16 +90,16 @@
                                         $getPostcat = wp_get_post_categories($id);
                                         $getResultset = check_cat_subcat($getPostcat);
                                         count($getResultset);
-                                        $i = 1;
+                                        $j = 1;
                                         foreach ($getResultset as $getKeyrel) {
                                             echo '<a href="' . get_category_link($getKeyrel) . '">';
                                             echo get_cat_name($getKeyrel) . '</a>';
-                                            if ($i > count($getResultset) - 1) {
+                                            if ($j > count($getResultset) - 1) {
                                                 echo "";
                                             } else {
                                                 echo "\x20/\x20";
                                             }
-                                            $i++;
+                                            $j++;
                                         }
                                         ?>
                                     </div>

@@ -1924,23 +1924,48 @@ function adjust_flagging_link( $link ) {
  * Date - 15-07-2016
  * Purpose - for set out class article title based on fixed heights
  */
-function article_title_class($wp_query) {
+function article_title_class() {
+    global $wp_query;
     $next_post = $wp_query->posts[$wp_query->current_post + 1];
     $next_next_post = $wp_query->posts[$wp_query->current_post + 2];
-    $data=array(get_the_title(),$next_post->post_title,$next_next_post->post_title);    
+    $data = array(get_the_title(), $next_post->post_title, $next_next_post->post_title);
+    return get_title_class($data);
+    
+}
+
+/**
+ * Author - Akilan
+ * Date - 18-07-2016
+ * Purpose - Fetch next and next most article for scroll based article load
+ */
+function next_post_scrollarticle($blog_title_ar, $i) {
+    $current =isset($blog_title_ar[$i]) ? $blog_title_ar[$i] : "";
+    $next_title = isset($blog_title_ar[$i + 1]) ? $blog_title_ar[$i + 1] : "";
+    $next_next_title = isset($blog_title_ar[$i + 2]) ? $blog_title_ar[$i + 2] : "";
+    $data = array($current, $next_title, $next_next_title);   
+    return get_title_class($data);
+}
+
+/**
+ * Author - Akilan
+ * Date - 18-07-2016
+ * Purpose - For setting class based on title length
+ */
+
+function get_title_class($data){
     $lengths = array_map('strlen', $data);
-    $max_length=max($lengths);
-    switch($max_length){
-        case $max_length>75:
+    $max_length = max($lengths);
+    switch ($max_length) {
+        case $max_length > 75:
             return 'title_length_four';
             break;
-        case $max_length>50 && $max_length<=75:
+        case $max_length > 50 && $max_length <= 75:
             return 'title_length_three';
             break;
-        case $max_length<=50 && $max_length>25:
+        case $max_length <= 50 && $max_length > 25:
             return 'title_length_two';
             break;
-        case $max_length<=25:
+        case $max_length <= 25:
             return 'title_length_one';
             break;
     }

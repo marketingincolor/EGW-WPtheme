@@ -77,16 +77,16 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                                     $getPostcat = wp_get_post_categories($id);
                                                     $getResultset = check_cat_subcat($getPostcat);
                                                     count($getResultset);
-                                                    $i = 1;
+                                                    $j = 1;
                                                     foreach ($getResultset as $getKeyrel) {
                                                         echo '<a href="' . get_category_link($getKeyrel) . '">';
                                                         echo get_cat_name($getKeyrel) . '</a>';
-                                                        if ($i > count($getResultset) - 1) {
+                                                        if ($j > count($getResultset) - 1) {
                                                             echo "";
                                                         } else {
                                                             echo "\x20/\x20";
                                                         }
-                                                        $i++;
+                                                        $j++;
                                                     }
                                                     ?>
                                                 </div>
