@@ -1230,7 +1230,7 @@ table.ai1ec-month-view {
     margin-top: 10px;
 }
 
-/*Title length
+/*Title length */
 .title_length_one h4{
     min-height: 26px;
 }
@@ -1243,4 +1243,4 @@ table.ai1ec-month-view {
 .title_length_four h4{
     min-height: 103px;
 }
-Title length ends here*/
+/*Title length ends here*/
