@@ -23,7 +23,7 @@ $sidebar = discussion_sidebar_layout(); ?>
 .page-template-template-page-white-bgnd .mkd-title .mkd-title-holder { height:auto; }
 
 /*Register Page Styles*/
-h3 { font-family: 'Roboto', sans-serif; font-weight:bold; color:#6c6b6b; font-size:1.733em; padding-top:1em;}
+h3 { font-family: 'Roboto', sans-serif; font-weight:bold; color:#6c6b6b; font-size:1.733em; padding-top:1rem;}
 p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font-size: 1em; }
 .join-content ul li{ list-style-type: disc !important; }
 .join-content { padding: 0% 21% 0% 7%; }
@@ -32,8 +32,8 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
 	color: #f79c49; 
 	font-size:3.200em; 
 	font-family: 'Roboto', sans-serif; 
-	font-weight:bold;
-	padding: 15% 10% 0%; 
+	font-weight:bold; 
+	padding-top:1rem;
 }
 .tooltip{ display: inline; position: relative; }
 .tooltip:hover:after{
