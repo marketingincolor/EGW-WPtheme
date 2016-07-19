@@ -2023,3 +2023,13 @@ function get_title_class($data){
          echo $str;
          }
   }
+  
+  
+   /**
+   * Author - Vinoth Raja
+   * Date  - 19-07-2016
+   * Purpose - For Disabling WordPress comment flood prevention  
+   * 
+   */
+  
+  add_filter('comment_flood_filter', '__return_false');
