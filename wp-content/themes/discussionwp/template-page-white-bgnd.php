@@ -11,7 +11,12 @@ $sidebar = discussion_sidebar_layout(); ?>
 <style>
 /* Start Custom layouts from MIC */
 .page-template-template-page-white-bgnd { background-color: #ffffff; }
+.page-template-template-page-white-bgnd .mkd-title-breadcrumb-holder { display:none !important; }
 .page-template-template-page-white-bgnd .mkd-content { background-color: #ffffff; }
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .page-feature-image img { 
+	border-top-right-radius: 60px; 
+	border-bottom-left-radius: 60px;  
+}
 .page-template-template-page-white-bgnd .mkd-title .mkd-title-holder { height:auto; }
 
 /*Register Page Styles*/
@@ -46,7 +51,7 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
 					
 					<?php 
 
-						if (is_page('sweepstakes-terms-conditions') || is_page('register')) {
+						if (is_page('sweepstakes-terms-conditions') || is_page('register') || is_page('shipshape')) {
 							
 						}
 						else {
