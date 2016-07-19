@@ -32,7 +32,20 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
 	font-weight:bold;
 	padding: 15% 10% 0%; 
 }
-
+.tooltip{ display: inline; position: relative; }
+.tooltip:hover:after{
+    background: #333;
+    background: rgba(0,0,0,.8);
+    border-radius: 5px;
+    bottom: 26px;
+    color: #fff;
+    content: attr(title);
+    left: 20%;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    width: 220px;
+}
 /* End Custom layouts from MIC */
 </style>
 	<?php discussion_get_title(); ?>
