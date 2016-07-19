@@ -30,9 +30,9 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
 	font-size:3.200em; 
 	font-family: 'Roboto', sans-serif; 
 	font-weight:bold;
+	padding: 15% 10% 0%; 
 }
 
-.fsPreviousButton, .fsSubmitButton, .fsNextButton { background-color: #f79c49 !important; }
 /* End Custom layouts from MIC */
 </style>
 	<?php discussion_get_title(); ?>
