@@ -6,6 +6,8 @@
  * Template Name: White Background
  *
 */ 
+$centered = is_page('register-success') ? 'text-align:center;' : '' ;
+$listed = (is_page('sweepstakes-terms-conditions') || is_page('register') || is_page('shipshape')) ? 'true' : null;
 $sidebar = discussion_sidebar_layout(); ?>
 <?php get_header(); ?>
 <style>
@@ -13,6 +15,7 @@ $sidebar = discussion_sidebar_layout(); ?>
 .page-template-template-page-white-bgnd { background-color: #ffffff; }
 .page-template-template-page-white-bgnd .mkd-title-breadcrumb-holder { display:none !important; }
 .page-template-template-page-white-bgnd .mkd-content { background-color: #ffffff; }
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .mkd-container-inner {<?php echo $centered; ?> }
 .page-template-template-page-white-bgnd .mkd-content .mkd-container .page-feature-image img { 
 	border-top-right-radius: 60px; 
 	border-bottom-left-radius: 60px;  
@@ -59,7 +62,7 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
 						}
 
 						the_content();
-						do_action('discussion_page_after_content');
+						//do_action('discussion_page_after_content');
 
 						?>
 
