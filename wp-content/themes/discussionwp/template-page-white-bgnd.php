@@ -59,6 +59,8 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
     position: absolute;
     z-index: 99;
 }
+
+.disclosure-text { font-size: .7em; }
 /* End Custom layouts from MIC */
 </style>
 	<?php discussion_get_title(); ?>
