@@ -7,14 +7,14 @@
  *
 */ 
 $centered = is_page('welcome') ? 'text-align:center;' : '' ;
-$listed = (is_page('sweepstakes-terms-conditions') || is_page('register') || is_page('shipshape')) ? 'true' : null;
+$listed = (is_page('welcome-sweeps')) ? 'true' : null;
 $sidebar = discussion_sidebar_layout(); ?>
 <?php get_header(); ?>
 <style>
 /* Start Custom layouts from MIC */
 .page-template-template-page-white-bgnd { background-color: #ffffff; }
 .page-template-template-page-white-bgnd .mkd-title-breadcrumb-holder { display:none !important; }
-.page-template-template-page-white-bgnd .mkd-content { background-color: #ffffff; }
+.page-template-template-page-white-bgnd .mkd-content { background-color: #ffffff; padding-top:1.3em;}
 .page-template-template-page-white-bgnd .mkd-content .mkd-container .mkd-container-inner {<?php echo $centered; ?> }
 .page-template-template-page-white-bgnd .mkd-content .mkd-container .page-feature-image img { 
 	border-top-right-radius: 60px; 
@@ -49,6 +49,8 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
     z-index: 98;
     width: 220px;
 }
+
+.disclosure-text { font-size: .7em; }
 /* End Custom layouts from MIC */
 </style>
 	<?php discussion_get_title(); ?>
@@ -67,7 +69,7 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
 					
 					<?php 
 
-						if (is_page('sweepstakes-terms-conditions') || is_page('register') || is_page('shipshape')) {
+						if ($listed) {
 							
 						}
 						else {
