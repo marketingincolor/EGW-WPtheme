@@ -28,10 +28,19 @@ $sidebar = discussion_sidebar_layout(); ?>
 							<?php the_post_thumbnail('full'); ?>
 						</div>
 					<?php endif; ?>
+					
+					<?php 
 
-					<?php the_title( '<h2 class="page-title">', '</h2>' ); ?>
-					<?php the_content(); ?>
-					<?php do_action('discussion_page_after_content'); ?>
+						if (!is_page( 'sweepstakes-terms-conditions' )) {
+						# code...
+						the_title( '<h2 class="page-title">', '</h2>' ); 
+						the_content();
+						do_action('discussion_page_after_content');
+					}
+						else {
+							the_content();
+							do_action('discussion_page_after_content');
+						} ?>
 
 				<?php elseif($sidebar == 'sidebar-33-right' || $sidebar == 'sidebar-25-right'): ?>
 					<div <?php echo discussion_sidebar_columns_class(); ?>>
