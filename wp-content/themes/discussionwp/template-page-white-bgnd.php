@@ -13,6 +13,21 @@ $sidebar = discussion_sidebar_layout(); ?>
 .page-template-template-page-white-bgnd { background-color: #ffffff; }
 .page-template-template-page-white-bgnd .mkd-content { background-color: #ffffff; }
 .page-template-template-page-white-bgnd .mkd-title .mkd-title-holder { height:auto; }
+
+/*Register Page Styles*/
+h3 { font-family: 'Roboto', sans-serif; font-weight:bold; color:#6c6b6b; font-size:1.733em; padding-top:1em;}
+p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font-size: 1em; }
+.join-content ul li{ list-style-type: disc !important; }
+.join-content { padding: 0% 21% 0% 7%; }
+.sign-up-text { 
+	text-align: center; 
+	color: #f79c49; 
+	font-size:3.200em; 
+	font-family: 'Roboto', sans-serif; 
+	font-weight:bold;
+}
+
+.fsPreviousButton, .fsSubmitButton, .fsNextButton { background-color: #f79c49 !important; }
 /* End Custom layouts from MIC */
 </style>
 	<?php discussion_get_title(); ?>
@@ -31,16 +46,18 @@ $sidebar = discussion_sidebar_layout(); ?>
 					
 					<?php 
 
-						if (!is_page( 'sweepstakes-terms-conditions' )) {
-						# code...
-						the_title( '<h2 class="page-title">', '</h2>' ); 
+						if (is_page('sweepstakes-terms-conditions') || is_page('register')) {
+							
+						}
+						else {
+							the_title( '<h2 class="page-title">', '</h2>' ); 
+						}
+
 						the_content();
 						do_action('discussion_page_after_content');
-					}
-						else {
-							the_content();
-							do_action('discussion_page_after_content');
-						} ?>
+
+						?>
+
 
 				<?php elseif($sidebar == 'sidebar-33-right' || $sidebar == 'sidebar-25-right'): ?>
 					<div <?php echo discussion_sidebar_columns_class(); ?>>
