@@ -35,6 +35,15 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
 	font-weight:bold; 
 	padding-top:1rem;
 }
+.enter-to-win-text { 
+	text-align: left; 
+	color: #f79c49; 
+	font-size:3.200em; 
+	font-family: 'Roboto', sans-serif; 
+	font-weight:bold; 
+	padding-top:1rem;
+ }
+
 .tooltip{ display: inline; position: relative; }
 .tooltip:hover:after{
     background: #333;
@@ -51,8 +60,12 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
 }
 
 .giveaway-text ul li { list-style-type: disc !important; }
-
 .disclosure-text { font-size: .7em; }
+
+/*SharpSpring Form Styles*/
+input:focus, textarea:focus { width: 75% !important; }
+
+
 /* End Custom layouts from MIC */
 </style>
 	<?php discussion_get_title(); ?>
