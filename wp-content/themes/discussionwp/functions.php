@@ -2033,3 +2033,19 @@ function get_title_class($data){
    */
   
   add_filter('comment_flood_filter', '__return_false');
+  
+  
+  /**
+* Created By   - Muthupandi
+* Created Date - 20-07-2016
+* Updated By   - Muthupandi 
+* Updated Date - 20-07-2016
+* Purpose      - For implementing append saved articles while click 'load more' button
+ */
+function custom_scroll_saved_articles_load(){
+    get_template_part('block/saved-articles');
+    exit;
+}
+
+add_action('wp_ajax_custom_scroll_saved_articles_load', 'custom_scroll_saved_articles_load');
+add_action('wp_ajax_nopriv_custom_scroll_saved_articles_load', 'custom_scroll_saved_articles_load');
