@@ -1257,4 +1257,7 @@ table.ai1ec-month-view {
 .fsp-recommended-stories-cont #comments {
     margin-top: 0px;
 }
+.mkd-column-inner #comments {
+    margin-top: 0px;
+}
 /*Monitor comment style ends here*/

@@ -146,9 +146,7 @@
                         <?php echo do_shortcode('[AuthorRecommendedPosts]'); ?>
                     </div>
                     <?php get_template_part('sidebar/template-ads-mobile'); ?>
-                    <div class="monitorcomments">                        
-                        <p>We monitor comments. <a href="<?php echo site_url(); ?>/comment-guidelines">See guidelines</a></p>
-                    </div>
+                    <?php get_template_part('block/comments-guidelines'); ?>
                     <?php
                     if (discussion_show_comments()) {
                         comments_template('', true);
