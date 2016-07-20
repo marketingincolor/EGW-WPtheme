@@ -138,6 +138,7 @@
                         <?php echo do_shortcode('[AuthorRecommendedPosts]'); ?>
                     </div>
                     <?php get_template_part('sidebar/template-ads-mobile'); ?>
+                    <?php get_template_part('block/comments-guidelines'); ?>
                     <?php
                     if (discussion_show_comments()) {
                         comments_template('', true);
