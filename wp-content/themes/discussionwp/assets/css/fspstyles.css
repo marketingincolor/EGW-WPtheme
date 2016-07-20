@@ -972,7 +972,7 @@ footer .mkd-footer-top-holder {
     font-size: 13px !important;
 }
 .single-post .mkd-comment-holder {
-    margin-top: 10px;
+    margin-top: 0px;
 }
 /*Title color*/
 aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_column .mkd-section-title-holder .mkd-st-title{
