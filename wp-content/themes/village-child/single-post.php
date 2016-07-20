@@ -137,6 +137,9 @@
                     <div class="fsp-recommended-stories-cont">
                         <?php echo do_shortcode('[AuthorRecommendedPosts]'); ?>
                     </div>
+                    <div class="monitorcomments">                        
+                        <p>We monitor comments. <a href="#">See guidelines</a></p>
+                    </div>
                     <?php
                     if (discussion_show_comments()) {
                         comments_template('', true);

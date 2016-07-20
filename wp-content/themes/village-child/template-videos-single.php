@@ -105,7 +105,10 @@
                 discussion_get_module_template_part('templates/single/parts/tags', 'blog');
                 ?>
                 <div class="fsp-recommended-stories-cont">
-                    <?php echo do_shortcode('[AuthorRecommendedPosts]'); ?> 
+                    <?php echo do_shortcode('[AuthorRecommendedPosts]'); ?>
+                    <div class="monitorcomments">                        
+                        <p>We monitor comments. <a href="#">See guidelines</a></p>
+                    </div>
                     <?php comments_template('', true); ?>
                 </div>
             </div>
