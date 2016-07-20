@@ -1254,4 +1254,7 @@ table.ai1ec-month-view {
 .monitorcomments a {
     text-decoration: underline;
 }
+.fsp-recommended-stories-cont #comments {
+    margin-top: 0px;
+}
 /*Monitor comment style ends here*/
