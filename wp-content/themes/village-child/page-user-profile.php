@@ -208,17 +208,21 @@ get_header();
                                     $require_post = $post;
                                     $user_data = get_user_meta(get_current_user_id(), 'wpfp_favorites');
                                     $post_id_ar = array();
+                                    
 
-                                    if (isset($user_data) && !empty($user_data[0])):
-                                        $post_id_ar = $user_data[0];
-                                        $args = array(
+                                    if (isset($user_data) && !empty($user_data[0])):                                        
+                                        $post_id_ar = array_reverse($user_data[0]); 
+                                        $total_count=count($post_id_ar);
+                                        $args = array(  
+                                            'orderby' => 'post__in',
                                             'post__in' => $post_id_ar,
-                                            'posts_per_page' => 5,
+                                            'posts_per_page' => 3,
                                             'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1 ),
+                                            'post_type' => array('post','videos'),
                                         );
-                                        $saved_posts = query_posts($args);
+                                        $saved_posts = query_posts($args);                                        
                                         ?>      
-                                        <ul>                        
+                                        <ul id="saved-artiles-list">                        
                                             <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
                                                     <?php if (($sidebar == 'default') || ($sidebar == '')) : ?>
                                                         <li>
@@ -226,7 +230,7 @@ get_header();
                                                                 <?php the_post_thumbnail([117, 117]) ?>
                                                             </div>
                                                             <div class="saved_art_cont">
-                                                                <h4><?php the_title(); ?></h4>
+                                                                <h4 id="<?php the_ID(); ?>"><?php the_title(); ?></h4>
                                                                 <p><?php discussion_excerpt(15); ?></p>
                                                             </div>
                                                             <div class="saved_art_cont_btns">
@@ -241,12 +245,20 @@ get_header();
                                             $post = $require_post;
                                             ?>
                                         </ul> 
+                                        <div id="displayed_article_count" style="display:none">3</div>
+                                        <div id="total_saved_article_count" style="display:none"><?php echo $total_count; ?></div>
+                                        <?php if($total_count>3): ?>
+                                            <div class="fsporange_btn" id="load-save-article-button">
+                                                <input onclick="load_saved_articles(event)" type="submit" value="Load More" name="Load More">
+                                            </div>                                          
+                                        <?php endif; ?>
+                                        <div class="fsp-ads-homepage loader_img" style="display: none;">
+                                            <img src="<?php echo MIKADO_ASSETS_ROOT . '/img/loading.svg'; ?>" width="75">
+                                        </div>
                                     <?php else: ?>
                                         <span>No articles found</span> 
                                     <?php endif; ?>  
-                                        <div class="fsporange_btn">
-                                                <input type="submit" value="Load More" name="Load More">
-                                            </div>    
+                                          
                                 </div>
                             </div>
                         </div>
