@@ -321,4 +321,5 @@ get_header();
         </div>
     </div>
 </div>
+<?php include(locate_template('block/ajax-pagination.php'));  ?> 
 <?php get_footer(); ?>
