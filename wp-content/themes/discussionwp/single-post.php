@@ -145,6 +145,7 @@
                     <div class="fsp-recommended-stories-cont">
                         <?php echo do_shortcode('[AuthorRecommendedPosts]'); ?>
                     </div>
+                    <?php get_template_part('sidebar/template-ads-mobile'); ?>
                     <div class="monitorcomments">                        
                         <p>We monitor comments. <a href="#">See guidelines</a></p>
                     </div>
