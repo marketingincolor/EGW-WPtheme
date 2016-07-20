@@ -6,8 +6,14 @@
  * Template Name: White Background
  *
 */ 
-$centered = is_page('welcome') ? 'text-align:center;' : '' ;
+
+/* add centered text to entire page by slug */
+$centered = ( is_page('welcome') || is_page('welcome-sweeps-success') ) ? 'text-align:center;' : '' ;
+/* add margins to paragraphs in the_content by slug */
+$margined = ( is_page('welcome') ) ? ' margin:2% 14%;' : null;
+/* show the_title by slug */
 $listed = (is_page('welcome-sweeps')) ? 'true' : null;
+
 $sidebar = discussion_sidebar_layout(); ?>
 <?php get_header(); ?>
 <style>
@@ -24,7 +30,7 @@ $sidebar = discussion_sidebar_layout(); ?>
 
 /*Register Page Styles*/
 h3 { font-family: 'Roboto', sans-serif; font-weight:bold; color:#6c6b6b; font-size:1.733em; padding-top:1rem;}
-p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font-size: 1em; }
+p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font-size: 1em; <?php echo $margined; ?> }
 .join-content ul li{ list-style-type: disc !important; }
 .join-content { padding: 0% 21% 0% 7%; }
 .sign-up-text { 
@@ -61,6 +67,7 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
 
 .giveaway-text ul li { list-style-type: disc !important; }
 .disclosure-text { font-size: .7em; }
+.v-link { color:#fff; font-size:1.25em; font-weight:bold; text-transform:uppercase; }
 
 /*SharpSpring Form Styles*/
 input:focus, textarea:focus { width: 75% !important; }
