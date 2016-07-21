@@ -25,10 +25,14 @@ require_once $abspath . '/wp-config.php';
  */
 $role = 'subscriber';
 $form_email = 'Email';
+$form_userfname= 'userfname';
+$form_userlname= 'userlname';
 /*
  * fetch post data
  */
 $user_email = ( isset($_POST[$form_email]) && !empty($_POST[$form_email]) ) ? sanitize_email($_POST[$form_email]) : '';
+$user_fname = ( isset($_POST[$form_userfname]) && !empty($_POST[$form_userfname]) ) ? sanitize_text_field($_POST[$form_userfname]) : '';
+$user_lname = ( isset($_POST[$form_userlname]) && !empty($_POST[$form_userlname]) ) ? sanitize_text_field($_POST[$form_userlname]) : '';
 $branch0 = ( isset($_POST['BranchVillages']) && !empty($_POST['BranchVillages']) ) ? $_POST['BranchVillages'] : '';
 $branch1 = ( isset($_POST['BranchOther']) && !empty($_POST['BranchOther']) ) ? $_POST['BranchOther'] : '';
 // TODO: Add additional branches above as required by site
@@ -45,6 +49,14 @@ if (!empty($branch0)) {
 // no email, or Branch, no registration!
 if (empty($user_email) || $branch == 'None') {
 // TODO: More error handling like an email to yourself or something else
+    exit();
+}
+if (empty($form_userfname) || $branch == 'None') {
+// TODO: More error handling like an User First name to yourself or something else
+    exit();
+}
+if (empty($form_userlname) || $branch == 'None') {
+// TODO: More error handling like an User Last name to yourself or something else
     exit();
 }
 if (!is_email($user_email)) {
@@ -90,12 +102,23 @@ $data = array(
     'user_login' => $user_email,
     'user_email' => $user_email,
     'user_nicename'=>$username,
-    'display_name'=>$username,
+    'display_name'=>$user_fname,
+    'first_name'=>$user_fname,
+    'last_name'=> $user_lname,
     'role' => $role // optional but useful if you create a special role for remote registered users
 );
 
 $new_user = wp_insert_user($data);
 
+//Inserting addtional field to user meta table. Field Name:primary_blog
+if(!empty($new_user)){
+$primary_blog = get_current_blog_id();
+if (get_user_meta($new_user, 'primary_blog', true)) {
+    update_user_meta($new_user, 'primary_blog', $primary_blog, true);
+} else {
+    add_user_meta($new_user, 'primary_blog', $primary_blog, false);
+}
+}
 $login_page = home_url('/login');
 $register_page = home_url('/register');
 
@@ -116,7 +139,7 @@ if (!is_wp_error($new_user)) {
 
     // maybe you want to be informed if the registration was successfull
     if (true == $success) {
-        wp_mail('ramfsp@gmail.com', 'Evergreen Wellness remote registration', "User {$user_email} was registered on " . date('d.m. Y H:i:s', time()));
+        wp_mail('rajasingh@farshore.com', 'Evergreen Wellness remote registration', "User {$user_email} was registered on " . date('d.m. Y H:i:s', time()));
     }
     echo 'success';
 } 

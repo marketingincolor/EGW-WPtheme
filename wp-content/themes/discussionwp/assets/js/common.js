@@ -58,15 +58,15 @@ function loginFormValidation() {
 //Registration Form Validation
 function registrationFormValidation() {
     jQuery('#fsForm2394143').on('submit', function (e) {
-        var firstname = jQuery('#field43284834-first').val();
-        var lastname = jQuery('#field43284834-last').val();
+        var firstname = jQuery('#field44058772').val();
+        var lastname = jQuery('#field44058847').val();
         var email = jQuery('#field43284833').val();
         var zipcode = jQuery('#field43284990').val();
         var age = jQuery('#field43284944').val();
         if (jQuery('.fspr_register_error').length)
             jQuery('.fspr_register_error').remove();
-        firstNameValidation(firstname, '#field43284834-first', 'fspr_register_error');
-        lastNameValidation(lastname, '#field43284834-last', 'fspr_register_error');
+        firstNameValidation(firstname, '#field44058772', 'fspr_register_error');
+        lastNameValidation(lastname, '#field44058847', 'fspr_register_error');
         emailValidation(email, '#field43284833', 'fspr_register_error');
         zipcodeValidation(zipcode, '#field43284990', 'fspr_register_error');
         ageValidation(age, '#field43284944', 'fspr_register_error');
