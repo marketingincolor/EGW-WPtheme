@@ -14,6 +14,7 @@
             $posts_array = get_posts($args);
 
             $i = 1;
+            $title_cls = "";
             if ($posts_array) {
                 $count = 0;
                 $title_tag = 'h3';
@@ -51,8 +52,11 @@
                     if ($post_no > 1) {
                         $title_tag = $smaller_title_tag;
                     }
-                    ?>        
-                    <?php
+                    
+                    if ($i % 2 == 1):
+                        /* for set out class article title based on fixed heights */
+                        $title_cls=village_next_post_scrollarticle($blog_title_ar,$i);                        
+                    endif;
                     /**
                      * For implement two coloumn based post in one row
                      */
@@ -96,7 +100,7 @@
                             </div>
                         <?php } ?>
                         <div class="mkd-pt-six-content-holder">
-                            <div class="mkd-pt-six-title-holder">
+                             <div class="mkd-pt-six-title-holder <?php echo $title_cls; ?>">
                                 <<?php echo esc_html($title_tag) ?> class="mkd-pt-six-title">
                                 <a itemprop="url" class="mkd-pt-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self"><?php echo discussion_get_title_substring(get_the_title(), $title_length) ?></a>
                                 </<?php echo esc_html($title_tag) ?>>
