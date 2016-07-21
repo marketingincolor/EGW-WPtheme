@@ -14,6 +14,9 @@ jQuery(document).ready(function ()
     commentFormValidation();
     userProfileUpload();
     userProfileFormValidation();
+    saveArticleSessionValidation();
+    postRatingSessionValidation();
+    userSessionValidationPopupClose(); 
 
 });
 
@@ -293,4 +296,53 @@ function ageValidation(age, current_element, error_element) {
         jQuery('<label class="' + error_element + '">Age must be a number between 1 and 100.</label>').insertAfter(current_element);
     }
 
+}
+
+function saveArticleSessionValidation(){
+        
+    if (jQuery(".wpfp-link").length) {
+        jQuery(".wpfp-link").attr('id', 'wpfp-link');
+        jQuery('#wpfp-link').removeClass('wpfp-link'); 
+
+        jQuery('#wpfp-link').live('click', function() {
+
+         var user_primary_site=jQuery.trim(jQuery('#user_primary_site').val());
+         if(user_primary_site && user_primary_site!== '0'){
+             jQuery('#site_user_validation_popup').css('display','block');
+             jQuery('#site_user_validation_popup_message').text('Only members of this branch can save or remove articles');
+             return false;
+         }
+
+         dhis = jQuery(this);
+         wpfp_do_js( dhis, 1 );
+         // for favorite post listing page
+         if (dhis.hasClass('remove-parent')) {
+             dhis.parent("li").fadeOut();
+         }
+         return false;
+        });              
+    }
+}
+    
+function postRatingSessionValidation(){
+    if(jQuery(".post-ratings").length){
+        jQuery(".post-ratings img").attr('onkeypress','DiscussionRatePost();')
+                . attr('onclick','DiscussionRatePost();');
+    }
+}
+    
+function DiscussionRatePost(){
+    var user_primary_site=jQuery.trim(jQuery('#user_primary_site').val());
+    if(user_primary_site && user_primary_site!== '0'){
+        jQuery('#site_user_validation_popup').css('display','block');
+        jQuery('#site_user_validation_popup_message').text('Only members of this branch can give ratings to the post.');
+        return false;
+    }
+    rate_post(); // Plugin default functionality
+}
+
+function userSessionValidationPopupClose(){    
+    jQuery('#site_user_validation_popup_close').click(function(){
+        jQuery('#site_user_validation_popup').css('display','none');
+    });
 }
