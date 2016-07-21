@@ -48,4 +48,31 @@ add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
     }
 
     add_action('wp_enqueue_scripts', 'discussion_scripts');
+    
+    
+ /**
+ * Author - Akilan
+ * Date - 15-07-2016
+ * Purpose - for set out class article title based on fixed heights
+ */
+function village_article_title_class() {
+    global $wp_query;
+    $next_post = $wp_query->posts[$wp_query->current_post + 1];
+    $data = array(get_the_title(), $next_post->post_title);
+    return get_title_class($data);
+    
+}
+
+
+/**
+ * Author - Akilan
+ * Date - 18-07-2016
+ * Purpose - Fetch next and next most article for scroll based article load
+ */
+function village_next_post_scrollarticle($blog_title_ar, $i) {
+    $current =isset($blog_title_ar[$i]) ? $blog_title_ar[$i] : "";
+    $next_title = isset($blog_title_ar[$i + 1]) ? $blog_title_ar[$i + 1] : "";
+    $data = array($current, $next_title);   
+    return get_title_class($data);
+}
 ?>

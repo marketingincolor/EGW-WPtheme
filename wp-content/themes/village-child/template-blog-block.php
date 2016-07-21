@@ -12,10 +12,13 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                         <?php
                         $i = 1;
                         $total_post = 0;
+                        $title_cls = "";
                         if (have_posts()) {
                             while (have_posts()) :the_post();
-                                ?>
-                                <?php
+                             if ($i % 2 == 1):
+                                    /* for set out class article title based on fixed heights */
+                                    $title_cls = village_article_title_class($wp_query);
+                                endif;
                                 $id = get_the_ID();
                                 $background_image_style = discussion_custom_getImageBackground($id);
                                 $params['background_image_style'] = $background_image_style;
@@ -83,7 +86,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                         </div>
                                     <?php } ?>
                                     <div class="mkd-pt-six-content-holder">
-                                        <div class="mkd-pt-six-title-holder">
+                                        <div class="mkd-pt-six-title-holder <?php echo $title_cls; ?>">
                                             <<?php echo esc_html($title_tag) ?> class="mkd-pt-six-title">
                                             <a itemprop="url" class="mkd-pt-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self"><?php echo discussion_get_title_substring(get_the_title(), $title_length) ?></a>
                                             </<?php echo esc_html($title_tag) ?>>
