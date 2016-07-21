@@ -59,6 +59,6 @@ $post_type=array('videos');
 /**
  * For loading scroll based post loading
  */
-include(locate_template('template-ajax-pagination.php'));
+include(locate_template('block/ajax-pagination.php'));
 get_footer(); 
 ?>

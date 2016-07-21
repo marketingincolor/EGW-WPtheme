@@ -163,7 +163,7 @@ list($post_per_section,$post_type)=scroll_loadpost_settings();
      <!-- For post pagintation maintain -->
     
     <?php
-    include(locate_template('template-ajax-pagination.php'));
+    include(locate_template('block/ajax-pagination.php'));
 //    get_template_part('template-ajax-pagination');      
     ?>
     <?php get_footer(); ?>

@@ -43,7 +43,7 @@ list($post_per_section,$post_type)=scroll_loadpost_settings();
     /**
      * For loading scroll based post loading
      */
-     include(locate_template('template-ajax-pagination.php'));
+     include(locate_template('block/ajax-pagination.php'));
     ?>
     <?php get_footer(); ?>
 

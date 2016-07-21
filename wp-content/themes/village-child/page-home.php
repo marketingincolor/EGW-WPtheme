@@ -156,7 +156,7 @@ $category='home';
     </div>
 </div>
 <?php
-include(locate_template('template-ajax-pagination.php'));
+include(locate_template('block/ajax-pagination.php'));
 ?>
 <?php get_footer(); ?>
 
