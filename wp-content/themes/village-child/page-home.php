@@ -69,14 +69,32 @@ $category='home';
                                             ))
                                             ?>
                                             <h2 class="mkd-psi-title">
-                                                <a itemprop="url" href="<?php echo $redirect_url; ?>" target="_self"><?php echo esc_attr(the_title()) ?></a>
+                                                <a itemprop="url" href="<?php echo $redirect_url; ?>" ><?php echo esc_attr(the_title()) ?></a>
                                             </h2>
-                                            <?php
-                                            discussion_post_info_date(array(
-                                                'date' => $display_date,
-                                                'date_format' => $date_format
-                                            ));
-                                            ?>
+                                           <?php
+                                         $month = get_the_time('m');
+                                         $year = get_the_time('Y');
+                                         ?>
+                                        <div itemprop="dateCreated" class="mkd-post-info-date entry-date updated">
+                                                <?php if (!discussion_post_has_title()) { ?>
+                                                    <a itemprop="url" href="<?php the_permalink() ?>" >
+                                                      <?php } else { ?>
+                                                            <a itemprop="url" href="<?php echo get_month_link($year, $month); ?>" >
+                                                            <?php } ?>
+                                                            <?php
+                                                            if ($date_format !== '') {
+                                                                the_time($date_format);
+                                                            } else {
+                                                                the_time(get_option('date_format'));
+                                                            }
+                                                            ?>
+                                                            <?php if (!discussion_post_has_title()) { ?>
+                                                            </a>
+                                                      <?php } else { ?>
+                                                    </a>
+                                                <?php } ?>
+                                             <meta itemprop="interactionCount" content="UserComments: <?php echo get_comments_number(discussion_get_page_id()); ?>"/>
+                                         </div>
                                           <?php if ($display_share == 'yes' || $display_comments == 'yes' || $display_count == 'yes') { ?>
                                                 <div class="mkd-pt-info-section clearfix">
                                                     <div>
