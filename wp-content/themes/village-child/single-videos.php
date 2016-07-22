@@ -105,10 +105,10 @@
 
                 discussion_get_module_template_part('templates/single/parts/tags', 'blog');
                 ?>
+                <?php get_template_part('sidebar/template-ads-mobile'); ?>
                 <div class="fsp-recommended-stories-cont">
                     <?php echo do_shortcode('[AuthorRecommendedPosts]'); ?>
                 </div>
-                <?php get_template_part('sidebar/template-ads-mobile'); ?>
                 <?php get_template_part('block/comments-guidelines'); ?>
                 <?php comments_template('', true); ?>
             </div>
