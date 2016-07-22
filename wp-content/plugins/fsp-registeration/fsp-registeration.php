@@ -255,7 +255,12 @@ function fspr_login_member() {
                     } elseif ($getwhichIs == "post") {
                         wp_redirect($location);
                     } else {
-                        wp_redirect(home_url('/user-profile'));
+                        $site_url = other_user_profile_redirection();
+                        if($site_url){
+                            wp_redirect($site_url);
+                        }else {
+                            wp_redirect(home_url());
+                        }                        
                     } 
                  }else {
                      $site_url = other_user_profile_redirection();
