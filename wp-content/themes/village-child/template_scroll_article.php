@@ -30,12 +30,15 @@
                 $thumb_image_height = '';
                 $thumb_image_size = '150';
                 $excerpt_length = '12';
-               
+                $blog_title_ar=array();
                 /**
                  * For counting no of posts exist
                  */
+                 $k=1;
                 foreach ($posts_array as $single_post) {
                     $count++;
+                    $blog_title_ar[$k]=$single_post->post_title;
+                    $k++;
                 }
                 /**
                  * Generate blog detail with 3*3 design
@@ -62,12 +65,10 @@
                      */
                     ?>
 
-
-
                     <div class="mkd-pt-six-item mkd-post-item mkd-active-post-page">
                         <?php if (has_post_thumbnail()) { ?>
                             <div class="mkd-pt-six-image-holder">
-                                <?php
+                                  <?php
                                 if ($display_category == 'yes') {
                                     $category = get_the_category();
                                     $the_category_id = $category[0]->cat_ID;
@@ -76,7 +77,23 @@
                                     }
                                     ?>
                                     <div  style="background: <?php echo $rl_category_color; ?>;" class="mkd-post-info-category">
-                                        <?php the_category(' / '); ?>
+                                        <?php //the_category(' / '); ?>
+                                        <?php
+                                        $getPostcat = wp_get_post_categories($id);
+                                        $getResultset = check_cat_subcat($getPostcat);
+                                        count($getResultset);
+                                        $j = 1;
+                                        foreach ($getResultset as $getKeyrel) {
+                                            echo '<a href="' . get_category_link($getKeyrel) . '">';
+                                            echo get_cat_name($getKeyrel) . '</a>';
+                                            if ($j > count($getResultset) - 1) {
+                                                echo "";
+                                            } else {
+                                                echo "\x20/\x20";
+                                            }
+                                            $j++;
+                                        }
+                                        ?>
                                     </div>
                                     <?php
                                 }
@@ -151,7 +168,6 @@
 
             wp_reset_postdata();  // Restore global post data stomped by the_post().
             ?><!--/div-->
-
         </div>
     </div>
 </div>

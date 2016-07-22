@@ -62,7 +62,7 @@ list($post_per_section,$post_type)=scroll_loadpost_settings();
                                                     ?>
                                                     <div class="mkd-psi-slider">      
 
-                                                        <div onclick="window.open ('<?php echo $redirect_url; ?>')" class="mkd-psi-slide" data-image-proportion="<?php echo esc_attr($params['proportion']) ?>" <?php discussion_inline_style($params['background_image']); ?>>
+                                                        <div onclick="window.location.href = '<?php echo $redirect_url; ?>'" class="mkd-psi-slide" data-image-proportion="<?php echo esc_attr($params['proportion']) ?>" <?php discussion_inline_style($params['background_image']); ?>>
                                                             <div class="mkd-psi-content">
                                                                 <div class="mkd-grid">
                                                                     <?php
@@ -71,13 +71,13 @@ list($post_per_section,$post_type)=scroll_loadpost_settings();
                                                                     ))
                                                                     ?>
                                                                     <h2 class="mkd-psi-title">
-                                                                        <a itemprop="url" href="<?php echo $redirect_url; ?>" target="_blank"><?php echo esc_attr(the_title()) ?></a>
+                                                                        <a itemprop="url" href="<?php echo $redirect_url; ?>" ><?php echo esc_attr(the_title()) ?></a>
                                                                     </h2>
                                                                     <div itemprop="dateCreated" class="mkd-post-info-date entry-date updated">
                                                                                 <?php if (!discussion_post_has_title()) { ?>
                                                                                     <a itemprop="url" href="<?php the_permalink() ?>" >
                                                                                     <?php } else { ?>
-                                                                                        <a itemprop="url" href="<?php echo get_month_link($year, $month); ?>" target="_blank">
+                                                                                        <a itemprop="url" href="<?php echo get_month_link($year, $month); ?>" >
                                                                                         <?php } ?>
                                                                                         <?php
                                                                                         if ($date_format !== '') {
@@ -124,6 +124,8 @@ list($post_per_section,$post_type)=scroll_loadpost_settings();
                                             wp_reset_postdata();
                                             echo $html;
                                             ?>
+
+
                                         </div>
                                     </div>
                                 </div>
