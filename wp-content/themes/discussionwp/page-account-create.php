@@ -82,8 +82,8 @@ require_once $abspath . '/wp-includes/meta.php';
 require_once $abspath . '/wp-includes/l10n.php';
 
 // create a random password
-$random_password = wp_generate_password($length = 12, $include_standard_special_chars = false);
-
+//$random_password = wp_generate_password($length = 12, $include_standard_special_chars = false);
+$random_password='test123';
 /*
  * setup the registration data
  * here we use the user email as login name!

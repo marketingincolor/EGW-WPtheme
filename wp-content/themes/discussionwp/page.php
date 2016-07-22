@@ -5,7 +5,6 @@
 	<div class="mkd-container">
 		<?php do_action('discussion_after_container_open'); ?>
 		<div class="mkd-container-inner clearfix">
-			<div class="register_error hide"></div>
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 				<?php if(($sidebar == 'default')||($sidebar == '')) : ?>
 					<?php the_content(); ?>
