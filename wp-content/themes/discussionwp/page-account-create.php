@@ -107,7 +107,7 @@ $data = array(
     'last_name'=> $user_lname,
     'role' => $role // optional but useful if you create a special role for remote registered users
 );
-
+switch_to_blog(2);
 $new_user = wp_insert_user($data);
 
 //Inserting addtional field to user meta table. Field Name:primary_blog
@@ -119,6 +119,8 @@ if (get_user_meta($new_user, 'primary_blog', true)) {
     add_user_meta($new_user, 'primary_blog', $primary_blog, false);
 }
 }
+restore_current_blog();
+
 $login_page = home_url('/login');
 $register_page = home_url('/register');
 
