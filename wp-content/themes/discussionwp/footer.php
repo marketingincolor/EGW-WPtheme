@@ -46,7 +46,7 @@ discussion_get_footer();
 <input type="hidden" id="accountvalid" value="test"/>
 <input type="hidden" name="user_primary_site" id="user_primary_site" value="<?php echo other_user_profile_redirection(); ?>"> 
 
-<div class="white-popup-block user-session-block" id="site_user_validation_popup">
+<div class="white-popup-block user-session-block mfp-hide" id="site_user_validation_popup">
     <div class="find-a-branch-container">        
         <div class="fs-custom-select-container fs-custom-session-container">
             <div class="egw-homesite egw-homesite-session-popup" id="site_user_validation_popup_message">                
