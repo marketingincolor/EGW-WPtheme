@@ -1261,3 +1261,18 @@ table.ai1ec-month-view {
     margin-top: 0px;
 }
 /*Monitor comment style ends here*/
+
+
+/*popup inner pages*/
+.user-session-block{
+    max-width: 335px;
+}
+.fs-custom-session-container{
+    width: 90%;
+}
+.egw-homesite-session-popup{
+    text-align: center;
+    padding: 40px 15px;
+    font-size: 18px;
+}
+/*popup inner pages ends here*/

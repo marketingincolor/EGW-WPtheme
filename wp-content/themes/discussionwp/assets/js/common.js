@@ -15,8 +15,7 @@ jQuery(document).ready(function ()
     userProfileUpload();
     userProfileFormValidation();
     saveArticleSessionValidation();
-    postRatingSessionValidation();
-    userSessionValidationPopupClose(); 
+    postRatingSessionValidation();    
 
 });
 
@@ -308,8 +307,13 @@ function saveArticleSessionValidation(){
 
          var user_primary_site=jQuery.trim(jQuery('#user_primary_site').val());
          if(user_primary_site && user_primary_site!== '0'){
-             jQuery('#site_user_validation_popup').css('display','block');
              jQuery('#site_user_validation_popup_message').text('Only members of this branch can save or remove articles');
+             jQuery.magnificPopup.open({
+                items: {
+                    src: '#site_user_validation_popup',
+                },
+                type: 'inline'
+            });             
              return false;
          }
 
@@ -333,16 +337,16 @@ function postRatingSessionValidation(){
     
 function DiscussionRatePost(){
     var user_primary_site=jQuery.trim(jQuery('#user_primary_site').val());
-    if(user_primary_site && user_primary_site!== '0'){
-        jQuery('#site_user_validation_popup').css('display','block');
+    if(user_primary_site && user_primary_site!== '0'){        
         jQuery('#site_user_validation_popup_message').text('Only members of this branch can give ratings to the post.');
+        jQuery.magnificPopup.open({
+                items: {
+                    src: '#site_user_validation_popup',
+                },
+                type: 'inline'
+            });
         return false;
     }
     rate_post(); // Plugin default functionality
 }
 
-function userSessionValidationPopupClose(){    
-    jQuery('#site_user_validation_popup_close').click(function(){
-        jQuery('#site_user_validation_popup').css('display','none');
-    });
-}

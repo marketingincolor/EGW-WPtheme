@@ -99,9 +99,14 @@
                                                                     jQuery(".comment_button").click(function () {
                                                                         
                                                                         var user_primary_site=jQuery.trim(jQuery('#user_primary_site').val());
-                                                                        if(user_primary_site){
-                                                                            jQuery('#site_user_validation_popup').css('display','block');
+                                                                        if(user_primary_site){                                                                            
                                                                             jQuery('#site_user_validation_popup_message').text('Only members of this branch can follow or unfollow the category.');
+                                                                            jQuery.magnificPopup.open({
+                                                                                items: {
+                                                                                    src: '#site_user_validation_popup',
+                                                                                },
+                                                                                type: 'inline'
+                                                                            });
                                                                             return false;
                                                                         }
                                                                         var dataString = jQuery('form').serialize();
