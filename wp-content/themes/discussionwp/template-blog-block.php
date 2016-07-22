@@ -157,10 +157,8 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                                 discussion_post_info_share(array(
                                                     'share' => $display_share
                                                 ));
-                                                discussion_post_info_comments(array(
-                                                    'comments' => $display_comments
-                                                ));
                                                 ?>
+                                              <div class="mkd-post-info-comments-holder"><a class="mkd-post-info-comments" href="<?php comments_link(); ?>" target="_blank"><?php comments_number('0 ' . esc_html__('Comments','discussionwp'), '1 '.esc_html__('Comment','discussionwp'), '% '.esc_html__('Comments','discussionwp') ); ?></a></div>     
                                             </div>
                                             <div class="mkd-pt-info-section-background"></div>
                                         </div>
