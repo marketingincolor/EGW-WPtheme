@@ -134,10 +134,10 @@
                     // discussion_get_module_template_part('templates/single/parts/author-info', 'blog');
                     //discussion_get_single_related_posts();
                     ?>
+                    <?php get_template_part('sidebar/template-ads-mobile'); ?>
                     <div class="fsp-recommended-stories-cont">
                         <?php echo do_shortcode('[AuthorRecommendedPosts]'); ?>
                     </div>
-                    <?php get_template_part('sidebar/template-ads-mobile'); ?>
                     <?php get_template_part('block/comments-guidelines'); ?>
                     <?php
                     if (discussion_show_comments()) {

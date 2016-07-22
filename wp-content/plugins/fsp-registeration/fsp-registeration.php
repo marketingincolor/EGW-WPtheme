@@ -379,12 +379,14 @@ function fsp_template_redirect() {
 
 
 function other_user_profile_redirection(){
-    $userid=get_current_user_id();
-    $user_blog_id=get_user_meta($userid,'primary_blog',true);            
-    $blog_id = get_current_blog_id();            
-    if($blog_id != $user_blog_id){  
-        $blog = get_blog_details($user_blog_id);
-        return $blog->siteurl;        
+    if(is_user_logged_in()){
+        $userid=get_current_user_id();
+        $user_blog_id=get_user_meta($userid,'primary_blog',true);            
+        $blog_id = get_current_blog_id();            
+        if($blog_id != $user_blog_id){  
+            $blog = get_blog_details($user_blog_id);
+            return $blog->siteurl;        
+        }
     }
     return 0;
 }

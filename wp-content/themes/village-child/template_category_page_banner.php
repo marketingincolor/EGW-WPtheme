@@ -97,6 +97,13 @@
                                                             <script type = "text/javascript">
                                                                 jQuery(function () {
                                                                     jQuery(".comment_button").click(function () {
+                                                                        
+                                                                        var user_primary_site=jQuery.trim(jQuery('#user_primary_site').val());
+                                                                        if(user_primary_site){
+                                                                            jQuery('#site_user_validation_popup').css('display','block');
+                                                                            jQuery('#site_user_validation_popup_message').text('Only members of this branch can follow or unfollow the category.');
+                                                                            return false;
+                                                                        }
                                                                         var dataString = jQuery('form').serialize();
                                                                         //alert(dataString);
                                                                         jQuery.ajax({
@@ -150,7 +157,7 @@
                                                                     <input type="hidden" name="updateflag" id="flagvalue" value="<?php echo $setValue; ?>">
                                                                     <input type="hidden" name="submit" id="submitvalue" value="<?php echo $processDo; ?>">
                                                                     <input type="hidden" name="userid" value="<?php echo $userid; ?>">
-                                                                    <input type="hidden" name="categoryid" value="<?php echo $categoryid; ?>">
+                                                                    <input type="hidden" name="categoryid" value="<?php echo $categoryid; ?>">                                                                    
                                                                 </form>
                                                             </div>
 
