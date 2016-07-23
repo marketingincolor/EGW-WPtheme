@@ -98,7 +98,7 @@
                                     <?php
                                 }
                                 ?>
-                                <a itemprop="url" class="mkd-pt-six-slide-link mkd-image-link" href="<?php echo esc_url(get_permalink()); ?>" target="_blank">
+                                <a itemprop="url" class="mkd-pt-six-slide-link mkd-image-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self">
                                     <?php
                                     if ($thumb_image_size != 'custom_size') {
                                         echo get_the_post_thumbnail(get_the_ID(), $thumb_image_size);
@@ -119,33 +119,15 @@
                         <div class="mkd-pt-six-content-holder">
                              <div class="mkd-pt-six-title-holder <?php echo $title_cls; ?>">
                                 <<?php echo esc_html($title_tag) ?> class="mkd-pt-six-title">
-                                <a itemprop="url" class="mkd-pt-link" href="<?php echo esc_url(get_permalink()); ?>" target="_blank"><?php echo discussion_get_title_substring(get_the_title(), $title_length) ?></a>
+                                <a itemprop="url" class="mkd-pt-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self"><?php echo discussion_get_title_substring(get_the_title(), $title_length) ?></a>
                                 </<?php echo esc_html($title_tag) ?>>
                             </div>
                              <?php
-                                    $month = get_the_time('m');
-                                    $year = get_the_time('Y');
-                                    ?>
-                                    <div itemprop="dateCreated" class="mkd-post-info-date entry-date updated">
-                                        <?php if (!discussion_post_has_title()) { ?>
-                                            <a itemprop="url" href="<?php the_permalink() ?>" >
-                                            <?php } else { ?>
-                                                <a itemprop="url" href="<?php echo get_month_link($year, $month); ?>" target="_blank">
-                                                <?php } ?>
-                                                <?php
-                                                if ($date_format !== '') {
-                                                    the_time($date_format);
-                                                } else {
-                                                    the_time(get_option('date_format'));
-                                                }
-                                                ?>
-                                                <?php if (!discussion_post_has_title()) { ?>
-                                                </a>
-                                            <?php } else { ?>
-                                            </a>
-                                        <?php } ?>
-                                        <meta itemprop="interactionCount" content="UserComments: <?php echo get_comments_number(discussion_get_page_id()); ?>"/>
-                                    </div>
+                                 discussion_post_info_date(array(
+                                     'date' => $display_date,
+                                     'date_format' => $date_format
+                                 ));
+                             ?>
                             <?php if ($display_excerpt == 'yes') { ?>
                                 <div class="mkd-pt-one-excerpt">
                                     <?php discussion_excerpt($excerpt_length); ?>
@@ -160,7 +142,11 @@
                                         'share' => $display_share
                                     ));
                                     ?>
-                                 <div class="mkd-post-info-comments-holder"><a class="mkd-post-info-comments" href="<?php comments_link(); ?>" target="_blank"><?php comments_number('0 ' . esc_html__('Comments','discussionwp'), '1 '.esc_html__('Comment','discussionwp'), '% '.esc_html__('Comments','discussionwp') ); ?></a></div>   
+                                   <?php   
+                                    discussion_post_info_comments(array(
+                                         'comments' => $display_comments
+                                    ));
+                                  ?>
                                 </div>
                                 <div class="mkd-pt-info-section-background"></div>
                             </div>
