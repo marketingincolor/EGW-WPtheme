@@ -63,12 +63,28 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                                 }
                                                 ?>
                                                 <div  style="background: <?php echo $rl_category_color; ?>;" class="mkd-post-info-category">
-                                                    <?php the_category(' / '); ?>
+                                                    <?php //the_category(' / '); ?>
+                                                    <?php
+                                                    $getPostcat = wp_get_post_categories($id);
+                                                    $getResultset = check_cat_subcat($getPostcat);
+                                                    count($getResultset);
+                                                    $j = 1;
+                                                    foreach ($getResultset as $getKeyrel) {
+                                                        echo '<a href="' . get_category_link($getKeyrel) . '" target="_self">';
+                                                        echo get_cat_name($getKeyrel) . '</a>';
+                                                        if ($j > count($getResultset) - 1) {
+                                                            echo "";
+                                                        } else {
+                                                            echo "\x20/\x20";
+                                                        }
+                                                        $j++;
+                                                    }
+                                                    ?>
                                                 </div>
                                                 <?php
                                             }
                                             ?>
-                                            <a itemprop="url" class="mkd-pt-six-slide-link mkd-image-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self">
+                                            <a itemprop="url" class="mkd-pt-six-slide-link mkd-image-link" href="<?php echo esc_url(get_permalink()); ?>" >
                                                 <?php
                                                 if ($thumb_image_size != 'custom_size') {
                                                     echo get_the_post_thumbnail(get_the_ID(), $thumb_image_size);
@@ -91,11 +107,13 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                             <a itemprop="url" class="mkd-pt-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self"><?php echo discussion_get_title_substring(get_the_title(), $title_length) ?></a>
                                             </<?php echo esc_html($title_tag) ?>>
                                         </div>
+                                         <?php
+                                             discussion_post_info_date(array(
+                                                    'date' => $display_date,
+                                                    'date_format' => $date_format
+                                             ));
+                                         ?>
                                         <?php
-                                        discussion_post_info_date(array(
-                                            'date' => $display_date,
-                                            'date_format' => $date_format
-                                        ));
                                         if ($display_excerpt == 'yes') {
                                             ?>
                                             <div class="mkd-pt-one-excerpt">
@@ -112,18 +130,17 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                                 discussion_post_info_share(array(
                                                     'share' => $display_share
                                                 ));
-                                                discussion_post_info_comments(array(
-                                                    'comments' => $display_comments
-                                                ));
                                                 ?>
+                                               <?php   
+                                               discussion_post_info_comments(array(
+                                                   'comments' => $display_comments
+                                               ));
+                                               ?>
                                             </div>
                                             <div class="mkd-pt-info-section-background"></div>
                                         </div>
                                     <?php } ?> 
                                 </div>                      
-
-
-
                                 <?php
                                 $i++;
                             endwhile;

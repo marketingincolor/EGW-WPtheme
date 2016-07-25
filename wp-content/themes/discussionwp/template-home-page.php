@@ -71,9 +71,9 @@ list($post_per_section,$post_type)=scroll_loadpost_settings();
                                                                     ))
                                                                     ?>
                                                                     <h2 class="mkd-psi-title">
-                                                                        <a itemprop="url" href="<?php echo $redirect_url; ?>" target="_self"><?php echo esc_attr(the_title()) ?></a>
+                                                                        <a itemprop="url" href="<?php echo $redirect_url; ?>" ><?php echo esc_attr(the_title()) ?></a>
                                                                     </h2>
-                                                                    <?php
+                                                                     <?php
                                                                     discussion_post_info_date(array(
                                                                         'date' => $display_date,
                                                                         'date_format' => $date_format

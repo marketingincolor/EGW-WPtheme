@@ -68,15 +68,15 @@ $category='home';
                                                 'category' => $display_category
                                             ))
                                             ?>
-                                            <h2 class="mkd-psi-title">
-                                                <a itemprop="url" href="<?php echo $redirect_url; ?>" target="_self"><?php echo esc_attr(the_title()) ?></a>
-                                            </h2>
-                                            <?php
-                                            discussion_post_info_date(array(
-                                                'date' => $display_date,
-                                                'date_format' => $date_format
-                                            ));
-                                            ?>
+                                              <h2 class="mkd-psi-title">
+                                                <a itemprop="url" href="<?php echo $redirect_url; ?>" ><?php echo esc_attr(the_title()) ?></a>
+                                              </h2>
+                                                    <?php
+                                                    discussion_post_info_date(array(
+                                                        'date' => $display_date,
+                                                        '    date_format' => $date_format
+                                                    ));
+                                                    ?>
                                           <?php if ($display_share == 'yes' || $display_comments == 'yes' || $display_count == 'yes') { ?>
                                                 <div class="mkd-pt-info-section clearfix">
                                                     <div>
