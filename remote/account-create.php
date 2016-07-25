@@ -7,7 +7,7 @@
  */
 
 //Removed functionality for theme account create setup
-  exit();
+  //exit();
 
 // define some vars
 require_once '../wp-config.php';
@@ -16,21 +16,32 @@ if (defined('ABSPATH'))
 else
     $abspath = '/var/www/dev.myevergreenwellness.com';
 
+//echo $abspath;
+
 /*
  * define the role of the new user here
  * @see http://codex.wordpress.org/Roles_and_Capabilities
  */
+/*
+ * For Local Variables
+ * 
+ */
 $role = 'subscriber';
 $form_email = 'Email';
+$form_userfname= 'userfname';
+$form_userlname= 'userlname';
+
+
 /*
  * fetch post data
  */
-$user_email = ( isset($_POST[$form_email]) && !empty($_POST[$form_email]) ) ? $_POST[$form_email] : '';
+echo $user_email = ( isset($_POST[$form_email]) && !empty($_POST[$form_email]) ) ? sanitize_email($_POST[$form_email]) : '';
+$user_fname = ( isset($_POST[$form_userfname]) && !empty($_POST[$form_userfname]) ) ? sanitize_text_field($_POST[$form_userfname]) : '';
+$user_lname = ( isset($_POST[$form_userlname]) && !empty($_POST[$form_userlname]) ) ? sanitize_text_field($_POST[$form_userlname]) : '';
 $branch0 = ( isset($_POST['BranchVillages']) && !empty($_POST['BranchVillages']) ) ? $_POST['BranchVillages'] : '';
 $branch1 = ( isset($_POST['BranchOther']) && !empty($_POST['BranchOther']) ) ? $_POST['BranchOther'] : '';
 // TODO: Add additional branches above as required by site
 $branchn = ( isset($_POST['BranchNone']) && !empty($_POST['BranchNone']) ) ? $_POST['BranchNone'] : '';
-
 if (!empty($branch0)) {
     $branch = $branch0;
 } elseif (!empty($branch1)) {
@@ -44,16 +55,22 @@ if (empty($user_email) || $branch == 'None') {
 // TODO: More error handling like an email to yourself or something else
     exit();
 }
-if (!is_email($user_email)) {
-    echo '<div class="error notice"><p>Email is not valid. Please try again ! - Redirecting in 2 sec</p></div>';
-    header('Refresh: 2;url= /register');
+if (empty($form_userfname) || $branch == 'None') {
+// TODO: More error handling like an User First name to yourself or something else
     exit();
 }
-//if (email_exists($user_email)) {
-//    echo '<dirname(path)                                                                                                                                                      v class="error notice"><p>Email Already in use. Please try again ! - Redirecting in 2 sec</p></div>';
-//    header('Refresh: 2;url= /register');
-//    exit();
-//}
+if (empty($form_userlname) || $branch == 'None') {
+// TODO: More error handling like an User Last name to yourself or something else
+    exit();
+}
+if (!is_email($user_email)) {
+    echo 'Email is not valid. Please try again';
+    exit();
+}
+if (email_exists($user_email)) {
+    echo 'Email Already registred for this website. Please try login';
+    exit();
+}
 
 // needed to prevent wordpress to load the complete environment. we need only a basic wordpress
 define('SHORTINIT', TRUE);
@@ -69,8 +86,8 @@ require_once $abspath . '/wp-includes/meta.php';
 require_once $abspath . '/wp-includes/l10n.php';
 
 // create a random password
-$random_password = wp_generate_password($length = 12, $include_standard_special_chars = false);
-
+$random_password = wp_generate_password($length = 6, $include_standard_special_chars = false);
+//$random_password='test123';
 /*
  * setup the registration data
  * here we use the user email as login name!
@@ -89,11 +106,29 @@ $data = array(
     'user_login' => $user_email,
     'user_email' => $user_email,
     'user_nicename'=>$username,
-    'display_name'=>$username,
+    'display_name'=>$user_fname,
+    'first_name'=>$user_fname,
+    'last_name'=> $user_lname,
     'role' => $role // optional but useful if you create a special role for remote registered users
 );
+if($branch=="Villages"){
+switch_to_blog(2);
+}
 
-$new_user = wp_insert_user($data);
+//$new_user = wp_insert_user($data);
+
+//Inserting addtional field to user meta table. Field Name:primary_blog
+if(!empty($new_user)){
+$primary_blog = get_current_blog_id();
+if (get_user_meta($new_user, 'primary_blog', true)) {
+    update_user_meta($new_user, 'primary_blog', $primary_blog, true);
+} else {
+    add_user_meta($new_user, 'primary_blog', $primary_blog, false);
+}
+}
+if($branch=="Villages"){
+restore_current_blog();
+}
 
 $login_page = home_url('/login');
 $register_page = home_url('/register');
@@ -121,11 +156,20 @@ if (!is_wp_error($new_user)) {
 
     // maybe you want to be informed if the registration was successfull
     if (true == $success) {
-        wp_mail('ramfsp@gmail.com', 'Evergreen Wellness remote registration', "User {$user_email} was registered on " . date('d.m. Y H:i:s', time()));
+        wp_mail('devaguru@mailinator.com', 'Evergreen Wellness remote registration', "User {$user_email} was registered on " . date('d.m. Y H:i:s', time()));
     }
-} else {
+    echo 'success';
+} 
+else {
     echo '<div class="error notice"><p>There has been an error while register. Please try again ! - Redirecting in 2 sec</p></div>';
-    wp_mail('ramfsp@gmail.com', 'Evergreen Wellness remote registration Failed', "User {$user_email} was registered Failed on " . date('d.m. Y H:i:s', time()));
+    $message = "Hi there! \n You have successfully registered to the site. Your login name is {$user_email} and your password is {$random_password}\nPlease change your password immediately!\n\nTesting content\n"
+            . "<a href='$login_page'>Click Here </a> to login\n";
+    foreach($_POST as $key => $val){
+        $message .= 'key=> '.$key;
+        $message .= '\n';
+        $message .= 'val=> '.$val;
+    }
+    wp_mail('devaguru@mailinator.com', 'Evergreen Wellness remote registration Failed', $message);
     header('Refresh: 2;url= /register');
     exit();
 }

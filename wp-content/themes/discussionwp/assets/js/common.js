@@ -10,7 +10,7 @@ jQuery(document).ready(function ()
     resetpassword();
     clearCommentText();
     loginFormValidation();
-    registrationFormValidation();
+    //registrationFormValidation();
     commentFormValidation();
     userProfileUpload();
     userProfileFormValidation();
@@ -58,65 +58,66 @@ function loginFormValidation() {
 }
 
 //Registration Form Validation
-function registrationFormValidation() {
-    jQuery('#fsForm2394143').on('submit', function (e) {
-        var firstname = jQuery('#field44058772').val();
-        var lastname = jQuery('#field44058847').val();
-        var email = jQuery('#field43284833').val();
-        var zipcode = jQuery('#field43284990').val();
-        var age = jQuery('#field43284944').val();
-        if (jQuery('.fspr_register_error').length)
-            jQuery('.fspr_register_error').remove();
-        firstNameValidation(firstname, '#field44058772', 'fspr_register_error');
-        lastNameValidation(lastname, '#field44058847', 'fspr_register_error');
-        emailValidation(email, '#field43284833', 'fspr_register_error');
-        zipcodeValidation(zipcode, '#field43284990', 'fspr_register_error');
-        ageValidation(age, '#field43284944', 'fspr_register_error');
-        if (jQuery('.fspr_register_error').length) {
-            e.preventDefault();
-        }
-        else {
-            var data = {
-                action: 'register_user',
-                userfname: firstname,
-                userlname: lastname,
-                userzipcode: zipcode,
-                userage: age,
-                Email: email,
-            };
-            var homeurl = jQuery('.mkd-logo-area .mkd-logo-wrapper a').attr('href');
-            var ajaxurl = homeurl + "account-create";
-            jQuery.ajax({
-                type: "POST",
-                url: ajaxurl,
-                data: data,
-                cache: false,
-                async: false,
-                success: function (successvalue) {
-                    console.log(successvalue);
-                    if (jQuery.trim(successvalue) == 'success') {
-                        jQuery('#accountvalid').val('valid');
-                    } else {
-                        jQuery('.register_error').html(successvalue);
-                        jQuery('.register_error').fadeIn();
-                    }
-                },
-                error: function (successvalue) {
-                    alert('Error occurs Please try again.');
-                }
-            });
-            console.log(jQuery('#accountvalid').val());
-            if ((jQuery('#accountvalid').val()) != 'valid') {
-                e.preventDefault();
-                console.log('not valid');
-            }
-            else {
-                console.log('valid and form submitted');
-                // e.preventDefault();
-            }
-        }
-    });
-}
+//function registrationFormValidation() {
+//    jQuery('#fsForm2394143').on('submit', function (e) {
+//        var firstname = jQuery('#field44058772').val();
+//        var lastname = jQuery('#field44058847').val();
+//        var email = jQuery('#field43284833').val();
+//        var zipcode = jQuery('#field43284990').val();
+//        var age = jQuery('#field43284944').val();
+//        if (jQuery('.fspr_register_error').length)
+//            jQuery('.fspr_register_error').remove();
+//        firstNameValidation(firstname, '#field44058772', 'fspr_register_error');
+//        lastNameValidation(lastname, '#field44058847', 'fspr_register_error');
+//        emailValidation(email, '#field43284833', 'fspr_register_error');
+//        zipcodeValidation(zipcode, '#field43284990', 'fspr_register_error');
+//        ageValidation(age, '#field43284944', 'fspr_register_error');
+//        if (jQuery('.fspr_register_error').length) {
+//            e.preventDefault();
+//        }
+//        else {
+//            var data = {
+//                action: 'register_user',
+//                userfname: firstname,
+//                userlname: lastname,
+//                userzipcode: zipcode,
+//                userage: age,
+//                Email: email,
+//            };
+//            var homeurl = jQuery('.mkd-logo-area .mkd-logo-wrapper a').attr('href');
+//            //var ajaxurl = homeurl + "account-create";
+//            var ajaxurl = "http://192.168.1.154/evergreen/remote/account-create.php";
+//            jQuery.ajax({
+//                type: "POST",
+//                url: ajaxurl,
+//                data: data,
+//                cache: false,
+//                async: false,
+//                success: function (successvalue) {
+//                    console.log(successvalue);
+//                    if (jQuery.trim(successvalue) == 'success') {
+//                        jQuery('#accountvalid').val('valid');
+//                    } else {
+//                        jQuery('.register_error').html(successvalue);
+//                        jQuery('.register_error').fadeIn();
+//                    }
+//                },
+//                error: function (successvalue) {
+//                    alert('Error occurs Please try again.');
+//                }
+//            });
+//            console.log(jQuery('#accountvalid').val());
+//            if ((jQuery('#accountvalid').val()) != 'valid') {
+//                e.preventDefault();
+//                console.log('not valid');
+//            }
+//            else {
+//                console.log('valid and form submitted');
+//                // e.preventDefault();
+//            }
+//        }
+//    });
+//}
 
 function commentFormValidation() {
 //Comment Form Validation    
