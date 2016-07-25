@@ -8,7 +8,7 @@
 <?php
 get_header();
 list($post_per_section,$post_type)=scroll_loadpost_settings();
-$category='home';
+$category='feature-home';
 ?>
 <div class="mkd-full-width">
     <div class="mkd-full-width-inner">   
@@ -29,7 +29,7 @@ $category='home';
 
                     $my_query = null;
 
-                    $atts['query_result'] = discussion_custom_featured_query('home', 'featured_article');
+                    $atts['query_result'] = discussion_custom_featured_query($category);
 
                     $params = shortcode_atts($args, $atts);
 

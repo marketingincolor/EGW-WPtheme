@@ -63,22 +63,3 @@
         </div>
     </div>
 </div>
-<script>
-    jQuery(document).ready(function () {
-//        jQuery("#myevergreen").click(function () {
-//            if (jQuery("#findavillage").val() == "") {
-//                return false;
-//            } else {       
-//                
-//                document.location.href=jQuery("#findavillage").val();
-//            }
-//                       
-//        });
-
-        jQuery('#findavillage').click(function () {
-            var blog_id = jQuery('#current-blog').text();
-            jQuery("#findavillage option[id='" + blog_id + "']").remove();
-        });
-    });
-
-</script>
