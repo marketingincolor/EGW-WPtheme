@@ -140,7 +140,7 @@ if (!function_exists('discussion_scripts')) {
 
         wp_enqueue_script('discussion_modules', MIKADO_ASSETS_ROOT . '/js/modules.min.js', array('jquery'), false, true);
         wp_enqueue_script('fsp-custom-popupjs', MIKADO_ASSETS_ROOT . '/js/jquery.magnific-popup.js', array('jquery'), false, true);
-        
+
         wp_enqueue_script('common script', MIKADO_ASSETS_ROOT . '/js/common.js', array('jquery'), false, true);
 
 
@@ -154,17 +154,16 @@ if (!function_exists('discussion_scripts')) {
         if (class_exists('WPBakeryVisualComposerAbstract')) {
             wp_enqueue_script('wpb_composer_front_js');
         }
-        
+
         //Remove article from the user profile page
-        if(is_page('user-profile')){
-           wp_enqueue_script( 'custom-remove-save-article',  MIKADO_ASSETS_ROOT . '/js/fsp-remove-save-article.js'); 
+        if (is_page('user-profile')) {
+            wp_enqueue_script('custom-remove-save-article', MIKADO_ASSETS_ROOT . '/js/fsp-remove-save-article.js');
         }
-        
-         //Remove article from the user profile page
-        if(is_page('login')){
-           wp_enqueue_script( 'jquery validation',  MIKADO_ASSETS_ROOT . '/js/jquery.validate.js'); 
+
+        //Remove article from the user profile page
+        if (is_page('login')) {
+            wp_enqueue_script('jquery validation', MIKADO_ASSETS_ROOT . '/js/jquery.validate.js');
         }
-        
     }
 
     add_action('wp_enqueue_scripts', 'discussion_scripts');
@@ -289,9 +288,9 @@ if (!function_exists('discussion_header_meta')) {
      */
     function discussion_header_meta() {
         ?>          
-        
+
         <meta charset="<?php bloginfo('charset'); ?>"/>       
-<!--        <link rel="profile" href="http://gmpg.org/xfn/11"/>-->
+        <!--        <link rel="profile" href="http://gmpg.org/xfn/11"/>-->
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>"/>
         <?php
     }
@@ -1060,26 +1059,26 @@ if (!function_exists('get_videoid_from_url')) {
 
     function get_videoid_from_url($url) {
         $arg = array();
-        $videoId="";
+        $videoId = "";
         if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match)) {
             $url_string = parse_url($url, PHP_URL_QUERY);
             parse_str($url_string, $args);
             $arg['video_url'] = 'http://www.youtube.com/embed/';
             $arg['video_src'] = 'youtube';
-            $url= isset($args['v']) ? $arg['video_url'] . $args['v'] : false;
+            $url = isset($args['v']) ? $arg['video_url'] . $args['v'] : false;
         } else if (preg_match("/(https?:\/\/)?(www\.)?(player\.)?vimeo\.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/", $url, $output_array)) {
             $urlParts = explode("/", parse_url($url, PHP_URL_PATH));
             $arg['video_url'] = 'http://player.vimeo.com/video/';
-            $url= $arg['video_url'] . $arg['video_id'] = (int) $urlParts[count($urlParts) - 1];
-        } elseif (preg_match('%https*://.*(?:wistia\.com|wi\.st)/(?:medias|embed)/(.*?)\?%',$url, $matched)) {           
-            $videoId = $matched[1];            
-            $arg['video_url']='http://fast.wistia.net/embed/iframe/';
-            $arg['video_id']=$videoId.'?videoFoam=true';
-            $url= $arg['video_url'] . $arg['video_id'];
+            $url = $arg['video_url'] . $arg['video_id'] = (int) $urlParts[count($urlParts) - 1];
+        } elseif (preg_match('%https*://.*(?:wistia\.com|wi\.st)/(?:medias|embed)/(.*?)\?%', $url, $matched)) {
+            $videoId = $matched[1];
+            $arg['video_url'] = 'http://fast.wistia.net/embed/iframe/';
+            $arg['video_id'] = $videoId . '?videoFoam=true';
+            $url = $arg['video_url'] . $arg['video_id'];
         }
-         return array($videoId,$url);
+        return array($videoId, $url);
     }
-   
+
 }
 
 
@@ -1090,11 +1089,9 @@ if (!function_exists('get_videoid_from_url')) {
  */
 if (!function_exists('discussion_custom_featured_query')) {
 
-    function discussion_custom_featured_query($title, $type) {
-        $cat_id = get_cat_ID('My Category');
+    function discussion_custom_featured_query($category) {
         $args1 = array(
-            'post_type' => $type,
-            'category_name' => 'feature-home',
+            'category_name' => $category,
             'post_status' => 'publish',
             'order' => 'DESC',
             'posts_per_page' => 1
@@ -1102,6 +1099,89 @@ if (!function_exists('discussion_custom_featured_query')) {
         return $result = query_posts($args1);
     }
 
+}
+
+
+/**
+ * Author - Akilan
+ * Date - 20-07-2016
+ * Purpose - For getting category based post except from followed categories
+ */
+if (!function_exists('follow_categorypost_detail')) {
+
+    function follow_categorypost_detail($post_type, $subcat_id_sgl, $display_postid_ar) {
+        $posts = get_posts(array(
+            'post_type' => $post_type,
+            'cat' => $subcat_id_sgl,
+            'order' => 'DESC',
+            'posts_per_page' => 2,
+            'post__not_in' => $display_postid_ar
+        ));
+        return $posts;
+    }
+
+}
+
+
+
+
+/**
+ * Author - Akilan
+ * Date  - 21-07-2016
+ * Purpose - For displaying unfollow category detail
+ */
+if (!function_exists('unfollow_categorypost_detail')) {
+
+    function unfollow_categorypost_detail($post_type, $category, $display_postid_ar, $post_per_section) {
+        $args = array(
+            'cat' => $category,
+            'post_status' => 'publish',
+            'order' => 'cat',
+            'post_type' => $post_type,
+            'posts_per_page' => $post_per_section,
+            'post__not_in' => $display_postid_ar,
+            'paged' => 1,
+        );
+        return $my_query = query_posts($args);
+    }
+
+}
+
+/**
+ * Author - Akilan
+ * Date - 22-07-2016
+ * Purpose - For calling home page followed article scroll based template
+ */
+function follow_category_scroll() {
+    get_template_part('block/followed-scroll-article');
+    exit;
+}
+
+add_action('wp_ajax_follow_category_scroll', 'follow_category_scroll');
+add_action('wp_ajax_nopriv_follow_category_scroll', 'follow_category_scroll');
+
+/**
+ * Author - Akilan
+ * Date - 22-07-2016
+ * Purpose - For category tag display with parent category remove if subcategory exist
+ */
+function organize_catgory($id) {
+    $getPostcat = wp_get_post_categories($id);
+    $getResultset = check_cat_subcat($getPostcat);
+    count($getResultset);
+    $j = 1;
+    $out="";
+    foreach ($getResultset as $getKeyrel) {
+        $out.='<a href="' . get_category_link($getKeyrel) . '">';
+        $out.=get_cat_name($getKeyrel) . '</a>';
+        if ($j > count($getResultset) - 1) {
+            echo "";
+        } else {
+            $out.= "\x20/\x20";
+        }
+        $j++;
+    }
+    return $out;
 }
 
 /**
@@ -1275,14 +1355,14 @@ if (!function_exists('discussion_custom_categoryImageParams')) {
  */
 if (!function_exists('discussion_custom_category_query')) {
 
-    function discussion_custom_category_query($post_type,$category,$post_per_section) {
-         $args = array(
+    function discussion_custom_category_query($post_type, $category, $post_per_section) {
+        $args = array(
             'category_name' => $category,
             'post_status' => 'publish',
             'order' => 'DESC',
             'post_type' => $post_type,
             'posts_per_page' => $post_per_section,
-            'paged'=>1
+            'paged' => 1
         );
         return $my_query = query_posts($args);
     }
@@ -1296,12 +1376,12 @@ if (!function_exists('discussion_custom_category_query')) {
  */
 if (!function_exists('discussion_custom_categorylist_query')) {
 
-    function discussion_custom_categorylist_query($post_type,$category,$post_per_section) {
+    function discussion_custom_categorylist_query($post_type, $category, $post_per_section) {
         $args = array(
             'cat' => $category,
             'post_status' => 'publish',
             'order' => 'DESC',
-            'post_type'=>$post_type,
+            'post_type' => $post_type,
             'posts_per_page' => $post_per_section,
             'paged' => 1
         );
@@ -1364,29 +1444,28 @@ function execute_php($html) {
     return $html;
 }
 
-/** 
+/**
  * Purpose: Enable Additional Fields for users
  * Author: Ramkumar S
  * Create Date: June 1, 2016
  * Last Modified: June 23, 2016
  *
  */
-
 function modify_contact_methods($profile_fields) {
 
-	// Add new fields
-	$profile_fields['twitter'] = 'Twitter Username';
-	$profile_fields['facebook'] = 'Facebook URL';
-	$profile_fields['dob'] = 'Date of Birth';
-        $profile_fields['phone'] = 'Phone';
-        $profile_fields['address'] = 'Address';
-        $profile_fields['city'] = 'City';
-        $profile_fields['state'] = 'State';
-        $profile_fields['postalcode'] = 'Postal Code';
+    // Add new fields
+    $profile_fields['twitter'] = 'Twitter Username';
+    $profile_fields['facebook'] = 'Facebook URL';
+    $profile_fields['dob'] = 'Date of Birth';
+    $profile_fields['phone'] = 'Phone';
+    $profile_fields['address'] = 'Address';
+    $profile_fields['city'] = 'City';
+    $profile_fields['state'] = 'State';
+    $profile_fields['postalcode'] = 'Postal Code';
 
-	return $profile_fields;
-        
+    return $profile_fields;
 }
+
 add_filter('user_contactmethods', 'modify_contact_methods');
 
 /* *
@@ -1435,23 +1514,24 @@ add_action('template_redirect', 'userpage_rewrite_catch');
  */
 if (!function_exists('custom_related_posts')) {
 
-function custom_related_posts($post_id, $post_type, $tag_ids) {
+    function custom_related_posts($post_id, $post_type, $tag_ids) {
 
-		$posts_per_page = 5;
+        $posts_per_page = 5;
 
-		$args = array(
-			'post__not_in'   => array($post_id),
-                        'post_type'=> $post_type,
-                        'tag_id'=> implode(",",$tag_ids),
-			'order'          => 'DESC',
-			'orderby'        => 'date',
-			'posts_per_page' => $posts_per_page
-		);
+        $args = array(
+            'post__not_in' => array($post_id),
+            'post_type' => $post_type,
+            'tag_id' => implode(",", $tag_ids),
+            'order' => 'DESC',
+            'orderby' => 'date',
+            'posts_per_page' => $posts_per_page
+        );
 
-		$related_posts = query_posts($args);
+        $related_posts = query_posts($args);
 
-		return $related_posts;
-	}
+        return $related_posts;
+    }
+
 }
 
 /**
@@ -1459,61 +1539,59 @@ function custom_related_posts($post_id, $post_type, $tag_ids) {
  * Date  - 23-06-2016
  * Purpose - Related to Author Recommended posts section
  */
-add_action('init','discussion_author_recommended_posts');
+add_action('init', 'discussion_author_recommended_posts');
 
-function discussion_author_recommended_posts() {        
-    
+function discussion_author_recommended_posts() {
+
     //Remove default short code
-    remove_shortcode('AuthorRecommendedPosts' );
-    
+    remove_shortcode('AuthorRecommendedPosts');
+
     //Create class and extend author recommended post class to override author recommended section design
     class DiscussionAuthorRecommendPosts extends AuthorRecommendedPosts {
-        
-                
-        function __construct() {            
-            
+
+        function __construct() {
+
             $this->option_name = '_' . $this->namespace . '--options';
-            add_shortcode( 'AuthorRecommendedPosts', array( &$this, 'shortcode') );
+            add_shortcode('AuthorRecommendedPosts', array(&$this, 'shortcode'));
         }
-        
+
         function shortcode($atts) {
             global $post;
             $namespace = $this->namespace;
 
-            if ( isset( $atts['post_id'] ) && !empty( $atts['post_id'] ) ){
-                $shortcode_post_id = $atts['post_id']; 
-            }else{
+            if (isset($atts['post_id']) && !empty($atts['post_id'])) {
+                $shortcode_post_id = $atts['post_id'];
+            } else {
                 $shortcode_post_id = $post->ID;
             }
 
-            $recommended_ids = get_post_meta( $shortcode_post_id, $namespace, true );
+            $recommended_ids = get_post_meta($shortcode_post_id, $namespace, true);
 
             $html = '';
 
-            if( $recommended_ids ){
+            if ($recommended_ids) {
 
-                $html_title = $this->get_option( "{$namespace}_title" );
-                $show_title = $this->get_option( "{$namespace}_show_title" );
-                $show_featured_image = $this->get_option( "{$namespace}_show_featured_image" );
-                $format_horizontal = $this->get_option( "{$namespace}_format_is_horizontal" );
-                $author_recommended_posts_post_types = $this->get_option( "{$namespace}_post_types" );
+                $html_title = $this->get_option("{$namespace}_title");
+                $show_title = $this->get_option("{$namespace}_show_title");
+                $show_featured_image = $this->get_option("{$namespace}_show_featured_image");
+                $format_horizontal = $this->get_option("{$namespace}_format_is_horizontal");
+                $author_recommended_posts_post_types = $this->get_option("{$namespace}_post_types");
 
-                ob_start( );
+                ob_start();
                 include('custom_author-recommended-posts-list.php' );
-                $html .= ob_get_contents( );
-                ob_end_clean( );
-
+                $html .= ob_get_contents();
+                ob_end_clean();
             }
 
             return $html;
         }
-                                                
-    }     
+
+    }
+
     $DiscussionAuthorRecommedPost = new DiscussionAuthorRecommendPosts();
-    
- }
- 
- /* *
+}
+
+/* *
  * 
  * Purpose: Login direct after login 
  * Author: Ramkumar.S 
@@ -1521,27 +1599,26 @@ function discussion_author_recommended_posts() {
  * Last Modified : 24 June 2016
  * */
 
-function redirect_login_page(){
+function redirect_login_page() {
     // Store for checking if this page equals wp-login.php
-    $page_viewed = basename( $_SERVER['REQUEST_URI'] );
+    $page_viewed = basename($_SERVER['REQUEST_URI']);
     // permalink to the custom login page
-    $login_page  = home_url('/login');
-    $register_page  = home_url('/register');
+    $login_page = home_url('/login');
+    $register_page = home_url('/register');
 
-    if( $page_viewed == "wp-login.php" ) {
-        wp_redirect( $login_page );
+    if ($page_viewed == "wp-login.php") {
+        wp_redirect($login_page);
         exit();
     }
-    if( $page_viewed == "wp-signup.php" ) {
-        wp_redirect( $register_page );
+    if ($page_viewed == "wp-signup.php") {
+        wp_redirect($register_page);
         exit();
     }
-    
 }
 
-add_action( 'init','redirect_login_page' );
+add_action('init', 'redirect_login_page');
 
- /* *
+/* *
  * 
  * Purpose: Disable top menu based on admin/super admin role
  * Author: Ramkumar.S 
@@ -1550,8 +1627,8 @@ add_action( 'init','redirect_login_page' );
  * */
 
 if ((current_user_can('administrator') && is_admin()) || (is_super_admin())) {
-      show_admin_bar(true);
-}else{
+    show_admin_bar(true);
+} else {
     show_admin_bar(false);
 }
 
@@ -1560,10 +1637,9 @@ if ((current_user_can('administrator') && is_admin()) || (is_super_admin())) {
  * Date - 22-06-2015
  * Purpose - For implementing scroll based post loading
  */
-function custom_scroll_post_load(){
+function custom_scroll_post_load() {
     get_template_part('template_scroll_article');
     exit;
-   
 }
 
 add_action('wp_ajax_custom_scroll_post_load', 'custom_scroll_post_load');
@@ -1576,14 +1652,14 @@ add_action('wp_ajax_nopriv_custom_scroll_post_load', 'custom_scroll_post_load');
  */
 if (!function_exists('discussion_home_custom_category_query')) {
 
-    function discussion_home_custom_category_query($type, $category,$per_page=6) {
+    function discussion_home_custom_category_query($type, $category, $per_page = 6) {
         $args = array(
             'category_name' => $category,
             'post_status' => 'publish',
             'order' => 'DESC',
             'post_type' => $type,
             'posts_per_page' => $per_page,
-            'paged'=>1
+            'paged' => 1
         );
         return $my_query = query_posts($args);
     }
@@ -1591,86 +1667,77 @@ if (!function_exists('discussion_home_custom_category_query')) {
 }
 
 
-        
+
 /**
  * Author- Vinoth Raja
  * Date  - 25-06-2016
  * Purpose - For forgot password functionality
  */
+add_action('wp_ajax_nopriv_ajax_forgotPassword', 'ajax_forgotPassword');
 
-add_action( 'wp_ajax_nopriv_ajax_forgotPassword', 'ajax_forgotPassword');
+add_action('wp_ajax_ajax_forgotPassword', 'ajax_forgotPassword');
 
-add_action( 'wp_ajax_ajax_forgotPassword', 'ajax_forgotPassword');
+function ajax_forgotPassword() {
+    check_ajax_referer('fp-ajax-nonce', 'security');
 
+    global $wpdb;
 
-function ajax_forgotPassword()
- {	 	
-     check_ajax_referer( 'fp-ajax-nonce', 'security' );
-     
-	global $wpdb;
-	
-	$account = $_POST['user_email'];
-	
-	if( empty( $account ) ) {
-		$error = 'Lost your password? Please enter your email address.';
-	} else {
-		if(is_email( $account )) {
-                   
-			if( email_exists($account) ) 
-				$get_by = 'email';
-			else	
-				$error = 'Please enter your valid email address.';			
-		}
-		else
-			$error = 'Invalid e-mail address.';		
-	}	
-	
-	if(empty ($error)) {
-		
-		$random_password = wp_generate_password(); 
+    $account = $_POST['user_email'];
 
-		$user = get_user_by( $get_by, $account );
-               		
-		$update_user = wp_update_user( array ( 'ID' => $user->ID, 'user_pass' => $random_password ) );
+    if (empty($account)) {
+        $error = 'Lost your password? Please enter your email address.';
+    } else {
+        if (is_email($account)) {
 
-		if( $update_user ) {
-			
-			$from =  get_option('admin_email');
-			
-			$to = $user->user_email;
-			$subject = 'Your new password';
-			$sender = 'From: '.get_option('name').' <'.$from.'>' . "\r\n";
-			
-			$message = 'Your new password is: '.$random_password;
-				
-			$headers[] = 'MIME-Version: 1.0' . "\r\n";
-			$headers[] = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-			$headers[] = "X-Mailer: PHP \r\n";
-			$headers[] = $sender;
-				
-			$mail = wp_mail( $to, $subject, $message, $headers );
-			if($mail)
-                        {
-				$success = 'You will received a new password via email.';
-                        }
-			else
-				$error = 'System is unable to send you mail containg your new password.';						
-		} else {
-			$error = 'Oops! Something went wrong while updaing your account.';
-		}
-	}
-	
-	if(!empty( $error ) )
+            if (email_exists($account))
+                $get_by = 'email';
+            else
+                $error = 'Please enter your valid email address.';
+        } else
+            $error = 'Invalid e-mail address.';
+    }
 
-                echo $error;
-			
-	if(!empty( $success ) )
+    if (empty($error)) {
 
-               echo $success;
-				
-	die();
+        $random_password = wp_generate_password();
+
+        $user = get_user_by($get_by, $account);
+
+        $update_user = wp_update_user(array('ID' => $user->ID, 'user_pass' => $random_password));
+
+        if ($update_user) {
+
+            $from = get_option('admin_email');
+
+            $to = $user->user_email;
+            $subject = 'Your new password';
+            $sender = 'From: ' . get_option('name') . ' <' . $from . '>' . "\r\n";
+
+            $message = 'Your new password is: ' . $random_password;
+
+            $headers[] = 'MIME-Version: 1.0' . "\r\n";
+            $headers[] = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+            $headers[] = "X-Mailer: PHP \r\n";
+            $headers[] = $sender;
+
+            $mail = wp_mail($to, $subject, $message, $headers);
+            if ($mail) {
+                $success = 'You will received a new password via email.';
+            } else
+                $error = 'System is unable to send you mail containg your new password.';
+        } else {
+            $error = 'Oops! Something went wrong while updaing your account.';
+        }
+    }
+
+    if (!empty($error))
+        echo $error;
+
+    if (!empty($success))
+        echo $success;
+
+    die();
 }
-
 
 /**
  * Author : Akilan
@@ -1679,376 +1746,367 @@ function ajax_forgotPassword()
  * First parameter => per page section
  * second parameter => post type
  */
-function scroll_loadpost_settings(){    
-    return array(6,array('post','videos'));   
+function scroll_loadpost_settings() {
+    return array(6, array('post', 'videos'));
 }
-
 
 /**
  * Author : Vinoth Raja
  * Date : 02-07-2016
  * Purpose - For display comment section with loggined user profile image
-*/
-
-function custom_comment($comment, $args, $depth) {
-                
-                $GLOBALS['comment'] = $comment;
-		global $post;
-
-		$is_pingback_comment = $comment->comment_type == 'pingback';
-		$is_author_comment  = $post->post_author == $comment->user_id;
-
-		$comment_class = 'mkd-comment clearfix';
-
-		if($is_author_comment) {
-			$comment_class .= ' mkd-post-author-comment';
-		}
-
-		if($is_pingback_comment) {
-			$comment_class .= ' mkd-pingback-comment';
-		}
-		?>
-		<li>
-		<div class="<?php echo esc_attr($comment_class); ?>">
-			<?php if(!$is_pingback_comment) { ?>
-				<div class="mkd-comment-image"> 
-                                <?php $user = $comment->user_id;                                
-                                      $custom_avatar_meta_data = get_user_meta($user,'custom_avatar');                                                  
-                                      if(isset($custom_avatar_meta_data) && !empty($custom_avatar_meta_data[0])):
-                                      $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0]);                              
-                                ?>
-                                <img src="<?php echo $attachment[0]; ?>" width="85px" height="85px"/>
-                                <?php else : ?>                                                    
-                                <img src="<?php echo MIKADO_ASSETS_ROOT.'/img/aavathar.jpg' ?>" width="85px" height="85px" />
-                                <?php endif; ?>
-                                </div>
-			<?php } ?>
-			<div class="mkd-comment-text-and-info">
-				<div class="mkd-comment-info-and-links">
-					<h6 class="mkd-comment-name">
-						<?php if($is_pingback_comment) { esc_html_e('Pingback:', 'discussionwp'); } ?><span class="mkd-comment-author"><?php echo wp_kses_post(get_comment_author_link()); ?></span>
-						<?php if($is_author_comment) { ?>
-						<span class="mkd-comment-mark"><?php esc_html_e('/', 'discussionwp'); ?></span>
-						<span class="mkd-comment-author-label"><?php esc_html_e('Author', 'discussionwp'); ?></span>
-						<?php } ?>
-					</h6>
-					<h6 class="mkd-comment-links">
-						<?php   if ( !is_user_logged_in() ) : ?>
-                                                        <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>
-                                                <?php   else :
-                                                            $userid=get_current_user_id();
-                                                            $user_blog_id=get_user_meta($userid,'primary_blog',true);
-                                                            $blog_id = get_current_blog_id();
-                                                            if($blog_id != $user_blog_id): ?>
-                                                                <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>                                                                   
-                                                            <?php  else :
-                                                                comment_reply_link( array_merge( $args, array('reply_text' => esc_html__('Reply', 'discussionwp'), 'depth' => $depth, 'max_depth' => $args['max_depth']) ) );
-                                                            endif;
-                                                        endif;
-						?>
-							<span class="mkd-comment-mark"><?php esc_html_e('/', 'discussionwp'); ?></span>
-						<?php
-							edit_comment_link(esc_html__('Edit','discussionwp'));
-						?>
-					</h6>
-				</div>
-				<?php if(!$is_pingback_comment) { ?>
-					<div class="mkd-comment-text">
-						<div class="mkd-text-holder" id="comment-<?php echo comment_ID(); ?>">
-							<?php comment_text(); ?>
-							<span class="mkd-comment-date"><?php comment_time(get_option('date_format')); ?></span>
-						</div>
-					</div>
-				<?php } ?>
-			</div>
-		</div>
-		<?php
-    }
-    
-    function SocialNetworkShareLink($net, $image) {
-                  
-    switch ($net) {
-        case 'facebook':
-            $link = 'window.open(\'http://www.facebook.com/sharer/sharer.php?s=100&amp;p[title]=' . urlencode(discussion_addslashes(get_the_title())) . '&amp;p[summary]=' . urlencode(discussion_addslashes(get_the_excerpt())) . '&amp;p[url]=' . urlencode(get_permalink()).'/'.rand(). '&amp;p[images][0]=' . $image[0]. '&v='.rand().'\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
-            break;
-        case 'twitter':
-            $count_char = (isset($_SERVER['https'])) ? 23 : 22;
-            $twitter_via = (discussion_options()->getOptionValue('twitter_via') !== '') ? ' via ' . discussion_options()->getOptionValue('twitter_via') . ' ' : '';
-            $link = 'window.open(\'http://twitter.com/home?status=' . urlencode(discussion_the_excerpt_max_charlength($count_char) . $twitter_via) . get_permalink() . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
-            break;
-        case 'google_plus':
-            $link = 'popUp=window.open(\'https://plus.google.com/share?url=' . urlencode(get_permalink()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
-            break;
-        case 'linkedin':
-            $link = 'popUp=window.open(\'http://linkedin.com/shareArticle?mini=true&amp;url=' . urlencode(get_permalink()) . '&amp;title=' . urlencode(get_the_title()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
-            break;
-        case 'tumblr':
-            $link = 'popUp=window.open(\'http://www.tumblr.com/share/link?url=' . urlencode(get_permalink()) . '&amp;name=' . urlencode(get_the_title()) . '&amp;description=' . urlencode(get_the_excerpt()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
-            break;
-        case 'pinterest':
-            $link = 'popUp=window.open(\'http://pinterest.com/pin/create/button/?url=' . urlencode(get_permalink()) . '&amp;description=' . discussion_addslashes(get_the_title()) . '&amp;media=' . urlencode($image[0]) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
-            break;
-        case 'vk':
-            $link = 'popUp=window.open(\'http://vkontakte.ru/share.php?url=' . urlencode(get_permalink()) . '&amp;title=' . urlencode(get_the_title()) . '&amp;description=' . urlencode(get_the_excerpt()) . '&amp;image=' . urlencode($image[0]) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
-            break;
-        default:
-            $link = '';
-    }
-
-    return $link;
-}
-
-
-/**
- * Author - Akilan 
- * Date - 08-07-2016
- * Purpose - For adding thumb image for facebook sharing
  */
-add_action('wp_head', 'fbfixheads');
-function fbfixheads(){
+function custom_comment($comment, $args, $depth) {
+
+    $GLOBALS['comment'] = $comment;
     global $post;
-    $ftf_head="";
-    if (has_post_thumbnail()) {
-    $featuredimg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), "Full");
-    $ftf_description = get_the_excerpt($post->ID);
-    $ftf_head = '
+
+    $is_pingback_comment = $comment->comment_type == 'pingback';
+    $is_author_comment = $post->post_author == $comment->user_id;
+
+    $comment_class = 'mkd-comment clearfix';
+
+    if ($is_author_comment) {
+        $comment_class .= ' mkd-post-author-comment';
+    }
+
+    if ($is_pingback_comment) {
+        $comment_class .= ' mkd-pingback-comment';
+    }
+    ?>
+    <li>
+        <div class="<?php echo esc_attr($comment_class); ?>">
+    <?php if (!$is_pingback_comment) { ?>
+                <div class="mkd-comment-image"> 
+        <?php
+        $user = $comment->user_id;
+        $custom_avatar_meta_data = get_user_meta($user, 'custom_avatar');
+        if (isset($custom_avatar_meta_data) && !empty($custom_avatar_meta_data[0])):
+            $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0]);
+            ?>
+                        <img src="<?php echo $attachment[0]; ?>" width="85px" height="85px"/>
+        <?php else : ?>                                                    
+                        <img src="<?php echo MIKADO_ASSETS_ROOT . '/img/aavathar.jpg' ?>" width="85px" height="85px" />
+        <?php endif; ?>
+                </div>
+            <?php } ?>
+            <div class="mkd-comment-text-and-info">
+                <div class="mkd-comment-info-and-links">
+                    <h6 class="mkd-comment-name">
+                <?php if ($is_pingback_comment) {
+                    esc_html_e('Pingback:', 'discussionwp');
+                } ?><span class="mkd-comment-author"><?php echo wp_kses_post(get_comment_author_link()); ?></span>
+                <?php if ($is_author_comment) { ?>
+                            <span class="mkd-comment-mark"><?php esc_html_e('/', 'discussionwp'); ?></span>
+                            <span class="mkd-comment-author-label"><?php esc_html_e('Author', 'discussionwp'); ?></span>
+                <?php } ?>
+                    </h6>
+                    <h6 class="mkd-comment-links">
+    <?php if (!is_user_logged_in()) : ?>
+                            <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>
+                        <?php
+                        else :
+                            $userid = get_current_user_id();
+                            $user_blog_id = get_user_meta($userid, 'primary_blog', true);
+                            $blog_id = get_current_blog_id();
+                            if ($blog_id != $user_blog_id):
+                                ?>
+                                <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>                                                                   
+                            <?php
+                            else :
+                                comment_reply_link(array_merge($args, array('reply_text' => esc_html__('Reply', 'discussionwp'), 'depth' => $depth, 'max_depth' => $args['max_depth'])));
+                            endif;
+                        endif;
+                        ?>
+                        <span class="mkd-comment-mark"><?php esc_html_e('/', 'discussionwp'); ?></span>
+                        <?php
+                        edit_comment_link(esc_html__('Edit', 'discussionwp'));
+                        ?>
+                    </h6>
+                </div>
+                        <?php if (!$is_pingback_comment) { ?>
+                    <div class="mkd-comment-text">
+                        <div class="mkd-text-holder" id="comment-<?php echo comment_ID(); ?>">
+                            <?php comment_text(); ?>
+                            <span class="mkd-comment-date"><?php comment_time(get_option('date_format')); ?></span>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+                        <?php
+                    }
+
+                    function SocialNetworkShareLink($net, $image) {
+
+                        switch ($net) {
+                            case 'facebook':
+                                $link = 'window.open(\'http://www.facebook.com/sharer/sharer.php?s=100&amp;p[title]=' . urlencode(discussion_addslashes(get_the_title())) . '&amp;p[summary]=' . urlencode(discussion_addslashes(get_the_excerpt())) . '&amp;p[url]=' . urlencode(get_permalink()) . '/' . rand() . '&amp;p[images][0]=' . $image[0] . '&v=' . rand() . '\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
+                                break;
+                            case 'twitter':
+                                $count_char = (isset($_SERVER['https'])) ? 23 : 22;
+                                $twitter_via = (discussion_options()->getOptionValue('twitter_via') !== '') ? ' via ' . discussion_options()->getOptionValue('twitter_via') . ' ' : '';
+                                $link = 'window.open(\'http://twitter.com/home?status=' . urlencode(discussion_the_excerpt_max_charlength($count_char) . $twitter_via) . get_permalink() . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+                                break;
+                            case 'google_plus':
+                                $link = 'popUp=window.open(\'https://plus.google.com/share?url=' . urlencode(get_permalink()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+                                break;
+                            case 'linkedin':
+                                $link = 'popUp=window.open(\'http://linkedin.com/shareArticle?mini=true&amp;url=' . urlencode(get_permalink()) . '&amp;title=' . urlencode(get_the_title()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+                                break;
+                            case 'tumblr':
+                                $link = 'popUp=window.open(\'http://www.tumblr.com/share/link?url=' . urlencode(get_permalink()) . '&amp;name=' . urlencode(get_the_title()) . '&amp;description=' . urlencode(get_the_excerpt()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+                                break;
+                            case 'pinterest':
+                                $link = 'popUp=window.open(\'http://pinterest.com/pin/create/button/?url=' . urlencode(get_permalink()) . '&amp;description=' . discussion_addslashes(get_the_title()) . '&amp;media=' . urlencode($image[0]) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+                                break;
+                            case 'vk':
+                                $link = 'popUp=window.open(\'http://vkontakte.ru/share.php?url=' . urlencode(get_permalink()) . '&amp;title=' . urlencode(get_the_title()) . '&amp;description=' . urlencode(get_the_excerpt()) . '&amp;image=' . urlencode($image[0]) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+                                break;
+                            default:
+                                $link = '';
+                        }
+
+                        return $link;
+                    }
+
+                    /**
+                     * Author - Akilan 
+                     * Date - 08-07-2016
+                     * Purpose - For adding thumb image for facebook sharing
+                     */
+                    add_action('wp_head', 'fbfixheads');
+
+                    function fbfixheads() {
+                        global $post;
+                        $ftf_head = "";
+                        if (has_post_thumbnail()) {
+                            $featuredimg = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), "Full");
+                            $ftf_description = get_the_excerpt($post->ID);
+                            $ftf_head = '
         <!--/ Facebook Thumb Fixer Open Graph /-->
-        <meta property="og:type" content="'. $default . '" />
+        <meta property="og:type" content="' . $default . '" />
         <meta property="og:url" content="' . get_permalink() . '" />
         <meta property="og:title" content="' . wp_kses_data(get_the_title($post->ID)) . '" />
-        <meta property="og:description" content="' . wp_kses($ftf_description, array ()) . '" />
+        <meta property="og:description" content="' . wp_kses($ftf_description, array()) . '" />
         <meta property="og:site_name" content="' . wp_kses_data(get_bloginfo('name')) . '" />
         <meta property="og:image" content="' . $featuredimg[0] . '" />
 
-        <meta itemscope itemtype="'. $default . '" />
-        <meta itemprop="description" content="' . wp_kses($ftf_description, array ()) . '" />
+        <meta itemscope itemtype="' . $default . '" />
+        <meta itemprop="description" content="' . wp_kses($ftf_description, array()) . '" />
         <meta itemprop="image" content="' . $featuredimg[0] . '" />
         ';
-    }
-    echo $ftf_head;
-}
+                        }
+                        echo $ftf_head;
+                    }
 
-/**
- * Author - Akilan
- * Date - 11-07-2016
- * Purpose - For getting main category name
- */
+                    /**
+                     * Author - Akilan
+                     * Date - 11-07-2016
+                     * Purpose - For getting main category name
+                     */
+                    function main_category_name() {
+                        return array('activity', 'medical', 'financial', 'relationships', 'nutrition', 'mind-spirit');
+                    }
 
-function main_category_name(){
-    return array('activity','medical','financial','relationships','nutrition','mind-spirit');
-}
+                    /**
+                     * Author - Akilan
+                     * Date - 11-07-2016
+                     * Purpose - For getting category id from category name
+                     */
+                    function get_main_category_detail() {
+                        $cat_ar = main_category_name();
+                        if (!empty($cat_ar)) {
+                            foreach ($cat_ar as $our_cat_each) {
+                                $cat = get_term_by('slug', $our_cat_each, 'category');
+                                if ($cat) {
+                                    $cat_id_ar[$cat->term_id] = $cat->term_id;
+                                }
+                            }
+                        }
+                        return $cat_id_ar;
+                    }
 
+                    /**
+                     * Author - Akilan
+                     * Date  - 11-07-2016
+                     * Purpose - For hiding pages from search
+                     * 
+                     */
+                    function remove_pages_from_search() {
+                        global $wp_post_types;
+                        $wp_post_types['page']->exclude_from_search = true;
+                    }
 
-/**
- * Author - Akilan
- * Date - 11-07-2016
- * Purpose - For getting category id from category name
- */
+                    add_action('init', 'remove_pages_from_search');
 
-function get_main_category_detail(){
-    $cat_ar=main_category_name();
-    if(!empty($cat_ar)){
-        foreach($cat_ar as $our_cat_each){              
-            $cat = get_term_by( 'slug', $our_cat_each, 'category' );
-            if ( $cat ){
-                $cat_id_ar[$cat->term_id]=$cat->term_id;                 
-            }
-        }
-    }
-    return $cat_id_ar;
-}
-
-/**
- * Author - Akilan
- * Date  - 11-07-2016
- * Purpose - For hiding pages from search
- * 
- */
-function remove_pages_from_search() {
-    global $wp_post_types;
-    $wp_post_types['page']->exclude_from_search = true;
-}
-add_action('init', 'remove_pages_from_search');
-
-/**
- * Author - Vinoth Raja
- * Date  - 14-07-2016
- * Purpose - For adding comment approved email functionality
- * 
- */
-  
-add_filter('wp_mail_content_type',create_function('', 'return "text/html"; ')); //for adding html content in wp_mail
-
+                    /**
+                     * Author - Vinoth Raja
+                     * Date  - 14-07-2016
+                     * Purpose - For adding comment approved email functionality
+                     * 
+                     */
+                    add_filter('wp_mail_content_type', create_function('', 'return "text/html"; ')); //for adding html content in wp_mail
 //for except admin users
-add_action('wp_set_comment_status', 'custom_set_comment_status',10,2);
+                    add_action('wp_set_comment_status', 'custom_set_comment_status', 10, 2);
 
-function custom_set_comment_status($comment_id, $comment_status) {
-    if($comment_status == 'approve')
-    {
-      $comment = get_comment($comment_id);
-      if($comment->comment_parent){
-      $parent_comment = get_comment($comment->comment_parent);
-      wp_mail($parent_comment->comment_author_email, 'myEvergreenWellness', 'New comment on your post '.get_the_title($comment->comment_post_ID).'<br>Author:'.$comment->comment_author .'<br>Email:'.$comment->comment_author_email.'<br>Comment:'.$comment->comment_content.'<br>You can see all comments on this post here:'.get_comment_link($comment->comment_ID));
-      }
-    }   
-}
+                    function custom_set_comment_status($comment_id, $comment_status) {
+                        if ($comment_status == 'approve') {
+                            $comment = get_comment($comment_id);
+                            if ($comment->comment_parent) {
+                                $parent_comment = get_comment($comment->comment_parent);
+                                wp_mail($parent_comment->comment_author_email, 'myEvergreenWellness', 'New comment on your post ' . get_the_title($comment->comment_post_ID) . '<br>Author:' . $comment->comment_author . '<br>Email:' . $comment->comment_author_email . '<br>Comment:' . $comment->comment_content . '<br>You can see all comments on this post here:' . get_comment_link($comment->comment_ID));
+                            }
+                        }
+                    }
 
 //for admin user
-add_action('comment_post', 'notify_author_of_reply', 10, 2);
+                    add_action('comment_post', 'notify_author_of_reply', 10, 2);
 
-function notify_author_of_reply($comment_id, $approved){
-  if($approved === 1){
-    $comment = get_comment($comment_id);
-    if($comment->comment_parent){
-      $parent_comment = get_comment($comment->comment_parent);
-      wp_mail($parent_comment->comment_author_email, 'myEvergreenWellness', 'New comment on your post '.get_the_title($comment->comment_post_ID).'<br>Author:'.$comment->comment_author .'<br>Email:'.$comment->comment_author_email.'<br>Comment:'.$comment->comment_content.'<br>You can see all comments on this post here:'.get_comment_link($comment->comment_ID));
-    }
-  }
-}
-
-
-/**
- * Author - Akilan
- * Date  - 14-07-2016
- * Purpose - change link layout to have a pipe prepended (safety comment)
- */
-
-add_filter( 'safe_report_comments_flagging_link', 'adjust_flagging_link' );
-function adjust_flagging_link( $link ) {
-	return ' / ' . $link;
-}
-
-
-/**
- * Author - Akilan
- * Date - 15-07-2016
- * Purpose - for set out class article title based on fixed heights
- */
-function article_title_class() {
-    global $wp_query;
-    $next_post = $wp_query->posts[$wp_query->current_post + 1];
-    $next_next_post = $wp_query->posts[$wp_query->current_post + 2];
-    $data = array(get_the_title(), $next_post->post_title, $next_next_post->post_title);
-    return get_title_class($data);
-    
-}
-
-/**
- * Author - Akilan
- * Date - 18-07-2016
- * Purpose - Fetch next and next most article for scroll based article load
- */
-function next_post_scrollarticle($blog_title_ar, $i) {
-    $current =isset($blog_title_ar[$i]) ? $blog_title_ar[$i] : "";
-    $next_title = isset($blog_title_ar[$i + 1]) ? $blog_title_ar[$i + 1] : "";
-    $next_next_title = isset($blog_title_ar[$i + 2]) ? $blog_title_ar[$i + 2] : "";
-    $data = array($current, $next_title, $next_next_title);   
-    return get_title_class($data);
-}
-
-/**
- * Author - Akilan
- * Date - 18-07-2016
- * Purpose - For setting class based on title length
- */
-
-function get_title_class($data){
-    $lengths = array_map('strlen', $data);
-    $max_length = max($lengths);
-    switch ($max_length) {
-        case $max_length > 75:
-            return 'title_length_four';
-            break;
-        case $max_length > 50 && $max_length <= 75:
-            return 'title_length_three';
-            break;
-        case $max_length <= 50 && $max_length > 25:
-            return 'title_length_two';
-            break;
-        case $max_length <= 25:
-            return 'title_length_one';
-            break;
-    }
-}
-
-    /**
-     * Author - Rajasingh
-     * Date  - 15-07-2016
-     * Purpose - Check the post contains both category and subcategory.
-     */
-    function check_cat_subcat($getPostcat) {
-            $temp_cat = array_flip($getPostcat);
-            foreach ($temp_cat as $key => $val) {
-                    $top_parent = category_top_parent_id($key);
-                    if ($top_parent != $key) {
-                        if (isset($temp_cat[$top_parent]))
-                            unset($temp_cat[$top_parent]);
+                    function notify_author_of_reply($comment_id, $approved) {
+                        if ($approved === 1) {
+                            $comment = get_comment($comment_id);
+                            if ($comment->comment_parent) {
+                                $parent_comment = get_comment($comment->comment_parent);
+                                wp_mail($parent_comment->comment_author_email, 'myEvergreenWellness', 'New comment on your post ' . get_the_title($comment->comment_post_ID) . '<br>Author:' . $comment->comment_author . '<br>Email:' . $comment->comment_author_email . '<br>Comment:' . $comment->comment_content . '<br>You can see all comments on this post here:' . get_comment_link($comment->comment_ID));
+                            }
+                        }
                     }
-            }
-            $temp_catval = array_flip($temp_cat);
-            return $temp_catval;
-    }
+
+                    /**
+                     * Author - Akilan
+                     * Date  - 14-07-2016
+                     * Purpose - change link layout to have a pipe prepended (safety comment)
+                     */
+                    add_filter('safe_report_comments_flagging_link', 'adjust_flagging_link');
+
+                    function adjust_flagging_link($link) {
+                        return ' / ' . $link;
+                    }
+
+                    /**
+                     * Author - Akilan
+                     * Date - 15-07-2016
+                     * Purpose - for set out class article title based on fixed heights
+                     */
+                    function article_title_class() {
+                        global $wp_query;
+                        $next_post = $wp_query->posts[$wp_query->current_post + 1];
+                        $next_next_post = $wp_query->posts[$wp_query->current_post + 2];
+                        $data = array(get_the_title(), $next_post->post_title, $next_next_post->post_title);
+                        return get_title_class($data);
+                    }
+
+                    /**
+                     * Author - Akilan
+                     * Date - 18-07-2016
+                     * Purpose - Fetch next and next most article for scroll based article load
+                     */
+                    function next_post_scrollarticle($blog_title_ar, $i) {
+                        $current = isset($blog_title_ar[$i]) ? $blog_title_ar[$i] : "";
+                        $next_title = isset($blog_title_ar[$i + 1]) ? $blog_title_ar[$i + 1] : "";
+                        $next_next_title = isset($blog_title_ar[$i + 2]) ? $blog_title_ar[$i + 2] : "";
+                        $data = array($current, $next_title, $next_next_title);
+                        return get_title_class($data);
+                    }
+
+                    /**
+                     * Author - Akilan
+                     * Date - 18-07-2016
+                     * Purpose - For setting class based on title length
+                     */
+                    function get_title_class($data) {
+                        $lengths = array_map('strlen', $data);
+                        $max_length = max($lengths);
+                        switch ($max_length) {
+                            case $max_length > 75:
+                                return 'title_length_four';
+                                break;
+                            case $max_length > 50 && $max_length <= 75:
+                                return 'title_length_three';
+                                break;
+                            case $max_length <= 50 && $max_length > 25:
+                                return 'title_length_two';
+                                break;
+                            case $max_length <= 25:
+                                return 'title_length_one';
+                                break;
+                        }
+                    }
+
+                    /**
+                     * Author - Rajasingh
+                     * Date  - 15-07-2016
+                     * Purpose - Check the post contains both category and subcategory.
+                     */
+                    function check_cat_subcat($getPostcat) {
+                        $temp_cat = array_flip($getPostcat);
+                        foreach ($temp_cat as $key => $val) {
+                            $top_parent = category_top_parent_id($key);
+                            if ($top_parent != $key) {
+                                if (isset($temp_cat[$top_parent]))
+                                    unset($temp_cat[$top_parent]);
+                            }
+                        }
+                        $temp_catval = array_flip($temp_cat);
+                        return $temp_catval;
+                    }
+
+                    /**
+                     * Author - Vinoth Raja
+                     * Date  - 16-07-2016
+                     * Purpose - For customizing wp_favorite_posts plugin for remove star from remove favorites section  
+                     * 
+                     */
+                    function customized_saved_stories() {
+                        global $post;
+                        $post_id = &$post->ID;
+                        extract($args);
+                        $str = "";
+                        if ($show_span)
+                            $str = "<span class='wpfp-span'>";
+                        $str .= wpfp_before_link_img();
+                        $str .= wpfp_loading_img();
+                        if ($action == "remove"):
+                            $str .= "<a class='wpfp-link' href='?wpfpaction=remove&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('remove_favorite') . "' rel='nofollow'>" . wpfp_get_option('remove_favorite') . "</a>";
+                        elseif ($action == "add"):
+                            $str .= "<i class='fa fa-star-o' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
+                        elseif (wpfp_check_favorited($post_id)):
+                            $str .= "<a class='wpfp-link' href='?wpfpaction=remove&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('remove_favorite') . "' rel='nofollow'>" . wpfp_get_option('remove_favorite') . "</a>";
+                        else:
+                            $str .= "<i class='fa fa-star-o' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
+                        endif;
+                        if ($show_span)
+                            $str .= "</span>";
+                        if ($return) {
+                            return $str;
+                        } else {
+                            echo $str;
+                        }
+                    }
+
+                    /**
+                     * Author - Vinoth Raja
+                     * Date  - 19-07-2016
+                     * Purpose - For Disabling WordPress comment flood prevention  
+                     * 
+                     */
+                    add_filter('comment_flood_filter', '__return_false');
+
+                    /**
+                     * Created By   - Muthupandi
+                     * Created Date - 20-07-2016
+                     * Updated By   - Muthupandi 
+                     * Updated Date - 20-07-2016
+                     * Purpose      - For implementing append saved articles while click 'load more' button
+                     */
+                    function custom_scroll_saved_articles_load() {
+                        get_template_part('block/saved-articles');
+                        exit;
+                    }
+
+                    add_action('wp_ajax_custom_scroll_saved_articles_load', 'custom_scroll_saved_articles_load');
+                    add_action('wp_ajax_nopriv_custom_scroll_saved_articles_load', 'custom_scroll_saved_articles_load');
 
 
-   /**
-   * Author - Vinoth Raja
-   * Date  - 16-07-2016
-   * Purpose - For customizing wp_favorite_posts plugin for remove star from remove favorites section  
-   * 
-   */
-   function customized_saved_stories()
-   {
-         global $post;
-         $post_id = &$post->ID;
-         extract($args);
-         $str = "";
-         if ($show_span)
-         $str = "<span class='wpfp-span'>";
-         $str .= wpfp_before_link_img();
-         $str .= wpfp_loading_img();
-         if ($action == "remove"):
-         $str .= "<a class='wpfp-link' href='?wpfpaction=remove&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('remove_favorite') . "' rel='nofollow'>" . wpfp_get_option('remove_favorite') . "</a>";
-         elseif ($action == "add"):
-         $str .= "<i class='fa fa-star-o' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
-         elseif (wpfp_check_favorited($post_id)):
-         $str .= "<a class='wpfp-link' href='?wpfpaction=remove&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('remove_favorite') . "' rel='nofollow'>" . wpfp_get_option('remove_favorite') . "</a>";
-         else:
-         $str .= "<i class='fa fa-star-o' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
-         endif;
-         if ($show_span)
-         $str .= "</span>";
-         if ($return) {
-         return $str;
-         } else {
-         echo $str;
-         }
-  }
-  
-  
-   /**
-   * Author - Vinoth Raja
-   * Date  - 19-07-2016
-   * Purpose - For Disabling WordPress comment flood prevention  
-   * 
-   */
-  
-  add_filter('comment_flood_filter', '__return_false');
-  
-  
-  /**
-* Created By   - Muthupandi
-* Created Date - 20-07-2016
-* Updated By   - Muthupandi 
-* Updated Date - 20-07-2016
-* Purpose      - For implementing append saved articles while click 'load more' button
- */
-function custom_scroll_saved_articles_load(){
-    get_template_part('block/saved-articles');
-    exit;
-}
 
-add_action('wp_ajax_custom_scroll_saved_articles_load', 'custom_scroll_saved_articles_load');
-add_action('wp_ajax_nopriv_custom_scroll_saved_articles_load', 'custom_scroll_saved_articles_load');
-
-
-
+                    
