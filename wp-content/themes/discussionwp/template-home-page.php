@@ -35,7 +35,7 @@ list($post_per_section,$post_type)=scroll_loadpost_settings();
                                                 'slider_height' => ''
                                             );
                                             $my_query = null;
-                                            $atts['query_result'] = discussion_custom_featured_query('home', 'featured_article');
+                                            $atts['query_result'] = discussion_custom_featured_query('feature-home');
                                             $params = shortcode_atts($args, $atts);
                                             $html = '';
                                             $thumb_html = '';
