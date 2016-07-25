@@ -84,7 +84,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                              * collected post id and display detail
                              */
                             if(!empty($display_postid_ar)){
-                                $followed_posts = query_posts(array('post_type' => $post_type, 'post__in' => $display_postid_ar, 'nopaging' => true));
+                                $followed_posts = query_posts(array('post_type' => $post_type, 'post__in' => $display_postid_ar, 'nopaging' => true,'orderby'=>'post__in'));
                                 global $wp_query;
                                 get_template_part('block/home-article-detail');  
                             }
