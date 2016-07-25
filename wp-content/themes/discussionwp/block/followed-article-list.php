@@ -11,7 +11,8 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
 ?>
 <div class="wpb_column vc_column_container vc_col-sm-12">
     <div class="vc_column-inner ">
-        <div class="wpb_wrapper">            
+        <div class="wpb_wrapper">
+            <div class="vc_empty_space" style="height: 20px"><span class="vc_empty_space_inner"></span></div>
             <div class="mkd-bnl-holder mkd-pl-five-holder  mkd-post-columns-2">
                 <div class="mkd-bnl-outer">
                     <div class="mkd-bnl-inner">
