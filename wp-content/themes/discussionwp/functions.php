@@ -1638,7 +1638,7 @@ if ((current_user_can('administrator') && is_admin()) || (is_super_admin())) {
  * Purpose - For implementing scroll based post loading
  */
 function custom_scroll_post_load() {
-    get_template_part('template_scroll_article');
+    get_template_part('scroll-article');
     exit;
 }
 
