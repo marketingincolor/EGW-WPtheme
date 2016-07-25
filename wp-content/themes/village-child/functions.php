@@ -45,6 +45,11 @@ add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
         if(class_exists('WPBakeryVisualComposerAbstract')) {
             wp_enqueue_script('wpb_composer_front_js');
         }
+        
+        //Remove article from the user profile page
+        if (is_page('login')) {
+            wp_enqueue_script('jquery validation', MIKADO_ASSETS_ROOT . '/js/jquery.validate.js');
+        }
     }
 
     add_action('wp_enqueue_scripts', 'discussion_scripts');
