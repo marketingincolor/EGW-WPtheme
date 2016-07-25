@@ -5,7 +5,7 @@
  * Purpose - For list out the blogs based on category
  */
 ?>
-<div class="mkd-bnl-holder mkd-pl-five-holder  mkd-post-columns-3"  data-base="mkd_post_layout_five"  data-number_of_posts="3" data-column_number="3" data-category_id="7"         data-thumb_image_size="custom_size" data-thumb_image_width="302" data-thumb_image_height="198" data-title_tag="h6" data-title_length="27" data-display_date="no"  data-display_category="no" data-display_comments="no" data-display_share="no" data-display_count="no" data-display_excerpt="yes" data-excerpt_length="7" data-display_read_more="no"     data-paged="1" data-max_pages="8">
+<div class="mkd-bnl-holder mkd-pl-five-holder  mkd-post-columns-2">
     <div class="mkd-bnl-outer">
         <div class="mkd-bnl-inner">
             <?php
@@ -82,7 +82,7 @@
                         $title_tag = $smaller_title_tag;
                     }
 
-                    if ($i % 3 == 1):
+                    if ($i % 3 == 2):
                         /* for set out class article title based on fixed heights */
                         $title_cls=next_post_scrollarticle($blog_title_ar,$i);                        
                     endif;

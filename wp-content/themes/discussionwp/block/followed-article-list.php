@@ -1,9 +1,9 @@
 <?php
 /**
  * Author - Akilan
- * Date - 10-06-2016
- * Purpose - For displaying article 3*3 based on category
- * Modified - 01-07-2016
+ * Date - 22-07-2016
+ * Purpose - For gathering followed/unfollowed category article in home page
+ *
  */
 ?>
 <?php
@@ -11,9 +11,8 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
 ?>
 <div class="wpb_column vc_column_container vc_col-sm-12">
     <div class="vc_column-inner ">
-        <div class="wpb_wrapper">
-            <div class="vc_empty_space" style="height: 40px"><span class="vc_empty_space_inner"></span></div>
-            <div class="mkd-bnl-holder mkd-pl-five-holder  mkd-post-columns-3"  data-base="mkd_post_layout_five"  data-number_of_posts="3" data-column_number="3" data-category_id="7"         data-thumb_image_size="custom_size" data-thumb_image_width="302" data-thumb_image_height="198" data-title_tag="h6" data-title_length="27" data-display_date="no"  data-display_category="no" data-display_comments="no" data-display_share="no" data-display_count="no" data-display_excerpt="yes" data-excerpt_length="7" data-display_read_more="no"     data-paged="1" data-max_pages="8">
+        <div class="wpb_wrapper">            
+            <div class="mkd-bnl-holder mkd-pl-five-holder  mkd-post-columns-2">
                 <div class="mkd-bnl-outer">
                     <div class="mkd-bnl-inner">
 
