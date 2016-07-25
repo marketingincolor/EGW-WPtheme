@@ -52,6 +52,12 @@ function clearCommentText() {
 
 //Login Form Validation
 function loginFormValidation() {
+    
+    jQuery('#fspr_login_submit').click(function(){
+        if(jQuery('.fspr_errors').length){
+            jQuery('.fspr_errors').remove();
+        }        
+    });
     if (jQuery('#fspr_login_form').length) {
         jQuery('#fspr_login_form').validate();
     }
