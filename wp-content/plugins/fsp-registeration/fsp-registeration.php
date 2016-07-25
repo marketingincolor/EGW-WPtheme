@@ -242,14 +242,19 @@ function fspr_login_member() {
             wp_set_current_user($user->ID, $_POST['fspr_user_login']);
             do_action('wp_login', $_POST['fspr_user_login']);
             //wp_redirect(home_url('/user-profile'));
-            $meta_data=get_user_meta(get_current_user_id(),'wp_capabilities',true);                        
+            $user_blog_id=get_user_meta($user->ID,'primary_blog',true);
+            if($user_blog_id!=1)
+                $meta_data=get_user_meta($user->ID,'wp_'.$user_blog_id.'_capabilities',true);
+            else 
+                $meta_data=get_user_meta($user->ID,'wp_capabilities',true);
+            
             if (is_super_admin()) {                                
                 wp_redirect(home_url('/wp-admin'));
-            } else {                
+            } else {                  
                 if(isset($meta_data['subscriber'])){ 
                     $location = $_POST['redirect']; // referral URL fetch from post value
                     $findblog_page = url_to_postid($location); // Get Post ID from referral URL
-                    echo $getwhichIs = get_post_type($findblog_page); // Find Post Type using Post ID
+                    $getwhichIs = get_post_type($findblog_page); // Find Post Type using Post ID
                     if ($getwhichIs == "videos") {
                         wp_redirect($location);
                     } elseif ($getwhichIs == "post") {
@@ -333,7 +338,13 @@ register_activation_hook(__FILE__, 'add_roles_on_plugin_activation');
 function fsp_template_redirect() {
     
     if(is_user_logged_in()){               
-        $meta_data=get_user_meta(get_current_user_id(),'wp_capabilities',true);
+
+        $user_blog_id=get_user_meta(get_current_user_id(),'primary_blog',true);
+        if($user_blog_id!=1)
+            $meta_data=get_user_meta(get_current_user_id(),'wp_'.$user_blog_id.'_capabilities',true);
+        else 
+            $meta_data=get_user_meta(get_current_user_id(),'wp_capabilities',true);
+            
         if ((is_page('login') || is_page('register'))) {  
             
             if(wp_get_referer()){
