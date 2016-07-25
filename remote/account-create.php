@@ -1,4 +1,5 @@
 <?php
+
 /*
   Functionality : Create account based on Formstack.com Registeration form
  * Author: Ramkumar.S
@@ -7,8 +8,7 @@
  */
 
 //Removed functionality for theme account create setup
-  //exit();
-
+//exit();
 // define some vars
 require_once '../wp-config.php';
 if (defined('ABSPATH'))
@@ -28,8 +28,8 @@ else
  */
 $role = 'subscriber';
 $form_email = 'Email';
-$form_userfname= 'userfname';
-$form_userlname= 'userlname';
+$form_userfname = 'First_Name';
+$form_userlname = 'Last_Name';
 
 
 /*
@@ -105,30 +105,30 @@ $data = array(
     'user_pass' => $random_password,
     'user_login' => $user_email,
     'user_email' => $user_email,
-    'user_nicename'=>$username,
-    'display_name'=>$user_fname,
-    'first_name'=>$user_fname,
-    'last_name'=> $user_lname,
+    'user_nicename' => $username,
+    'display_name' => $user_fname,
+    'first_name' => $user_fname,
+    'last_name' => $user_lname,
     'role' => $role // optional but useful if you create a special role for remote registered users
 );
-if($branch=="Villages"){
-switch_to_blog(2);
-}
+//if ($branch == "Villages") {
+    switch_to_blog(2); //just register all users for subsite by Martina(Monday 25 July 2016)
+//}
 
-//$new_user = wp_insert_user($data);
+$new_user = wp_insert_user($data);
 
 //Inserting addtional field to user meta table. Field Name:primary_blog
-if(!empty($new_user)){
-$primary_blog = get_current_blog_id();
-if (get_user_meta($new_user, 'primary_blog', true)) {
-    update_user_meta($new_user, 'primary_blog', $primary_blog, true);
-} else {
-    add_user_meta($new_user, 'primary_blog', $primary_blog, false);
+if (!empty($new_user)) {
+    $primary_blog = get_current_blog_id();
+    if (get_user_meta($new_user, 'primary_blog', true)) {
+        update_user_meta($new_user, 'primary_blog', $primary_blog, true);
+    } else {
+        add_user_meta($new_user, 'primary_blog', $primary_blog, false);
+    }
 }
-}
-if($branch=="Villages"){
-restore_current_blog();
-}
+//if ($branch == "Villages") {
+    restore_current_blog();
+//}
 
 $login_page = home_url('/login');
 $register_page = home_url('/register');
@@ -140,10 +140,10 @@ if (!is_wp_error($new_user)) {
     $subject = "Evergreen Wellness remote registration";
     $message = "Hi there! \n You have successfully registered to the site. Your login name is {$user_email} and your password is {$random_password}\nPlease change your password immediately!\n\nTesting content\n"
             . "<a href='$login_page'>Click Here </a> to login\n";
-    foreach($_POST as $key => $val){
-        $message .= 'key=> '.$key;
+    foreach ($_POST as $key => $val) {
+        $message .= 'key=> ' . $key;
         $message .= '\n';
-        $message .= 'val=> '.$val;
+        $message .= 'val=> ' . $val;
     }
     $sender = 'From: Admin <ramfsp@gmail.com>' . "\r\n";
     $headers[] = 'MIME-Version: 1.0' . "\r\n";
@@ -159,15 +159,14 @@ if (!is_wp_error($new_user)) {
         wp_mail('devaguru@mailinator.com', 'Evergreen Wellness remote registration', "User {$user_email} was registered on " . date('d.m. Y H:i:s', time()));
     }
     echo 'success';
-} 
-else {
+} else {
     echo '<div class="error notice"><p>There has been an error while register. Please try again ! - Redirecting in 2 sec</p></div>';
     $message = "Hi there! \n You have successfully registered to the site. Your login name is {$user_email} and your password is {$random_password}\nPlease change your password immediately!\n\nTesting content\n"
             . "<a href='$login_page'>Click Here </a> to login\n";
-    foreach($_POST as $key => $val){
-        $message .= 'key=> '.$key;
+    foreach ($_POST as $key => $val) {
+        $message .= 'key=> ' . $key;
         $message .= '\n';
-        $message .= 'val=> '.$val;
+        $message .= 'val=> ' . $val;
     }
     wp_mail('devaguru@mailinator.com', 'Evergreen Wellness remote registration Failed', $message);
     header('Refresh: 2;url= /register');
