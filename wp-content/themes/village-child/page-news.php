@@ -14,7 +14,7 @@ $category = 'news';
         <div class="mkd-full-width">
             <div class="mkd-full-width-inner"> 
                 <?php get_template_part('template-page-featured-content'); ?>
-                <div class="vc_empty_space" style="height: 40px"><span class="vc_empty_space_inner"></span></div>
+                <div class="vc_empty_space" style="height: 0px"><span class="vc_empty_space_inner"></span></div>
                 <div class="mkd-container">
                     <div class="mkd-container-inner clearfix">
                         <div class="mkd-two-columns-75-25  mkd-content-has-sidebar clearfix">
@@ -24,7 +24,7 @@ $category = 'news';
                                     $my_query = null;
                                     $my_query = discussion_custom_category_query('post', $category);
                                     global $wp_query;
-                                    get_template_part('template-blog-block');
+                                    get_template_part('block/category-blog-list'); 
                                     ?>                            
                                 </div>
                             </div>		
@@ -32,6 +32,7 @@ $category = 'news';
                                 <div class="mkd-column-inner">
                                     <aside class="mkd-sidebar" style="transform: translateY(0px);">
                                         <div class="widget widget_apsc_widget">   
+                                          <div class="vc_empty_space" style="height: 40px"><span class="vc_empty_space_inner"></span></div>    
                                             <?php get_template_part('sidebar/template-sidebar-home'); ?>
                                         </div>    
                                     </aside>

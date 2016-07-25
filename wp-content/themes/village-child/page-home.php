@@ -145,6 +145,7 @@ $category='feature-home';
                         <div class="mkd-column-inner">
                             <aside class="mkd-sidebar" style="transform: translateY(0px);">
                                 <div class="widget widget_apsc_widget">   
+                                <div class="vc_empty_space" style="height: 40px"><span class="vc_empty_space_inner"></span></div>         
                                <?php get_template_part('sidebar/template-sidebar-home'); ?>
                                 </div>    
                             </aside>
