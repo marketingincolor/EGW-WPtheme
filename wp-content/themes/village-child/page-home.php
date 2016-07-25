@@ -137,7 +137,7 @@ $category='feature-home';
                             }
                               
                             global $wp_query;
-                            get_template_part('template-blog-block');                  
+                            get_template_part('block/category-blog-list');                    
                             ?>                   
                         </div>
                     </div>		

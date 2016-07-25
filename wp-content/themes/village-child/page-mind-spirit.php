@@ -26,7 +26,7 @@ list($post_per_section,$post_type)=scroll_loadpost_settings();
                 <div class="mkd-two-columns-75-25  mkd-content-has-sidebar clearfix">
                     <div class="mkd-column1 mkd-content-left-from-sidebar">
                         <div class="mkd-column-inner">
-                              <div class="vc_empty_space" style="height: 20px"><span class="vc_empty_space_inner"></span></div> 
+                              <div class="vc_empty_space" style="height: 0px"><span class="vc_empty_space_inner"></span></div> 
                             <?php
                             $my_query = null;
                             $my_query = discussion_custom_category_query($post_type,$category,$post_per_section); 

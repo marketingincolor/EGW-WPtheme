@@ -36,7 +36,7 @@ $post_type=array('videos');
                                 $my_query = null;
                                 $my_query = discussion_custom_category_query('videos', $category, $post_per_section);
                                 global $wp_query;
-                                get_template_part('template-blog-block');
+                                get_template_part('block/category-blog-list');   
                                 ?>
                             </div>
                         </div>		
