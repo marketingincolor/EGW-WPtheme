@@ -58,7 +58,7 @@ $merged_new_ar=array();
                             if(empty($subcat_id_ar)){
                                 global $wp_query;
                                 get_template_part('template-blog-block');   
-                                include(locate_template('ajax-pagination.php'));
+                                include(locate_template('block/ajax-pagination.php'));
                             }
 
 
