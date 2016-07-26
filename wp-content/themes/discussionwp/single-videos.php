@@ -46,8 +46,10 @@
                         <div class="mkd-post-content">                                
                             <div class="mkd-post-text">
                                 <div class="mkd-post-text-inner clearfix">                          
-                                    <?php discussion_get_module_template_part('templates/single/parts/title', 'blog'); ?>                           
+                                    <?php discussion_get_module_template_part('templates/single/parts/title', 'blog'); ?>  
+                                    <div class="mdk-sng-pst"> 
                                     <?php the_content(); ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
