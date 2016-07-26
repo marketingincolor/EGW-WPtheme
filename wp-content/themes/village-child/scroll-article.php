@@ -24,7 +24,7 @@
             $title_cls = "";
             if ($posts_array) {
                 $count = 0;
-                $title_tag = 'h3';
+                $title_tag = 'h4';
                 $title_length = '';
                 $display_date = 'yes';
                 $date_format = 'd. F Y';
