@@ -343,9 +343,17 @@ function postRatingSessionValidation(){
 }
     
 function DiscussionRatePost(){
+    
+    var message="";
+    var is_user_login = jQuery.trim(jQuery('#is_user_login').val());
     var user_primary_site=jQuery.trim(jQuery('#user_primary_site').val());
-    if(user_primary_site && user_primary_site!== '0'){        
-        jQuery('#site_user_validation_popup_message').text('Only members of this branch can give ratings to the post.');
+    if(!is_user_login){
+        message="You need to be a registered member to rate this Article.";
+    }else if(user_primary_site && user_primary_site!== '0'){
+        message="Only members of this branch can give ratings to the post.";        
+    }
+    if(message){
+        jQuery('#site_user_validation_popup_message').text(message);
         jQuery.magnificPopup.open({
                 items: {
                     src: '#site_user_validation_popup',
