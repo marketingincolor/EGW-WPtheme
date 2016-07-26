@@ -89,87 +89,89 @@
                                                     ?>
                                                           </div>
                                                       </div> -->
-                                                    <div class="mkd-follow-category">
-                                                        <!-- Category follow functionality Start-->
-                                                        <?php
-                                                        if (is_user_logged_in()) {
-                                                            ?>
-                                                            <script type = "text/javascript">
-                                                                jQuery(function () {
-                                                                    jQuery(".comment_button").click(function () {
-                                                                        
-                                                                        var user_primary_site=jQuery.trim(jQuery('#user_primary_site').val());
-                                                                        if(user_primary_site && user_primary_site!== '0'){                                                                                                                                                        
-                                                                            jQuery('#site_user_validation_popup_message').text('Only members of this branch can follow or unfollow the category.');
-                                                                            jQuery.magnificPopup.open({
-                                                                                items: {
-                                                                                    src: '#site_user_validation_popup',
-                                                                                },
-                                                                                type: 'inline'
+                                                    <?php if(get_current_blog_id()!=1){ ?>
+                                                        <div class="mkd-follow-category">
+                                                            <!-- Category follow functionality Start-->
+                                                            <?php
+                                                            if (is_user_logged_in()) {
+                                                                ?>
+                                                                <script type = "text/javascript">
+                                                                    jQuery(function () {
+                                                                        jQuery(".comment_button").click(function () {
+
+                                                                            var user_primary_site=jQuery.trim(jQuery('#user_primary_site').val());
+                                                                            if(user_primary_site && user_primary_site!== '0'){                                                                                                                                                        
+                                                                                jQuery('#site_user_validation_popup_message').text('Only members of this branch can follow or unfollow the category.');
+                                                                                jQuery.magnificPopup.open({
+                                                                                    items: {
+                                                                                        src: '#site_user_validation_popup',
+                                                                                    },
+                                                                                    type: 'inline'
+                                                                                });
+                                                                                return false;
+                                                                            }
+                                                                            var dataString = jQuery('form').serialize();
+                                                                            //alert(dataString);
+                                                                            jQuery.ajax({
+                                                                                type: "POST",
+                                                                                url: "wp-content/themes/discussionwp/followajax.php",
+                                                                                data: jQuery('form').serialize(),
+                                                                                cache: false,
+                                                                                success: function (successvalue) {
+
+                                                                                    obj = JSON.parse(successvalue);
+                                                                                    alert(obj.msg);
+                                                                                    jQuery(".comment_button").html(obj.label);
+                                                                                    jQuery("#flagvalue").val(obj.setflag);
+                                                                                    jQuery("#submitvalue").val(obj.submitvalue);
+                                                                                }
                                                                             });
                                                                             return false;
-                                                                        }
-                                                                        var dataString = jQuery('form').serialize();
-                                                                        //alert(dataString);
-                                                                        jQuery.ajax({
-                                                                            type: "POST",
-                                                                            url: "wp-content/themes/discussionwp/followajax.php",
-                                                                            data: jQuery('form').serialize(),
-                                                                            cache: false,
-                                                                            success: function (successvalue) {
-
-                                                                                obj = JSON.parse(successvalue);
-                                                                                alert(obj.msg);
-                                                                                jQuery(".comment_button").html(obj.label);
-                                                                                jQuery("#flagvalue").val(obj.setflag);
-                                                                                jQuery("#submitvalue").val(obj.submitvalue);
-                                                                            }
                                                                         });
-                                                                        return false;
                                                                     });
-                                                                });
-                                                            </script>
-                                                            <div id="followContainer">
-                                                                <form method="post" name="form" action="">
-                                                                    <?php
-                                                                    $categoryid = $category_id;
-                                                                    $userid = get_current_user_id();
-                                                                    //echo $categoryid =  $wp_query->get_queried_object();
-                                                                    //echo "SELECT *from wp_follow_category where userid=" . $userid . " and categoryid=" . $categoryid . "";
-                                                                    $fetchresult = $wpdb->get_results("SELECT *from wp_follow_category where userid=" . $userid . " and categoryid=" . $categoryid . "");
-                                                                    $rowresult = $wpdb->num_rows;
-                                                                    foreach ($fetchresult as $results) {
-                                                                        $currentFlag = $results->flag;
-                                                                    }
-                                                                    if ($rowresult > 0) {
-                                                                        $processDo = "update";
-                                                                        if ($currentFlag == 0) {
-                                                                            $setValue = 1;
-                                                                            $label = "Follow";
-                                                                        } else {
-                                                                            $setValue = 0;
-                                                                            $label = "unfollow";
+                                                                </script>
+                                                                <div id="followContainer">
+                                                                    <form method="post" name="form" action="">
+                                                                        <?php
+                                                                        $categoryid = $category_id;
+                                                                        $userid = get_current_user_id();
+                                                                        //echo $categoryid =  $wp_query->get_queried_object();
+                                                                        //echo "SELECT *from wp_follow_category where userid=" . $userid . " and categoryid=" . $categoryid . "";
+                                                                        $fetchresult = $wpdb->get_results("SELECT *from wp_follow_category where userid=" . $userid . " and categoryid=" . $categoryid . "");
+                                                                        $rowresult = $wpdb->num_rows;
+                                                                        foreach ($fetchresult as $results) {
+                                                                            $currentFlag = $results->flag;
                                                                         }
-                                                                    } else {
-                                                                        $label = "Follow";
-                                                                        $processDo = "insert";
-                                                                        $setValue = 1;
-                                                                    }
-                                                                    if($parent_category_id!=$category_id) {
-                                                                    ?>
-                                                                    <button type="button" value="<?php echo $label; ?>" name="follow" class="comment_button"><?php echo $label; ?></button>
-                                                                    <?php } ?>
-                                                                    <input type="hidden" name="updateflag" id="flagvalue" value="<?php echo $setValue; ?>">
-                                                                    <input type="hidden" name="submit" id="submitvalue" value="<?php echo $processDo; ?>">
-                                                                    <input type="hidden" name="userid" value="<?php echo $userid; ?>">
-                                                                    <input type="hidden" name="categoryid" value="<?php echo $categoryid; ?>">                                                                    
-                                                                </form>
-                                                            </div>
+                                                                        if ($rowresult > 0) {
+                                                                            $processDo = "update";
+                                                                            if ($currentFlag == 0) {
+                                                                                $setValue = 1;
+                                                                                $label = "Follow";
+                                                                            } else {
+                                                                                $setValue = 0;
+                                                                                $label = "unfollow";
+                                                                            }
+                                                                        } else {
+                                                                            $label = "Follow";
+                                                                            $processDo = "insert";
+                                                                            $setValue = 1;
+                                                                        }
+                                                                        if($parent_category_id!=$category_id) {
+                                                                        ?>
+                                                                        <button type="button" value="<?php echo $label; ?>" name="follow" class="comment_button"><?php echo $label; ?></button>
+                                                                        <?php } ?>
+                                                                        <input type="hidden" name="updateflag" id="flagvalue" value="<?php echo $setValue; ?>">
+                                                                        <input type="hidden" name="submit" id="submitvalue" value="<?php echo $processDo; ?>">
+                                                                        <input type="hidden" name="userid" value="<?php echo $userid; ?>">
+                                                                        <input type="hidden" name="categoryid" value="<?php echo $categoryid; ?>">                                                                    
+                                                                    </form>
+                                                                </div>
 
 
-                                                        <?php } ?>
-                                                        <!-- Category follow functionality end -->
-                                                    </div>
+                                                            <?php } ?>
+                                                            <!-- Category follow functionality end -->
+                                                        </div>
+                                                    <?php } ?>
                                                 <?php } ?>
                                             </div>
                                         </div>

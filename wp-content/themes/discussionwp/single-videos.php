@@ -29,11 +29,11 @@
                                 'comments' => $display_comments,
                             ))
                             ?>
-                         <div class="mkd-post-fsp-savestories">
+<!--                         <div class="mkd-post-fsp-savestories">
                         <?php 
-                           customized_saved_stories();    
+                           //customized_saved_stories();    
                         ?>
-                        </div>
+                        </div>-->
                         </div>
                 </article>
             </div>
