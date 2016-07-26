@@ -1028,6 +1028,7 @@ aside.mkd-sidebar .mkd-section-title-holder .mkd-st-title, .wpb_widgetised_colum
     padding:10px 0;
     font-size: 14pt !important;
     line-height: 29px !important;
+    overflow: hidden;
 }
 .mdk-sng-pst p img{
     float:left;
@@ -1310,3 +1311,14 @@ table.ai1ec-month-view {
     }
 }
 /*Trending news style ends here*/
+
+/* Registration message style starts here*/
+.registration-msg{
+    background-color: rgba(179, 204, 54, 1);
+    color: #fff;
+    padding: 10px 15px;
+}
+.registration-msg .mkd-vertical-align-containers{
+    padding: 0px;
+}
+/* Registration message style ends here*/
