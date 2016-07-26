@@ -77,11 +77,6 @@
                     $background_image_style = discussion_custom_getImageBackground($id);
                     $params['background_image_style'] = $background_image_style;
                     $post_no_class = 'mkd-post-number-' . $post_no;
-
-                    if ($post_no > 1) {
-                        $title_tag = $smaller_title_tag;
-                    }
-
                     if ($i % 2 == 1):
                         /* for set out class article title based on fixed heights */
                         $title_cls=village_next_post_scrollarticle($blog_title_ar,$i);                             
