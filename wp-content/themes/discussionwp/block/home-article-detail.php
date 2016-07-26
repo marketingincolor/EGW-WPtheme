@@ -19,7 +19,7 @@ if (have_posts()) {
     while (have_posts()) :the_post();
         if ($i % 2 == 1):
             /* for set out class article title based on fixed heights */
-            $title_cls = article_title_class($wp_query);
+            $title_cls = village_article_title_class($wp_query);
         endif;
 
         $id = get_the_ID();

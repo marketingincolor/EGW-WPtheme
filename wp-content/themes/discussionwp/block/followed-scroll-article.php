@@ -82,9 +82,9 @@
                         $title_tag = $smaller_title_tag;
                     }
 
-                    if ($i % 3 == 2):
+                    if ($i % 2 == 1):
                         /* for set out class article title based on fixed heights */
-                        $title_cls=next_post_scrollarticle($blog_title_ar,$i);                        
+                        $title_cls=village_next_post_scrollarticle($blog_title_ar,$i);                             
                     endif;
 
                     /**
