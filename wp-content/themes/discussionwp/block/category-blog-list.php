@@ -33,9 +33,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                 $params['background_image_style'] = $background_image_style;
                                 $post_no_class = 'mkd-post-number-' . $post_no;
                                 $total_post = $wp_query->found_posts;
-                                if ($post_no > 1) {
-                                    $title_tag = $smaller_title_tag;
-                                }
+                               
 
                                 /**
                                  * For hide date/category for videos section
@@ -71,24 +69,8 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                                     $rl_category_color = rl_color($the_category_id);
                                                 }
                                                 ?>
-                                                <div  style="background: <?php echo $rl_category_color; ?>;" class="mkd-post-info-category">
-                                                    <?php //the_category(' / '); ?>
-                                                    <?php
-                                                    $getPostcat = wp_get_post_categories($id);
-                                                    $getResultset = check_cat_subcat($getPostcat);
-                                                    count($getResultset);
-                                                    $j = 1;
-                                                    foreach ($getResultset as $getKeyrel) {
-                                                        echo '<a href="' . get_category_link($getKeyrel) . '" target="_self">';
-                                                        echo get_cat_name($getKeyrel) . '</a>';
-                                                        if ($j > count($getResultset) - 1) {
-                                                            echo "";
-                                                        } else {
-                                                            echo "\x20/\x20";
-                                                        }
-                                                        $j++;
-                                                    }
-                                                    ?>
+                                                <div  style="background: <?php echo $rl_category_color; ?>;" class="mkd-post-info-category">                                                    
+                                                    <?php  echo organize_catgory($id); ?>
                                                 </div>
                                                 <?php
                                             }
