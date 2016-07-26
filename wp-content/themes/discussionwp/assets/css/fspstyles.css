@@ -617,6 +617,9 @@ footer .mkd-footer-top-holder {
     color:red;
     font-size: 13px;
 }
+.fsborderradius .fsBody .fsForm{
+        width: 90% !important;
+    }
 @media only screen and (max-width: 640px) {
     .join-content {
         padding: 0 0 0 7% !important;
