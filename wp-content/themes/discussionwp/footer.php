@@ -49,7 +49,8 @@ discussion_get_footer();
 </script>
 
 <input type="hidden" id="accountvalid" value="test"/>
-<input type="hidden" name="user_primary_site" id="user_primary_site" value="<?php echo other_user_profile_redirection(); ?>"> 
+<input type="hidden" name="user_primary_site" id="user_primary_site" value="<?php echo other_user_profile_redirection(); ?>">
+<input tyie="hidden" name="is_user_login" id="is_user_login" value="<?php echo is_user_logged_in(); ?>" >
 
 <div class="white-popup-block user-session-block mfp-hide" id="site_user_validation_popup">
     <div class="find-a-branch-container">        
