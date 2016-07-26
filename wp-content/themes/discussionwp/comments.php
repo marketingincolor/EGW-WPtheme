@@ -34,6 +34,24 @@
 	<?php endif; ?>
 <?php endif; ?>
 </div></div>
+
+    
+<?php 
+if ( is_user_logged_in() ) :
+    $userid=get_current_user_id();
+    $user_blog_id=get_user_meta($userid,'primary_blog',true);
+    $blog_id = get_current_blog_id();    
+    if($user_blog_id!=1)
+        $meta_data=get_user_meta($userid,'wp_'.$user_blog_id.'_capabilities',true);
+    else 
+        $meta_data=get_user_meta($userid,'wp_capabilities',true);
+    $user_profile_url=admin_url( 'profile.php' );
+    if(isset($meta_data['subscriber'])){
+        $user_profile_url=home_url( '/user-profile' );
+    }
+endif;
+?>
+
 <?php
 $commenter = wp_get_current_commenter();
 $req = get_option( 'require_name_email' );
@@ -50,6 +68,7 @@ $args = array(
 	'comment_notes_before' => '',
 	'comment_notes_after' => '',
         'must_log_in' => '<p class="must-log-in">' .  sprintf( __( 'You must be <a href="%s">logged in</a> to post a comment.' ), home_url('/login') ) . '</p>',
+        'logged_in_as' => '<p class="logged-in-as">' .sprintf(__( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>' ),$user_profile_url,$user_identity,wp_logout_url( apply_filters( 'the_permalink', get_permalink( ) ) )) . '</p>',
 	'fields' => apply_filters( 'comment_form_default_fields', array(
 		'author' => '<div class="mkd-three-columns clearfix"><div class="mkd-three-columns-inner"><div class="mkd-column"><div class="mkd-column-inner"><input id="author" name="author" placeholder="'. esc_html__( 'Name:','discussionwp' ) .'" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '"' . $aria_req . ' /></div></div>',
 		'url' => '<div class="mkd-column"><div class="mkd-column-inner"><input id="email" name="email" placeholder="'. esc_html__( 'E-mail:','discussionwp' ) .'" type="text" value="' . esc_attr(  $commenter['comment_author_email'] ) . '"' . $aria_req . ' /></div></div>',
@@ -64,12 +83,8 @@ $args = array(
 	</div>
 <?php } ?>
 
-<?php 
-if ( is_user_logged_in() ) :
-    $userid=get_current_user_id();
-    $user_blog_id=get_user_meta($userid,'primary_blog',true);
-    $blog_id = get_current_blog_id();    
-endif;
+
+<?php
 if(isset($blog_id) && $blog_id != $user_blog_id): ?>
         <div class="mkd-comment-form">
             <div class="comment-respond" id="respond">
