@@ -81,23 +81,7 @@
                                     }
                                     ?>
                                     <div  style="background: <?php echo $rl_category_color; ?>;" class="mkd-post-info-category">
-                                        <?php //the_category(' / '); ?>
-                                        <?php
-                                        $getPostcat = wp_get_post_categories($id);
-                                        $getResultset = check_cat_subcat($getPostcat);
-                                        count($getResultset);
-                                        $j = 1;
-                                        foreach ($getResultset as $getKeyrel) {
-                                            echo '<a href="' . get_category_link($getKeyrel) . '" target="_self">';
-                                            echo get_cat_name($getKeyrel) . '</a>';
-                                            if ($j > count($getResultset) - 1) {
-                                                echo "";
-                                            } else {
-                                                echo "\x20/\x20";
-                                            }
-                                            $j++;
-                                        }
-                                        ?>
+                                        <?php echo organize_catgory($id); ?> 
                                     </div>
                                     <?php
                                 }
