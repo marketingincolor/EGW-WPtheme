@@ -1170,7 +1170,7 @@ function organize_catgory($id) {
     $getResultset = check_cat_subcat($getPostcat);
     count($getResultset);
     $j = 1;
-    $out="";
+    $out = "";
     foreach ($getResultset as $getKeyrel) {
         $out.='<a href="' . get_category_link($getKeyrel) . '">';
         $out.=get_cat_name($getKeyrel) . '</a>';
@@ -1775,35 +1775,37 @@ function custom_comment($comment, $args, $depth) {
     ?>
     <li>
         <div class="<?php echo esc_attr($comment_class); ?>">
-    <?php if (!$is_pingback_comment) { ?>
+            <?php if (!$is_pingback_comment) { ?>
                 <div class="mkd-comment-image"> 
-        <?php
-        $user = $comment->user_id;
-        $custom_avatar_meta_data = get_user_meta($user, 'custom_avatar');
-        if (isset($custom_avatar_meta_data) && !empty($custom_avatar_meta_data[0])):
-            $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0]);
-            ?>
+                    <?php
+                    $user = $comment->user_id;
+                    $custom_avatar_meta_data = get_user_meta($user, 'custom_avatar');
+                    if (isset($custom_avatar_meta_data) && !empty($custom_avatar_meta_data[0])):
+                        $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0]);
+                        ?>
                         <img src="<?php echo $attachment[0]; ?>" width="85px" height="85px"/>
-        <?php else : ?>                                                    
+                    <?php else : ?>                                                    
                         <img src="<?php echo MIKADO_ASSETS_ROOT . '/img/aavathar.jpg' ?>" width="85px" height="85px" />
-        <?php endif; ?>
+                    <?php endif; ?>
                 </div>
             <?php } ?>
             <div class="mkd-comment-text-and-info">
                 <div class="mkd-comment-info-and-links">
                     <h6 class="mkd-comment-name">
-                <?php if ($is_pingback_comment) {
-                    esc_html_e('Pingback:', 'discussionwp');
-                } ?><span class="mkd-comment-author"><?php echo wp_kses_post(get_comment_author_link()); ?></span>
-                <?php if ($is_author_comment) { ?>
+                        <?php
+                        if ($is_pingback_comment) {
+                            esc_html_e('Pingback:', 'discussionwp');
+                        }
+                        ?><span class="mkd-comment-author"><?php echo wp_kses_post(get_comment_author_link()); ?></span>
+                        <?php if ($is_author_comment) { ?>
                             <span class="mkd-comment-mark"><?php esc_html_e('/', 'discussionwp'); ?></span>
                             <span class="mkd-comment-author-label"><?php esc_html_e('Author', 'discussionwp'); ?></span>
-                <?php } ?>
+                        <?php } ?>
                     </h6>
                     <h6 class="mkd-comment-links">
-    <?php if (!is_user_logged_in()) : ?>
+                        <?php if (!is_user_logged_in()) : ?>
                             <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>
-                        <?php
+                            <?php
                         else :
                             $userid = get_current_user_id();
                             $user_blog_id = get_user_meta($userid, 'primary_blog', true);
@@ -1811,7 +1813,7 @@ function custom_comment($comment, $args, $depth) {
                             if ($blog_id != $user_blog_id):
                                 ?>
                                 <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>                                                                   
-                            <?php
+                                <?php
                             else :
                                 comment_reply_link(array_merge($args, array('reply_text' => esc_html__('Reply', 'discussionwp'), 'depth' => $depth, 'max_depth' => $args['max_depth'])));
                             endif;
@@ -1826,63 +1828,63 @@ function custom_comment($comment, $args, $depth) {
                         <?php if (!$is_pingback_comment) { ?>
                     <div class="mkd-comment-text">
                         <div class="mkd-text-holder" id="comment-<?php echo comment_ID(); ?>">
-                            <?php comment_text(); ?>
+        <?php comment_text(); ?>
                             <span class="mkd-comment-date"><?php comment_time(get_option('date_format')); ?></span>
                         </div>
                     </div>
-                <?php } ?>
+        <?php } ?>
             </div>
         </div>
-                        <?php
-                    }
+        <?php
+    }
 
-                    function SocialNetworkShareLink($net, $image) {
+    function SocialNetworkShareLink($net, $image) {
 
-                        switch ($net) {
-                            case 'facebook':
-                                $link = 'window.open(\'http://www.facebook.com/sharer/sharer.php?s=100&amp;p[title]=' . urlencode(discussion_addslashes(get_the_title())) . '&amp;p[summary]=' . urlencode(discussion_addslashes(get_the_excerpt())) . '&amp;p[url]=' . urlencode(get_permalink()) . '/' . rand() . '&amp;p[images][0]=' . $image[0] . '&v=' . rand() . '\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
-                                break;
-                            case 'twitter':
-                                $count_char = (isset($_SERVER['https'])) ? 23 : 22;
-                                $twitter_via = (discussion_options()->getOptionValue('twitter_via') !== '') ? ' via ' . discussion_options()->getOptionValue('twitter_via') . ' ' : '';
-                                $link = 'window.open(\'http://twitter.com/home?status=' . urlencode(discussion_the_excerpt_max_charlength($count_char) . $twitter_via) . get_permalink() . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
-                                break;
-                            case 'google_plus':
-                                $link = 'popUp=window.open(\'https://plus.google.com/share?url=' . urlencode(get_permalink()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
-                                break;
-                            case 'linkedin':
-                                $link = 'popUp=window.open(\'http://linkedin.com/shareArticle?mini=true&amp;url=' . urlencode(get_permalink()) . '&amp;title=' . urlencode(get_the_title()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
-                                break;
-                            case 'tumblr':
-                                $link = 'popUp=window.open(\'http://www.tumblr.com/share/link?url=' . urlencode(get_permalink()) . '&amp;name=' . urlencode(get_the_title()) . '&amp;description=' . urlencode(get_the_excerpt()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
-                                break;
-                            case 'pinterest':
-                                $link = 'popUp=window.open(\'http://pinterest.com/pin/create/button/?url=' . urlencode(get_permalink()) . '&amp;description=' . discussion_addslashes(get_the_title()) . '&amp;media=' . urlencode($image[0]) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
-                                break;
-                            case 'vk':
-                                $link = 'popUp=window.open(\'http://vkontakte.ru/share.php?url=' . urlencode(get_permalink()) . '&amp;title=' . urlencode(get_the_title()) . '&amp;description=' . urlencode(get_the_excerpt()) . '&amp;image=' . urlencode($image[0]) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
-                                break;
-                            default:
-                                $link = '';
-                        }
+        switch ($net) {
+            case 'facebook':
+                $link = 'window.open(\'http://www.facebook.com/sharer/sharer.php?s=100&amp;p[title]=' . urlencode(discussion_addslashes(get_the_title())) . '&amp;p[summary]=' . urlencode(discussion_addslashes(get_the_excerpt())) . '&amp;p[url]=' . urlencode(get_permalink()) . '/' . rand() . '&amp;p[images][0]=' . $image[0] . '&v=' . rand() . '\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
+                break;
+            case 'twitter':
+                $count_char = (isset($_SERVER['https'])) ? 23 : 22;
+                $twitter_via = (discussion_options()->getOptionValue('twitter_via') !== '') ? ' via ' . discussion_options()->getOptionValue('twitter_via') . ' ' : '';
+                $link = 'window.open(\'http://twitter.com/home?status=' . urlencode(discussion_the_excerpt_max_charlength($count_char) . $twitter_via) . get_permalink() . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+                break;
+            case 'google_plus':
+                $link = 'popUp=window.open(\'https://plus.google.com/share?url=' . urlencode(get_permalink()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+                break;
+            case 'linkedin':
+                $link = 'popUp=window.open(\'http://linkedin.com/shareArticle?mini=true&amp;url=' . urlencode(get_permalink()) . '&amp;title=' . urlencode(get_the_title()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+                break;
+            case 'tumblr':
+                $link = 'popUp=window.open(\'http://www.tumblr.com/share/link?url=' . urlencode(get_permalink()) . '&amp;name=' . urlencode(get_the_title()) . '&amp;description=' . urlencode(get_the_excerpt()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+                break;
+            case 'pinterest':
+                $link = 'popUp=window.open(\'http://pinterest.com/pin/create/button/?url=' . urlencode(get_permalink()) . '&amp;description=' . discussion_addslashes(get_the_title()) . '&amp;media=' . urlencode($image[0]) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+                break;
+            case 'vk':
+                $link = 'popUp=window.open(\'http://vkontakte.ru/share.php?url=' . urlencode(get_permalink()) . '&amp;title=' . urlencode(get_the_title()) . '&amp;description=' . urlencode(get_the_excerpt()) . '&amp;image=' . urlencode($image[0]) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+                break;
+            default:
+                $link = '';
+        }
 
-                        return $link;
-                    }
+        return $link;
+    }
 
-                    /**
-                     * Author - Akilan 
-                     * Date - 08-07-2016
-                     * Purpose - For adding thumb image for facebook sharing
-                     */
-                    add_action('wp_head', 'fbfixheads');
+    /**
+     * Author - Akilan 
+     * Date - 08-07-2016
+     * Purpose - For adding thumb image for facebook sharing
+     */
+    add_action('wp_head', 'fbfixheads');
 
-                    function fbfixheads() {
-                        global $post;
-                        $ftf_head = "";
-                        if (has_post_thumbnail()) {
-                            $featuredimg = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), "Full");
-                            $ftf_description = get_the_excerpt($post->ID);
-                            $ftf_head = '
+    function fbfixheads() {
+        global $post;
+        $ftf_head = "";
+        if (has_post_thumbnail()) {
+            $featuredimg = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), "Full");
+            $ftf_description = get_the_excerpt($post->ID);
+            $ftf_head = '
         <!--/ Facebook Thumb Fixer Open Graph /-->
         <meta property="og:type" content="' . $default . '" />
         <meta property="og:url" content="' . get_permalink() . '" />
@@ -1895,218 +1897,234 @@ function custom_comment($comment, $args, $depth) {
         <meta itemprop="description" content="' . wp_kses($ftf_description, array()) . '" />
         <meta itemprop="image" content="' . $featuredimg[0] . '" />
         ';
-                        }
-                        echo $ftf_head;
-                    }
+        }
+        echo $ftf_head;
+    }
 
-                    /**
-                     * Author - Akilan
-                     * Date - 11-07-2016
-                     * Purpose - For getting main category name
-                     */
-                    function main_category_name() {
-                        return array('activity', 'medical', 'financial', 'relationships', 'nutrition', 'mind-spirit');
-                    }
+    /**
+     * Author - Akilan
+     * Date - 11-07-2016
+     * Purpose - For getting main category name
+     */
+    function main_category_name() {
+        return array('activity', 'medical', 'financial', 'relationships', 'nutrition', 'mind-spirit');
+    }
 
-                    /**
-                     * Author - Akilan
-                     * Date - 11-07-2016
-                     * Purpose - For getting category id from category name
-                     */
-                    function get_main_category_detail() {
-                        $cat_ar = main_category_name();
-                        if (!empty($cat_ar)) {
-                            foreach ($cat_ar as $our_cat_each) {
-                                $cat = get_term_by('slug', $our_cat_each, 'category');
-                                if ($cat) {
-                                    $cat_id_ar[$cat->term_id] = $cat->term_id;
-                                }
-                            }
-                        }
-                        return $cat_id_ar;
-                    }
+    /**
+     * Author - Akilan
+     * Date - 11-07-2016
+     * Purpose - For getting category id from category name
+     */
+    function get_main_category_detail() {
+        $cat_ar = main_category_name();
+        if (!empty($cat_ar)) {
+            foreach ($cat_ar as $our_cat_each) {
+                $cat = get_term_by('slug', $our_cat_each, 'category');
+                if ($cat) {
+                    $cat_id_ar[$cat->term_id] = $cat->term_id;
+                }
+            }
+        }
+        return $cat_id_ar;
+    }
 
-                    /**
-                     * Author - Akilan
-                     * Date  - 11-07-2016
-                     * Purpose - For hiding pages from search
-                     * 
-                     */
-                    function remove_pages_from_search() {
-                        global $wp_post_types;
-                        $wp_post_types['page']->exclude_from_search = true;
-                    }
+    /**
+     * Author - Akilan
+     * Date  - 11-07-2016
+     * Purpose - For hiding pages from search
+     * 
+     */
+    function remove_pages_from_search() {
+        global $wp_post_types;
+        $wp_post_types['page']->exclude_from_search = true;
+    }
 
-                    add_action('init', 'remove_pages_from_search');
+    add_action('init', 'remove_pages_from_search');
 
-                    /**
-                     * Author - Vinoth Raja
-                     * Date  - 14-07-2016
-                     * Purpose - For adding comment approved email functionality
-                     * 
-                     */
-                    add_filter('wp_mail_content_type', create_function('', 'return "text/html"; ')); //for adding html content in wp_mail
+    /**
+     * Author - Vinoth Raja
+     * Date  - 14-07-2016
+     * Purpose - For adding comment approved email functionality
+     * 
+     */
+    add_filter('wp_mail_content_type', create_function('', 'return "text/html"; ')); //for adding html content in wp_mail
 //for except admin users
-                    add_action('wp_set_comment_status', 'custom_set_comment_status', 10, 2);
+    add_action('wp_set_comment_status', 'custom_set_comment_status', 10, 2);
 
-                    function custom_set_comment_status($comment_id, $comment_status) {
-                        if ($comment_status == 'approve') {
-                            $comment = get_comment($comment_id);
-                            if ($comment->comment_parent) {
-                                $parent_comment = get_comment($comment->comment_parent);
-                                wp_mail($parent_comment->comment_author_email, 'myEvergreenWellness', 'New comment on your post ' . get_the_title($comment->comment_post_ID) . '<br>Author:' . $comment->comment_author . '<br>Email:' . $comment->comment_author_email . '<br>Comment:' . $comment->comment_content . '<br>You can see all comments on this post here:' . get_comment_link($comment->comment_ID));
-                            }
-                        }
-                    }
+    function custom_set_comment_status($comment_id, $comment_status) {
+        if ($comment_status == 'approve') {
+            $comment = get_comment($comment_id);
+            if ($comment->comment_parent) {
+                $parent_comment = get_comment($comment->comment_parent);
+                wp_mail($parent_comment->comment_author_email, 'myEvergreenWellness', 'New comment on your post ' . get_the_title($comment->comment_post_ID) . '<br>Author:' . $comment->comment_author . '<br>Email:' . $comment->comment_author_email . '<br>Comment:' . $comment->comment_content . '<br>You can see all comments on this post here:' . get_comment_link($comment->comment_ID));
+            }
+        }
+    }
 
 //for admin user
-                    add_action('comment_post', 'notify_author_of_reply', 10, 2);
+    add_action('comment_post', 'notify_author_of_reply', 10, 2);
 
-                    function notify_author_of_reply($comment_id, $approved) {
-                        if ($approved === 1) {
-                            $comment = get_comment($comment_id);
-                            if ($comment->comment_parent) {
-                                $parent_comment = get_comment($comment->comment_parent);
-                                wp_mail($parent_comment->comment_author_email, 'myEvergreenWellness', 'New comment on your post ' . get_the_title($comment->comment_post_ID) . '<br>Author:' . $comment->comment_author . '<br>Email:' . $comment->comment_author_email . '<br>Comment:' . $comment->comment_content . '<br>You can see all comments on this post here:' . get_comment_link($comment->comment_ID));
-                            }
-                        }
-                    }
+    function notify_author_of_reply($comment_id, $approved) {
+        if ($approved === 1) {
+            $comment = get_comment($comment_id);
+            if ($comment->comment_parent) {
+                $parent_comment = get_comment($comment->comment_parent);
+                wp_mail($parent_comment->comment_author_email, 'myEvergreenWellness', 'New comment on your post ' . get_the_title($comment->comment_post_ID) . '<br>Author:' . $comment->comment_author . '<br>Email:' . $comment->comment_author_email . '<br>Comment:' . $comment->comment_content . '<br>You can see all comments on this post here:' . get_comment_link($comment->comment_ID));
+            }
+        }
+    }
 
-                    /**
-                     * Author - Akilan
-                     * Date  - 14-07-2016
-                     * Purpose - change link layout to have a pipe prepended (safety comment)
-                     */
-                    add_filter('safe_report_comments_flagging_link', 'adjust_flagging_link');
+    /**
+     * Author - Akilan
+     * Date  - 14-07-2016
+     * Purpose - change link layout to have a pipe prepended (safety comment)
+     */
+    add_filter('safe_report_comments_flagging_link', 'adjust_flagging_link');
 
-                    function adjust_flagging_link($link) {
-                        return ' / ' . $link;
-                    }
+    function adjust_flagging_link($link) {
+        return ' / ' . $link;
+    }
 
-                    /**
-                     * Author - Akilan
-                     * Date - 15-07-2016
-                     * Purpose - for set out class article title based on fixed heights
-                     */
-                    function article_title_class() {
-                        global $wp_query;
-                        $next_post = $wp_query->posts[$wp_query->current_post + 1];
-                        $next_next_post = $wp_query->posts[$wp_query->current_post + 2];
-                        $data = array(get_the_title(), $next_post->post_title, $next_next_post->post_title);
-                        return get_title_class($data);
-                    }
+    /**
+     * Author - Akilan
+     * Date - 15-07-2016
+     * Purpose - for set out class article title based on fixed heights
+     */
+    function article_title_class() {
+        global $wp_query;
+        $next_post = $wp_query->posts[$wp_query->current_post + 1];
+        $next_next_post = $wp_query->posts[$wp_query->current_post + 2];
+        $data = array(get_the_title(), $next_post->post_title, $next_next_post->post_title);
+        return get_title_class($data);
+    }
 
-                    /**
-                     * Author - Akilan
-                     * Date - 18-07-2016
-                     * Purpose - Fetch next and next most article for scroll based article load
-                     */
-                    function next_post_scrollarticle($blog_title_ar, $i) {
-                        $current = isset($blog_title_ar[$i]) ? $blog_title_ar[$i] : "";
-                        $next_title = isset($blog_title_ar[$i + 1]) ? $blog_title_ar[$i + 1] : "";
-                        $next_next_title = isset($blog_title_ar[$i + 2]) ? $blog_title_ar[$i + 2] : "";
-                        $data = array($current, $next_title, $next_next_title);
-                        return get_title_class($data);
-                    }
+    /**
+     * Author - Akilan
+     * Date - 18-07-2016
+     * Purpose - Fetch next and next most article for scroll based article load
+     */
+    function next_post_scrollarticle($blog_title_ar, $i) {
+        $current = isset($blog_title_ar[$i]) ? $blog_title_ar[$i] : "";
+        $next_title = isset($blog_title_ar[$i + 1]) ? $blog_title_ar[$i + 1] : "";
+        $next_next_title = isset($blog_title_ar[$i + 2]) ? $blog_title_ar[$i + 2] : "";
+        $data = array($current, $next_title, $next_next_title);
+        return get_title_class($data);
+    }
 
-                    /**
-                     * Author - Akilan
-                     * Date - 18-07-2016
-                     * Purpose - For setting class based on title length
-                     */
-                    function get_title_class($data) {
-                        $lengths = array_map('strlen', $data);
-                        $max_length = max($lengths);
-                        switch ($max_length) {
-                            case $max_length > 75:
-                                return 'title_length_four';
-                                break;
-                            case $max_length > 50 && $max_length <= 75:
-                                return 'title_length_three';
-                                break;
-                            case $max_length <= 50 && $max_length > 25:
-                                return 'title_length_two';
-                                break;
-                            case $max_length <= 25:
-                                return 'title_length_one';
-                                break;
-                        }
-                    }
+    /**
+     * Author - Akilan
+     * Date - 18-07-2016
+     * Purpose - For setting class based on title length
+     */
+    function get_title_class($data) {
+        $lengths = array_map('strlen', $data);
+        $max_length = max($lengths);
+        switch ($max_length) {
+            case $max_length > 75:
+                return 'title_length_four';
+                break;
+            case $max_length > 50 && $max_length <= 75:
+                return 'title_length_three';
+                break;
+            case $max_length <= 50 && $max_length > 25:
+                return 'title_length_two';
+                break;
+            case $max_length <= 25:
+                return 'title_length_one';
+                break;
+        }
+    }
 
-                    /**
-                     * Author - Rajasingh
-                     * Date  - 15-07-2016
-                     * Purpose - Check the post contains both category and subcategory.
-                     */
-                    function check_cat_subcat($getPostcat) {
-                        $temp_cat = array_flip($getPostcat);
-                        foreach ($temp_cat as $key => $val) {
-                            $top_parent = category_top_parent_id($key);
-                            if ($top_parent != $key) {
-                                if (isset($temp_cat[$top_parent]))
-                                    unset($temp_cat[$top_parent]);
-                            }
-                        }
-                        $temp_catval = array_flip($temp_cat);
-                        return $temp_catval;
-                    }
+    /**
+     * Author - Rajasingh
+     * Date  - 15-07-2016
+     * Purpose - Check the post contains both category and subcategory.
+     */
+    function check_cat_subcat($getPostcat) {
+        $temp_cat = array_flip($getPostcat);
+        foreach ($temp_cat as $key => $val) {
+            $top_parent = category_top_parent_id($key);
+            if ($top_parent != $key) {
+                if (isset($temp_cat[$top_parent]))
+                    unset($temp_cat[$top_parent]);
+            }
+        }
+        $temp_catval = array_flip($temp_cat);
+        return $temp_catval;
+    }
 
-                    /**
-                     * Author - Vinoth Raja
-                     * Date  - 16-07-2016
-                     * Purpose - For customizing wp_favorite_posts plugin for remove star from remove favorites section  
-                     * 
-                     */
-                    function customized_saved_stories() {
-                        global $post;
-                        $post_id = &$post->ID;
-                        extract($args);
-                        $str = "";
-                        if ($show_span)
-                            $str = "<span class='wpfp-span'>";
-                        $str .= wpfp_before_link_img();
-                        $str .= wpfp_loading_img();
-                        if ($action == "remove"):
-                            $str .= "<a class='wpfp-link' href='?wpfpaction=remove&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('remove_favorite') . "' rel='nofollow'>" . wpfp_get_option('remove_favorite') . "</a>";
-                        elseif ($action == "add"):
-                            $str .= "<i class='fa fa-star-o' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
-                        elseif (wpfp_check_favorited($post_id)):
-                            $str .= "<a class='wpfp-link' href='?wpfpaction=remove&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('remove_favorite') . "' rel='nofollow'>" . wpfp_get_option('remove_favorite') . "</a>";
-                        else:
-                            $str .= "<i class='fa fa-star-o' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
-                        endif;
-                        if ($show_span)
-                            $str .= "</span>";
-                        if ($return) {
-                            return $str;
-                        } else {
-                            echo $str;
-                        }
-                    }
+    /**
+     * Author - Vinoth Raja
+     * Date  - 16-07-2016
+     * Purpose - For customizing wp_favorite_posts plugin for remove star from remove favorites section  
+     * 
+     */
+    function customized_saved_stories() {
+        global $post;
+        $post_id = &$post->ID;
+        extract($args);
+        $str = "";
+        if ($show_span)
+            $str = "<span class='wpfp-span'>";
+        $str .= wpfp_before_link_img();
+        $str .= wpfp_loading_img();
+        if ($action == "remove"):
+            $str .= "<a class='wpfp-link' href='?wpfpaction=remove&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('remove_favorite') . "' rel='nofollow'>" . wpfp_get_option('remove_favorite') . "</a>";
+        elseif ($action == "add"):
+            $str .= "<i class='fa fa-star-o' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
+        elseif (wpfp_check_favorited($post_id)):
+            $str .= "<a class='wpfp-link' href='?wpfpaction=remove&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('remove_favorite') . "' rel='nofollow'>" . wpfp_get_option('remove_favorite') . "</a>";
+        else:
+            $str .= "<i class='fa fa-star-o' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
+        endif;
+        if ($show_span)
+            $str .= "</span>";
+        if ($return) {
+            return $str;
+        } else {
+            echo $str;
+        }
+    }
 
-                    /**
-                     * Author - Vinoth Raja
-                     * Date  - 19-07-2016
-                     * Purpose - For Disabling WordPress comment flood prevention  
-                     * 
-                     */
-                    add_filter('comment_flood_filter', '__return_false');
+    /**
+     * Author - Vinoth Raja
+     * Date  - 19-07-2016
+     * Purpose - For Disabling WordPress comment flood prevention  
+     * 
+     */
+    add_filter('comment_flood_filter', '__return_false');
 
-                    /**
-                     * Created By   - Muthupandi
-                     * Created Date - 20-07-2016
-                     * Updated By   - Muthupandi 
-                     * Updated Date - 20-07-2016
-                     * Purpose      - For implementing append saved articles while click 'load more' button
-                     */
-                    function custom_scroll_saved_articles_load() {
-                        get_template_part('block/saved-articles');
-                        exit;
-                    }
+    /**
+     * Created By   - Muthupandi
+     * Created Date - 20-07-2016
+     * Updated By   - Muthupandi 
+     * Updated Date - 20-07-2016
+     * Purpose      - For implementing append saved articles while click 'load more' button
+     */
+    function custom_scroll_saved_articles_load() {
+        get_template_part('block/saved-articles');
+        exit;
+    }
 
-                    add_action('wp_ajax_custom_scroll_saved_articles_load', 'custom_scroll_saved_articles_load');
-                    add_action('wp_ajax_nopriv_custom_scroll_saved_articles_load', 'custom_scroll_saved_articles_load');
+    add_action('wp_ajax_custom_scroll_saved_articles_load', 'custom_scroll_saved_articles_load');
+    add_action('wp_ajax_nopriv_custom_scroll_saved_articles_load', 'custom_scroll_saved_articles_load');
 
+     /**
+     * Created By   - Rajasingh
+     * Created Date - 25-07-2016
+     * Updated By   - Rajasingh 
+     * Updated Date - 25-07-2016
+     * Purpose      - Getting username using user email address
+     */
+    function login_with_email_address($username) {
+        $user = get_user_by('email', $username);
+        $userDetails = $user->data;
+        // print_r($userDetails->user_login);
+        // exit;
+        if (!empty($userDetails->user_login))
+            $user_username = $userDetails->user_login;
+        return $user_username;
+    }
 
-
-                    
+    add_action('init', 'login_with_email_address');
+    

@@ -27,7 +27,7 @@ list($post_per_section,$post_type)=scroll_loadpost_settings();
                             $my_query = discussion_custom_categorylist_query($post_type,$category_id,$post_per_section);   
 //                            $my_query = discussion_custom_categorylist_query($category_id);
                             global $wp_query;
-                            get_template_part('template-blog-block');
+                            get_template_part('block/category-blog-list');
                             ?>               
                         
                         </div>

@@ -31,7 +31,7 @@ $merged_new_ar=array();
                             <?php                            
                                 $my_query = discussion_custom_categorylist_query($post_type, $cat_id_ar, $post_per_section);
                                 global $wp_query;
-                                get_template_part('template-blog-block');   
+                                get_template_part('block/category-blog-list');      
                                 include(locate_template('block/ajax-pagination.php'));
                             ?>      
                         </div>

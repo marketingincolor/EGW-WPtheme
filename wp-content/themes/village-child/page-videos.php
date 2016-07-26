@@ -26,7 +26,7 @@ $post_type=array('videos');
               videos section
              */
             ?>
-            <div class="vc_empty_space" style="height: 40px"><span class="vc_empty_space_inner"></span></div>
+            <div class="vc_empty_space" style="height: 0px"><span class="vc_empty_space_inner"></span></div>
             <div class="mkd-container">
                 <div class="mkd-container-inner clearfix">
                     <div class="mkd-two-columns-75-25  mkd-content-has-sidebar clearfix">
@@ -36,7 +36,7 @@ $post_type=array('videos');
                                 $my_query = null;
                                 $my_query = discussion_custom_category_query('videos', $category, $post_per_section);
                                 global $wp_query;
-                                get_template_part('template-blog-block');
+                                get_template_part('block/category-blog-list');   
                                 ?>
                             </div>
                         </div>		
@@ -44,6 +44,7 @@ $post_type=array('videos');
                             <div class="mkd-column-inner">
                                 <aside class="mkd-sidebar" style="transform: translateY(0px);">
                                     <div class="widget widget_apsc_widget"> 
+                                     <div class="vc_empty_space" style="height: 40px"><span class="vc_empty_space_inner"></span></div>     
                                         <?php get_template_part('sidebar/template-sidebar-home'); ?>
                                     </div>    
                                 </aside>
