@@ -1825,14 +1825,14 @@ function custom_comment($comment, $args, $depth) {
                         ?>
                     </h6>
                 </div>
-                        <?php if (!$is_pingback_comment) { ?>
+                <?php if (!$is_pingback_comment) { ?>
                     <div class="mkd-comment-text">
                         <div class="mkd-text-holder" id="comment-<?php echo comment_ID(); ?>">
-        <?php comment_text(); ?>
+                            <?php comment_text(); ?>
                             <span class="mkd-comment-date"><?php comment_time(get_option('date_format')); ?></span>
                         </div>
                     </div>
-        <?php } ?>
+                <?php } ?>
             </div>
         </div>
         <?php
@@ -2109,7 +2109,7 @@ function custom_comment($comment, $args, $depth) {
     add_action('wp_ajax_custom_scroll_saved_articles_load', 'custom_scroll_saved_articles_load');
     add_action('wp_ajax_nopriv_custom_scroll_saved_articles_load', 'custom_scroll_saved_articles_load');
 
-     /**
+    /**
      * Created By   - Rajasingh
      * Created Date - 25-07-2016
      * Updated By   - Rajasingh 
@@ -2127,4 +2127,28 @@ function custom_comment($comment, $args, $depth) {
     }
 
     add_action('init', 'login_with_email_address');
+
+    /**
+     * Created By   - Ramkumar.S
+     * Created Date - 27-07-2016
+     * Updated By   - Ramkumar.S 
+     * Updated Date - 27-07-2016
+     * Purpose      - Add Find Branch/Join link to naviagation menu
+     */
+    function add_login_logout_to_menu($items, $args) {
+        //change theme location with your them location name
+        if (is_admin())
+            return $items;
+
+        $redirect = ( is_home() ) ? home_url('/') : home_url('/');
+        $homeurl = home_url('/');
+        if (!is_user_logged_in())
+            $link = '<a class="" href="' . $homeurl . 'register"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">Join</span></span></span></a>';
+        // else  
+        //  $link = '<a class="" href="' . $homeurl . 'register"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">Find a Branch</span></span></span></a>';
+
+        return $items.= '<li id="log-in-out-link" class="menu-item menu-item-type-custom menu-item-object-custom  mkd-menu-narrow">' . $link . '</li>';
+    }
+    add_filter('wp_nav_menu_items', 'add_login_logout_to_menu', 50, 2);
+
     
