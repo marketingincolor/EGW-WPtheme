@@ -33,6 +33,7 @@ function resetpassword() {
             },
             success: function (data) {
                 jQuery('.status').html(data);
+                jQuery('#user_email').val("");
             }
         });
         e.preventDefault();

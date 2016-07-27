@@ -1713,7 +1713,7 @@ function ajax_forgotPassword() {
             $subject = 'Your new password';
             $sender = 'From: ' . get_option('name') . ' <' . $from . '>' . "\r\n";
 
-            $message = 'Your new password is: ' . $random_password;
+            $message = 'Hi '. $user->user_nicename .',<br>We received a request for password change. Your new password is: ' . $random_password.'Please use this password for further login.<br>Thanks!';
 
             $headers[] = 'MIME-Version: 1.0' . "\r\n";
             $headers[] = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
