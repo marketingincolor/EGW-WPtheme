@@ -6,7 +6,7 @@ Date  - 27-06-2016
 Purpose - For reset password functionality
 */ 
 ?>
-
+<?php if(!is_user_logged_in()){ ?>
 <?php get_header(); ?>
 
 <script type="text/javascript">
@@ -33,4 +33,9 @@ Purpose - For reset password functionality
     </form>
 </div>
 
-<?php get_footer(); ?>
+<?php get_footer(); 
+}
+else
+{
+  wp_redirect(home_url());  
+}?>
