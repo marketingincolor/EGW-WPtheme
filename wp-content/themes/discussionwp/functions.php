@@ -2142,7 +2142,7 @@ function custom_comment($comment, $args, $depth) {
 
         $redirect = ( is_home() ) ? home_url('/') : home_url('/');
         $homeurl = home_url('/');
-        if (!is_user_logged_in())
+        if (!is_user_logged_in()  && get_current_blog_id()==1)
             $link = '<a class="" href="' . $homeurl . 'register"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">Join</span></span></span></a>';
         // else  
         //  $link = '<a class="" href="' . $homeurl . 'register"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">Find a Branch</span></span></span></a>';
