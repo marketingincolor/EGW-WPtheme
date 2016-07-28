@@ -578,6 +578,10 @@ footer .mkd-footer-top-holder {
 .fs_forgot_password a:hover{
     text-decoration: none;
 }
+.frp-success
+{
+    color:#b3cc36;
+}
 #fspr_user_login-error, #fspr_user_pass-error {
     color: red; 
     float: left;
