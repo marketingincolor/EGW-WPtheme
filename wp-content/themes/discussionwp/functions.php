@@ -1796,7 +1796,8 @@ function custom_comment($comment, $args, $depth) {
                         if ($is_pingback_comment) {
                             esc_html_e('Pingback:', 'discussionwp');
                         }
-                        ?><span class="mkd-comment-author"><?php echo wp_kses_post(get_comment_author_link()); ?></span>
+                        $user_name = get_user_meta($user);
+                        ?><span class="mkd-comment-author"><?php if(!empty($user_name['first_name'][0])&&!empty($user_name['first_name'][0])){ echo $user_name['first_name'][0] . ' ' . $user_name['last_name'][0]; } else { echo wp_kses_post(get_comment_author_link()); } ?></span>
                         <?php if ($is_author_comment) { ?>
                             <span class="mkd-comment-mark"><?php esc_html_e('/', 'discussionwp'); ?></span>
                             <span class="mkd-comment-author-label"><?php esc_html_e('Author', 'discussionwp'); ?></span>
