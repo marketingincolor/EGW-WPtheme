@@ -578,6 +578,10 @@ footer .mkd-footer-top-holder {
 .fs_forgot_password a:hover{
     text-decoration: none;
 }
+.frp-success
+{
+    color:#b3cc36;
+}
 #fspr_user_login-error, #fspr_user_pass-error {
     color: red; 
     float: left;
@@ -618,8 +622,8 @@ footer .mkd-footer-top-holder {
     font-size: 13px;
 }
 .fsborderradius .fsBody .fsForm{
-        width: 90% !important;
-    }
+    width: 90% !important;
+}
 @media only screen and (max-width: 640px) {
     .join-content {
         padding: 0 0 0 7% !important;
@@ -634,6 +638,14 @@ footer .mkd-footer-top-holder {
     .fsSubmit input.fsSubmitButton{
         margin-left: 0% !important;
         width: 50% !important;
+    }
+    .fsForm .fsLabelHorizontal > label, .fsForm .fsLabelHorizontal > legend, .fsForm .fsLabelHorizontal > span.fsLabel, .fsForm .fsLabelHorizontal legend.fsLabelHorizontal{
+        padding-bottom: 10px !important;
+        text-align:left !important;
+        width:100% !important;
+    }
+    .fsForm .fsLabelHorizontal .fsLabel + .fieldset-content, .fsForm .fsLabelHorizontal .fsLabel + .fsFieldHorizontal{
+        width:100% !important;
     }
 }
 
@@ -1322,3 +1334,19 @@ table.ai1ec-month-view {
     padding: 0px;
 }
 /* Registration message style ends here*/
+
+
+/*For set out minimum height blog box if description not exist*/
+
+@media only screen and (min-width: 769px) {
+    .mkd-pt-six-item .mkd-pt-six-image-holder {
+        min-height: 198px;
+        background: #ffffff;
+    }
+    .mkd-post-excerpt-fsp{
+        margin-bottom: 0;
+        margin-top: 13px;
+        min-height: 44px;
+    }
+}
+/*For set out minimum height blog box if description not exist ends*/

@@ -1685,16 +1685,16 @@ function ajax_forgotPassword() {
     $account = $_POST['user_email'];
 
     if (empty($account)) {
-        $error = 'Lost your password? Please enter your email address.';
+        $error = '<div class="error">Lost your password? Please enter your email address.</div>';
     } else {
         if (is_email($account)) {
 
             if (email_exists($account))
                 $get_by = 'email';
             else
-                $error = 'Please enter your valid email address.';
+                $error = '<div class="error">Please enter your valid email address.</div>';
         } else
-            $error = 'Invalid e-mail address.';
+            $error = '<div class="error">Invalid e-mail address.</div>';
     }
 
     if (empty($error)) {
@@ -1722,11 +1722,11 @@ function ajax_forgotPassword() {
 
             $mail = wp_mail($to, $subject, $message, $headers);
             if ($mail) {
-                $success = 'You will received a new password via email.';
+                $success = '<div class="frp-success">You will received a new password via email.<div>';
             } else
-                $error = 'System is unable to send you mail containg your new password.';
+                $error = '<div class="error">System is unable to send you mail containg your new password.</div>';
         } else {
-            $error = 'Oops! Something went wrong while updaing your account.';
+            $error = '<div class="error">Oops! Something went wrong while updaing your account.</div>';
         }
     }
 
@@ -1842,12 +1842,12 @@ function custom_comment($comment, $args, $depth) {
 
         switch ($net) {
             case 'facebook':
-                $link = 'window.open(\'http://www.facebook.com/sharer/sharer.php?s=100&amp;p[title]=' . urlencode(discussion_addslashes(get_the_title())) . '&amp;p[summary]=' . urlencode(discussion_addslashes(get_the_excerpt())) . '&amp;p[url]=' . urlencode(get_permalink()) . '/' . rand() . '&amp;p[images][0]=' . $image[0] . '&v=' . rand() . '\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
+                $link = 'window.open(\'http://www.facebook.com/sharer/sharer.php?s=100&amp;p[title]=' . urlencode(discussion_addslashes(get_the_title())) . '&amp;p[summary]=' . urlencode(discussion_addslashes(get_the_excerpt())) . '&amp;u=' . urlencode(get_permalink()) . '/' . rand() . '&amp;p[images][0]=' . $image[0] . '&v=' . rand() . '\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
                 break;
             case 'twitter':
                 $count_char = (isset($_SERVER['https'])) ? 23 : 22;
                 $twitter_via = (discussion_options()->getOptionValue('twitter_via') !== '') ? ' via ' . discussion_options()->getOptionValue('twitter_via') . ' ' : '';
-                $link = 'window.open(\'http://twitter.com/home?status=' . urlencode(discussion_the_excerpt_max_charlength($count_char) . $twitter_via) . get_permalink() . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+                $link = 'window.open(\'https://twitter.com/intent/tweet?text='. urlencode(discussion_addslashes(get_the_title())) .'&url=' . urlencode(discussion_the_excerpt_max_charlength($count_char) . $twitter_via) . get_permalink() . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
                 break;
             case 'google_plus':
                 $link = 'popUp=window.open(\'https://plus.google.com/share?url=' . urlencode(get_permalink()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
@@ -2135,20 +2135,20 @@ function custom_comment($comment, $args, $depth) {
      * Updated Date - 27-07-2016
      * Purpose      - Add Find Branch/Join link to naviagation menu
      */
-    function add_login_logout_to_menu($items, $args) {
-        //change theme location with your them location name
-        if (is_admin())
-            return $items;
-
-        $redirect = ( is_home() ) ? home_url('/') : home_url('/');
-        $homeurl = home_url('/');
-        if (!is_user_logged_in()  && get_current_blog_id()==1)
-            $link = '<a class="" href="' . $homeurl . 'register"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">Join</span></span></span></a>';
-        // else  
-        //  $link = '<a class="" href="' . $homeurl . 'register"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">Find a Branch</span></span></span></a>';
-
-        return $items.= '<li id="log-in-out-link" class="menu-item menu-item-type-custom menu-item-object-custom  mkd-menu-narrow">' . $link . '</li>';
-    }
-    add_filter('wp_nav_menu_items', 'add_login_logout_to_menu', 50, 2);
+//    function add_login_logout_to_menu($items, $args) {
+//        //change theme location with your them location name
+//        if (is_admin())
+//            return $items;
+//
+//        $redirect = ( is_home() ) ? home_url('/') : home_url('/');
+//        $homeurl = home_url('/');
+//        if (!is_user_logged_in()  && get_current_blog_id()==1)
+//            $link = '<a class="" href="' . $homeurl . 'register"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">Join</span></span></span></a>';
+//        // else  
+//        //  $link = '<a class="" href="' . $homeurl . 'register"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">Find a Branch</span></span></span></a>';
+//
+//        return $items.= '<li id="log-in-out-link" class="menu-item menu-item-type-custom menu-item-object-custom  mkd-menu-narrow">' . $link . '</li>';
+//    }
+//    add_filter('wp_nav_menu_items', 'add_login_logout_to_menu', 50, 2);
 
     

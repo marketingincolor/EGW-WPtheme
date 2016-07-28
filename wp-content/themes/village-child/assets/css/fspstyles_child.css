@@ -45,3 +45,12 @@ and open the template in the editor.
     background-color: #3a7d3b;
 }
 /*sidebar welcome css ends here*/
+
+/*For set out minimum height blog box if description not exist*/
+@media only screen and (min-width: 769px) {
+    .mkd-pt-six-item .mkd-pt-six-image-holder {
+    min-height: 223px;
+    background: #fff;
+}
+}
+/*For set out minimum height blog box if description not exist ends*/
