@@ -1328,4 +1328,5 @@ table.ai1ec-month-view {
 .mkd-post-excerpt-fsp{
     margin-bottom: 0;
     margin-top: 13px;
+    min-height: 44px;
 }
