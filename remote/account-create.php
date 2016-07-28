@@ -137,8 +137,8 @@ $register_page = home_url('/register');
 // optional email component
 if (!is_wp_error($new_user)) {
 
-    $subject = "Evergreen Wellness remote registration";
-    $message = "Hi there! \n You have successfully registered to the site. Your login name is {$user_email} and your password is {$random_password}\nPlease change your password immediately!\n\nTesting content\n"
+    $subject = "Evergreen Wellness registration";
+    $message = "Hi there! \n You have successfully registered to the site. Your login name is {$user_email} and your password is {$random_password}\nPlease change your password immediately!\n"
             . "<a href='$login_page'>Click Here </a> to login\n";
     $sender = 'From: Admin <ramfsp@gmail.com>' . "\r\n";
     $headers[] = 'MIME-Version: 1.0' . "\r\n";
