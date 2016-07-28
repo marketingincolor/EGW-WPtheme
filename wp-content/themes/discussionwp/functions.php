@@ -1685,16 +1685,16 @@ function ajax_forgotPassword() {
     $account = $_POST['user_email'];
 
     if (empty($account)) {
-        $error = 'Lost your password? Please enter your email address.';
+        $error = '<div class="error">Lost your password? Please enter your email address.</div>';
     } else {
         if (is_email($account)) {
 
             if (email_exists($account))
                 $get_by = 'email';
             else
-                $error = 'Please enter your valid email address.';
+                $error = '<div class="error">Please enter your valid email address.</div>';
         } else
-            $error = 'Invalid e-mail address.';
+            $error = '<div class="error">Invalid e-mail address.</div>';
     }
 
     if (empty($error)) {
@@ -1722,11 +1722,11 @@ function ajax_forgotPassword() {
 
             $mail = wp_mail($to, $subject, $message, $headers);
             if ($mail) {
-                $success = 'You will received a new password via email.';
+                $success = '<div class="frp-success">You will received a new password via email.<div>';
             } else
-                $error = 'System is unable to send you mail containg your new password.';
+                $error = '<div class="error">System is unable to send you mail containg your new password.</div>';
         } else {
-            $error = 'Oops! Something went wrong while updaing your account.';
+            $error = '<div class="error">Oops! Something went wrong while updaing your account.</div>';
         }
     }
 
