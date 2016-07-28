@@ -1322,3 +1322,10 @@ table.ai1ec-month-view {
     padding: 0px;
 }
 /* Registration message style ends here*/
+
+
+/*For set out minimum height blog box if description not exist*/
+.mkd-post-excerpt-fsp{
+    margin-bottom: 0;
+    margin-top: 13px;
+}

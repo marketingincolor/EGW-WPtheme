@@ -546,7 +546,7 @@ if(!function_exists('discussion_excerpt')) {
 	 */
 	function discussion_excerpt($excerpt_length) {
 		global $post;
-
+                $empty_content_p='<p class="mkd-post-excerpt-fsp"></p>';
 		if(post_password_required()) {
 			echo get_the_password_form();
 		}
@@ -590,8 +590,12 @@ if(!function_exists('discussion_excerpt')) {
 				if($excerpt !== '') {
 					echo '<p class="mkd-post-excerpt">'.wp_kses_post($excerpt).'</p>';
 				}
-			}
-		}
+			} else {
+                            echo $empty_content_p;
+                        }
+		} else {
+                    echo $empty_content_p;
+                }
 	}
 }
 
@@ -625,6 +629,7 @@ if( !function_exists('discussion_get_single_html') ) {
 	function discussion_get_single_html() {
 
 		$post_format = get_post_format();
+                
 		if($post_format === false){
 			$post_format = 'standard';
 		}
