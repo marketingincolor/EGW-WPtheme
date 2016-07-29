@@ -153,23 +153,11 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                 ?>">
                        <?php wp_reset_query();  // Restore global post data stomped by the_post().?>
             </div>
-            <?php
+           <?php
             /**
              * For displaying ads based on total count of post
              */
-            if ($total_post >= $post_per_section) {
-                $no_of_adds = floor($total_post / $post_per_section);
-                for ($i = 1; $i <= $no_of_adds; $i++) {
-                    ?>                    
-                    <div class="fsp-ads-homepage" id="adv_row_<?php echo $i; ?>" <?php if ($i != 1) { ?> style="display:none;clear:both" <?php } else { ?> style="clear:both" <?php } ?>>  
-                        <?php
-                        if (function_exists('drawAdsPlace'))
-                            drawAdsPlace(array('id' => 1), true);
-                        ?>
-                    </div>                    
-                    <?php
-                }
-            }
+            include(locate_template('block/post-middle-adsblock.php'));   
             ?>
         </div>
     </div>
