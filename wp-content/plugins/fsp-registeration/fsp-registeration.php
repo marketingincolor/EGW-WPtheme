@@ -185,7 +185,7 @@ function fspr_login_form_fields() {
     ob_start();
     ?>
     <div class="login-container">
-        <h3 class="fspr_header"><?php _e('Login'); ?></h3>
+        <h3 class="fspr_header" style="text-transform: none;"><?php _e('Sign in to your branch of MyEvergreenWellness.com.'); ?></h3>
 
         <?php
         // show any error messages after form submission
