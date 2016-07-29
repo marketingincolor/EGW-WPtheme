@@ -155,7 +155,7 @@ if (!is_wp_error($new_user)) {
     }
     echo 'success';
 }
-//else {wq
+//else {
 //    echo '<div class="error notice"><p>There has been an error while register. Please try again ! - Redirecting in 2 sec</p></div>';
 //    $message = "Hi there! \n You have successfully registered to the site. Your login name is {$user_email} and your password is {$random_password}\nPlease change your password immediately!\n\nTesting content\n"
 //            . "<a href='$login_page'>Click Here </a> to login\n";
