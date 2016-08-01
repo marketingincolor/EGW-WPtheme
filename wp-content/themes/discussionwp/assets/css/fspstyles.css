@@ -1376,3 +1376,12 @@ table.ai1ec-month-view {
     }
 }
 /*footer block for ipad ends here*/
+
+/*contact us styles starts here*/
+.fsp-wrapper-cont{
+    background: #ffffff;
+}
+.wpb-cont-cust-style a{
+        font-weight: bold;
+}
+/*contact us styles ends here*/
