@@ -7,7 +7,7 @@
  *
 */ 
 $centered = is_page('register-success') ? 'text-align:center;' : '' ;
-$listed = (is_page('sweepstakes-terms-conditions') || is_page('register') || is_page('shipshape')) ? 'true' : null;
+$listed = (is_page('sweepstakes-terms-conditions') || is_page('register') || is_page('shipshape')) || is_page('login') ? 'true' : null;
 $sidebar = discussion_sidebar_layout(); ?>
 <?php get_header(); ?>
 <style>
@@ -60,6 +60,8 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
     z-index: 99;
 }
 
+.login-container { background-color: #edebeb; }
+
 .disclosure-text { font-size: .7em; }
 /* End Custom layouts from MIC */
 </style>
@@ -79,7 +81,7 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
 					
 					<?php 
 
-						if (is_page('sweepstakes-terms-conditions') || is_page('register') || is_page('shipshape')) {
+						if ($listed) {
 							
 						}
 						else {
