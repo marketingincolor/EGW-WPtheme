@@ -49,8 +49,7 @@ and open the template in the editor.
 /*For set out minimum height blog box if description not exist*/
 @media only screen and (min-width: 769px) {
     .mkd-pt-six-item .mkd-pt-six-image-holder {
-    min-height: 223px;
-    background: #fff;
+    min-height: 225px !important;
 }
 }
 /*For set out minimum height blog box if description not exist ends*/
