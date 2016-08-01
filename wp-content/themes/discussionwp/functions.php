@@ -2250,3 +2250,36 @@ function custom_comment($comment, $args, $depth) {
 //    add_filter('wp_nav_menu_items', 'add_login_logout_to_menu', 50, 2);
 
     
+      
+     /**
+     * Author - Vinoth Raja
+     * Date   - 30-07-2016
+     * Purpose - For page view count increasing functionality
+     */
+    
+    remove_action('wp', 'discussion_update_post_count_views');
+    
+    if(!function_exists('custom_update_post_count_views')) {
+
+	function custom_update_post_count_views(){
+		$postID = discussion_get_page_id();
+		if(is_singular('post')||is_singular('videos')){	
+                        if(isset($_COOKIE['mkd-post-views_'. $postID])){
+				return;
+			} else {
+				$count = get_post_meta($postID, 'count_post_views', true);
+				if ($count === ''){
+					update_post_meta($postID, 'count_post_views', 1);
+                                        setcookie('mkd-post-views_'. $postID, $postID, time()*20, '/');
+				} else {
+					$count++;
+					update_post_meta($postID, 'count_post_views', $count);
+                                        setcookie('mkd-post-views_'. $postID, $postID, time()*20, '/');
+				}
+                        }
+		}
+	}
+
+	add_action('wp', 'custom_update_post_count_views');
+}
+  
