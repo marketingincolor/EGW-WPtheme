@@ -129,7 +129,7 @@ li{
     float:left;
 }
 .mkd-sticky-holder .mkd-logo-wrapper{
-    float:none;
+    float:none !important;
 }
 .mkd-mobile-logo-wrapper{
     float:left;
@@ -1367,3 +1367,12 @@ table.ai1ec-month-view {
     }
 }
 /*For set out minimum height blog box if description not exist ends*/
+
+/*footer block for ipad starts here*/
+@media only screen and (max-width: 780px) and (min-width: 768px){
+   footer .mkd-footer-top-holder .mkd-four-columns .mkd-column{
+        width: 50% !important;
+        float: left !important;
+    }
+}
+/*footer block for ipad ends here*/
