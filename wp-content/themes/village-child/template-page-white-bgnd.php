@@ -65,6 +65,8 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
     width: 220px;
 }
 
+.login-container { background-color: #edebeb; }
+
 .giveaway-text ul li { list-style-type: disc !important; }
 .disclosure-text { font-size: .7em; }
 .v-link { color:#fff; font-size:1.25em; font-weight:bold; text-transform:uppercase; }

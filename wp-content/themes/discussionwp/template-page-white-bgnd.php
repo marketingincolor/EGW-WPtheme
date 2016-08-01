@@ -59,6 +59,7 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
     position: absolute;
     z-index: 99;
 }
+.login-container { background-color: #edebeb; }
 
 .disclosure-text { font-size: .7em; }
 /* End Custom layouts from MIC */
