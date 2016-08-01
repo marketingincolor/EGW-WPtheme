@@ -2167,11 +2167,11 @@ function custom_comment($comment, $args, $depth) {
         $str .= wpfp_before_link_img();
         $str .= wpfp_loading_img();
         if ($action == "remove"):
-            $str .= "<a class='wpfp-link' href='?wpfpaction=remove&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('remove_favorite') . "' rel='nofollow'>" . wpfp_get_option('remove_favorite') . "</a>";
+               $str .= "<a href='".home_url('/user-profile')."'>" . wpfp_get_option('remove_favorite') . "</a>";
         elseif ($action == "add"):
             $str .= "<i class='fa fa-star-o' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
         elseif (wpfp_check_favorited($post_id)):
-            $str .= "<a class='wpfp-link' href='?wpfpaction=remove&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('remove_favorite') . "' rel='nofollow'>" . wpfp_get_option('remove_favorite') . "</a>";
+            $str .= "<a href='".home_url('/user-profile')."'>" . wpfp_get_option('remove_favorite') . "</a>";
         else:
             $str .= "<i class='fa fa-star-o' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
         endif;
