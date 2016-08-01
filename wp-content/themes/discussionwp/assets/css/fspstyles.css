@@ -128,6 +128,9 @@ li{
 .mkd-logo-wrapper{
     float:left;
 }
+.mkd-sticky-holder .mkd-logo-wrapper{
+    float:none;
+}
 .mkd-mobile-logo-wrapper{
     float:left;
 }
@@ -1337,13 +1340,27 @@ table.ai1ec-month-view {
 
 
 /*For set out minimum height blog box if description not exist*/
+.mkd-pt-six-item .mkd-post-excerpt{
+    font-size: 16px;
+}
 
+@media screen and (max-width: 1200px) and (min-width: 1025px){
+    .mkd-pt-six-item .mkd-pt-six-image-holder {
+        min-height: 180px;
+    }
+    .mkd-pt-six-item .mkd-post-excerpt {
+        min-height: 66px;
+    }
+    .mkd-post-excerpt-fsp {
+        min-height: 66px;
+    }
+}
 @media only screen and (min-width: 769px) {
     .mkd-pt-six-item .mkd-pt-six-image-holder {
-        min-height: 198px;
+        min-height: 200px;
         background: #ffffff;
     }
-    .mkd-post-excerpt-fsp{
+    .mkd-post-excerpt-fsp {
         margin-bottom: 0;
         margin-top: 13px;
         min-height: 44px;
