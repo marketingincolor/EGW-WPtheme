@@ -19,7 +19,7 @@
                             <div style="" class="vc_row wpb_row vc_row-fluid mkd-section vc_custom_section mkd-content-aligment-left">
                                 <div class="clearfix mkd-full-section-inner">
                                     <div class="wpb_column vc_column_container vc_col-sm-12 vc_col-has-fill">
-                                        <div class="vc_column-inner vc_custom_1457446509978">
+                                        <div class="vc_column-inner fsp-pad-btm-30">
                                             <div class="wpb_wrapper">
                                                 <div style="" class="vc_row wpb_row vc_inner vc_row-fluid mkd-section mkd-content-aligment-left">
                                                     <div class="mkd-full-section-inner">
@@ -43,7 +43,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div style="" class="vc_row wpb_row vc_inner vc_row-fluid mkd-section vc_custom_1457693380284 mkd-content-aligment-left">
+                                                <!-- <div style="" class="vc_row wpb_row vc_inner vc_row-fluid mkd-section vc_custom_1457693380284 mkd-content-aligment-left">
                                                     <div class="mkd-full-section-inner">
                                                         <div class="wpb_column vc_column_container vc_col-sm-6">
                                                             <div class="vc_column-inner vc_custom_1457350178380">
@@ -92,16 +92,16 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div style="" class="vc_row wpb_row vc_row-fluid mkd-section vc_custom_1457353735985 mkd-content-aligment-left">
-                                              <?php echo do_shortcode("[contact-form-7 id=351 title='contact']"); ?>
-                            </div>
+                            <!-- <div style="" class="vc_row wpb_row vc_row-fluid mkd-section vc_custom_1457353735985 mkd-content-aligment-left">
+                                              <?php echo do_shortcode("[contact-form-7 id=393 title='contact']"); ?>
+                            </div> --> 
                         </div>
                     </div>
                     <div class="mkd-column2">
