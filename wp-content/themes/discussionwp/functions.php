@@ -1536,7 +1536,8 @@ if (!function_exists('custom_related_posts')) {
 
 /**
  * Author- Muthupandi
- * Date  - 23-06-2016
+ * Create Date  - 23-06-2016
+ * Updated Date - 01-08-2016
  * Purpose - Related to Author Recommended posts section
  */
 add_action('init', 'discussion_author_recommended_posts');
@@ -1545,6 +1546,8 @@ function discussion_author_recommended_posts() {
 
     //Remove default short code
     remove_shortcode('AuthorRecommendedPosts');
+    global $AuthorRecommendedPosts;
+    remove_action('add_meta_boxes', array($AuthorRecommendedPosts,'add_recommended_meta_box'));
 
     //Create class and extend author recommended post class to override author recommended section design
     class DiscussionAuthorRecommendPosts extends AuthorRecommendedPosts {
@@ -1553,6 +1556,7 @@ function discussion_author_recommended_posts() {
 
             $this->option_name = '_' . $this->namespace . '--options';
             add_shortcode('AuthorRecommendedPosts', array(&$this, 'shortcode'));
+            add_action( 'add_meta_boxes', array( &$this, 'add_recommended_meta_box' ) );
         }
 
         function shortcode($atts) {
@@ -1585,6 +1589,99 @@ function discussion_author_recommended_posts() {
 
             return $html;
         }
+        
+        function add_recommended_meta_box() {
+            // set post_types that this meta box shows up on.
+            $author_recommended_posts_post_types = $this->get_option( "{$this->namespace}_post_types" );
+
+            foreach( $author_recommended_posts_post_types as $author_recommended_posts_post_type ) {
+                // adds to posts $post_type
+                add_meta_box( 
+                    $this->namespace . '-recommended_meta_box',
+                    __( 'Author Recommended Posts', $this->namespace ),
+                    array( &$this, 'recommended_meta_box' ),
+                    $author_recommended_posts_post_type,
+                    'side',
+                    'high'
+                );
+            }
+
+        }
+        
+        function recommended_meta_box( $object, $box ) {
+        
+        $author_recommended_posts = get_post_meta( $object->ID, $this->namespace, true );
+        $author_recommended_posts_post_types = $this->get_option( "{$this->namespace}_post_types" );
+        $author_recommended_posts_search_results = $this->author_recommended_posts_search();
+        $author_recommended_posts_options_url = admin_url() . '/options-general.php?page=' . $this->namespace;
+        
+        include( AUTHOR_RECOMMENDED_POSTS_DIRNAME . '/views/_recommended-meta-box.php' );
+    }
+    
+    function author_recommended_posts_search(){
+        global $post;
+        $post_id = $post->ID;
+        $html = '';
+        
+        // set post_types that get filtered in the search box.
+        $author_recommended_posts_post_types = $this->get_option( "{$this->namespace}_post_types" );
+        
+        // set default query options
+        $options = array(
+            'post_type' =>  $author_recommended_posts_post_types,
+            'posts_per_page' => '-1',
+            'paged' => 0,
+            'order' => 'DESC',
+            'post_status' => array('publish'),
+            'suppress_filters' => false,
+            'post__not_in' => array($post_id),
+            's' => ''
+        );
+        
+        // check if ajax
+        $ajax = isset( $_POST['action'] ) ? true : false;
+        
+        // if ajax merge $_POST
+        if( $ajax ) {
+            $options = array_merge($options, $_POST);
+        }
+        
+        // search
+        if( $options['s'] ) {
+            // set temp title to search query
+            $options['like_title'] = $options['s'];
+            // filter query by title
+            add_filter( 'posts_where', array($this, 'posts_where'), 10, 2 );
+        }
+        
+        // unset search so results are accurate and not muddled 
+        unset( $options['s'] );
+        
+        $searchable_posts = get_posts( $options );
+        
+        if( $searchable_posts ) {
+            foreach( $searchable_posts as $searchable_post ) {
+                // right aligned info
+                $title = '<span class="recommended-posts-post-type">';
+                $title .= $searchable_post->post_type;
+                $title .= '</span>';
+                $title .= '<span class="recommended-posts-title">';
+                $title .= apply_filters( 'the_title', $searchable_post->post_title, $searchable_post->ID );
+                $title .= '</span>';
+                
+                $html .= '<li><a href="' . get_permalink($searchable_post->ID) . '" data-post_id="' . $searchable_post->ID . '">' . $title .  '</a></li>' . "\n";
+            }
+        }
+        
+        // if ajax, die and echo $html otherwise just return
+        if( $ajax ) {
+            die( $html );
+        } else {
+            return $html;
+        }
+    }
+    
+    
 
     }
 
