@@ -1894,7 +1894,7 @@ function custom_comment($comment, $args, $depth) {
                             esc_html_e('Pingback:', 'discussionwp');
                         }
                         $user_name = get_user_meta($user);
-                        ?><span class="mkd-comment-author"><?php if(!empty($user_name['first_name'][0])&&!empty($user_name['first_name'][0])){ echo $user_name['first_name'][0] . ' ' . $user_name['last_name'][0]; } else { echo wp_kses_post(get_comment_author_link()); } ?></span>
+                        ?><span class="mkd-comment-author"><?php if(!empty($user_name['first_name'][0])){ echo $user_name['first_name'][0]; } else { echo wp_kses_post(get_comment_author_link()); } ?></span>
                         <?php if ($is_author_comment) { ?>
                             <span class="mkd-comment-mark"><?php esc_html_e('/', 'discussionwp'); ?></span>
                             <span class="mkd-comment-author-label"><?php esc_html_e('Author', 'discussionwp'); ?></span>
