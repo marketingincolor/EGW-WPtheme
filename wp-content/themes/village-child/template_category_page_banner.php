@@ -14,6 +14,7 @@
                     <div data-max_pages="1" data-paged="1" data-sort="featured_first" data-post_in="205, 215, 218, 225, 232" data-category_id="4" data-number_of_posts="5" data-slider_height="735" data-base="mkd_post_slider_interactive" class="mkd-bnl-holder mkd-psi-holder  mkd-psi-number-5" style="opacity: 1;">
                         <div class="mkd-bnl-outer">
                             <?php
+                            if(!isset($category_id))
                             $category_id = get_cat_id(single_cat_title("", false));
                             $cat = get_category($category_id);
                             $parent_category_id = category_top_parent_id($category_id);

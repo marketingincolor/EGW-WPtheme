@@ -1171,8 +1171,14 @@ function organize_catgory($id) {
     count($getResultset);
     $j = 1;
     $out = "";
+    $main_cat=get_main_category_detail();
     foreach ($getResultset as $getKeyrel) {
-        $out.='<a href="' . get_category_link($getKeyrel) . '">';
+        if(isset($main_cat[$getKeyrel])){
+            $slug = get_category($getKeyrel);
+            $out.='<a href="' . site_url().'/' .$slug->slug. '">';
+        }
+        else 
+        $out.='<a href="' . get_category_link($getKeyrel) . '">';   
         $out.=get_cat_name($getKeyrel) . '</a>';
         if ($j > count($getResultset) - 1) {
             echo "";
