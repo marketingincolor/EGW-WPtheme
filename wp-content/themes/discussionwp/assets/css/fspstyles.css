@@ -1385,3 +1385,10 @@ table.ai1ec-month-view {
         font-weight: bold;
 }
 /*contact us styles ends here*/
+
+/*padding space for saved stories starts here*/
+.fa-star-rightpad
+{
+    padding-right:7px;
+}
+/*padding space for saved stories ends here*/
