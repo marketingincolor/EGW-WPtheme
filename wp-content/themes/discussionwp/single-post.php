@@ -146,11 +146,11 @@
                     <div class="fsp-recommended-stories-cont">
                         <?php echo do_shortcode('[AuthorRecommendedPosts]'); ?>
                     </div>
-                    <?php get_template_part('block/comments-guidelines'); ?>
-                    <?php
-                    if (discussion_show_comments()) {
-                        comments_template('', true);
-                    }
+                    <?php 
+//                    get_template_part('block/comments-guidelines'); 
+//                    if (discussion_show_comments()) {
+//                        comments_template('', true);
+//                    }
                     ?>
                 </div>
             </div>
