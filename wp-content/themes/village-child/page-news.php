@@ -13,7 +13,10 @@ $category = 'news';
     <div class="mkd-content-inner">
         <div class="mkd-full-width">
             <div class="mkd-full-width-inner"> 
-                <?php get_template_part('template-page-featured-content'); ?>
+                <?php     
+                    $category_id=get_cat_id($category);
+                    include(locate_template('template_category_page_banner.php')); 
+                ?>
                 <div class="vc_empty_space" style="height: 0px"><span class="vc_empty_space_inner"></span></div>
                 <div class="mkd-container">
                     <div class="mkd-container-inner clearfix">

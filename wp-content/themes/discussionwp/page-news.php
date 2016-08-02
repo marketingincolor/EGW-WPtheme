@@ -19,7 +19,8 @@ list($post_per_section,$post_type)=scroll_loadpost_settings();
         <div class="mkd-full-width">
             <div class="mkd-full-width-inner">               
                 <?php
-                get_template_part('template-page-featured-content');               
+                $category_id=get_cat_id($category);
+                include(locate_template('template_category_page_banner.php'));               
                 ?>                
                 <div style="" class="vc_row wpb_row vc_row-fluid mkd-section mkd-content-aligment-left mkd-grid-section">
                     <div class="mkd-container-inner clearfix">
