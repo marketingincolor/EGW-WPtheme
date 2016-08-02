@@ -35,7 +35,7 @@
                 $thumb_image_width = '';
                 $thumb_image_height = '';
                 $thumb_image_size = '150';
-                $excerpt_length = '12';
+                $excerpt_length = '9';
                 $blog_title_ar=array();
                 /**
                  * For counting no of posts exist

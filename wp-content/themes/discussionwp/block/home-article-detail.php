@@ -46,7 +46,7 @@ if (have_posts()) {
         $thumb_image_width = '';
         $thumb_image_height = '';
         $thumb_image_size = '150';
-        $excerpt_length = '12';
+        $excerpt_length = '9';
         ?>        
         <?php
         /**
