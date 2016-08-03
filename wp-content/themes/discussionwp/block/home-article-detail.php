@@ -105,7 +105,7 @@ if (have_posts()) {
                 if ($display_excerpt == 'yes') {
                     ?>
                     <div class="mkd-pt-one-excerpt">
-                        <?php discussion_excerpt($excerpt_length); ?>
+                        <?php custom_discussion_excerpt(60);?>
                     </div>
                     <?php
                 }

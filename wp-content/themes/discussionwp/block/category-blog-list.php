@@ -108,7 +108,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                         if ($display_excerpt == 'yes') {
                                             ?>
                                             <div class="mkd-pt-one-excerpt">
-                                                <?php discussion_excerpt($excerpt_length); ?>
+                                                <?php custom_discussion_excerpt(60);?>
                                             </div>
                                             <?php
                                         }

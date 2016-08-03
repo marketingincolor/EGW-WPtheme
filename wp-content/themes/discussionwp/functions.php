@@ -2175,11 +2175,11 @@ function custom_comment($comment, $args, $depth) {
         if ($action == "remove"):
                $str .= "<a href='".home_url('/user-profile')."'>" . wpfp_get_option('remove_favorite') . "</a>";
         elseif ($action == "add"):
-            $str .= "<i class='fa fa-star-o' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
+            $str .= "<i class='fa fa-star-o fa-star-rightpad' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
         elseif (wpfp_check_favorited($post_id)):
             $str .= "<a href='".home_url('/user-profile')."'>" . wpfp_get_option('remove_favorite') . "</a>";
         else:
-            $str .= "<i class='fa fa-star-o' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
+            $str .= "<i class='fa fa-star-o fa-star-rightpad' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
         endif;
         if ($show_span)
             $str .= "</span>";
@@ -2289,3 +2289,42 @@ function custom_comment($comment, $args, $depth) {
 	add_action('wp', 'custom_update_post_count_views');
 }
   
+
+if(!function_exists('custom_discussion_excerpt')) {
+	/**
+	 * Function that cuts post excerpt to the number of word based on previosly set global
+	 * variable $word_count, which is defined in mkd_set_blog_word_count function.
+	 *
+	 * It current post has read more tag set it will return content of the post, else it will return post excerpt
+	 *
+	 */
+	function custom_discussion_excerpt($excerpt_length_in_chars) {
+		
+            global $post;
+            $empty_content_p='<p class="mkd-post-excerpt-fsp"></p>';
+            if(post_password_required()) {
+                    echo get_the_password_form();
+            }
+
+            //does current post has read more tag set?
+            elseif(discussion_post_has_read_more()) {
+                    global $more;
+
+                    //override global $more variable so this can be used in blog templates
+                    $more = 0;
+                    the_content(true);
+            }elseif($post->post_content != "") {
+                $post_excerpt = $post->post_excerpt != "" ? $post->post_excerpt : strip_tags($post->post_content);                    
+                $post_excerpt_length = strlen($post_excerpt);
+                if($excerpt_length_in_chars == '0'){
+                    $post_excerpt = rtrim(substr($post_excerpt,0,100));
+                }else if($post_excerpt_length > $excerpt_length_in_chars){
+                    $post_excerpt = rtrim(substr($post_excerpt,0,$excerpt_length_in_chars));
+                }
+                echo '<p class="mkd-post-excerpt">'.$post_excerpt.'</p>';                                        			
+            }
+            else {
+                echo $empty_content_p;
+            }
+	}
+}
