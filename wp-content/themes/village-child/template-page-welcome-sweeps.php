@@ -127,6 +127,11 @@ input:focus, textarea:focus { width: 75% !important; }
 							var ss_form = {'account': 'MzawMDG2NDQxAwA', 'formID': 'M01NNTZJSUrRTTG0NNc1MTdP1k0yMbTUNTEwsTBNtkhJNk2zAAA'}; ss_form.width = '100%'; ss_form.height = '1000'; ss_form.domain = 'app-3QMYANU21K.marketingautomation.services'; // ss_form.hidden = {'Company': 'Anon'}; // Modify this for sending hidden variables, or overriding values
 							// ]]></script>
 							<script src="https://koi-3QMYANU21K.marketingautomation.services/client/form.js?ver=1.1.1" type="text/javascript"></script>
+							<br />
+							<p style="font-size:0.75em; line-height:1.5em;">We ask for your street address to verify that you are a resident of The Villages, who are solely eligible to win this giveaway.</p>
+							<br /><br />
+							<p>Not interested in entering the giveaway? <a href="https://myevergreenwellness.com/thevillages">Click here to visit The Villages branch of Evergreen Wellness.</a></p>
+							<br /><br />
 							<p style="text-align: center;">Sponsored by AAA Travel</p>
 							<p><img width="117" height="78" alt="AAA logo" src="https://myevergreenwellness.com/thevillages/wp-content/uploads/sites/2/2016/08/AAALogo.png" class="aligncenter size-full wp-image-3487"></p>
 						</div>
