@@ -261,6 +261,16 @@ function fspr_login_member() {
                 wp_redirect(home_url('/wp-admin'));
             } else {                  
                 if(isset($meta_data['subscriber'])){ 
+                    
+                    //Redirect to welcome page when user login first time   
+                    $first_login = get_user_meta( $user->ID, 'first_login', true );
+                    if( ! $first_login ) {                        
+                        update_user_meta( $user->ID, 'first_login', 'true', '' );
+                        $site_url = other_user_profile_redirection();                        
+                        wp_redirect($site_url.'/welcome'); 
+                        exit;
+                    }
+                    
                     $location = $_POST['redirect']; // referral URL fetch from post value
                     $findblog_page = url_to_postid($location); // Get Post ID from referral URL
                     $getwhichIs = get_post_type($findblog_page); // Find Post Type using Post ID
