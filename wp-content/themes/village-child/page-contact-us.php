@@ -19,7 +19,7 @@
                             <div style="" class="vc_row wpb_row vc_row-fluid mkd-section vc_custom_section mkd-content-aligment-left">
                                 <div class="clearfix mkd-full-section-inner">
                                     <div class="wpb_column vc_column_container vc_col-sm-12 vc_col-has-fill">
-                                        <div class="vc_column-inner fsp-pad-btm-30">
+                                        <div class="vc_column-inner fsp-wrapper-cont fsp-pad-btm-30">
                                             <div class="wpb_wrapper">
                                                 <div style="" class="vc_row wpb_row vc_inner vc_row-fluid mkd-section mkd-content-aligment-left">
                                                     <div class="mkd-full-section-inner">
@@ -34,7 +34,7 @@
                                                                     <div style="height: 10px" class="vc_empty_space"><span class="vc_empty_space_inner"></span></div>
 
                                                                     <div class="wpb_text_column wpb_content_element ">
-                                                                        <div class="wpb_wrapper">
+                                                                        <div class="wpb_wrapper wpb-cont-cust-style">
                                                                             <?php the_content(); ?>
                                                                         </div>
                                                                     </div>
