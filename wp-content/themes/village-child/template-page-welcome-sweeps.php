@@ -8,9 +8,9 @@
 */ 
 
 /* add centered text to entire page by slug */
-$centered = ( is_page('welcome') || is_page('welcome-sweeps-success') ) ? 'text-align:center;' : '' ;
+//$centered = ( is_page('welcome') || is_page('welcome-sweeps-success') ) ? 'text-align:center;' : '' ;
 /* add margins to paragraphs in the_content by slug */
-$margined = ( is_page('welcome') ) ? ' margin:2% 14%;' : null;
+//$margined = ( is_page('welcome') ) ? ' margin:2% 14%;' : null;
 /* show the_title by slug */
 $listed = (is_page('welcome')) ? 'true' : null;
 
@@ -18,15 +18,15 @@ $sidebar = discussion_sidebar_layout(); ?>
 <?php get_header(); ?>
 <style>
 /* Start Custom layouts from MIC */
-.page-template-template-page-white-bgnd { background-color: #ffffff; }
-.page-template-template-page-white-bgnd .mkd-title-breadcrumb-holder { display:none !important; }
-.page-template-template-page-white-bgnd .mkd-content { background-color: #ffffff; padding-top:1.3em;}
-.page-template-template-page-white-bgnd .mkd-content .mkd-container .mkd-container-inner {<?php echo $centered; ?> }
-.page-template-template-page-white-bgnd .mkd-content .mkd-container .page-feature-image img { 
+.page-template-template-page-welcome-sweeps { background-color: #ffffff; }
+.page-template-template-page-welcome-sweeps .mkd-title-breadcrumb-holder { display:none !important; }
+.page-template-template-page-welcome-sweeps .mkd-content { background-color: #ffffff; padding-top:1.3em;}
+.page-template-template-page-welcome-sweeps .mkd-content .mkd-container .mkd-container-inner {<?php echo $centered; ?> }
+.page-template-template-page-welcome-sweeps .mkd-content .mkd-container .page-feature-image img { 
 	border-top-right-radius: 60px; 
 	border-bottom-left-radius: 60px;  
 }
-.page-template-template-page-white-bgnd .mkd-title .mkd-title-holder { height:auto; }
+.page-template-template-page-welcome-sweeps .mkd-title .mkd-title-holder { height:auto; }
 
 /*Register Page Styles*/
 h3 { font-family: 'Roboto', sans-serif; font-weight:bold; color:#6c6b6b; font-size:1.733em; padding-top:1rem;}
@@ -96,7 +96,7 @@ input:focus, textarea:focus { width: 75% !important; }
 						if ($listed) { ?>
 
 					
-					<h2 class="page-title">Welcome Sweeps</h2>
+					<h2 class="page-title" style="display:none;">Welcome Sweeps</h2>
 						<div style="width: 35%; float: left; padding: 0% 5% 0% 10%;">
 							<h3>Welcome to The Villages branch of MyEvergreenWellness.com</h3>
 							<p>As a resident of The Villages, you can now access your local online page with stories and events exclusively for you. Plus save, share, and comment on articles and videos. We’re so happy that you joined and look forward to your feedback and involvement.</p>
@@ -121,12 +121,12 @@ input:focus, textarea:focus { width: 75% !important; }
 							<p><img alt="blue-banner" src="https://myevergreenwellness.com/thevillages/wp-content/uploads/sites/2/2016/07/blue-banner.png"></p>
 						</div>
 						<div style="width: 35%; padding: 0% 10% 0% 5%; float: left; min-height: 418px;">
-							<h1 style="text-align: center;" class="enter-to-win-text">Enter to win!</h1>
-							<p style="min-height: 418px;"><!-- SharpSpring Form for Villages FT Welcome Sweeps Entry --><br>
-							<script type="text/javascript">// &lt;![CDATA[
+							<h1 class="enter-to-win-text" style="text-align: center;">Enter to win!</h1>
+							<!-- SharpSpring Form for Villages FT Welcome Sweeps Entry -->
+							<script type="text/javascript">// <![CDATA[
 							var ss_form = {'account': 'MzawMDG2NDQxAwA', 'formID': 'M01NNTZJSUrRTTG0NNc1MTdP1k0yMbTUNTEwsTBNtkhJNk2zAAA'}; ss_form.width = '100%'; ss_form.height = '1000'; ss_form.domain = 'app-3QMYANU21K.marketingautomation.services'; // ss_form.hidden = {'Company': 'Anon'}; // Modify this for sending hidden variables, or overriding values
-							// ]]&amp;gt;</script><br>
-							<script type="text/javascript" src="https://koi-3QMYANU21K.marketingautomation.services/client/form.js?ver=1.1.1"></script><iframe width="100%" height="418" frameborder="0" style="overflow-y: auto" src="https://app-3QMYANU21K.marketingautomation.services/prospector/form/MzawMDG2NDQxAwA/M01NNTZJSUrRTTG0NNc1MTdP1k0yMbTUNTEwsTBNtkhJNk2zAAA?_tk=201605|57489c3ae61ba562118b53c4" id="ssf_M01NNTZJSUrRTTG0NNc1MTdP1k0yMbTUNTEwsTBNtkhJNk2zAAA"></iframe></p>
+							// ]]></script>
+							<script src="https://koi-3QMYANU21K.marketingautomation.services/client/form.js?ver=1.1.1" type="text/javascript"></script>
 							<p style="text-align: center;">Sponsored by AAA Travel</p>
 							<p><img width="117" height="78" alt="AAA logo" src="https://myevergreenwellness.com/thevillages/wp-content/uploads/sites/2/2016/08/AAALogo.png" class="aligncenter size-full wp-image-3487"></p>
 						</div>
@@ -135,15 +135,16 @@ input:focus, textarea:focus { width: 75% !important; }
 					<?php }
 						else {
 							the_title( '<h2 class="page-title">', '</h2>' ); 
+							the_content();
 						}
 
-						the_content();
+						//the_content();
 						//do_action('discussion_page_after_content');
 
 						?>
 
 
-
+			<?php endif; ?>
 			<?php endwhile; ?>
 			<?php endif; ?>
 		</div>
