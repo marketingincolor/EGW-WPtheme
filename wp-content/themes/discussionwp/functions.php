@@ -2289,3 +2289,42 @@ function custom_comment($comment, $args, $depth) {
 	add_action('wp', 'custom_update_post_count_views');
 }
   
+
+if(!function_exists('custom_discussion_excerpt')) {
+	/**
+	 * Function that cuts post excerpt to the number of word based on previosly set global
+	 * variable $word_count, which is defined in mkd_set_blog_word_count function.
+	 *
+	 * It current post has read more tag set it will return content of the post, else it will return post excerpt
+	 *
+	 */
+	function custom_discussion_excerpt($excerpt_length_in_chars) {
+		
+            global $post;
+            $empty_content_p='<p class="mkd-post-excerpt-fsp"></p>';
+            if(post_password_required()) {
+                    echo get_the_password_form();
+            }
+
+            //does current post has read more tag set?
+            elseif(discussion_post_has_read_more()) {
+                    global $more;
+
+                    //override global $more variable so this can be used in blog templates
+                    $more = 0;
+                    the_content(true);
+            }
+
+            //is word count set to something different that 0?
+            elseif($excerpt_length_in_chars != '0') {
+                    $post_excerpt = $post->post_excerpt != "" ? $post->post_excerpt : strip_tags($post->post_content);                    
+                    $post_excerpt_length = strlen($post_excerpt);
+                    if($post_excerpt_length > $excerpt_length_in_chars){
+                        $post_excerpt = rtrim(substr($post_excerpt,0,$excerpt_length_in_chars));
+                    }
+                    echo '<p class="mkd-post-excerpt">'.$post_excerpt.'</p>';                                        			
+            } else {
+                echo $empty_content_p;
+            }
+	}
+}
