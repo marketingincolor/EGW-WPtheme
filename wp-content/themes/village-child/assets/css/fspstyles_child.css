@@ -47,6 +47,11 @@ and open the template in the editor.
 /*sidebar welcome css ends here*/
 
 /*For set out minimum height blog box if description not exist*/
+@media only screen and (min-width: 1441px){
+    .mkd-pt-six-item .mkd-pt-six-image-holder {
+         min-height: 270px !important;
+    }
+}
 @media only screen and (min-width: 769px) {
     .mkd-pt-six-item .mkd-pt-six-image-holder {
     min-height: 225px !important;
