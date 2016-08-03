@@ -62,5 +62,3 @@ discussion_get_footer();
         </div>        
     </div>
 </div>
-
-
