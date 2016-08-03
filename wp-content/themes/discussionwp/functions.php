@@ -2313,17 +2313,17 @@ if(!function_exists('custom_discussion_excerpt')) {
                     //override global $more variable so this can be used in blog templates
                     $more = 0;
                     the_content(true);
+            }elseif($post->post_content != "") {
+                $post_excerpt = $post->post_excerpt != "" ? $post->post_excerpt : strip_tags($post->post_content);                    
+                $post_excerpt_length = strlen($post_excerpt);
+                if($excerpt_length_in_chars == '0'){
+                    $post_excerpt = rtrim(substr($post_excerpt,0,100));
+                }else if($post_excerpt_length > $excerpt_length_in_chars){
+                    $post_excerpt = rtrim(substr($post_excerpt,0,$excerpt_length_in_chars));
+                }
+                echo '<p class="mkd-post-excerpt">'.$post_excerpt.'</p>';                                        			
             }
-
-            //is word count set to something different that 0?
-            elseif($excerpt_length_in_chars != '0') {
-                    $post_excerpt = $post->post_excerpt != "" ? $post->post_excerpt : strip_tags($post->post_content);                    
-                    $post_excerpt_length = strlen($post_excerpt);
-                    if($post_excerpt_length > $excerpt_length_in_chars){
-                        $post_excerpt = rtrim(substr($post_excerpt,0,$excerpt_length_in_chars));
-                    }
-                    echo '<p class="mkd-post-excerpt">'.$post_excerpt.'</p>';                                        			
-            } else {
+            else {
                 echo $empty_content_p;
             }
 	}
