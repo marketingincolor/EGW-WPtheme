@@ -200,12 +200,15 @@ else if ($inYoga!==false)
 }
 
 
+
+
 ?>
 <script>
 window.dataLayer = window.dataLayer || [];
 dataLayer.push({
 'egwCategory': '<?php echo $cat_name; ?>',
-'egwSubcategory' : '<?php echo $sub_name; ?>'
+'egwSubcategory' : '<?php echo $sub_name; ?>',
+'egwAuthor' : <?php if (is_singular('post') : ?>'<?php the_author(); ?>'<?php endif; ?>
 });
 </script>
 

@@ -2282,4 +2282,19 @@ function custom_comment($comment, $args, $depth) {
 
 	add_action('wp', 'custom_update_post_count_views');
 }
-  
+
+    /**
+     * Author - Adam Doe
+     * Date   - 02-08-2016
+     * Purpose - For author custom dimensions in GA
+     */
+    
+    function custom_add_author_custom_dimension(){
+    if (is_singular('post') :
+        $this_post = get_queried_object();
+        $author_id = $this_post->post_author;
+        //dimension index number must be retrieved for your GA property ?>
+        ga('set', 'dimension3', '<?php echo get_the_author_meta('display_name', $author_id); ?>');
+    <?php endif; ?>   
+<?php }
+add_action ('wp_head', 'custom_add_author_custom_dimension');
