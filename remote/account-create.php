@@ -30,7 +30,7 @@ $role = 'subscriber';
 $form_email = 'Email';
 $form_userfname = 'First_Name';
 $form_userlname = 'Last_Name';
-$form_postalcode = 'Zipcode';
+$form_postalcode = 'ZIP_Code';
 
 
 /*
