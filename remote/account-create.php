@@ -30,7 +30,7 @@ $role = 'subscriber';
 $form_email = 'Email';
 $form_userfname = 'First_Name';
 $form_userlname = 'Last_Name';
-$form_postalcode = 'Zipcode';
+$form_postalcode = 'ZIP_Code';
 
 
 /*
@@ -144,11 +144,6 @@ if (!is_wp_error($new_user)) {
     $subject = "Evergreen Wellness registration";
     $message = "Hi there! \n You have successfully registered to the site. Your login name is {$user_email} and your password is {$random_password}\nPlease change your password immediately!\n"
             . "<a href='$login_page'>Click Here </a> to login\n";
-        foreach ($_POST as $key => $val) {
-        $message .= 'key=> ' . $key;
-        $message .= '\n';
-        $message .= 'val=> ' . $val;
-    }
     $sender = 'From: Admin <ramfsp@gmail.com>' . "\r\n";
     $headers[] = 'MIME-Version: 1.0' . "\r\n";
     $headers[] = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
