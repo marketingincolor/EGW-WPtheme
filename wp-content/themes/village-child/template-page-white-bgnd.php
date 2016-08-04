@@ -2,7 +2,7 @@
 /*
  * Author - MIC
  * Date - 13-06-2016
- * Purpose - For displaying specific pages and landing pages with a white background 
+ * Purpose - For displaying specific Pages and landing pages with a white background 
  * Template Name: White Background
  *
 */ 
