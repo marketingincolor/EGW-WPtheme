@@ -2286,15 +2286,29 @@ function custom_comment($comment, $args, $depth) {
     /**
      * Author - Adam Doe
      * Date   - 02-08-2016
-     * Purpose - For author custom dimensions in GA
+     * Index - 3
+     * Custom Dimension - Author
      */
     
     function custom_add_author_custom_dimension(){
-    if (is_singular('post') :
-        $this_post = get_queried_object();
-        $author_id = $this_post->post_author;
-        //dimension index number must be retrieved for your GA property ?>
-        ga('set', 'dimension3', '<?php echo get_the_author_meta('display_name', $author_id); ?>');
-    <?php endif; ?>   
-<?php }
-add_action ('wp_head', 'custom_add_author_custom_dimension');
+
+        if (is_singular('post'))
+        {
+            $this_post = get_queried_object();
+            $author_id = $this_post->post_author;
+            
+        
+        echo "<script>
+
+        window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+
+        'egwAuthor' : '" . get_the_author_meta('display_name', $author_id) . "'
+
+        });
+        </script>";
+
+        }
+    }
+
+    add_action ('wp_head', 'custom_add_author_custom_dimension');

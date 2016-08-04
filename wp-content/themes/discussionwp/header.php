@@ -26,6 +26,10 @@
             })();
         </script>
 
+        <!-- Google Search Console  -->
+        <meta name="google-site-verification" content="mZoOb3v4TAvSTNBKhwAXckZ0SphEFbMtZlIldfYDmIA" />
+        <meta name="google-site-verification" content="mZoOb3v4TAvSTNBKhwAXckZ0SphEFbMtZlIldfYDmIA" />
+
     </head>
     <body <?php if (is_single()) {
             body_class('mkd-apsc-custom-style-enabled');
