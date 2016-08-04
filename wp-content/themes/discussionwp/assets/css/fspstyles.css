@@ -1365,12 +1365,15 @@ table.ai1ec-month-view {
         margin-top: 13px;
         min-height: 44px;
     }
+    .mkd-pt-six-item .mkd-post-excerpt {
+        min-height: 44px;
+    }
 }
 /*For set out minimum height blog box if description not exist ends*/
 
 /*footer block for ipad starts here*/
 @media only screen and (max-width: 780px) and (min-width: 768px){
-   footer .mkd-footer-top-holder .mkd-four-columns .mkd-column{
+    footer .mkd-footer-top-holder .mkd-four-columns .mkd-column{
         width: 50% !important;
         float: left !important;
     }
@@ -1382,7 +1385,8 @@ table.ai1ec-month-view {
     background: #ffffff;
 }
 .wpb-cont-cust-style a{
-        font-weight: bold;
+    font-weight: bold;
+    color: #ff6600;
 }
 /*contact us styles ends here*/
 
