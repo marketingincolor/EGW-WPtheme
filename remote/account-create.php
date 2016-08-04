@@ -30,14 +30,17 @@ $role = 'subscriber';
 $form_email = 'Email';
 $form_userfname = 'First_Name';
 $form_userlname = 'Last_Name';
+$form_postalcode = 'Zipcode';
 
 
 /*
  * fetch post data
  */
-echo $user_email = ( isset($_POST[$form_email]) && !empty($_POST[$form_email]) ) ? sanitize_email($_POST[$form_email]) : '';
+$user_email = ( isset($_POST[$form_email]) && !empty($_POST[$form_email]) ) ? sanitize_email($_POST[$form_email]) : '';
 $user_fname = ( isset($_POST[$form_userfname]) && !empty($_POST[$form_userfname]) ) ? sanitize_text_field($_POST[$form_userfname]) : '';
 $user_lname = ( isset($_POST[$form_userlname]) && !empty($_POST[$form_userlname]) ) ? sanitize_text_field($_POST[$form_userlname]) : '';
+$postalcode = ( isset($_POST[$form_postalcode]) && !empty($_POST[$form_postalcode]) ) ? sanitize_text_field($_POST[$form_postalcode]) : '';
+
 $branch0 = ( isset($_POST['BranchVillages']) && !empty($_POST['BranchVillages']) ) ? $_POST['BranchVillages'] : '';
 $branch1 = ( isset($_POST['BranchOther']) && !empty($_POST['BranchOther']) ) ? $_POST['BranchOther'] : '';
 // TODO: Add additional branches above as required by site
@@ -109,6 +112,7 @@ $data = array(
     'display_name' => $user_fname,
     'first_name' => $user_fname,
     'last_name' => $user_lname,
+    'postalcode' => $postalcode,
     'role' => $role // optional but useful if you create a special role for remote registered users
 );
 //if ($branch == "Villages") {
