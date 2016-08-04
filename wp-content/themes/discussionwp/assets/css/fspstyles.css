@@ -1369,6 +1369,11 @@ table.ai1ec-month-view {
         min-height: 44px;
     }
 }
+@media only screen and (min-width: 1441px){
+    .mkd-pt-six-item .mkd-pt-six-image-holder {
+         min-height: 240px;
+    }
+}
 /*For set out minimum height blog box if description not exist ends*/
 
 /*footer block for ipad starts here*/
