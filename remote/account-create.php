@@ -142,7 +142,7 @@ $register_page = home_url('/register');
 if (!is_wp_error($new_user)) {
 
     $subject = "Welcome to Evergreen Wellness!";
-    $message = "Thank you for joining Evergreen Wellness!<br> To unlock the member features of your Evergreen Wellness website... <br><br>" . "<a href='$login_page'>Sign In Here</a><br><br>" . "... using the following login information:<br> Username: {$user_email} <br> Password: {$random_password}<br><br>" . "Keep this information in a safe place for future reference.<br><br> Then start enjoying new ways to get informed, get inspired, and get healthy with Evergreen Wellness! <br>";
+    $message = "Thank you for joining Evergreen Wellness!<br> To unlock the member features of your Evergreen Wellness website... <br><br>" . "<a href='$login_page'>Sign In Here</a><br><br>" . "... using the following login information:<br> Username: {$user_email} <br> Password: {$random_password}<br><br>" . "Keep this information in a safe place for future reference.<br><br> Then start enjoying new ways to get informed, get inspired, and get healthy with Evergreen Wellness! <br><br>Take care,<br>Evergreen Wellness";
     $sender = 'From: Admin <admin@myevergreenwellness.com>' . "\r\n";
     $headers[] = 'MIME-Version: 1.0' . "\r\n";
     $headers[] = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
