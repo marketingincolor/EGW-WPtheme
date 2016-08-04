@@ -89,7 +89,7 @@ require_once $abspath . '/wp-includes/meta.php';
 require_once $abspath . '/wp-includes/l10n.php';
 
 // create a random password
-$random_password = wp_generate_password($length = 6, $include_standard_special_chars = false);
+$random_password = wp_generate_password($length = 8, $include_standard_special_chars = false);
 //$random_password='test123';
 /*
  * setup the registration data
@@ -141,10 +141,10 @@ $register_page = home_url('/register');
 // optional email component
 if (!is_wp_error($new_user)) {
 
-    $subject = "Evergreen Wellness registration";
-    $message = "Hi there! \n You have successfully registered to the site. Your login name is {$user_email} and your password is {$random_password}\nPlease change your password immediately!\n"
-            . "<a href='$login_page'>Click Here </a> to login\n";
-    $sender = 'From: Admin <ramfsp@gmail.com>' . "\r\n";
+    $subject = "Your password for MyEvergreenWellness.com";
+    $message = "Here are your login credentials for MyEvergreenWellness.com.<br> Your username is: {$user_email} <br> and your password is: {$random_password}<br><br>"
+            . "<a href='$login_page'>Sign In</a><br>" . " <br> Sign in now for new ways to get informed, get inspired, and get healthy! <br>";
+    $sender = 'From: Admin <admin@myevergreenwellness.com>' . "\r\n";
     $headers[] = 'MIME-Version: 1.0' . "\r\n";
     $headers[] = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
     $headers[] = "X-Mailer: PHP \r\n";
@@ -155,7 +155,7 @@ if (!is_wp_error($new_user)) {
 
     // maybe you want to be informed if the registration was successfull
     if (true == $success) {
-        wp_mail('devaguru@mailinator.com', 'Evergreen Wellness remote registration', "User {$user_email} was registered on " . date('d.m. Y H:i:s', time()));
+        wp_mail('admin@myevergreenwellness.com', 'Evergreen Wellness remote registration', "User {$user_email} was registered on " . date('d.m. Y H:i:s', time()));
     }
     echo 'success';
 } 
