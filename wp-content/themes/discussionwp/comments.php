@@ -1,7 +1,7 @@
 <div class="mkd-comment-holder clearfix" id="comments">
 	<div class="mkd-comment-number">
 		<?php comments_number(
-			discussion_execute_shortcode('mkd_section_title', array('title' => esc_html__('No Comments','discussionwp'))),
+			discussion_execute_shortcode('mkd_section_title', array('title' => esc_html__('Comments','discussionwp'))),
 			discussion_execute_shortcode('mkd_section_title', array('title' => esc_html__('Comments','discussionwp'))),
 			discussion_execute_shortcode('mkd_section_title', array('title' => esc_html__('Comments','discussionwp')))
 			); ?>
@@ -31,7 +31,9 @@
 		<!-- If comments are closed. -->
 		<p><?php esc_html_e('Sorry, the comment form is closed at this time.', 'discussionwp'); ?></p>
 
-	<?php endif; ?>
+	<?php else : ?>
+                <div style="margin-bottom:31px">No Comments</div>
+            <?php endif; ?>
 <?php endif; ?>
 </div></div>
 
