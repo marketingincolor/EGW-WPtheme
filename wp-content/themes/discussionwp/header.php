@@ -10,7 +10,7 @@
         <?php do_action('discussion_header_meta'); ?>
 
         <?php wp_head(); ?>
-
+          <?php if(ENVIRONMENT_MODE==1){ ?>
         <script type="text/javascript">
             var _ss = _ss || [];
             _ss.push(['_setDomain', 'https://koi-3QMYANU21K.marketingautomation.services/net']);
@@ -25,7 +25,7 @@
                 scr.parentNode.insertBefore(ss, scr);
             })();
         </script>
-
+          <?php } ?>
     </head>
     <body <?php if (is_single()) {
             body_class('mkd-apsc-custom-style-enabled');

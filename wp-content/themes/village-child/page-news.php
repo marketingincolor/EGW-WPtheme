@@ -6,7 +6,7 @@
  */
 ?>
 <?php get_header(); 
-$post_per_section=6;
+list($post_per_section, $post_type) = scroll_loadpost_settings();
 $category = 'news';
 ?>
 <div class="mkd-content">
@@ -25,7 +25,7 @@ $category = 'news';
                                 <div class="mkd-column-inner">
                                     <?php                                 
                                     $my_query = null;
-                                    $my_query = discussion_custom_category_query('post', $category);
+                                    $my_query = discussion_custom_category_query($post_type,$category,$post_per_section); 
                                     global $wp_query;
                                     get_template_part('block/category-blog-list'); 
                                     ?>                            
