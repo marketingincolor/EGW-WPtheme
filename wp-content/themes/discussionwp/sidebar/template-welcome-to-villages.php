@@ -2,7 +2,7 @@
     <div class="fsp-branch-title"><h4>Welcome to The Villages!</h4></div>
     <div class="fsp-branch-content">        
         <ul>
-            <?php if(ENVIRONMENT_MODE==1){ ?>
+            <?php if(ENVIRONMENT_MODE!=1){ ?>
             <?php if (!is_user_logged_in()) { ?>
             <li><a href = "<?php echo network_site_url(); ?>register"><i class="fa fa-check" aria-hidden="true"></i> Join This Branch?</a></li>
             <?php } ?>
