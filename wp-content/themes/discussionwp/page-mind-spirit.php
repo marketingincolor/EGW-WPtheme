@@ -10,7 +10,8 @@
 ?>
 
 <?php get_header(); 
-$category='mind-spirit';
+$category_slug = basename(get_permalink());
+$category =  get_category_by_slug( $category_slug )->name;
 list($post_per_section,$post_type)=scroll_loadpost_settings();
 ?>
 <div class="mkd-content">
