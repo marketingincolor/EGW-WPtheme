@@ -806,6 +806,10 @@ footer .mkd-footer-top-holder {
 .user-profile-rgtinfo h2, .fsp-saved-articles h2, .fsp-followed-categories h2{
     font-size: 20px;
 }
+.about-us-container a{    
+    color: #ff6600;
+    font-weight: 500;
+}
 /*Saved Articles*/
 .fsp-saved-articles *, .fsp-saved-articles *::after, .fsp-saved-articles *::before {
     box-sizing: border-box;
@@ -1401,3 +1405,15 @@ table.ai1ec-month-view {
     padding-right:7px;
 }
 /*padding space for saved stories ends here*/
+
+/*reply command section starts here*/
+.mkd-comment-holder .mkd-comment-info-and-links .mkd-comment-name {
+    display: block;
+    width: 100%;
+}
+.mkd-comment-holder .mkd-comment-links {
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+/*reply command section ends here*/
