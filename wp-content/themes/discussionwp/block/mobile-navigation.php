@@ -5,11 +5,13 @@
         <form method="get" action="<?php bloginfo('home'); ?>" id="searchform-859049597">
             <div class="mkd-form-holder">
                 <div class="mkd-mobile-search-nw">
-                    <div class="mkd-column-left">
-                        <input type="text" autocomplete="off" class="mkd-search-field" name="s" placeholder="Search">
-                    </div>
-                    <div class="mkd-column-right">
-                        <button value="Search" type="submit" class="mkd-search-submit"><span class="ion-ios-search"></span></button>
+                    <div class="mkd-mobile-search-container">
+                        <div class="mkd-column-left">
+                            <input type="text" autocomplete="off" class="mkd-search-field" name="s" placeholder="Search">
+                        </div>
+                        <div class="mkd-column-right">
+                            <button value="Search" type="submit" class="mkd-search-submit"><span class="ion-ios-search"></span></button>
+                        </div>
                     </div>
                 </div>
             </div>
