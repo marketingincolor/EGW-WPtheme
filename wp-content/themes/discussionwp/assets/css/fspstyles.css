@@ -1287,6 +1287,10 @@ table.ai1ec-month-view {
         font-size: 13px;
     }
 }
+.timely a, .timely a:link, .timely a:visited, .timely a:active, .timely a:hover, #ai1ec-container a, #ai1ec-container a:link, #ai1ec-container a:visited, #ai1ec-container a:active, #ai1ec-container a:hover{
+    font-size: 15px !important;
+}
+
 /*Live events css ends here*/
 
 .disclamier{
@@ -1443,6 +1447,7 @@ table.ai1ec-month-view {
 /*padding space for saved stories ends here*/
 
 /*reply command section starts here*/
+@media only screen and (max-width: 767px) {
 .mkd-comment-holder .mkd-comment-info-and-links .mkd-comment-name {
     display: block;
     width: 100%;
@@ -1452,4 +1457,6 @@ table.ai1ec-month-view {
     width: 100%;
     text-align: left;
 }
+}
 /*reply command section ends here*/
+
