@@ -12,6 +12,9 @@ $cat_id = "";
 /**
  * cat_id_ar => For fetching follow category based post
  * cat_id => if category id array empty we will follow with category id
+ * slug page => for identify current page slug
+ * main cat  id => it is used for loading article id based on current page slug if it has both category means like
+ * activity and medical ,in activity page it loads like /activity/article-name and medical /medical/article-name
  */
 if (isset($cat_id_ar) || !empty($cat_id_ar))
     $cat_id = implode(",", $cat_id_ar);
@@ -19,6 +22,8 @@ if (isset($category) && $cat_id == "")
     $cat_id = get_cat_ID($category);
 if (isset($category_id))
     $cat_id = $category_id;
+
+$slug_page=basename(get_permalink()); //For retrieving current page slug and changed in videos page
 ?>
     jQuery(document).ready(function() {
         /**
@@ -71,6 +76,8 @@ if (isset($category_id))
                 cat_id: '<?php echo $cat_id; ?>',
                 post_type: '<?php echo implode(",",$post_type); ?>',
                 perpage: post_per_section,
+                main_cat_id:jQuery('#main_cat_id').val(),
+                slug_page:jQuery('#slug_page').val()
             },
             success: function(data)
             {

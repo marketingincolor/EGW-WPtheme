@@ -1168,26 +1168,29 @@ add_action('wp_ajax_nopriv_follow_category_scroll', 'follow_category_scroll');
 function organize_catgory($id) {
     $getPostcat = wp_get_post_categories($id);
     $getResultset = check_cat_subcat($getPostcat);
-    count($getResultset);
-    $j = 1;
-    $out = "";
-    $main_cat=get_main_category_detail();
+    $restrict_id=get_cat_id('videos');
+     $j = 1;
+    $out = array();
+    $output="";
+    $main_cat = get_main_category_detail();
+    global $post;
     foreach ($getResultset as $getKeyrel) {
-        if(isset($main_cat[$getKeyrel])){
-            $slug = get_category($getKeyrel);
-            $out.='<a href="' . site_url().'/' .$slug->slug. '">';
-        }
-        else 
-        $out.='<a href="' . get_category_link($getKeyrel) . '">';   
-        $out.=get_cat_name($getKeyrel) . '</a>';
-        if ($j > count($getResultset) - 1) {
-            echo "";
-        } else {
-            $out.= "\x20/\x20";
+        if($restrict_id!=$getKeyrel){
+            $parent_id = category_top_parent_id($getKeyrel);
+            if (isset($main_cat[$getKeyrel])) {
+                $slug = get_category($getKeyrel);
+                $out[]='<a href="' . site_url() . '/' . $slug->slug . '">'.get_cat_name($getKeyrel) . '</a>';
+            } else
+                $out[]='<a href="' . get_category_link($getKeyrel) . '">'.get_cat_name($getKeyrel) . '</a>';
+            
         }
         $j++;
     }
-    return $out;
+    
+    if(!empty($out))
+        $output=implode("\x20/\x20",$out);
+
+    return $output;
 }
 
 /**
@@ -2328,3 +2331,120 @@ if(!function_exists('custom_discussion_excerpt')) {
             }
 	}
 }
+
+/**
+ * Author - Akilan 
+ * Date   - 03-08-2016
+ * Purpose - For retrieve main category id related with category pages
+ */
+function get_maincategory_id() {
+    $parent_category_name = basename(get_permalink());
+    $main_catid = get_category_by_slug($parent_category_name)->term_id;
+    if (empty($main_catid))
+        $main_catid = get_cat_id(single_cat_title("", false));
+    $parent_cat_id=category_top_parent_id($main_catid);
+    $main_catid_ar=get_main_category_detail();
+    $main_catid=isset($main_catid_ar[$parent_cat_id]) ? $main_catid : "";
+    return $main_catid;
+}
+
+/**
+ * Author - Akilan
+ * Date  - 03-08-2016
+ * Purpose - For generating post category link
+ */
+function post_category_link($id,$getPostcat,$main_cat_det,$main_cat_id,$slug_page) {   
+  
+    if ((!empty($main_cat_det) && !empty($main_cat_id)) || $slug_page=='videos'):  
+        $post_link = esc_url(custom_category_permalink($id,$getPostcat, $main_cat_det->term_id, $main_cat_det->slug,$slug_page));
+    else:        
+        $post_link = esc_url(get_permalink());
+    endif;
+    return $post_link;
+}
+
+/**
+ * Author - Akilan
+ * Date - 03-08-2016
+ * Purpose - For getting child categories as per random basis as corresponding category page
+ * $getPostcat => post categories
+ * $current_cat_id =>current category id (as per page)
+ */
+function get_child_catid($getPostcat, $current_cat_id) {
+    $temp_cat = array_flip($getPostcat);
+    $child_cat_ar = array();
+    foreach ($temp_cat as $key => $val) {
+        $top_parent = category_top_parent_id($key);
+        if ($top_parent != $key && $top_parent == $current_cat_id) {
+            $child_cat_ar[] = $key;
+        }
+    }
+    if (!empty($child_cat_ar))
+        return $child_catid = $child_cat_ar[array_rand($child_cat_ar)];
+}
+
+
+/**
+ * Author - Akilan
+ * Date  - 05-08-2016
+ * Purpose - For generating permalink
+ */
+
+function custom_category_permalink($id,$getPostcat, $current_cat_id,$parent_cat_slug,$slug_page){
+    global $post;
+    if ((!empty($current_cat_id) || !empty($parent_cat_slug)) || $slug_page=='videos') {      
+        $child_cat_id = get_child_catid($getPostcat, $current_cat_id);
+        $top_parent_id = category_top_parent_id($current_cat_id);
+        $url = site_url();
+        if($slug_page=='videos'){
+            $url.='/'.$slug_page;
+        } else {     
+            if($top_parent_id!=$current_cat_id)
+                $url.='/' . get_category($top_parent_id)->slug;
+            $url.='/' . $parent_cat_slug;
+            if (!empty($child_cat_id))
+                $url.='/' . get_category($child_cat_id)->slug;
+        }        
+        $url.='/' . $post->post_name;
+        return $url;
+    } else {
+       
+        return esc_url(get_permalink());;
+    }
+}
+
+/**
+ * Author - Muthupandi
+ * Date  - 09-08-2016
+ * Purpose - For mobile search bar
+ */
+add_action('init','remove_mobile_header');
+
+function remove_mobile_header(){
+    //mobile header
+    remove_action('discussion_after_page_header', 'discussion_get_mobile_header');
+    add_action('discussion_after_page_header', 'custom_get_mobile_header');
+}
+
+function custom_get_mobile_header(){
+    
+    if(discussion_is_responsive_on()) {
+            $header_type = 'header-type3';
+
+            //this could be read from theme options
+            $mobile_header_type = 'mobile-header';
+
+            $parameters = array(
+                'show_logo'              => discussion_options()->getOptionValue('hide_logo') == 'yes' ? false : true,
+                'show_navigation_opener' => has_nav_menu('mobile-navigation')
+            );            
+            include(locate_template('block/mobile-header.php'));            
+        }
+}
+
+function custom_get_mobile_nav() {
+
+    $slug = 'header-type3';
+    include(locate_template('block/mobile-navigation.php'));
+}
+/*Added script for mobile search header ends here*/

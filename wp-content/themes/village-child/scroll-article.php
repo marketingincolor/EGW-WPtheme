@@ -19,7 +19,7 @@
                 'numberposts' => $_POST['perpage']
             );
             $posts_array = get_posts($args);
-
+            $main_cat_det = get_category($_POST['main_cat_id']);         
             $i = 1;
             $title_cls = "";
             if ($posts_array) {
@@ -47,6 +47,9 @@
                     $blog_title_ar[$k]=$single_post->post_title;
                     $k++;
                 }
+                
+               
+                
                 /**
                  * Generate blog detail with 3*3 design
                  */
@@ -66,6 +69,14 @@
                     /**
                      * For implement two coloumn based post in one row
                      */
+                    
+                     /**
+                     * Genarating permalink based on category
+                     */
+                    $getPostcat = wp_get_post_categories($id);
+                    $slug_page=$_POST['slug_page'];
+                    $main_cat_id=$_POST['main_cat_id'];
+                    $post_link=post_category_link($id,$getPostcat,$main_cat_det,$main_cat_id,$slug_page); 
                     ?>
 
                     <div class="mkd-pt-six-item mkd-post-item mkd-active-post-page">
@@ -85,7 +96,7 @@
                                     <?php
                                 }
                                 ?>
-                                <a itemprop="url" class="mkd-pt-six-slide-link mkd-image-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self">
+                                <a itemprop="url" class="mkd-pt-six-slide-link mkd-image-link" href="<?php echo $post_link; ?>" target="_self">
                                     <?php
                                     if ($thumb_image_size != 'custom_size') {
                                         echo get_the_post_thumbnail(get_the_ID(), $thumb_image_size);
@@ -106,7 +117,7 @@
                         <div class="mkd-pt-six-content-holder">
                              <div class="mkd-pt-six-title-holder <?php echo $title_cls; ?>">
                                 <<?php echo esc_html($title_tag) ?> class="mkd-pt-six-title">
-                                <a itemprop="url" class="mkd-pt-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self"><?php echo discussion_get_title_substring(get_the_title(), $title_length) ?></a>
+                                <a itemprop="url" class="mkd-pt-link" href="<?php echo $post_link; ?>" target="_self"><?php echo discussion_get_title_substring(get_the_title(), $title_length) ?></a>
                                 </<?php echo esc_html($title_tag) ?>>
                             </div>
                              <?php
