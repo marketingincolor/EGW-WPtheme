@@ -2394,10 +2394,13 @@ function custom_category_permalink($id,$getPostcat, $current_cat_id,$parent_cat_
     global $post;
     if ((!empty($current_cat_id) || !empty($parent_cat_slug)) || $slug_page=='videos') {      
         $child_cat_id = get_child_catid($getPostcat, $current_cat_id);
+        $top_parent_id = category_top_parent_id($current_cat_id);
         $url = site_url();
         if($slug_page=='videos'){
             $url.='/'.$slug_page;
-        } else {           
+        } else {     
+            if($top_parent_id!=$current_cat_id)
+                $url.='/' . get_category($top_parent_id)->slug;
             $url.='/' . $parent_cat_slug;
             if (!empty($child_cat_id))
                 $url.='/' . get_category($child_cat_id)->slug;
