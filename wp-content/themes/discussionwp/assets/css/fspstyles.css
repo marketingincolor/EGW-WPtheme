@@ -375,11 +375,19 @@ Category menu right side css ends here*/
     padding:15px;
     overflow: hidden;
 }
+.mkd-mobile-search-container{
+    background:#ffffff;
+    width:100%;
+    overflow: hidden;
+}
 .mkd-mobile-search-nw .mkd-column-left input{
-    width:75%;
+    width:68%;
     float: left;
-    padding: 0 2%;
-    height: 36px;
+    padding: 0 2% 0 5%;
+    height: 38px;
+    border: medium none;
+    border-radius: 0;
+    outline: medium none;
 }
 .mkd-mobile-search-nw .mkd-column-right button{
     background: #b3cc36;
