@@ -321,5 +321,22 @@ get_header();
         </div>
     </div>
 </div>
+<script type = "text/javascript">
+    jQuery(document).ready(function () {
+        formmodified = 0;
+        jQuery('#user-profile-form :input').keyup(function () {
+            formmodified = 1;
+        });
+        window.onbeforeunload = confirmExit;
+        function confirmExit() {
+            if (formmodified == 1) {
+                return "New information not saved. Do you wish to leave the page?";
+            }
+        }
+        jQuery("input[name='update']").click(function () {
+            formmodified = 0;
+        });
+    });
+</script>
 <?php include(locate_template('block/ajax-pagination.php'));  ?> 
 <?php get_footer(); ?>
