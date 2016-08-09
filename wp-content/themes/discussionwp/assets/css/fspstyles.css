@@ -1415,7 +1415,7 @@ table.ai1ec-month-view {
 }
 @media only screen and (min-width: 1441px){
     .mkd-pt-six-item .mkd-pt-six-image-holder {
-         min-height: 240px;
+        min-height: 240px;
     }
 }
 /*For set out minimum height blog box if description not exist ends*/
@@ -1430,10 +1430,18 @@ table.ai1ec-month-view {
 /*footer block for ipad ends here*/
 
 /*contact us styles starts here*/
+.contact-us-wrapper{
+    margin-top: 30px;
+}
+.contact-us-container{
+    padding:30px;
+    background: #ffffff;
+    margin-bottom: 20px;
+}
 .fsp-wrapper-cont{
     background: #ffffff;
 }
-.wpb-cont-cust-style a{
+.contact-us-container a{
     font-weight: bold;
     color: #ff6600;
 }
@@ -1448,15 +1456,15 @@ table.ai1ec-month-view {
 
 /*reply command section starts here*/
 @media only screen and (max-width: 767px) {
-.mkd-comment-holder .mkd-comment-info-and-links .mkd-comment-name {
-    display: block;
-    width: 100%;
-}
-.mkd-comment-holder .mkd-comment-links {
-    display: block;
-    width: 100%;
-    text-align: left;
-}
+    .mkd-comment-holder .mkd-comment-info-and-links .mkd-comment-name {
+        display: block;
+        width: 100%;
+    }
+    .mkd-comment-holder .mkd-comment-links {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
 }
 /*reply command section ends here*/
 
