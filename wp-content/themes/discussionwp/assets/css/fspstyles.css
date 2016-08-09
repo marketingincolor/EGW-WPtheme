@@ -371,6 +371,31 @@ Category menu right side css ends here*/
         margin-left: 5px;
     }
 }
+.mkd-mobile-search-nw {
+    padding:15px;
+    overflow: hidden;
+}
+.mkd-mobile-search-nw .mkd-column-left input{
+    width:75%;
+    float: left;
+    padding: 0 2%;
+    height: 36px;
+}
+.mkd-mobile-search-nw .mkd-column-right button{
+    background: #b3cc36;
+    border: 0 none;
+    color: #ffffff;
+    float: right;
+    font-size: 20px;
+    height: 38px;
+    letter-spacing: 2px;
+    width: 19%;
+    cursor: pointer;
+    font-weight: bold;
+}
+.mkd-mobile-header .mkd-mobile-nav ul{
+    padding-bottom: 10px;
+}
 /*header css ends here*/
 
 /*footer css starts here*/
@@ -627,6 +652,17 @@ footer .mkd-footer-top-holder {
 .fsborderradius .fsBody .fsForm{
     width: 90% !important;
 }
+@media only screen and (max-width: 1024px) {
+    .fsForm .fsLabelHorizontal > label, .fsForm .fsLabelHorizontal > legend, .fsForm .fsLabelHorizontal > span.fsLabel, .fsForm .fsLabelHorizontal legend.fsLabelHorizontal{
+        padding-bottom: 10px !important;
+        text-align:left !important;
+        width:100% !important;
+    }
+    .fsForm .fsLabelHorizontal .fsLabel + .fieldset-content, .fsForm .fsLabelHorizontal .fsLabel + .fsFieldHorizontal{
+        width:100% !important;
+    }
+}
+
 @media only screen and (max-width: 640px) {
     .join-content {
         padding: 0 0 0 7% !important;
@@ -641,15 +677,7 @@ footer .mkd-footer-top-holder {
     .fsSubmit input.fsSubmitButton{
         margin-left: 0% !important;
         width: 50% !important;
-    }
-    .fsForm .fsLabelHorizontal > label, .fsForm .fsLabelHorizontal > legend, .fsForm .fsLabelHorizontal > span.fsLabel, .fsForm .fsLabelHorizontal legend.fsLabelHorizontal{
-        padding-bottom: 10px !important;
-        text-align:left !important;
-        width:100% !important;
-    }
-    .fsForm .fsLabelHorizontal .fsLabel + .fieldset-content, .fsForm .fsLabelHorizontal .fsLabel + .fsFieldHorizontal{
-        width:100% !important;
-    }
+    }    
 }
 
 /*Login css ends here*/

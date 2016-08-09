@@ -2409,3 +2409,39 @@ function custom_category_permalink($id,$getPostcat, $current_cat_id,$parent_cat_
         return esc_url(get_permalink());;
     }
 }
+
+/**
+ * Author - Muthupandi
+ * Date  - 09-08-2016
+ * Purpose - For mobile search bar
+ */
+add_action('init','remove_mobile_header');
+
+function remove_mobile_header(){
+    //mobile header
+    remove_action('discussion_after_page_header', 'discussion_get_mobile_header');
+    add_action('discussion_after_page_header', 'custom_get_mobile_header');
+}
+
+function custom_get_mobile_header(){
+    
+    if(discussion_is_responsive_on()) {
+            $header_type = 'header-type3';
+
+            //this could be read from theme options
+            $mobile_header_type = 'mobile-header';
+
+            $parameters = array(
+                'show_logo'              => discussion_options()->getOptionValue('hide_logo') == 'yes' ? false : true,
+                'show_navigation_opener' => has_nav_menu('mobile-navigation')
+            );            
+            include(locate_template('block/mobile-header.php'));            
+        }
+}
+
+function custom_get_mobile_nav() {
+
+    $slug = 'header-type3';
+    include(locate_template('block/mobile-navigation.php'));
+}
+/*Added script for mobile search header ends here*/
