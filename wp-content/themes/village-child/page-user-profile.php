@@ -109,7 +109,7 @@ get_header();
                                                 if (isset($custom_avatar_meta_data) && !empty($custom_avatar_meta_data[0])):
                                                     $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0], 'medium');
                                                     ?>
-                                                    <img src="<?php echo $attachment[0]; ?>" width="248"/>
+                                                    <img id="image_upload_preview" src="<?php echo $attachment[0]; ?>" width="248" height="248"/>
                                                 <?php else : ?>                                                    
                                                     <img src="<?php echo get_template_directory_uri();?>/assets/img/aavathar.jpg" width="248" height="248"/>
                                                 <?php endif; ?>

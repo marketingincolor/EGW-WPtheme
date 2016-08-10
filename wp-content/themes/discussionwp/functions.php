@@ -142,6 +142,8 @@ if (!function_exists('discussion_scripts')) {
         wp_enqueue_script('fsp-custom-popupjs', MIKADO_ASSETS_ROOT . '/js/jquery.magnific-popup.js', array('jquery'), false, true);
 
         wp_enqueue_script('common script', MIKADO_ASSETS_ROOT . '/js/common.js', array('jquery'), false, true);
+        
+        wp_enqueue_script('common jquery', MIKADO_ASSETS_ROOT . '/js/jquery-library.js', array('jquery'), false, true);
 
 
         //include comment reply script
