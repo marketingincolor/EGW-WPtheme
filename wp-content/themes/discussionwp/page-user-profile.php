@@ -111,7 +111,7 @@ get_header();
                                                     ?>
                                                     <img id="image_upload_preview" src="<?php echo $attachment[0]; ?>" width="248" height="248"/>
                                                 <?php else : ?>                                                    
-                                                    <img src="<?php echo get_template_directory_uri();?>/assets/img/aavathar.jpg" width="248" height="248"/>
+                                                    <img id="image_upload_preview" src="<?php echo get_template_directory_uri();?>/assets/img/aavathar.jpg" width="248" height="248"/>
                                                 <?php endif; ?>
                                                 <div class="fspgray_btn">
                                                     <input type="file" id="userProfileImage" name="userProfileImage" style="display:none">                                                
