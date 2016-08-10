@@ -6,7 +6,8 @@
 	<div class="mkd-container">
 		<?php do_action('discussion_after_container_open'); ?>
 		<div class="mkd-container-inner">
-		         <?php  discussion_get_blog_single(); ?>
+                    <div class="vc_empty_space" style="height: 30px"><span class="vc_empty_space_inner"></span></div>
+		    <?php  discussion_get_blog_single(); ?>
 		</div>
 		<?php do_action('discussion_before_container_close'); ?>
 	</div>
