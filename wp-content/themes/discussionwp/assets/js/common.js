@@ -164,6 +164,7 @@ function userProfileUpload() {
 
 
     jQuery('#userProfileImage').change(function () {
+        userProfilePreview(this);
         if (jQuery('.fspr_user_profile_upload_error').length)
             jQuery('.fspr_user_profile_upload_error').remove();
         var filename = jQuery('#userProfileImage').val().toLowerCase();
@@ -175,6 +176,20 @@ function userProfileUpload() {
             jQuery('#user-profile-avatar').html('Profile Picture Added !').css('color', 'green');
         }
     });
+}
+
+//User profile image preview
+
+function userProfilePreview(imgData){
+	if (imgData.files && imgData.files[0]) {
+        var readerObj = new FileReader();
+        
+        readerObj.onload = function (element) {
+            jQuery('#image_upload_preview').attr('src', element.target.result);
+        }
+        
+        readerObj.readAsDataURL(imgData.files[0]);
+    }
 }
 
 //User profile form validation
