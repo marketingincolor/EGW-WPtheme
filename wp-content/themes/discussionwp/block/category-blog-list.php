@@ -33,10 +33,18 @@ if(!isset($slug_page)) $slug_page=basename(get_permalink());
                         $title_cls = "";
                         if (have_posts()) {
                             while (have_posts()) :the_post();
-                                if ($i % 3 == 1):
-                                    /* for set out class article title based on fixed heights */
-                                    $title_cls = article_title_class($wp_query);
-                                endif;
+                                if (strstr($_SERVER['HTTP_USER_AGENT'], 'iPad')) {
+                                    //echo "You are on an iPad";
+                                    if ($i % 2 == 1):
+                                        /* for set out class article title based on fixed heights */
+                                        $title_cls = article_title_class($wp_query);
+                                    endif;
+                                }else {
+                                    if ($i % 3 == 1):
+                                        /* for set out class article title based on fixed heights */
+                                        $title_cls = article_title_class($wp_query);
+                                    endif;
+                                }
 
                                 $id = get_the_ID();
                                 $background_image_style = discussion_custom_getImageBackground($id);

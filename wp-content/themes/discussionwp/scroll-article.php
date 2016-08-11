@@ -59,10 +59,18 @@
                     $params['background_image_style'] = $background_image_style;
                     $post_no_class = 'mkd-post-number-' . $post_no;                   
 
-                    if ($i % 3 == 1):
-                        /* for set out class article title based on fixed heights */
-                        $title_cls=next_post_scrollarticle($blog_title_ar,$i);                        
-                    endif;
+                    if (strstr($_SERVER['HTTP_USER_AGENT'], 'iPad')) {
+                        if ($i % 2 == 1):
+                            /* for set out class article title based on fixed heights */
+                            $title_cls = next_post_scrollarticle($blog_title_ar, $i);
+                        endif;
+                    }else {
+                        if ($i % 3 == 1):
+                            /* for set out class article title based on fixed heights */
+                            $title_cls = next_post_scrollarticle($blog_title_ar, $i);
+                        endif;
+                    }
+
                     
                     /**
                      * Genarating permalink based on category

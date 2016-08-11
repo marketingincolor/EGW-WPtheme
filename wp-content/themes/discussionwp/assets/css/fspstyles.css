@@ -1399,6 +1399,7 @@ table.ai1ec-month-view {
         min-height: 66px;
     }
 }
+
 @media only screen and (min-width: 769px) {
     .mkd-pt-six-item .mkd-pt-six-image-holder {
         min-height: 200px;
@@ -1411,6 +1412,11 @@ table.ai1ec-month-view {
     }
     .mkd-pt-six-item .mkd-post-excerpt {
         min-height: 44px;
+    }
+}
+@media screen and (max-width: 1024px) and (min-width: 769px){
+    .mkd-pt-six-item .mkd-pt-six-image-holder {
+        min-height: 215px;
     }
 }
 @media only screen and (min-width: 1441px){
