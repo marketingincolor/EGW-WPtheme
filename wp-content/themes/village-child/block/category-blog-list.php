@@ -1,10 +1,16 @@
 <!-- Post block start-->
 <?php
 list($post_per_section, $post_type) = scroll_loadpost_settings();
-$main_cat_id = get_maincategory_id(); //for retrieving main category id
-$main_cat_det = get_category($main_cat_id);
+$main_cat_id="";
+$main_cat_det="";
+global $wp;
+$current_url = add_query_arg( $wp->query_string, '', home_url( $wp->request ) );
+if($current_url!=get_home_url())
+{
+   $main_cat_id = get_maincategory_id(); //for retrieving main category id
+   $main_cat_det = get_category($main_cat_id);
+}
 if(!isset($slug_page)) $slug_page=basename(get_permalink());
-$slug_page=basename(get_permalink());
 ?>
 <div class="wpb_column vc_column_container vc_col-sm-12">
         <div class="wpb_wrapper">
