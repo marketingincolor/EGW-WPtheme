@@ -259,40 +259,40 @@ function fspr_login_member() {
             
             if (is_super_admin()) {                                
                 wp_redirect(home_url('/wp-admin'));
-            } else {                  
+            } else {    
+                $site_url = other_user_profile_redirection();
                 if(isset($meta_data['subscriber'])){ 
                     
-                    //Redirect to welcome page when user login first time   
+                    //Redirect to welcome page when user login first time                     
                     $first_login = get_user_meta( $user->ID, 'first_login', true );
                     if( ! $first_login ) {                        
-                        update_user_meta( $user->ID, 'first_login', 'true', '' );
-                        $site_url = other_user_profile_redirection();                        
+                        update_user_meta( $user->ID, 'first_login', 'true', '' );                                               
                         wp_redirect($site_url.'/welcome'); 
                         exit;
                     }
                     
+                    //Redirect to home or referrer url after user login
                     $location = $_POST['redirect']; // referral URL fetch from post value
                     $findblog_page = url_to_postid($location); // Get Post ID from referral URL
-                    $getwhichIs = get_post_type($findblog_page); // Find Post Type using Post ID
-                    if ($getwhichIs == "videos") {
-                        wp_redirect($location);
-                    } elseif ($getwhichIs == "post") {
-                        wp_redirect($location);
-                    } else {
-                        $site_url = other_user_profile_redirection();
-                        if ($site_url) {
+                    $getwhichIs = get_post_type($findblog_page); // Find Post Type using Post ID                    
+                    if ($getwhichIs == "videos" || $getwhichIs == "post") {
+                        if ($site_url)  
+                            wp_redirect($site_url); 
+                        else    
+                            wp_redirect($location);                        
+                    } else {                        
+                        if ($site_url)  
                             wp_redirect($site_url);
-                        } else {
-                            wp_redirect(home_url());
-                        }
+                        else   
+                            wp_redirect(home_url());                        
                     }
-                } else {
-                    $site_url = other_user_profile_redirection();
-                    if ($site_url) {
+                    
+                } else {   
+                    //Redirect to admin page if user role is admin
+                    if ($site_url)
                         wp_redirect($site_url . '/wp-admin');
-                    } else {
-                        wp_redirect(home_url('/wp-admin'));
-                    }
+                    else
+                        wp_redirect(home_url('/wp-admin'));                    
                 }
             }
             exit;
