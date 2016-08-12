@@ -327,6 +327,9 @@ get_header();
         jQuery('#user-profile-form :input').keyup(function () {
             formmodified = 1;
         });
+        jQuery('#upload').click(function () {
+            formmodified = 1;
+        });
         window.onbeforeunload = confirmExit;
         function confirmExit() {
             if (formmodified == 1) {
