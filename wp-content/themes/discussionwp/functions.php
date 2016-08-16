@@ -287,9 +287,9 @@ if (!function_exists('discussion_header_meta')) {
      * Function that echoes meta data if our seo is enabled
      */
     function discussion_header_meta() {
-        ?>          
+        ?>
 
-        <meta charset="<?php bloginfo('charset'); ?>"/>       
+        <meta charset="<?php bloginfo('charset'); ?>"/>
         <!--        <link rel="profile" href="http://gmpg.org/xfn/11"/>-->
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>"/>
         <?php
@@ -1177,8 +1177,8 @@ function organize_catgory($id) {
             $slug = get_category($getKeyrel);
             $out.='<a href="' . site_url().'/' .$slug->slug. '">';
         }
-        else 
-        $out.='<a href="' . get_category_link($getKeyrel) . '">';   
+        else
+        $out.='<a href="' . get_category_link($getKeyrel) . '">';
         $out.=get_cat_name($getKeyrel) . '</a>';
         if ($j > count($getResultset) - 1) {
             echo "";
@@ -1191,7 +1191,7 @@ function organize_catgory($id) {
 }
 
 /**
- * 
+ *
  * Author -Akilan
  * Date  - 20-06-2016
  * Purpose -  For featured template image background
@@ -1315,7 +1315,7 @@ if (!function_exists('discussion_custom_getImageParams')) {
  * Author -Akilan
  * Date  - 20-06-2016
  * purpose - For implementing custom category template for getting category image detail
- * 
+ *
  * @param type $id
  * @return string
  */
@@ -1378,7 +1378,7 @@ if (!function_exists('discussion_custom_category_query')) {
 /**
  * Author - Akilan
  * Date - 20-06-2016
- * Purpose - For custom template for category query 
+ * Purpose - For custom template for category query
  */
 if (!function_exists('discussion_custom_categorylist_query')) {
 
@@ -1431,9 +1431,9 @@ if (!function_exists('category_top_parent_id')) {
 }
 
 /* *
- * 
+ *
  * Purpose: Enable PHP in widgets
- * Author: Ramkumar.S 
+ * Author: Ramkumar.S
  * Date : 20 June 2016
  * Last Modified : 20 June 2016
  * */
@@ -1475,9 +1475,9 @@ function modify_contact_methods($profile_fields) {
 add_filter('user_contactmethods', 'modify_contact_methods');
 
 /* *
- * 
+ *
  * Purpose: Public Profile
- * Author: Ramkumar.S 
+ * Author: Ramkumar.S
  * Date : 22 June 2016
  * Last Modified : 22 June 2016
  * */
@@ -1595,14 +1595,14 @@ function discussion_author_recommended_posts() {
 
             return $html;
         }
-        
+
         function add_recommended_meta_box() {
             // set post_types that this meta box shows up on.
             $author_recommended_posts_post_types = $this->get_option( "{$this->namespace}_post_types" );
 
             foreach( $author_recommended_posts_post_types as $author_recommended_posts_post_type ) {
                 // adds to posts $post_type
-                add_meta_box( 
+                add_meta_box(
                     $this->namespace . '-recommended_meta_box',
                     __( 'Author Recommended Posts', $this->namespace ),
                     array( &$this, 'recommended_meta_box' ),
@@ -1613,25 +1613,25 @@ function discussion_author_recommended_posts() {
             }
 
         }
-        
+
         function recommended_meta_box( $object, $box ) {
-        
+
         $author_recommended_posts = get_post_meta( $object->ID, $this->namespace, true );
         $author_recommended_posts_post_types = $this->get_option( "{$this->namespace}_post_types" );
         $author_recommended_posts_search_results = $this->author_recommended_posts_search();
         $author_recommended_posts_options_url = admin_url() . '/options-general.php?page=' . $this->namespace;
-        
+
         include( AUTHOR_RECOMMENDED_POSTS_DIRNAME . '/views/_recommended-meta-box.php' );
     }
-    
+
     function author_recommended_posts_search(){
         global $post;
         $post_id = $post->ID;
         $html = '';
-        
+
         // set post_types that get filtered in the search box.
         $author_recommended_posts_post_types = $this->get_option( "{$this->namespace}_post_types" );
-        
+
         // set default query options
         $options = array(
             'post_type' =>  $author_recommended_posts_post_types,
@@ -1643,15 +1643,15 @@ function discussion_author_recommended_posts() {
             'post__not_in' => array($post_id),
             's' => ''
         );
-        
+
         // check if ajax
         $ajax = isset( $_POST['action'] ) ? true : false;
-        
+
         // if ajax merge $_POST
         if( $ajax ) {
             $options = array_merge($options, $_POST);
         }
-        
+
         // search
         if( $options['s'] ) {
             // set temp title to search query
@@ -1659,12 +1659,12 @@ function discussion_author_recommended_posts() {
             // filter query by title
             add_filter( 'posts_where', array($this, 'posts_where'), 10, 2 );
         }
-        
-        // unset search so results are accurate and not muddled 
+
+        // unset search so results are accurate and not muddled
         unset( $options['s'] );
-        
+
         $searchable_posts = get_posts( $options );
-        
+
         if( $searchable_posts ) {
             foreach( $searchable_posts as $searchable_post ) {
                 // right aligned info
@@ -1674,11 +1674,11 @@ function discussion_author_recommended_posts() {
                 $title .= '<span class="recommended-posts-title">';
                 $title .= apply_filters( 'the_title', $searchable_post->post_title, $searchable_post->ID );
                 $title .= '</span>';
-                
+
                 $html .= '<li><a href="' . get_permalink($searchable_post->ID) . '" data-post_id="' . $searchable_post->ID . '">' . $title .  '</a></li>' . "\n";
             }
         }
-        
+
         // if ajax, die and echo $html otherwise just return
         if( $ajax ) {
             die( $html );
@@ -1686,8 +1686,8 @@ function discussion_author_recommended_posts() {
             return $html;
         }
     }
-    
-    
+
+
 
     }
 
@@ -1695,9 +1695,9 @@ function discussion_author_recommended_posts() {
 }
 
 /* *
- * 
- * Purpose: Login direct after login 
- * Author: Ramkumar.S 
+ *
+ * Purpose: Login direct after login
+ * Author: Ramkumar.S
  * Date : 24 June 2016
  * Last Modified : 24 June 2016
  * */
@@ -1722,9 +1722,9 @@ function redirect_login_page() {
 add_action('init', 'redirect_login_page');
 
 /* *
- * 
+ *
  * Purpose: Disable top menu based on admin/super admin role
- * Author: Ramkumar.S 
+ * Author: Ramkumar.S
  * Date : 24 June 2016
  * Last Modified : 27 June 2016
  * */
@@ -1825,7 +1825,7 @@ function ajax_forgotPassword() {
 
             $mail = wp_mail($to, $subject, $message, $headers);
             if ($mail) {
-                $success = '<div class="frp-success">You will received a new password via email.<div>';
+                $success = '<div class="frp-success">You will receive a new password via email.<div>';
             } else
                 $error = '<div class="error">System is unable to send you mail containg your new password.</div>';
         } else {
@@ -1879,7 +1879,7 @@ function custom_comment($comment, $args, $depth) {
     <li>
         <div class="<?php echo esc_attr($comment_class); ?>">
             <?php if (!$is_pingback_comment) { ?>
-                <div class="mkd-comment-image"> 
+                <div class="mkd-comment-image">
                     <?php
                     $user = $comment->user_id;
                     $custom_avatar_meta_data = get_user_meta($user, 'custom_avatar');
@@ -1887,7 +1887,7 @@ function custom_comment($comment, $args, $depth) {
                         $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0]);
                         ?>
                         <img src="<?php echo $attachment[0]; ?>" width="85px" height="85px"/>
-                    <?php else : ?>                                                    
+                    <?php else : ?>
                         <img src="<?php echo MIKADO_ASSETS_ROOT . '/img/aavathar.jpg' ?>" width="85px" height="85px" />
                     <?php endif; ?>
                 </div>
@@ -1916,7 +1916,7 @@ function custom_comment($comment, $args, $depth) {
                             $blog_id = get_current_blog_id();
                             if ($blog_id != $user_blog_id):
                                 ?>
-                                <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>                                                                   
+                                <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>
                                 <?php
                             else :
                                 comment_reply_link(array_merge($args, array('reply_text' => esc_html__('Reply', 'discussionwp'), 'depth' => $depth, 'max_depth' => $args['max_depth'])));
@@ -1976,7 +1976,7 @@ function custom_comment($comment, $args, $depth) {
     }
 
     /**
-     * Author - Akilan 
+     * Author - Akilan
      * Date - 08-07-2016
      * Purpose - For adding thumb image for facebook sharing
      */
@@ -2036,7 +2036,7 @@ function custom_comment($comment, $args, $depth) {
      * Author - Akilan
      * Date  - 11-07-2016
      * Purpose - For hiding pages from search
-     * 
+     *
      */
     function remove_pages_from_search() {
         global $wp_post_types;
@@ -2049,7 +2049,7 @@ function custom_comment($comment, $args, $depth) {
      * Author - Vinoth Raja
      * Date  - 14-07-2016
      * Purpose - For adding comment approved email functionality
-     * 
+     *
      */
     add_filter('wp_mail_content_type', create_function('', 'return "text/html"; ')); //for adding html content in wp_mail
 //for except admin users
@@ -2160,8 +2160,8 @@ function custom_comment($comment, $args, $depth) {
     /**
      * Author - Vinoth Raja
      * Date  - 16-07-2016
-     * Purpose - For customizing wp_favorite_posts plugin for remove star from remove favorites section  
-     * 
+     * Purpose - For customizing wp_favorite_posts plugin for remove star from remove favorites section
+     *
      */
     function customized_saved_stories() {
         global $post;
@@ -2193,15 +2193,15 @@ function custom_comment($comment, $args, $depth) {
     /**
      * Author - Vinoth Raja
      * Date  - 19-07-2016
-     * Purpose - For Disabling WordPress comment flood prevention  
-     * 
+     * Purpose - For Disabling WordPress comment flood prevention
+     *
      */
     add_filter('comment_flood_filter', '__return_false');
 
     /**
      * Created By   - Muthupandi
      * Created Date - 20-07-2016
-     * Updated By   - Muthupandi 
+     * Updated By   - Muthupandi
      * Updated Date - 20-07-2016
      * Purpose      - For implementing append saved articles while click 'load more' button
      */
@@ -2216,7 +2216,7 @@ function custom_comment($comment, $args, $depth) {
     /**
      * Created By   - Rajasingh
      * Created Date - 25-07-2016
-     * Updated By   - Rajasingh 
+     * Updated By   - Rajasingh
      * Updated Date - 25-07-2016
      * Purpose      - Getting username using user email address
      */
@@ -2235,7 +2235,7 @@ function custom_comment($comment, $args, $depth) {
     /**
      * Created By   - Ramkumar.S
      * Created Date - 27-07-2016
-     * Updated By   - Ramkumar.S 
+     * Updated By   - Ramkumar.S
      * Updated Date - 27-07-2016
      * Purpose      - Add Find Branch/Join link to naviagation menu
      */
@@ -2248,28 +2248,28 @@ function custom_comment($comment, $args, $depth) {
 //        $homeurl = home_url('/');
 //        if (!is_user_logged_in()  && get_current_blog_id()==1)
 //            $link = '<a class="" href="' . $homeurl . 'register"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">Join</span></span></span></a>';
-//        // else  
+//        // else
 //        //  $link = '<a class="" href="' . $homeurl . 'register"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">Find a Branch</span></span></span></a>';
 //
 //        return $items.= '<li id="log-in-out-link" class="menu-item menu-item-type-custom menu-item-object-custom  mkd-menu-narrow">' . $link . '</li>';
 //    }
 //    add_filter('wp_nav_menu_items', 'add_login_logout_to_menu', 50, 2);
 
-    
-      
+
+
      /**
      * Author - Vinoth Raja
      * Date   - 30-07-2016
      * Purpose - For page view count increasing functionality
      */
-    
+
     remove_action('wp', 'discussion_update_post_count_views');
-    
+
     if(!function_exists('custom_update_post_count_views')) {
 
 	function custom_update_post_count_views(){
 		$postID = discussion_get_page_id();
-		if(is_singular('post')||is_singular('videos')){	
+		if(is_singular('post')||is_singular('videos')){
                         if(isset($_COOKIE['mkd-post-views_'. $postID])){
 				return;
 			} else {
@@ -2288,7 +2288,7 @@ function custom_comment($comment, $args, $depth) {
 
 	add_action('wp', 'custom_update_post_count_views');
 }
-  
+
 
 if(!function_exists('custom_discussion_excerpt')) {
 	/**
@@ -2299,7 +2299,7 @@ if(!function_exists('custom_discussion_excerpt')) {
 	 *
 	 */
 	function custom_discussion_excerpt($excerpt_length_in_chars) {
-		
+
             global $post;
             $empty_content_p='<p class="mkd-post-excerpt-fsp"></p>';
             if(post_password_required()) {
@@ -2314,14 +2314,14 @@ if(!function_exists('custom_discussion_excerpt')) {
                     $more = 0;
                     the_content(true);
             }elseif($post->post_content != "") {
-                $post_excerpt = $post->post_excerpt != "" ? $post->post_excerpt : strip_tags($post->post_content);                    
+                $post_excerpt = $post->post_excerpt != "" ? $post->post_excerpt : strip_tags($post->post_content);
                 $post_excerpt_length = strlen($post_excerpt);
                 if($excerpt_length_in_chars == '0'){
                     $post_excerpt = rtrim(substr($post_excerpt,0,100));
                 }else if($post_excerpt_length > $excerpt_length_in_chars){
                     $post_excerpt = rtrim(substr($post_excerpt,0,$excerpt_length_in_chars));
                 }
-                echo '<p class="mkd-post-excerpt">'.$post_excerpt.'</p>';                                        			
+                echo '<p class="mkd-post-excerpt">'.$post_excerpt.'</p>';
             }
             else {
                 echo $empty_content_p;
