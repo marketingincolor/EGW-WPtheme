@@ -1,0 +1,1 @@
+<div class="mkd-blog-like"><?php if( function_exists('discussion_get_like') ) discussion_get_like(); ?></div>

@@ -1,0 +1,41 @@
+/*
+Theme Name: Discussion-Child
+Theme URI: http://discussion.mikado-themes.com/
+Description: A Powerful News & Magazine Theme
+Author: Mikado Themes
+Template: discussionwp
+Author URI: http://themeforest.net/user/mikado-themes
+Version: 1.1.1
+License: GNU General Public License
+License URI: licence/GPL.txt
+
+CSS changes can be made in files in the /css/ folder. This is a placeholder file required by WordPress, so do not delete it.
+
+*/
+
+/**
+For setting main blog style adjustment
+*/
+
+.home .mkd-reveal-nonf-active{
+
+    display:none;
+}
+
+.home .mkd-pb-two-holder.three_fourths_one_fourth .mkd-pb-two-featured{
+    width:100%
+}
+
+.ngg-fancybox > img {
+    height: 123px;
+    margin-bottom: 5px;
+    width: 184px;
+}
+
+.ngg-galleryoverview.ngg-ajax-pagination-none {
+    margin-bottom: 30px;
+}
+
+.slideshowlink {
+    display: none;
+}

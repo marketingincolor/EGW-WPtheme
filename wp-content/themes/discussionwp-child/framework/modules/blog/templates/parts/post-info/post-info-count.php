@@ -1,0 +1,1 @@
+<div class="mkd-post-info-count"><span class="mkd-post-count-number"><?php echo discussion_get_post_count_views(discussion_get_page_id()); ?></span> <span class="mkd-post-count-text"><?php esc_html_e('Views','discussionwp'); ?></span></div>

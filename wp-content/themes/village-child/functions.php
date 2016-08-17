@@ -80,4 +80,43 @@ function village_next_post_scrollarticle($blog_title_ar, $i) {
     $data = array($current, $next_title);   
     return get_title_class($data);
 }
+
+/**
+ * Author -Akilan
+ * Date  - 20-06-2016
+ * purpose - For implementing custom category template for getting category image detail
+ * 
+ * @param type $id
+ * @return string
+ */
+if (!function_exists('discussion_custom_categoryImageParams')) {
+
+    function discussion_custom_categoryImageParams($id) {
+        $params = array();
+        $params['proportion'] = 1;
+        $params['background_image'] = '';
+        $params['background_image_thumbs'] = '';
+        $url = z_taxonomy_image_url($id);
+        $background_image_url = wp_get_attachment_image_src($url, 'full');
+        if ($url != "") {
+            $background_image = getimagesize($url);
+        }
+
+        $background_image_thumbs = wp_get_attachment_image_src(get_post_thumbnail_id($id), 'discussion_landscape');
+
+        if (count($background_image) && is_array($background_image)) {
+            $width = $background_image[0];
+            $height = $background_image[1];
+            $params['proportion'] = $height / $width; //get height/width proportion
+            $params['background_image'] = 'background-image: url(' . $url . ')';
+        }
+
+        if (count($background_image_thumbs) && is_array($background_image_thumbs)) {
+            $params['background_image_thumbs'] = 'background-image: url(' . $background_image_thumbs[0] . ')';
+        }
+
+        return $params;
+    }
+
+}
 ?>
