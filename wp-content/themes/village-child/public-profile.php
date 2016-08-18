@@ -1,7 +1,5 @@
+<?php get_header(); ?>
 <?php
- get_header();?>
-<?php
-
 /*
  * Author: Ramkumar.S
  * Date: June 22, 2016
@@ -15,38 +13,64 @@ if ($server == '192.168.1.154')
 else
     $username = $link_array[2];
 ?>
+<?php
+
+function get_user_id_by_display_name($author_display_name) {
+    global $wpdb;
+
+    if (!$user = $wpdb->get_row($wpdb->prepare(
+                    "SELECT `ID` FROM $wpdb->users WHERE `display_name` = %s", $author_display_name
+            )))
+        return false;
+
+    return $user->ID;
+}
+
+$getUserID = get_user_id_by_display_name($username);
+?>
 
 <div class="mkd-content">
     <div class="mkd-content-inner">
-       <?php global $current_user;
-             wp_get_current_user ();
-       ?>
+        <?php
+        global $current_user;
+        wp_get_current_user();
+        ?>
         <div class="mkd-container">
             <div class="mkd-container-inner clearfix">
-            <div class="mkd-blog-holder mkd-blog-single">
-		<?php
-		$args = array(
-		    'search' => $username,
-		    'search_columns' => array('user_login', 'user_email')
-		);
-		$user_query = new WP_User_Query($args);
+                <div class="mkd-blog-holder mkd-blog-single">
+                    <?php
+                    $user = new WP_User($getUserID);
+                    if (!empty($user->roles) && is_array($user->roles)) {
+                        foreach ($user->roles as $role) {
+                            $role;
+                            $user->first_name;
+                            $user->last_name;
+                        }
+                    }
+//		$args = array(
+//		    'search' => $username,
+//		    'search_columns' => array('user_login', 'user_email')
+//		);
+//		$user_query = new WP_User($getUserID);
 //		echo '<pre>';
-//		print_r($current_user);
+//		print_r($user_query);
 //		echo '</pre>';
-
 //		echo '<h2>Public Profile</h2>';
-
-		if (!empty($user_query->results)) {
-		    foreach ($user_query->results as $user) {
-//			echo '<p> Display Name: ' . $user->display_name . '</p>';
-//			echo '<p> User Login: ' . $user->user_login . '</p>';
-//			echo '<p> User Email: ' . $user->user_email . '</p>';
-//			echo '<p> User registered: ' . $user->user_registered . '</p>';
-//			echo '<p> Role: ' . $user->roles[0] . '</p>';
-		    }
-		} else {
-		    echo 'No users found.';
-		}
+//		if (!empty($user_query)) {
+//		    foreach ($user_query as $user) {
+//                        print_r($user);
+//			//echo '<p> Display Name: ' . $user->display_name . '</p>';
+////			echo '<p> User Login: ' . $user->user_login . '</p>';
+////			echo '<p> User Email: ' . $user->user_email . '</p>';
+////			echo '<p> User registered: ' . $user->user_registered . '</p>';
+////			echo '<p> Role: ' . $user->roles[0] . '</p>';
+//		  }
+//		} else {
+//		    echo 'Not found.';
+//		}
+//                
+//                echo $user->display_name;
+//                echo $user->ID;
 //
 //		echo '<h2>Related posts</h2>';
 //
@@ -83,34 +107,36 @@ else
 //		    }
 //		    echo "</ul>";
 //		}
-		?>
-                <div class="mkd-container-inner">
-                    <div class="mkd-author-description">
-                        <div class="mkd-author-description-inner">
-                           <div class="mkd-author-description-image">
-                                     <?php
-                                    $custom_avatar_meta_data = get_user_meta($user->ID, 'custom_avatar');
-                                    if (isset($custom_avatar_meta_data) && !empty($custom_avatar_meta_data[0])):
-                                        $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0], 'thumbnail');
-                                        ?>
-                                        <img src="<?php echo $attachment[0]; ?>" width="176" height="176" class="avatar avatar-176 photo"/>
-                                    <?php else : ?>                                                    
-                                        <img src="<?php echo get_template_directory_uri();?>/assets/img/aavathar.jpg" width="176" height="176" class="avatar avatar-176 photo"/>
-                                    <?php endif; ?>
-                            </div>
-                            <div class="mkd-author-description-text-holder">
-                                <div class="mkd-author-text">
-                                    <h3><?php echo $user->first_name." ".$user->last_name ?></h3>
-                                     <p><?php echo $user->description ?></p>
+                    ?>
+                    <div class="mkd-container-inner">
+                        <div class="mkd-author-description">
+                            <div class="mkd-author-description-inner">
+                                <div class="coach-profile">
+                                    <div class="coach-profile-image">
+                                        <?php
+                                        $custom_avatar_meta_data = get_user_meta($getUserID, 'custom_avatar');
+                                        if (isset($custom_avatar_meta_data) && !empty($custom_avatar_meta_data[0])):
+                                            $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0], 'thumbnail');
+                                            ?>
+                                            <img src="<?php echo $attachment[0]; ?>" width="176" height="176" class="avatar avatar-176 photo"/>
+                                        <?php else : ?>                                                    
+                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/aavathar.jpg" width="176" height="176" class="avatar avatar-176 photo"/>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="coach-profile-text">
+                                        <div class="mkd-coach-profile-text">
+                                            <h3><?php echo $user->first_name . " " . $user->last_name ?></h3>
+                                            <p><?php echo $user->description ?></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-       </div>
     </div>
 </div>
 <?php get_footer(); ?>

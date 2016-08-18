@@ -1474,5 +1474,61 @@ table.ai1ec-month-view {
 }
 /*reply command section ends here*/
 .mkd-author-description .mkd-author-text p{
-margin: 7px 0 0;
+    margin: 7px 0 0;
 }
+
+/*article created section starts here*/
+.article-created{
+    background:#fff;
+    padding: 20px 20px 16px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+.article-created p{
+    font-size: 12pt;
+    margin: 0;
+}
+.article-created a{
+    font-size: 13pt;
+    color: #ff6600;
+    font-weight: 500;
+    text-decoration: underline;
+}
+.article-created a:hover{
+    text-decoration: none;
+}
+.article-cr-lft{
+    float: left;
+    padding-right: 20px;
+}
+.article-cr-rgt{
+    float: left;
+    padding-top: 25px;
+}
+.coach-profile{
+    background:#fff;
+    padding: 25px 25px 25px;
+    overflow: hidden;
+}
+.coach-profile-image{
+    float: left;
+    padding-right: 2%;
+    width: 17%;
+}
+.coach-profile-text{
+    float: left;
+    width: 80%;
+}
+@media only screen and (max-width: 767px) {
+    .coach-profile-image{
+    float: none;
+    width: 100%;
+    padding-right: 0%;
+    padding-bottom: 20px;
+}
+.coach-profile-text{
+    float: none;
+    width: 100%;
+}
+}
+/*article created section ends here*/

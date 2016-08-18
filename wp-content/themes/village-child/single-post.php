@@ -75,12 +75,12 @@
                                     <?php discussion_get_module_template_part('templates/single/parts/title', 'blog'); ?>
                                     <div class="mdk-sng-pst"> 
                                     <?php the_content(); ?>
-                                    <?php include(locate_template('block/get-post-author.php')); ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </article>
+                    <?php include(locate_template('block/get-post-author.php')); ?>
                     <div class="disclamier">
                         <p><span>Disclaimer:</span> This content is for entertainment purposes only and it is not meant to be relied on as medical advice, diagnosis, or treatment. Consult your physician before starting any exercise or dietary program or taking any other action respecting your health. In case of a medical emergency, call 911. </p>
                     </div>
