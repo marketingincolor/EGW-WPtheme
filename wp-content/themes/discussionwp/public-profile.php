@@ -45,7 +45,7 @@ else
 //			echo '<p> Role: ' . $user->roles[0] . '</p>';
 		    }
 		} else {
-		    echo 'No users found.';
+		    echo 'Not found.';
 		}
 //
 //		echo '<h2>Related posts</h2>';
