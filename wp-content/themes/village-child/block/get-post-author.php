@@ -8,7 +8,7 @@ if (!empty($user->roles) && is_array($user->roles)) {
 ?>
 <?php if ($role == "coach") { ?>
     <div class="monitorcomments">                        
-        <p>This article created by <a href="<?php echo the_author_link(); ?> "><?php echo $author = get_the_author(); ?></a></p>
+        <p>This article created by <a href="<?php echo site_url(); ?>/public/<?php echo get_the_author(); ?>"><?php echo $author = get_the_author(); ?></a></p>
     </div> 
 <?php
 }?>
