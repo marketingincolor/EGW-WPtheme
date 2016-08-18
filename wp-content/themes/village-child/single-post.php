@@ -75,6 +75,7 @@
                                     <?php discussion_get_module_template_part('templates/single/parts/title', 'blog'); ?>
                                     <div class="mdk-sng-pst"> 
                                     <?php the_content(); ?>
+                                    <?php include(locate_template('block/get-post-author.php')); ?>
                                     </div>
                                 </div>
                             </div>

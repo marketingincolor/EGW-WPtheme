@@ -1473,4 +1473,6 @@ table.ai1ec-month-view {
     }
 }
 /*reply command section ends here*/
-
+.mkd-author-description .mkd-author-text p{
+margin: 7px 0 0;
+}
