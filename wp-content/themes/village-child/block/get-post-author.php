@@ -1,6 +1,6 @@
 <?php
 $author_display_name = get_the_author();
-echo "Checking:".$author_display_name;
+echo "Checking-village:".$author_display_name;
 function get_user_id_by_display_name($author_display_name) {
     global $wpdb;
 
@@ -12,12 +12,12 @@ function get_user_id_by_display_name($author_display_name) {
     return $user->ID;
 }
 
-$getUserID = get_user_id_by_display_name($author_display_name);
+echo $getUserID = get_user_id_by_display_name($author_display_name);
 
 $user = new WP_User($getUserID);
 if (!empty($user->roles) && is_array($user->roles)) {
     foreach ($user->roles as $role) {
-        $role;
+        echo $role;
         $user->first_name;
         $user->last_name;
     }
