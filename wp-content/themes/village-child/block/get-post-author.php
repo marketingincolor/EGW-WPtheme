@@ -1,6 +1,6 @@
 <?php
 $author_display_name = get_the_author();
-
+echo "Checking:".$author_display_name;
 function get_user_id_by_display_name($author_display_name) {
     global $wpdb;
 

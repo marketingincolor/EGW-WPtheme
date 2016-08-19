@@ -7,11 +7,7 @@
 $link = $_SERVER["REQUEST_URI"];
 $server = $_SERVER['SERVER_NAME'];
 $link_array = explode('/', $link);
-//print_r($link_array);
-if ($server == '192.168.1.154')
-    $username = $link_array[3];
-else
-    $username = $link_array[2];
+$username = $link_array[count($link_array)-2];
 ?>
 <?php
 
@@ -125,7 +121,14 @@ $getUserID = get_user_id_by_display_name($username);
                                     </div>
                                     <div class="coach-profile-text">
                                         <div class="mkd-coach-profile-text">
-                                            <h3><?php echo $user->first_name . " " . $user->last_name ?></h3>
+                                            <?php
+                                            if (!empty($user->first_name) && !empty($user->last_name)) {
+                                                $displayNameis = $user->first_name . " " . $user->last_name;
+                                            } else {
+                                                $displayNameis = $user->display_name;
+                                            }
+                                            ?>
+                                            <h3><?php echo $displayNameis; ?></h3>
                                             <p><?php echo $user->description ?></p>
                                         </div>
                                     </div>
