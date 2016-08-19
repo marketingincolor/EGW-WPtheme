@@ -1,23 +1,11 @@
 <?php
-$author_display_name = get_the_author();
-echo "Checking-min:".$author_display_name;
-function get_user_id_by_display_name($author_display_name) {
-    global $wpdb;
-
-    if (!$user = $wpdb->get_row($wpdb->prepare(
-                    "SELECT `ID` FROM $wpdb->users WHERE `display_name` = %s", $author_display_name
-            )))
-        return false;
-
-    return $user->ID;
-}
-
-echo $getUserID = get_user_id_by_display_name($author_display_name);
-
+$author_email = get_the_author_meta('user_email');
+$user = get_user_by( 'email', $author_email );
+$getUserID = $user->ID;
 $user = new WP_User($getUserID);
 if (!empty($user->roles) && is_array($user->roles)) {
     foreach ($user->roles as $role) {
-        echo $role;
+        $role;
         $user->first_name;
         $user->last_name;
     }
@@ -25,7 +13,7 @@ if (!empty($user->roles) && is_array($user->roles)) {
 if (!empty($user->first_name) && !empty($user->last_name)) {
     $displayNameis = $user->first_name . " " . $user->last_name;
 } else {
-    $displayNameis = get_the_author();
+    $displayNameis = $author_email = get_the_author_meta('user_nicename');
 }
 ?>
 <?php if ($role == "coach") { ?>
@@ -43,7 +31,7 @@ if (!empty($user->first_name) && !empty($user->last_name)) {
         </div>
         <div class="article-cr-rgt">
             <p>This article was created by</p>
-            <a href="<?php echo site_url(); ?>/public/<?php echo get_the_author(); ?>"><?php echo $displayNameis; ?></a>
+            <a href="<?php echo site_url(); ?>/public/<?php echo get_the_author_meta('user_nicename'); ?>"><?php echo $displayNameis; ?></a>
         </div>
     </div>
 

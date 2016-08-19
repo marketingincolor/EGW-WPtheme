@@ -11,18 +11,18 @@ $username = $link_array[count($link_array)-2];
 ?>
 <?php
 
-function get_user_id_by_display_name($author_display_name) {
+function get_user_id_by_user_nicename($author_display_name) {
     global $wpdb;
 
     if (!$user = $wpdb->get_row($wpdb->prepare(
-                    "SELECT `ID` FROM $wpdb->users WHERE `display_name` = %s", $author_display_name
+                    "SELECT `ID` FROM $wpdb->users WHERE `user_nicename` = %s", $author_display_name
             )))
         return false;
 
     return $user->ID;
 }
 
-$getUserID = get_user_id_by_display_name($username);
+$getUserID = get_user_id_by_user_nicename($username);
 ?>
 
 <div class="mkd-content">
