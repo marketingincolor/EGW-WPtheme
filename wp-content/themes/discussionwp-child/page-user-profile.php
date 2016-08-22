@@ -231,7 +231,7 @@ get_header();
                                                             </div>
                                                             <div class="saved_art_cont">
                                                                 <h4 id="<?php the_ID(); ?>"><?php the_title(); ?></h4>
-                                                                <p><?php discussion_excerpt(15); ?></p>
+                                                                <p><?php custom_discussion_excerpt(15); ?></p>
                                                             </div>
                                                             <div class="saved_art_cont_btns">
                                                                 <a class="fsp_remove_btn" href="?wpfpaction=remove&postid=<?php the_ID(); ?>" title="Remove" rel="">Remove</a>

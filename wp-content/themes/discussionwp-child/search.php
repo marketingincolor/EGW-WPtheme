@@ -71,7 +71,7 @@ if(discussion_options()->getOptionValue('enable_search_page_sidebar') === "no"){
 																			</a>
 																		</h4>
 																		<div class="mkd-pt-two-excerpt">
-																			<?php discussion_excerpt('20'); ?>
+																			<?php custom_discussion_excerpt('20'); ?>
 																		</div>
 																	</div>
 																</div>

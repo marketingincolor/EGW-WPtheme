@@ -1,0 +1,1 @@
+<div class="mkd-post-info-fsp-singlepost"><i class="fa fa-folder-o" aria-hidden="true"></i><span><?php the_category(' / '); ?></span></div>
