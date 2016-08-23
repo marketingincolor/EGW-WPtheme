@@ -2015,7 +2015,7 @@ function custom_comment($comment, $args, $depth) {
      * Purpose - For getting main category name
      */
     function main_category_name() {
-        return array('activity', 'medical', 'financial', 'relationships', 'nutrition', 'mind-spirit');
+        return array('activity', 'medical', 'financial', 'relationships', 'nutrition', 'mind-spirit', 'news');
     }
 
     /**
