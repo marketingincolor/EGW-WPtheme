@@ -2449,3 +2449,21 @@ function custom_get_mobile_nav() {
     include(locate_template('block/mobile-navigation.php'));
 }
 /*Added script for mobile search header ends here*/
+function add_last_updated()
+{
+    global $post;
+    $post_time = strtotime(get_the_time('m.d.Y', $post));
+    $mod_time = strtotime(get_the_modified_time('m.d.Y', $post));
+    $mod_date = get_the_modified_time('m.d.Y');
+    $date = get_the_date('m.d.Y');
+
+    if ($mod_time != null && $post_time != null)
+    {
+        $display_date = ($post_time < $mod_time ? $mod_date : $date);
+        if ($post_time != $mod_time)
+        {
+            echo '<div class="posted-on">Last updated : ' . $display_date . '</div>';
+        }
+    }
+}
+add_action( 'last_updated', 'add_last_updated' );
