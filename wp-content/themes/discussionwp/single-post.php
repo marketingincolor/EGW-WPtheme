@@ -73,6 +73,7 @@
                                         </div>
                                     <?php } ?>
                                     <?php discussion_get_module_template_part('templates/single/parts/title', 'blog'); ?>
+                                    <div class="posted-on">Last updated : <?php echo the_modified_date('m.d.Y'); ?></div>
                                     <div class="mdk-sng-pst"> 
                                     <?php the_content(); ?>
                                     

@@ -1,6 +1,6 @@
 <?php get_header(); ?>
-<div class="mkd-container-inner"> 
-     <?php 
+<div class="mkd-container-inner">
+     <?php
     $title_tag = 'h3';
     $title_length = '20';
     $display_date = 'yes';
@@ -10,7 +10,7 @@
     $display_count = 'yes';
     $display_comments = 'yes';
     ?>
-   
+
     <div class="mkd-blog-holder mkd-blog-single mkd-fsp-blog-holder">
         <?php ?>
         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -30,8 +30,8 @@
                             ))
                             ?>
 <!--                         <div class="mkd-post-fsp-savestories">
-                        <?php 
-                           //customized_saved_stories();    
+                        <?php
+                           //customized_saved_stories();
                         ?>
                         </div>-->
                         </div>
@@ -43,12 +43,13 @@
             <div class="mkd-column-inner">
                 <div class="mkd-blog-holder mkd-blog-single">
                     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                        <div class="mkd-post-content">                                
+                        <div class="mkd-post-content">
                             <div class="mkd-post-text">
-                                <div class="mkd-post-text-inner clearfix">                          
-                                    <?php discussion_get_module_template_part('templates/single/parts/title', 'blog'); ?>  
-                                    <div class="mdk-sng-pst"> 
+                                <div class="mkd-post-text-inner clearfix">
+                                    <?php discussion_get_module_template_part('templates/single/parts/title', 'blog'); ?>
+                                    <div class="mdk-sng-pst">
                                     <?php the_content(); ?>
+                                    <?php do_action('last_updated'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -112,9 +113,9 @@
                 <div class="fsp-recommended-stories-cont">
                     <?php echo do_shortcode('[AuthorRecommendedPosts]'); ?>
                 </div>
-                <?php 
-//                   get_template_part('block/comments-guidelines'); 
-//                   comments_template('', true); 
+                <?php
+//                   get_template_part('block/comments-guidelines');
+//                   comments_template('', true);
                 ?>
             </div>
         </div>
