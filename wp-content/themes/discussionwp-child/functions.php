@@ -7,7 +7,7 @@ if (!function_exists('discussion_styles')) {
     function discussion_styles() {
 
         //include theme's core styles
-        wp_enqueue_style('discussion_default_style', MIKADO_ROOT . '/style.css');
+        wp_enqueue_style('discussion_default_style', get_stylesheet_directory_uri() . '/style.css');
         wp_enqueue_style('discussion_modules', get_stylesheet_directory_uri() . '/assets/css/modules.css');
         wp_enqueue_style('fsp_custom_css', get_stylesheet_directory_uri() . '/assets/css/fspstyles.css');
         wp_enqueue_style('fsp_custom_popup', get_stylesheet_directory_uri() . '/assets/css/magnific-popup.css');

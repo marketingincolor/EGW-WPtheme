@@ -7,6 +7,7 @@
 //Forgot Password 
 jQuery(document).ready(function ()
 {
+    updateClassforTrendingNews();
     resetpassword();
     clearCommentText();
     loginFormValidation();
@@ -15,7 +16,8 @@ jQuery(document).ready(function ()
     userProfileUpload();
     userProfileFormValidation();
     saveArticleSessionValidation();
-    postRatingSessionValidation();    
+    postRatingSessionValidation();  
+    
 
 });
 
@@ -381,3 +383,9 @@ function DiscussionRatePost(){
     rate_post(); // Plugin default functionality
 }
 
+function updateClassforTrendingNews(){
+    
+    if(jQuery(".mkd-content-top-holder > .mkd-grid > .mkd-bn-holder").length){        
+        jQuery(".mkd-content-top-holder > .mkd-grid > .mkd-bn-holder").addClass('trending-news-blk');
+    }
+}
