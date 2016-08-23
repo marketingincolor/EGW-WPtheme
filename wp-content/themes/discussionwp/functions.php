@@ -2451,19 +2451,25 @@ function custom_get_mobile_nav() {
 /*Added script for mobile search header ends here*/
 function add_last_updated()
 {
-    global $post;
-    $post_time = strtotime(get_the_time('m.d.Y', $post));
-    $mod_time = strtotime(get_the_modified_time('m.d.Y', $post));
-    $mod_date = get_the_modified_time('m.d.Y');
-    $date = get_the_date('m.d.Y');
+    $post_date_number = strtotime(get_the_date());
+    $mod_date_number = strtotime(get_the_modified_date());
+    $modified_date = get_the_modified_date('m.d.Y');
+    $post_date = get_the_date('m.d.Y');
+    $display_date = ($post_date_number > $mod_date_number ? $post_date : $modified_date);
 
-    if ($mod_time != null && $post_time != null)
+    /* Get both time variables for post*/
+    if (($mod_date_number != null && $post_date_number) != null && ($post_date_number != $mod_date_number))
     {
-        $display_date = ($post_time < $mod_time ? $mod_date : $date);
-        if ($post_time != $mod_time)
-        {
-            echo '<div class="posted-on">Last updated : ' . $display_date . '</div>';
-        }
+        echo 'Last updated: ' . $display_date;
+    }
+    /*If post time is missing use modified time*/
+    elseif($modified_date)
+    {
+        echo '<div class="posted-on">Last updated : ' . $modified_date . '</div>';
+    }
+    else
+    {
+        return;
     }
 }
 add_action( 'last_updated', 'add_last_updated' );
