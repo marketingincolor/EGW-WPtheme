@@ -114,7 +114,7 @@
                                                                         //alert(dataString);
                                                                         jQuery.ajax({
                                                                             type: "POST",
-                                                                            url: "wp-content/themes/discussionwp/followajax.php",
+                                                                            url: "<?php echo get_stylesheet_directory_uri(); ?>/followajax.php",
                                                                             data: jQuery('form').serialize(),
                                                                             cache: false,
                                                                             success: function (successvalue) {
