@@ -1,10 +1,8 @@
 <?php
 
 function my_theme_enqueue_styles() {
-
-    $parent_style = 'parent-style';
-
-    wp_enqueue_style($parent_style, get_stylesheet_directory_uri() . '/style.css');    
+   
+    wp_enqueue_style(discussion_default_style, get_stylesheet_directory_uri() . '/style.css');    
     wp_enqueue_style('fsp_custom_css_child', get_stylesheet_directory_uri().'/assets/css/fspstyles_child.css');
     wp_enqueue_style('discussion_modules', get_stylesheet_directory_uri() . '/assets/css/modules.css');
     wp_enqueue_style('fsp_custom_css', get_stylesheet_directory_uri().'/assets/css/fspstyles.css');
@@ -13,7 +11,9 @@ function my_theme_enqueue_styles() {
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 
-/**
+if (!function_exists('discussion_scripts')) {
+
+    /**
      * Function that includes all necessary scripts
      */
     function discussion_scripts() {
@@ -56,6 +56,7 @@ add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
     }
 
     add_action('wp_enqueue_scripts', 'discussion_scripts');
+}
     
 /**
  * Author - Akilan
