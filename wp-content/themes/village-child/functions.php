@@ -503,26 +503,15 @@ if (!function_exists('discussion_custom_categorylist_query')) {
 }
 
 /**
- * 
- * Author -Akilan
- * Date  - 20-06-2016
- * Purpose -  For featured template image background
+ * Author - Akilan
+ * Date - 20-06-2016
+ * Purpose - Custom function for changing image post reating extension
  */
-if (!function_exists('discussion_custom_getImageBackground')) {
-
-    function discussion_custom_getImageBackground($id) {
-        $background_image_style = '';
-
-        $background_image = wp_get_attachment_image_src(get_post_thumbnail_id($id), 'full');
-
-        if (count($background_image) && is_array($background_image)) {
-            $background_image_style = 'background-image: url(' . $background_image[0] . ')';
-        }
-
-        return $background_image_style;
-    }
-
+function custom_rating_image_extension() {
+    return 'png';
 }
+
+add_filter('wp_postratings_image_extension', 'custom_rating_image_extension');
 
 /**
  * Returns ID of top-level parent category, or current category if you are viewing a top-level
@@ -1623,82 +1612,6 @@ if (!function_exists('discussion_post_info')) {
     }
 
 }
-
-/**
- * Author - Muthupandi
- * Date  - 19-08-2016
- * Purpose - Function return all parts on single.php page
- */
-
-/* if (!function_exists('discussion_get_single_html')) {
-    
-    function discussion_get_single_html() {
-
-        $post_format = get_post_format();
-
-        if ($post_format === false) {
-            $post_format = 'standard';
-        }
-
-        $params = array();
-
-        $display_category = 'yes';
-        if (discussion_options()->getOptionValue('blog_single_category') !== '') {
-            $display_category = discussion_options()->getOptionValue('blog_single_category');
-        }
-
-        $display_date = 'yes';
-        if (discussion_options()->getOptionValue('blog_single_date') !== '') {
-            $display_date = discussion_options()->getOptionValue('blog_single_date');
-        }
-
-        $display_author = 'yes';
-        if (discussion_options()->getOptionValue('blog_single_author') !== '') {
-            $display_author = discussion_options()->getOptionValue('blog_single_author');
-        }
-
-        $display_comments = 'yes';
-        if (discussion_options()->getOptionValue('blog_single_comment') !== '') {
-            $display_comments = discussion_options()->getOptionValue('blog_single_comment');
-        }
-
-        $display_like = 'no';
-        if (discussion_options()->getOptionValue('blog_single_like') !== '') {
-            $display_like = discussion_options()->getOptionValue('blog_single_like');
-        }
-
-        $display_count = 'yes';
-        if (discussion_options()->getOptionValue('blog_single_count') !== '') {
-            $display_count = discussion_options()->getOptionValue('blog_single_count');
-        }
-
-        $params['display_category'] = $display_category;
-        $params['display_date'] = $display_date;
-        $params['display_author'] = $display_author;
-        $params['display_comments'] = $display_comments;
-        $params['display_like'] = $display_like;
-        $params['display_count'] = $display_count;
-
-        discussion_get_module_template_part('templates/single/post-formats/' . $post_format, 'blog', '', $params);
-
-        discussion_get_module_template_part('templates/single/parts/tags', 'blog');
-        discussion_get_module_template_part('templates/single/parts/single-navigation', 'blog');
-
-        $show_ratings = (discussion_options()->getOptionValue('blog_single_ratings') == 'yes') ? true : false;        
-        if ($show_ratings) {            
-            get_template_part('block/ratings');
-        }
-
-        discussion_get_module_template_part('templates/single/parts/author-info', 'blog');
-
-        discussion_get_single_related_posts();
-
-        if (discussion_show_comments()) {
-            comments_template('', true);
-        }
-    }
-
-} */
 
 /**
  * Author - Muthupandi
