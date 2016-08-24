@@ -16,6 +16,8 @@ if (!isset($display_postid_ar))
     $display_postid_ar = array();
 if (!isset($subcat_id_ar))
     $subcat_id_ar = array();
+if(!isset($displayed_sub_cat_ar))
+    $displayed_sub_cat_ar=array();
 ?>
     jQuery(document).ready(function() {
         /**
@@ -99,6 +101,7 @@ if (!isset($subcat_id_ar))
                 cat_id: '<?php echo $cat_id; ?>',
                 post_type: '<?php if (!empty($post_type)): echo implode(",", $post_type);endif; ?>',              
                 display_postid_ar: '<?php if (!empty($display_postid_ar)): echo implode(",", $display_postid_ar); endif; ?>',
+                displayed_sub_cat_ar: '<?php if (!empty($displayed_sub_cat_ar)): echo implode(",", $displayed_sub_cat_ar); endif; ?>',
                 sub_catid_ar: '<?php if (!empty($subcat_id_ar)): echo implode(",", $subcat_id_ar);endif; ?>',
                 query_type1:query_type1,
                 query_type2:query_type2,

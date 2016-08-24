@@ -1115,7 +1115,7 @@ if (!function_exists('follow_categorypost_detail')) {
             'post_type' => $post_type,
             'cat' => $subcat_id_sgl,
             'order' => 'DESC',
-            'posts_per_page' => 2,
+            'posts_per_page' => 1,
             'post__not_in' => $display_postid_ar
         ));
         return $posts;
@@ -1124,6 +1124,16 @@ if (!function_exists('follow_categorypost_detail')) {
 }
 
 
+function follow_categorypost_detail_set($post_type, $subcat_id_sgl, $display_postid_ar) {
+        $posts = array(
+            'post_type' => $post_type,
+            'cat' => $subcat_id_sgl,
+            'order' => 'DESC',
+            'posts_per_page' => 1,
+            'post__not_in' => $display_postid_ar
+        );
+        return $posts;
+    }
 
 
 /**
