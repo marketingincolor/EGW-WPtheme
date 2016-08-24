@@ -984,7 +984,7 @@ function custom_comment($comment, $args, $depth) {
             ?>
                         <img src="<?php echo $attachment[0]; ?>" width="85px" height="85px"/>
                 <?php else : ?>                                                    
-                        <img src="<?php echo MIKADO_ASSETS_ROOT . '/img/aavathar.jpg' ?>" width="85px" height="85px" />
+                        <img src="<?php echo get_stylesheet_directory_uri() . '/assets/img/aavathar.jpg' ?>" width="85px" height="85px" />
                     <?php endif; ?>
                 </div>
                 <?php } ?>
