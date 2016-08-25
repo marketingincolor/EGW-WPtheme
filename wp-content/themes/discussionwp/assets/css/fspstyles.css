@@ -1530,5 +1530,8 @@ table.ai1ec-month-view {
     float: none;
     width: 100%;
 }
+.article-cr-cont{
+    padding-top: 20px;
+}
 }
 /*article created section ends here*/

@@ -1474,6 +1474,8 @@ function execute_php($html) {
 function modify_contact_methods($profile_fields) {
 
     // Add new fields
+    
+    
     $profile_fields['twitter'] = 'Twitter Username';
     $profile_fields['facebook'] = 'Facebook URL';
     $profile_fields['dob'] = 'Date of Birth';
@@ -1482,6 +1484,7 @@ function modify_contact_methods($profile_fields) {
     $profile_fields['city'] = 'City';
     $profile_fields['state'] = 'State';
     $profile_fields['postalcode'] = 'Postal Code';
+    $profile_fields['signature'] = 'Title';
 
     return $profile_fields;
 }
