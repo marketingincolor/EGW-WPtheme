@@ -3,8 +3,7 @@
  * Author - Akilan
  * Date - 22-07-2016
  * Purpose - For gathering followed/unfollowed category article in home page
- * Updated Date: 26-08-2016
- * Updated by: Rajasingh
+ *
  */
 ?>
 <?php
@@ -47,8 +46,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                 }
                                 $title_cls = 0;
                             }
-                            $_SESSION["display_postid_ar"] = $display_postid_ar;
-                            $_SESSION["displayed_sub_cat_ar"] = $displayed_sub_cat_ar;
+                            
                             /*
                              * Show remaining article belongs to following subcategories
                              */
@@ -85,6 +83,10 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                 endif;
                                 wp_reset_postdata();
                             }
+                            
+                            $_SESSION["display_postid_ar"] = $display_postid_ar;
+                            $_SESSION["displayed_sub_cat_ar"] = $displayed_sub_cat_ar;
+                            
                             /**
                              * collected post id and display detail
                              */
