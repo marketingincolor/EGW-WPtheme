@@ -3,21 +3,55 @@
  * Author - Akilan
  * Date - 27-06-2016
  * Purpose - For list out the blogs based on category
+ * Updated Date: 26-08-2016
+ * Updated by: Rajasingh
  */
 ?>
 <div class="mkd-bnl-holder mkd-pl-five-holder  mkd-post-columns-2">
     <div class="mkd-bnl-outer">
         <div class="mkd-bnl-inner">
             <?php
+            $display_postid_ar = $_SESSION["display_postid_ar"];
+            $displayed_sub_cat_ar = $_SESSION["displayed_sub_cat_ar"];
+            $q=0;
             if ($_POST['query_type1'] == 'followed') {
+       
+                $sub_catid_ar = explode(",", $_POST['sub_catid_ar']);
+                if (count($displayed_sub_cat_ar) < count($sub_catid_ar)) {
+                    $missed_sub_cat_ar = array_diff($sub_catid_ar, $displayed_sub_cat_ar);
+                    foreach ($missed_sub_cat_ar as $subcat_id_sgl) {                        
+                        $posts_retrived = follow_categorypost_detail_set($post_type, array($subcat_id_sgl), $display_postid_ar);
+                        $posts=get_posts($posts_retrived);
+                        if (!empty($posts)) {
+                            foreach ($posts as $post): setup_postdata($post);
+                                if ($q == $_POST['per_page1'])
+                                    break;
+                                array_push($display_postid_ar, get_the_ID());
+                                $q++;
+                                $args[] = $posts_retrived;
+                            endforeach;
+                            wp_reset_postdata();
+                        }
+                        array_push($displayed_sub_cat_ar, $subcat_id_sgl);
+                    }
+                } else {
+                    
+                }
+                
+                //echo "q value -".$q;
+                $_SESSION["display_postid_ar"] = $display_postid_ar;
+                $_SESSION["displayed_sub_cat_ar"] = $displayed_sub_cat_ar;
+                $remaining=$_POST['per_page1'] - $q;
                 $args[] = array(
                     'category' => explode(",", $_POST['sub_catid_ar']),
                     'post_status' => 'publish',
                     'post_type' => explode(",", $_POST['post_type']),
-                    'post__not_in' => explode(",", $_POST['display_postid_ar']),
+                    'post__not_in' => $_SESSION["display_postid_ar"],
                     'offset' => $_POST['offset1'],
-                    'numberposts' => $_POST['per_page1']
+                    'numberposts' => $remaining
                 );
+
+               
             }
 
 
@@ -98,7 +132,7 @@
                                         }
                                         ?>
                                         <div  style="background: <?php echo $rl_category_color; ?>;" class="mkd-post-info-category">
-                                            <?php echo organize_catgory($id);?>
+                                            <?php echo organize_catgory($id); ?>
                                         </div>
                                         <?php
                                     }
@@ -135,7 +169,7 @@
                                 ?>
                                 <?php if ($display_excerpt == 'yes') { ?>
                                     <div class="mkd-pt-one-excerpt">
-                                       <?php custom_discussion_excerpt(60);?>
+                                        <?php custom_discussion_excerpt(60); ?>
                                     </div>
                                 <?php } ?>
                             </div>

@@ -273,7 +273,7 @@ get_header();
                         <div class="followed_ctg_content">
                             <?php
                             $userid = get_current_user_id();
-                            $fetchresult = $wpdb->get_results("SELECT *from wp_follow_category where userid=" . $userid . " and flag=1");
+                            $fetchresult = $wpdb->get_results("SELECT *from wp_follow_category where userid=" . $userid . " and flag=1 ORDER BY date DESC");
                             $rowresult = $wpdb->num_rows;
                             ?>
                             <div id="unfollowedmsg"></div>

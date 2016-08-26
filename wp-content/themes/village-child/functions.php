@@ -1,11 +1,11 @@
 <?php
 
 function my_theme_enqueue_styles() {
-   
-    wp_enqueue_style(discussion_default_style, get_stylesheet_directory_uri() . '/style.css');    
-    wp_enqueue_style('fsp_custom_css_child', get_stylesheet_directory_uri().'/assets/css/fspstyles_child.css');
+
+    wp_enqueue_style(discussion_default_style, get_stylesheet_directory_uri() . '/style.css');
+    wp_enqueue_style('fsp_custom_css_child', get_stylesheet_directory_uri() . '/assets/css/fspstyles_child.css');
     wp_enqueue_style('discussion_modules', get_stylesheet_directory_uri() . '/assets/css/modules.css');
-    wp_enqueue_style('fsp_custom_css', get_stylesheet_directory_uri().'/assets/css/fspstyles.css');
+    wp_enqueue_style('fsp_custom_css', get_stylesheet_directory_uri() . '/assets/css/fspstyles.css');
     wp_enqueue_style('fsp_custom_popup', get_stylesheet_directory_uri() . '/assets/css/magnific-popup.css');
 }
 
@@ -20,35 +20,35 @@ if (!function_exists('discussion_scripts')) {
         global $wp_scripts;
 
         //init theme core scripts
-		wp_enqueue_script( 'jquery-ui-core');
-		wp_enqueue_script( 'jquery-ui-tabs');
-		wp_enqueue_script( 'wp-mediaelement');
-                
+        wp_enqueue_script('jquery-ui-core');
+        wp_enqueue_script('jquery-ui-tabs');
+        wp_enqueue_script('wp-mediaelement');
 
-        wp_enqueue_script('discussion_third_party', MIKADO_ASSETS_ROOT.'/js/third-party.min.js', array('jquery'), false, true);
 
-        if(discussion_is_smoth_scroll_enabled()) {
+        wp_enqueue_script('discussion_third_party', MIKADO_ASSETS_ROOT . '/js/third-party.min.js', array('jquery'), false, true);
+
+        if (discussion_is_smoth_scroll_enabled()) {
             wp_enqueue_script("discussion_smooth_page_scroll", MIKADO_ASSETS_ROOT . "/js/smoothPageScroll.js", array(), false, true);
         }
 
         //include google map api script
         wp_enqueue_script('google_map_api', '//maps.googleapis.com/maps/api/js?sensor=false', array(), false, true);
-        
-        wp_enqueue_script('discussion_modules', MIKADO_ASSETS_ROOT.'/js/modules.min.js', array('jquery'), false, true);
-        wp_enqueue_script('fsp-custom-popupjs', get_stylesheet_directory_uri().'/assets/js/jquery.magnific-popup.js' , array('jquery'), false, true);
+
+        wp_enqueue_script('discussion_modules', MIKADO_ASSETS_ROOT . '/js/modules.min.js', array('jquery'), false, true);
+        wp_enqueue_script('fsp-custom-popupjs', get_stylesheet_directory_uri() . '/assets/js/jquery.magnific-popup.js', array('jquery'), false, true);
         wp_enqueue_script('common script', get_stylesheet_directory_uri() . '/assets/js/common.js', array('jquery'), false, true);
 
         //include comment reply script
         $wp_scripts->add_data('comment-reply', 'group', 1);
-        if(is_singular()) {
+        if (is_singular()) {
             wp_enqueue_script("comment-reply");
         }
 
         //include Visual Composer script
-        if(class_exists('WPBakeryVisualComposerAbstract')) {
+        if (class_exists('WPBakeryVisualComposerAbstract')) {
             wp_enqueue_script('wpb_composer_front_js');
         }
-        
+
         //Remove article from the user profile page
         if (is_page('login')) {
             wp_enqueue_script('jquery validation', MIKADO_ASSETS_ROOT . '/js/jquery.validate.js');
@@ -57,16 +57,16 @@ if (!function_exists('discussion_scripts')) {
 
     add_action('wp_enqueue_scripts', 'discussion_scripts');
 }
-    
+
 /**
  * Author - Akilan
  * Date - 18-07-2016
  * Purpose - Fetch next and next most article for scroll based article load
  */
 function village_next_post_scrollarticle($blog_title_ar, $i) {
-    $current =isset($blog_title_ar[$i]) ? $blog_title_ar[$i] : "";
+    $current = isset($blog_title_ar[$i]) ? $blog_title_ar[$i] : "";
     $next_title = isset($blog_title_ar[$i + 1]) ? $blog_title_ar[$i + 1] : "";
-    $data = array($current, $next_title);   
+    $data = array($current, $next_title);
     return get_title_class($data);
 }
 
@@ -134,7 +134,7 @@ if (!function_exists('follow_categorypost_detail')) {
             'post_type' => $post_type,
             'cat' => $subcat_id_sgl,
             'order' => 'DESC',
-            'posts_per_page' => 2,
+            'posts_per_page' => 1,
             'post__not_in' => $display_postid_ar
         ));
         return $posts;
@@ -142,8 +142,21 @@ if (!function_exists('follow_categorypost_detail')) {
 
 }
 
-
-
+/**
+ * Author - Rajasingh
+ * Date - 26-08-2016
+ * Purpose - For getting category based post except from followed categories
+ */
+function follow_categorypost_detail_set($post_type, $subcat_id_sgl, $display_postid_ar) {
+    $posts = array(
+        'post_type' => $post_type,
+        'cat' => $subcat_id_sgl,
+        'order' => 'DESC',
+        'posts_per_page' => 1,
+        'post__not_in' => $display_postid_ar
+    );
+    return $posts;
+}
 
 /**
  * Author - Akilan
@@ -946,7 +959,7 @@ function custom_comment($comment, $args, $depth) {
             $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0]);
             ?>
                         <img src="<?php echo $attachment[0]; ?>" width="85px" height="85px"/>
-                <?php else : ?>                                                    
+                    <?php else : ?>                                                    
                         <img src="<?php echo get_stylesheet_directory_uri() . '/assets/img/aavathar.jpg' ?>" width="85px" height="85px" />
                     <?php endif; ?>
                 </div>
@@ -954,20 +967,22 @@ function custom_comment($comment, $args, $depth) {
             <div class="mkd-comment-text-and-info">
                 <div class="mkd-comment-info-and-links">
                     <h6 class="mkd-comment-name">
-                <?php
-                if ($is_pingback_comment) {
-                    esc_html_e('Pingback:', 'discussionwp');
-                }
-                $user_name = get_user_meta($user);
-                ?><span class="mkd-comment-author"><?php if (!empty($user_name['first_name'][0])) {
-            echo $user_name['first_name'][0];
-        } else {
-            echo wp_kses_post(get_comment_author_link());
-        } ?></span>
+            <?php
+            if ($is_pingback_comment) {
+                esc_html_e('Pingback:', 'discussionwp');
+            }
+            $user_name = get_user_meta($user);
+            ?><span class="mkd-comment-author"><?php
+                        if (!empty($user_name['first_name'][0])) {
+                            echo $user_name['first_name'][0];
+                        } else {
+                            echo wp_kses_post(get_comment_author_link());
+                        }
+                        ?></span>
                         <?php if ($is_author_comment) { ?>
                             <span class="mkd-comment-mark"><?php esc_html_e('/', 'discussionwp'); ?></span>
                             <span class="mkd-comment-author-label"><?php esc_html_e('Author', 'discussionwp'); ?></span>
-                        <?php } ?>
+    <?php } ?>
                     </h6>
                     <h6 class="mkd-comment-links">
     <?php if (!is_user_logged_in()) : ?>
@@ -992,14 +1007,14 @@ function custom_comment($comment, $args, $depth) {
                         ?>
                     </h6>
                 </div>
-                        <?php if (!$is_pingback_comment) { ?>
+    <?php if (!$is_pingback_comment) { ?>
                     <div class="mkd-comment-text">
                         <div class="mkd-text-holder" id="comment-<?php echo comment_ID(); ?>">
         <?php comment_text(); ?>
                             <span class="mkd-comment-date"><?php comment_time(get_option('date_format')); ?></span>
                         </div>
                     </div>
-                        <?php } ?>
+    <?php } ?>
             </div>
         </div>
     <?php
@@ -1162,7 +1177,6 @@ function village_article_title_class() {
     $next_post = $wp_query->posts[$wp_query->current_post + 1];
     $data = array(get_the_title(), $next_post->post_title);
     return get_title_class($data);
-    
 }
 
 /**
@@ -1581,7 +1595,6 @@ if (!function_exists('discussion_post_info')) {
  * Date  - 19-08-2016
  * Purpose - Update Header top
  */
-
 add_action('init', 'remove_discussion_get_header_top');
 
 function remove_discussion_get_header_top() {
@@ -1596,10 +1609,10 @@ if (!function_exists('add_custom_discussion_get_header_top')) {
      * Loads header top HTML and sets parameters for it
      */
     function discussion_get_header_top() {
-        
+
         $column_widths = '50-50';
         $show_header_top = discussion_options()->getOptionValue('top_bar') == 'yes' ? true : false;
-        $top_bar_in_grid = discussion_options()->getOptionValue('top_bar_in_grid') == 'yes' ? true : false;        
+        $top_bar_in_grid = discussion_options()->getOptionValue('top_bar_in_grid') == 'yes' ? true : false;
         include_once('block/header-top.php');
     }
 
@@ -1610,8 +1623,8 @@ if (!function_exists('add_custom_discussion_get_header_top')) {
  * Date  - 19-08-2016
  * Purpose - Update Logo
  */
+if (!function_exists('discussion_get_logo')) {
 
-if(!function_exists('discussion_get_logo')) {
     /**
      * Loads logo HTML
      *
@@ -1621,9 +1634,9 @@ if(!function_exists('discussion_get_logo')) {
 
         $slug = $slug !== '' ? $slug : 'header-type3';
 
-        if($slug == 'sticky'){
+        if ($slug == 'sticky') {
             $logo_image = discussion_options()->getOptionValue('logo_image_sticky');
-        }else{
+        } else {
             $logo_image = discussion_options()->getOptionValue('logo_image');
         }
 
@@ -1635,16 +1648,18 @@ if(!function_exists('discussion_get_logo')) {
 
         $logo_height = '';
         $logo_styles = '';
-        if(is_array($logo_dimensions) && array_key_exists('height', $logo_dimensions)) {
+        if (is_array($logo_dimensions) && array_key_exists('height', $logo_dimensions)) {
             $logo_height = $logo_dimensions['height'];
-            $logo_styles = 'height: '.intval($logo_height / 2).'px;'; //divided with 2 because of retina screens
+            $logo_styles = 'height: ' . intval($logo_height / 2) . 'px;'; //divided with 2 because of retina screens
         }
-                                        
+
         include_once('block/logo.php');
     }
+
 }
 
-if(!function_exists('discussion_get_mobile_logo')) {
+if (!function_exists('discussion_get_mobile_logo')) {
+
     /**
      * Loads mobile logo HTML. It checks if mobile logo image is set and uses that, else takes normal logo image
      *
@@ -1655,7 +1670,7 @@ if(!function_exists('discussion_get_mobile_logo')) {
         $slug = $slug !== '' ? $slug : 'header-type3';
 
         //check if mobile logo has been set and use that, else use normal logo
-        if(discussion_options()->getOptionValue('logo_image_mobile') !== '') {
+        if (discussion_options()->getOptionValue('logo_image_mobile') !== '') {
             $logo_image = discussion_options()->getOptionValue('logo_image_mobile');
         } else {
             $logo_image = discussion_options()->getOptionValue('logo_image');
@@ -1666,13 +1681,13 @@ if(!function_exists('discussion_get_mobile_logo')) {
 
         $logo_height = '';
         $logo_styles = '';
-        if(is_array($logo_dimensions) && array_key_exists('height', $logo_dimensions)) {
+        if (is_array($logo_dimensions) && array_key_exists('height', $logo_dimensions)) {
             $logo_height = $logo_dimensions['height'];
-            $logo_styles = 'height: '.intval($logo_height / 2).'px'; //divided with 2 because of retina screens
+            $logo_styles = 'height: ' . intval($logo_height / 2) . 'px'; //divided with 2 because of retina screens
         }
         include_once('block/mobile-logo.php');
-        
     }
+
 }
 
 /**
@@ -1683,11 +1698,9 @@ if(!function_exists('discussion_get_mobile_logo')) {
  *
  * Class DiscussionCategoryLayoutTabs
  */
-
-include_once get_template_directory().'/framework/lib/mkd.layout.inc';
-include_once get_template_directory().'/framework/lib/mkd.framework.inc';
-include_once get_template_directory().'/framework/modules/widgets/lib/widget-class.php';
-
+include_once get_template_directory() . '/framework/lib/mkd.layout.inc';
+include_once get_template_directory() . '/framework/lib/mkd.framework.inc';
+include_once get_template_directory() . '/framework/modules/widgets/lib/widget-class.php';
 
 class DiscussionCategoryLayoutTabs extends DiscussionWidget {
 
@@ -1946,78 +1959,78 @@ class DiscussionCategoryLayoutTabs extends DiscussionWidget {
 
             $i = 1;
             ?>
-            <div class="mkd-plw-tabs-content">
+                <div class="mkd-plw-tabs-content">
                 <?php foreach ($sub_categories as $category) { ?>
 
                     <?php if ($i == 1 || $i % 3 == 1): ?>
-                        <div class="mkd-bnl-holder mkd-pl-five-holder  mkd-post-columns-3">
-                            <div class="mkd-bnl-outer">
-                                <div class="mkd-bnl-inner">
-                                    <?php
-                                endif;
-                                ?>
+                            <div class="mkd-bnl-holder mkd-pl-five-holder  mkd-post-columns-3">
+                                <div class="mkd-bnl-outer">
+                                    <div class="mkd-bnl-inner">
+                            <?php
+                        endif;
+                        ?>
 
-                                <div class="mkd-pt-five-item mkd-post-item">
-                                    <div class="mkd-pt-five-item-inner">
-                                        <div class="mkd-pt-five-top-content">
+                                    <div class="mkd-pt-five-item mkd-post-item">
+                                        <div class="mkd-pt-five-item-inner">
+                                            <div class="mkd-pt-five-top-content">
 
-                                            <!-- image section -->
-                                            <div class="mkd-pt-five-image">
-                                                <a itemprop="url" class="mkd-pt-five-link mkd-image-link" href="<?php echo esc_url(get_category_link($category->term_id)) ?>" target="_self">
-                                                    <?php
-                                                    $attr = array(
-                                                       'class' => '',
-                                                        'alt' => $category->name,
-                            //                        'height' =>198,
-                            //                        'width' => 302,
-                                                        'title' => $category->name,
-                                                    );
-                                                    z_taxonomy_image($category->term_id, 'full', $attr);
+                                                <!-- image section -->
+                                                <div class="mkd-pt-five-image">
+                                                    <a itemprop="url" class="mkd-pt-five-link mkd-image-link" href="<?php echo esc_url(get_category_link($category->term_id)) ?>" target="_self">
+                <?php
+                $attr = array(
+                    'class' => '',
+                    'alt' => $category->name,
+                    //                        'height' =>198,
+                    //                        'width' => 302,
+                    'title' => $category->name,
+                );
+                z_taxonomy_image($category->term_id, 'full', $attr);
 
-                                                    //echo '<img src="'.z_taxonomy_image_url($category->term_id).'" alt="'.$category->name.'" width="'.$instance['thumb_image_width'].'" height="'.$instance['thumb_image_height'].'" />';
-                                                    // echo discussion_generate_thumbnail(z_taxonomy_image_url($category->term_id),null,$thumb_image_width,$thumb_image_height);
-                                                    ?>	
-                                                </a></div>	
+                //echo '<img src="'.z_taxonomy_image_url($category->term_id).'" alt="'.$category->name.'" width="'.$instance['thumb_image_width'].'" height="'.$instance['thumb_image_height'].'" />';
+                // echo discussion_generate_thumbnail(z_taxonomy_image_url($category->term_id),null,$thumb_image_width,$thumb_image_height);
+                ?>	
+                                                    </a></div>	
 
 
-                                            <div class="mkd-pt-five-content">
-                                                <div class="mkd-pt-five-content-inner">
-                                                    <h6 class="mkd-pt-five-title">
-                                                        <a itemprop="url" class="mkd-pt-link" href="<?php echo esc_url(get_category_link($category->term_id)) ?>" target="_self">
-                                                            <?php
-                                                            echo $category->name;
-                                                            ?>
-                                                        </a> 
-                                                    </h6>   
-                                                    <div class="mkd-pt-one-excerpt">                                                    
-                                                    </div>
-                                                </div>			
+                                                <div class="mkd-pt-five-content">
+                                                    <div class="mkd-pt-five-content-inner">
+                                                        <h6 class="mkd-pt-five-title">
+                                                            <a itemprop="url" class="mkd-pt-link" href="<?php echo esc_url(get_category_link($category->term_id)) ?>" target="_self">
+                <?php
+                echo $category->name;
+                ?>
+                                                            </a> 
+                                                        </h6>   
+                                                        <div class="mkd-pt-one-excerpt">                                                    
+                                                        </div>
+                                                    </div>			
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
 
-                                <?php if ($i % 3 == 0 || $i == count($sub_categories)): ?>
+                <?php if ($i % 3 == 0 || $i == count($sub_categories)): ?>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <?php
-                    endif;
-                    $i++;
-                    //echo do_shortcode('[mkd_post_layout_'.$layout.' '.${$params_label.$key}.']'); // XSS OK
+                                        <?php
+                                    endif;
+                                    $i++;
+                                    //echo do_shortcode('[mkd_post_layout_'.$layout.' '.${$params_label.$key}.']'); // XSS OK
 //                        echo'</div>';
+                                }
+                                ?>
+                </div>
+                    <?php
                 }
-                ?>
-            </div>
-            <?php
+                echo '</div>'; //close div.mkd-plw-tabs-content-holder
+                echo '</div>'; //close div.mkd-plw-tabs-inner
+                echo '</div>'; //close div.mkd-plw-tabs
+            }
+
         }
-        echo '</div>'; //close div.mkd-plw-tabs-content-holder
-        echo '</div>'; //close div.mkd-plw-tabs-inner
-        echo '</div>'; //close div.mkd-plw-tabs
-    }
 
-}
-add_action( 'widgets_init', create_function('', 'return register_widget("DiscussionCategoryLayoutTabs");') );
-
-?>
+        add_action('widgets_init', create_function('', 'return register_widget("DiscussionCategoryLayoutTabs");'));
+        ?>
