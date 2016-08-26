@@ -491,6 +491,7 @@ function modify_contact_methods($profile_fields) {
     $profile_fields['city'] = 'City';
     $profile_fields['state'] = 'State';
     $profile_fields['postalcode'] = 'Postal Code';
+    $profile_fields['signature'] = 'Title';
 
     return $profile_fields;
 }
