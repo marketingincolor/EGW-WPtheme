@@ -76,7 +76,7 @@ if ($_POST['ajaxupdate'] == 'unfollowedCat') {
             var dataString = jQuery('#requiredvalues :input').serialize() + '&categoryid=' + this.id;
             jQuery.ajax({
                 type: "POST",
-                url: "wp-content/themes/discussionwp/unfollowajax.php",
+                url: "wp-content/themes/village-child/unfollowajax.php",
                 data: dataString,
                 cache: false,
                 success: function (successvalue) {
