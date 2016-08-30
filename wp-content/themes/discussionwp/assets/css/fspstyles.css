@@ -577,6 +577,8 @@ footer .mkd-footer-top-holder {
 .login-container h3{
     font-size: 20px;
     padding-bottom: 5px;
+    padding-top: 5px;
+    letter-spacing: .02em;
 }
 .login-container ul li{
     list-style: none;
