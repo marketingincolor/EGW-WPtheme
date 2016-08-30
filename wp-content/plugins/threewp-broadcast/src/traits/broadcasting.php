@@ -528,6 +528,40 @@ trait broadcasting
 
 			if ( $bcd->custom_fields )
 			{
+                            if(isset($bcd->custom_fields->original['video_file']) && !empty($bcd->custom_fields->original['video_file'])){                                    
+                                    
+                                if(!isset($o->attachment_id)){  
+
+                                    $parent_post_table='wp_posts';
+                                    $parent_blog_id=$bcd->parent_blog_id;
+                                    if($parent_blog_id!=1){
+                                        $parent_post_table='wp_'.$parent_blog_id.'_posts';
+                                    }                                        
+                                    global $wpdb;
+                                    $attachments = $wpdb->get_results("SELECT *from ".$parent_post_table." where ID=" . $bcd->custom_fields->original['video_file'][0]);
+                                    foreach($attachments as $attachment){
+                                        $attach_arr=(array)$attachment;
+                                    }
+                                    unset($attach_arr['ID']);
+                                    $child_post_table='wp_posts';
+                                    $child_blog_id=$bcd->current_child_blog_id();
+                                    if($bcd->current_child_blog_id()!=1){
+                                        $child_post_table='wp_'.$child_blog_id.'_posts';
+                                    }                                                                           
+                                    $check_attachments=$wpdb->get_results("SELECT *from ".$child_post_table." where guid LIKE '%".$attach_arr['guid']."%'");                                                                                                            
+                                    if(empty($check_attachments)){
+                                        $wpdb->insert($child_post_table, $attach_arr);
+                                        $bcd->custom_fields->original['video_file'][0]=$wpdb->insert_id;
+                                    }else {
+                                        foreach($check_attachments as $attachment){
+                                            $attach_arr=(array)$attachment;
+                                        }
+                                        $bcd->custom_fields->original['video_file'][0]=$attach_arr['ID'];
+                                    }                                                                        
+                                }else {
+                                    $bcd->custom_fields->original['video_file'][0]=$o->attachment_id;
+                                }
+                            }
 				$this->debug( 'Custom fields: Started.' );
 
 				$child_fields = $bcd->custom_fields()->child_fields();

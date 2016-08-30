@@ -371,6 +371,39 @@ Category menu right side css ends here*/
         margin-left: 5px;
     }
 }
+.mkd-mobile-search-nw {
+    padding:15px;
+    overflow: hidden;
+}
+.mkd-mobile-search-container{
+    background:#ffffff;
+    width:100%;
+    overflow: hidden;
+}
+.mkd-mobile-search-nw .mkd-column-left input{
+    width:68%;
+    float: left;
+    padding: 0 2% 0 5%;
+    height: 38px;
+    border: medium none;
+    border-radius: 0;
+    outline: medium none;
+}
+.mkd-mobile-search-nw .mkd-column-right button{
+    background: #b3cc36;
+    border: 0 none;
+    color: #ffffff;
+    float: right;
+    font-size: 20px;
+    height: 38px;
+    letter-spacing: 2px;
+    width: 19%;
+    cursor: pointer;
+    font-weight: bold;
+}
+.mkd-mobile-header .mkd-mobile-nav ul{
+    padding-bottom: 10px;
+}
 /*header css ends here*/
 
 /*footer css starts here*/
@@ -627,6 +660,17 @@ footer .mkd-footer-top-holder {
 .fsborderradius .fsBody .fsForm{
     width: 90% !important;
 }
+@media only screen and (max-width: 1024px) {
+    .fsForm .fsLabelHorizontal > label, .fsForm .fsLabelHorizontal > legend, .fsForm .fsLabelHorizontal > span.fsLabel, .fsForm .fsLabelHorizontal legend.fsLabelHorizontal{
+        padding-bottom: 10px !important;
+        text-align:left !important;
+        width:100% !important;
+    }
+    .fsForm .fsLabelHorizontal .fsLabel + .fieldset-content, .fsForm .fsLabelHorizontal .fsLabel + .fsFieldHorizontal{
+        width:100% !important;
+    }
+}
+
 @media only screen and (max-width: 640px) {
     .join-content {
         padding: 0 0 0 7% !important;
@@ -641,15 +685,7 @@ footer .mkd-footer-top-holder {
     .fsSubmit input.fsSubmitButton{
         margin-left: 0% !important;
         width: 50% !important;
-    }
-    .fsForm .fsLabelHorizontal > label, .fsForm .fsLabelHorizontal > legend, .fsForm .fsLabelHorizontal > span.fsLabel, .fsForm .fsLabelHorizontal legend.fsLabelHorizontal{
-        padding-bottom: 10px !important;
-        text-align:left !important;
-        width:100% !important;
-    }
-    .fsForm .fsLabelHorizontal .fsLabel + .fieldset-content, .fsForm .fsLabelHorizontal .fsLabel + .fsFieldHorizontal{
-        width:100% !important;
-    }
+    }    
 }
 
 /*Login css ends here*/
@@ -805,6 +841,10 @@ footer .mkd-footer-top-holder {
 }
 .user-profile-rgtinfo h2, .fsp-saved-articles h2, .fsp-followed-categories h2{
     font-size: 20px;
+}
+.about-us-container a{    
+    color: #ff6600;
+    font-weight: 500;
 }
 /*Saved Articles*/
 .fsp-saved-articles *, .fsp-saved-articles *::after, .fsp-saved-articles *::before {
@@ -1247,6 +1287,10 @@ table.ai1ec-month-view {
         font-size: 13px;
     }
 }
+.timely a, .timely a:link, .timely a:visited, .timely a:active, .timely a:hover, #ai1ec-container a, #ai1ec-container a:link, #ai1ec-container a:visited, #ai1ec-container a:active, #ai1ec-container a:hover{
+    font-size: 15px !important;
+}
+
 /*Live events css ends here*/
 
 .disclamier{
@@ -1371,7 +1415,7 @@ table.ai1ec-month-view {
 }
 @media only screen and (min-width: 1441px){
     .mkd-pt-six-item .mkd-pt-six-image-holder {
-         min-height: 240px;
+        min-height: 240px;
     }
 }
 /*For set out minimum height blog box if description not exist ends*/
@@ -1386,10 +1430,18 @@ table.ai1ec-month-view {
 /*footer block for ipad ends here*/
 
 /*contact us styles starts here*/
+.contact-us-wrapper{
+    margin-top: 30px;
+}
+.contact-us-container{
+    padding:30px;
+    background: #ffffff;
+    margin-bottom: 20px;
+}
 .fsp-wrapper-cont{
     background: #ffffff;
 }
-.wpb-cont-cust-style a{
+.contact-us-container a{
     font-weight: bold;
     color: #ff6600;
 }
@@ -1401,3 +1453,18 @@ table.ai1ec-month-view {
     padding-right:7px;
 }
 /*padding space for saved stories ends here*/
+
+/*reply command section starts here*/
+@media only screen and (max-width: 767px) {
+    .mkd-comment-holder .mkd-comment-info-and-links .mkd-comment-name {
+        display: block;
+        width: 100%;
+    }
+    .mkd-comment-holder .mkd-comment-links {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+}
+/*reply command section ends here*/
+

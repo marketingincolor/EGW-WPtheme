@@ -109,9 +109,9 @@ get_header();
                                                 if (isset($custom_avatar_meta_data) && !empty($custom_avatar_meta_data[0])):
                                                     $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0], 'medium');
                                                     ?>
-                                                    <img src="<?php echo $attachment[0]; ?>" width="248"/>
+                                                    <img id="image_upload_preview" src="<?php echo $attachment[0]; ?>" width="248" height="248"/>
                                                 <?php else : ?>                                                    
-                                                    <img src="<?php echo get_template_directory_uri();?>/assets/img/aavathar.jpg" width="248" height="248"/>
+                                                    <img id="image_upload_preview" src="<?php echo get_template_directory_uri();?>/assets/img/aavathar.jpg" width="248" height="248"/>
                                                 <?php endif; ?>
                                                 <div class="fspgray_btn">
                                                     <input type="file" id="userProfileImage" name="userProfileImage" style="display:none">                                                
@@ -321,5 +321,22 @@ get_header();
         </div>
     </div>
 </div>
+<script type = "text/javascript">
+    jQuery(document).ready(function () {
+        formmodified = 0;
+        jQuery('#user-profile-form :input').keyup(function () {
+            formmodified = 1;
+        });
+        window.onbeforeunload = confirmExit;
+        function confirmExit() {
+            if (formmodified == 1) {
+                return "New information not saved. Do you wish to leave the page?";
+            }
+        }
+        jQuery("input[name='update']").click(function () {
+            formmodified = 0;
+        });
+    });
+</script>
 <?php include(locate_template('block/ajax-pagination.php'));  ?> 
 <?php get_footer(); ?>

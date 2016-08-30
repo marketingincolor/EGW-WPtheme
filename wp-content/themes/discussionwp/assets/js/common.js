@@ -164,6 +164,7 @@ function userProfileUpload() {
 
 
     jQuery('#userProfileImage').change(function () {
+        userProfilePreview(this);
         if (jQuery('.fspr_user_profile_upload_error').length)
             jQuery('.fspr_user_profile_upload_error').remove();
         var filename = jQuery('#userProfileImage').val().toLowerCase();
@@ -175,6 +176,20 @@ function userProfileUpload() {
             jQuery('#user-profile-avatar').html('Profile Picture Added !').css('color', 'green');
         }
     });
+}
+
+//User profile image preview
+
+function userProfilePreview(imgData){
+	if (imgData.files && imgData.files[0]) {
+        var readerObj = new FileReader();
+        
+        readerObj.onload = function (element) {
+            jQuery('#image_upload_preview').attr('src', element.target.result);
+        }
+        
+        readerObj.readAsDataURL(imgData.files[0]);
+    }
 }
 
 //User profile form validation
@@ -210,7 +225,7 @@ function fullnameValidation(firstname, current_element, error_element) {
         jQuery('<label class="' + error_element + '">This field is required.</label>').insertAfter(current_element);
     } else if (firstname.length > 40) {
         jQuery('<label class="' + error_element + '">Name cannot be more than 20 characters.</label>').insertAfter(current_element);
-    } else if (/[^a-zA-Z0-9\-]/.test(firstname)) {
+    } else if (/[^a-zA-Z0-9\s\-]/.test(firstname)) {
         jQuery('<label class="' + error_element + '">Name can only contain alphanumeric characters and hyphens(-).</label>').insertAfter(current_element);
     }
 }
@@ -220,7 +235,7 @@ function firstNameValidation(firstname, current_element, error_element) {
         jQuery('<label class="' + error_element + '">This field is required.</label>').insertAfter(current_element);
     } else if (firstname.length > 20) {
         jQuery('<label class="' + error_element + '">First name cannot be more than 20 characters.</label>').insertAfter(current_element);
-    } else if (/[^a-zA-Z0-9\-]/.test(firstname)) {
+    } else if (/[^a-zA-Z0-9\s\-]/.test(firstname)) {
         jQuery('<label class="' + error_element + '">First name can only contain alphanumeric characters and hyphens(-).</label>').insertAfter(current_element);
     }
 }
@@ -230,7 +245,7 @@ function lastNameValidation(lastname, current_element, error_element) {
         jQuery('<label class="' + error_element + '">This field is required.</label>').insertAfter(current_element);
     } else if (lastname.length > 20) {
         jQuery('<label class="' + error_element + '">Last name cannot be more than 20 characters.</label>').insertAfter(current_element);
-    } else if (/[^a-zA-Z0-9\-]/.test(lastname)) {
+    } else if (/[^a-zA-Z0-9\s\-]/.test(lastname)) {
         jQuery('<label class="' + error_element + '">Last name can only contain alphanumeric characters and hyphens(-).</label>').insertAfter(current_element);
     }
 }
@@ -250,7 +265,7 @@ function cityNameValidation(city, current_element, error_element) {
 
     if (city === "") {
         jQuery('<label class="' + error_element + '">This field is required.</label>').insertAfter(current_element);
-    } else if (/[^a-zA-Z0-9\-]/.test(city)) {
+    } else if (/[^a-zA-Z0-9\s\-]/.test(city)) {
         jQuery('<label class="' + error_element + '">City can only contain alphanumeric characters and hyphens(-).</label>').insertAfter(current_element);
     }
 }
@@ -259,7 +274,7 @@ function stateNameValidation(state, current_element, error_element) {
 
     if (state === "") {
         jQuery('<label class="' + error_element + '">This field is required.</label>').insertAfter(current_element);
-    } else if (/[^a-zA-Z0-9\-]/.test(state)) {
+    } else if (/[^a-zA-Z0-9\s\-]/.test(state)) {
         jQuery('<label class="' + error_element + '">State can only contain alphanumeric characters and hyphens(-).</label>').insertAfter(current_element);
     }
 }

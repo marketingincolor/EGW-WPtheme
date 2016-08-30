@@ -8,6 +8,10 @@
 ?>
 <?php
 list($post_per_section, $post_type) = scroll_loadpost_settings();
+$main_cat_id = get_maincategory_id(); //for retrieving main category id
+$main_cat_det = get_category($main_cat_id);
+if(!isset($slug_page)) $slug_page=basename(get_permalink());
+
 ?>
 <div class="wpb_column vc_column_container vc_col-sm-12">
     <div class="vc_column-inner ">
@@ -56,6 +60,8 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                 /**
                                  * For implement two coloumn based post in one row
                                  */
+                                $getPostcat = wp_get_post_categories($id);
+                                $post_link=post_category_link($id,$getPostcat,$main_cat_det,$main_cat_id,$slug_page);     
                                 ?>
 
                                 <div class="mkd-pt-six-item mkd-post-item">
@@ -75,7 +81,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                                 <?php
                                             }
                                             ?>
-                                            <a itemprop="url" class="mkd-pt-six-slide-link mkd-image-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self">
+                                            <a itemprop="url" class="mkd-pt-six-slide-link mkd-image-link" href="<?php echo $post_link;; ?>" target="_self">
                                                 <?php
                                                 if ($thumb_image_size != 'custom_size') {
                                                     echo get_the_post_thumbnail(get_the_ID(), $thumb_image_size);
@@ -95,7 +101,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                     <div class="mkd-pt-six-content-holder">
                                         <div class="mkd-pt-six-title-holder <?php echo $title_cls; ?>">
                                             <<?php echo esc_html($title_tag) ?> class="mkd-pt-six-title">
-                                            <a itemprop="url" class="mkd-pt-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self"><?php echo discussion_get_title_substring(get_the_title(), $title_length) ?></a>
+                                            <a itemprop="url" class="mkd-pt-link" href="<?php echo $post_link; ?>" target="_self"><?php echo discussion_get_title_substring(get_the_title(), $title_length) ?></a>
                                             </<?php echo esc_html($title_tag) ?>>
                                         </div>
                                          <?php
@@ -151,7 +157,9 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                 else: echo $post_per_section;
                 endif;
                 ?>">
-                       <?php wp_reset_query();  // Restore global post data stomped by the_post().?>
+                <input type="hidden" id="main_cat_id" value="<?php echo $main_cat_id;  ?>"/>
+                <input type="hidden" id="slug_page" value="<?php echo $slug_page;  ?>"/>
+                <?php wp_reset_query();  // Restore global post data stomped by the_post().?>
             </div>
            <?php
             /**
