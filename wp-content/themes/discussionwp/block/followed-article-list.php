@@ -46,31 +46,30 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                 }
                                 $title_cls = 0;
                             }
-                            $_SESSION["display_postid_ar"] = $display_postid_ar;
-                            $_SESSION["displayed_sub_cat_ar"] = $displayed_sub_cat_ar;
+                            
                             /*
                              * Show remaining article belongs to following subcategories
                              */
                             $j = 0;
-                            if ($i < $post_per_section && $total_followed_posts >= $post_per_section) {
-                                $remaining = $post_per_section - $i;
-                                $posts = follow_categorypost_detail($post_type, $subcat_id_ar, $display_postid_ar);
-                                if (!empty($posts)) {
-                                    foreach ($posts as $post): setup_postdata($post);
-                                        if ($j == $remaining)
-                                            break;
-                                        array_push($display_postid_ar, get_the_ID());
-                                        $display_post_title_ar[] = get_the_title();
-                                        $j++;
-                                    endforeach;
-                                    wp_reset_postdata();
-                                }
-                            }
-
+//                            if ($i < $post_per_section && $total_followed_posts >= $post_per_section) {
+//                                $remaining = $post_per_section - $i;
+//                                $posts = follow_categorypost_detail($post_type, $subcat_id_ar, $display_postid_ar);
+//                                if (!empty($posts)) {
+//                                    foreach ($posts as $post): setup_postdata($post);
+//                                        if ($j == $remaining)
+//                                            break;
+//                                        array_push($display_postid_ar, get_the_ID());
+//                                        $display_post_title_ar[] = get_the_title();
+//                                        $j++;
+//                                    endforeach;
+//                                    wp_reset_postdata();
+//                                }
+//                            }
                             $k = 0;
                             /**
                              * displaying remaining unfollow article if we have less followed articles
                              */
+                            $remaining=0;
                             if (($i + $j) < $post_per_section) {
                                 $remaining = $post_per_section - ($i + $j);
                                 unfollow_categorypost_detail($post_type, $cat_id_ar, $display_postid_ar, $remaining);
@@ -84,6 +83,10 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                 endif;
                                 wp_reset_postdata();
                             }
+                            
+                            $_SESSION["display_postid_ar"] = $display_postid_ar;
+                            $_SESSION["displayed_sub_cat_ar"] = $displayed_sub_cat_ar;
+                            
                             /**
                              * collected post id and display detail
                              */
@@ -93,7 +96,6 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                 get_template_part('block/home-article-detail');
                             }
                         }
-
                         $current_post = $i + $j + $remaining;
                         $total_post = $total_followed_posts + $total_unfollowed_posts;
                         ?>
@@ -101,15 +103,16 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                     </div>
                 </div>
                 <?php
-                $total_followed_posts = count(get_posts(array('post_type' => $post_type, 'post__not_in' => $display_postid_ar, 'category' => $subcat_id_ar, 'nopaging' => true)));
+                $total_followed_posts=count($subcat_id_ar);
+//                $total_followed_posts = count(get_posts(array('post_type' => $post_type, 'post__not_in' => $display_postid_ar, 'category' => $subcat_id_ar, 'nopaging' => true)));
                 $total_unfollowed_posts = count(get_posts(array('post_type' => $post_type, 'post__not_in' => $display_postid_ar, 'category' => $cat_id_ar, 'nopaging' => true)));
                 ?>
                 <input type="hidden" id="processing" value="0">
                 <input type="hidden" id="currentloop" value="1">
                 <input type="hidden" id="total_followed_post" value="<?php echo $total_followed_posts ?>">
                 <input type="hidden" id="total_unfollowed_post" value="<?php echo $total_unfollowed_posts ?>">
-                <input type="hidden" id="followed_current_post" value="0">
-                <input type="hidden" id="unfollowed_current_post" value="0">
+                <input type="hidden" id="followed_current_post" value="<?php echo $i;?>">
+                <input type="hidden" id="unfollowed_current_post" value="<?php echo $remaining; ?>">
                 <input type="hidden" id="total_post" value="<?php echo $total_followed_posts + $total_unfollowed_posts; ?>">
                 <input type="hidden" id="current_post" value="0">
             </div>
