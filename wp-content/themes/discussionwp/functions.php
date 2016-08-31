@@ -142,7 +142,7 @@ if (!function_exists('discussion_scripts')) {
         wp_enqueue_script('fsp-custom-popupjs', MIKADO_ASSETS_ROOT . '/js/jquery.magnific-popup.js', array('jquery'), false, true);
 
         wp_enqueue_script('common script', MIKADO_ASSETS_ROOT . '/js/common.js', array('jquery'), false, true);
-        
+
 
 
         //include comment reply script
@@ -288,9 +288,9 @@ if (!function_exists('discussion_header_meta')) {
      * Function that echoes meta data if our seo is enabled
      */
     function discussion_header_meta() {
-        ?>          
+        ?>
 
-        <meta charset="<?php bloginfo('charset'); ?>"/>       
+        <meta charset="<?php bloginfo('charset'); ?>"/>
         <!--        <link rel="profile" href="http://gmpg.org/xfn/11"/>-->
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>"/>
         <?php
@@ -1193,11 +1193,11 @@ function organize_catgory($id) {
                 $out[]='<a href="' . site_url() . '/' . $slug->slug . '">'.get_cat_name($getKeyrel) . '</a>';
             } else
                 $out[]='<a href="' . get_category_link($getKeyrel) . '">'.get_cat_name($getKeyrel) . '</a>';
-            
+
         }
         $j++;
     }
-    
+
     if(!empty($out))
         $output=implode("\x20/\x20",$out);
 
@@ -1205,7 +1205,7 @@ function organize_catgory($id) {
 }
 
 /**
- * 
+ *
  * Author -Akilan
  * Date  - 20-06-2016
  * Purpose -  For featured template image background
@@ -1329,7 +1329,7 @@ if (!function_exists('discussion_custom_getImageParams')) {
  * Author -Akilan
  * Date  - 20-06-2016
  * purpose - For implementing custom category template for getting category image detail
- * 
+ *
  * @param type $id
  * @return string
  */
@@ -1392,7 +1392,7 @@ if (!function_exists('discussion_custom_category_query')) {
 /**
  * Author - Akilan
  * Date - 20-06-2016
- * Purpose - For custom template for category query 
+ * Purpose - For custom template for category query
  */
 if (!function_exists('discussion_custom_categorylist_query')) {
 
@@ -1445,9 +1445,9 @@ if (!function_exists('category_top_parent_id')) {
 }
 
 /* *
- * 
+ *
  * Purpose: Enable PHP in widgets
- * Author: Ramkumar.S 
+ * Author: Ramkumar.S
  * Date : 20 June 2016
  * Last Modified : 20 June 2016
  * */
@@ -1492,9 +1492,9 @@ function modify_contact_methods($profile_fields) {
 add_filter('user_contactmethods', 'modify_contact_methods');
 
 /* *
- * 
+ *
  * Purpose: Public Profile
- * Author: Ramkumar.S 
+ * Author: Ramkumar.S
  * Date : 22 June 2016
  * Last Modified : 22 June 2016
  * */
@@ -1612,14 +1612,14 @@ function discussion_author_recommended_posts() {
 
             return $html;
         }
-        
+
         function add_recommended_meta_box() {
             // set post_types that this meta box shows up on.
             $author_recommended_posts_post_types = $this->get_option( "{$this->namespace}_post_types" );
 
             foreach( $author_recommended_posts_post_types as $author_recommended_posts_post_type ) {
                 // adds to posts $post_type
-                add_meta_box( 
+                add_meta_box(
                     $this->namespace . '-recommended_meta_box',
                     __( 'Author Recommended Posts', $this->namespace ),
                     array( &$this, 'recommended_meta_box' ),
@@ -1630,25 +1630,25 @@ function discussion_author_recommended_posts() {
             }
 
         }
-        
+
         function recommended_meta_box( $object, $box ) {
-        
+
         $author_recommended_posts = get_post_meta( $object->ID, $this->namespace, true );
         $author_recommended_posts_post_types = $this->get_option( "{$this->namespace}_post_types" );
         $author_recommended_posts_search_results = $this->author_recommended_posts_search();
         $author_recommended_posts_options_url = admin_url() . '/options-general.php?page=' . $this->namespace;
-        
+
         include( AUTHOR_RECOMMENDED_POSTS_DIRNAME . '/views/_recommended-meta-box.php' );
     }
-    
+
     function author_recommended_posts_search(){
         global $post;
         $post_id = $post->ID;
         $html = '';
-        
+
         // set post_types that get filtered in the search box.
         $author_recommended_posts_post_types = $this->get_option( "{$this->namespace}_post_types" );
-        
+
         // set default query options
         $options = array(
             'post_type' =>  $author_recommended_posts_post_types,
@@ -1660,15 +1660,15 @@ function discussion_author_recommended_posts() {
             'post__not_in' => array($post_id),
             's' => ''
         );
-        
+
         // check if ajax
         $ajax = isset( $_POST['action'] ) ? true : false;
-        
+
         // if ajax merge $_POST
         if( $ajax ) {
             $options = array_merge($options, $_POST);
         }
-        
+
         // search
         if( $options['s'] ) {
             // set temp title to search query
@@ -1676,12 +1676,12 @@ function discussion_author_recommended_posts() {
             // filter query by title
             add_filter( 'posts_where', array($this, 'posts_where'), 10, 2 );
         }
-        
-        // unset search so results are accurate and not muddled 
+
+        // unset search so results are accurate and not muddled
         unset( $options['s'] );
-        
+
         $searchable_posts = get_posts( $options );
-        
+
         if( $searchable_posts ) {
             foreach( $searchable_posts as $searchable_post ) {
                 // right aligned info
@@ -1691,11 +1691,11 @@ function discussion_author_recommended_posts() {
                 $title .= '<span class="recommended-posts-title">';
                 $title .= apply_filters( 'the_title', $searchable_post->post_title, $searchable_post->ID );
                 $title .= '</span>';
-                
+
                 $html .= '<li><a href="' . get_permalink($searchable_post->ID) . '" data-post_id="' . $searchable_post->ID . '">' . $title .  '</a></li>' . "\n";
             }
         }
-        
+
         // if ajax, die and echo $html otherwise just return
         if( $ajax ) {
             die( $html );
@@ -1703,8 +1703,8 @@ function discussion_author_recommended_posts() {
             return $html;
         }
     }
-    
-    
+
+
 
     }
 
@@ -1712,9 +1712,9 @@ function discussion_author_recommended_posts() {
 }
 
 /* *
- * 
- * Purpose: Login direct after login 
- * Author: Ramkumar.S 
+ *
+ * Purpose: Login direct after login
+ * Author: Ramkumar.S
  * Date : 24 June 2016
  * Last Modified : 24 June 2016
  * */
@@ -1739,9 +1739,9 @@ function redirect_login_page() {
 add_action('init', 'redirect_login_page');
 
 /* *
- * 
+ *
  * Purpose: Disable top menu based on admin/super admin role
- * Author: Ramkumar.S 
+ * Author: Ramkumar.S
  * Date : 24 June 2016
  * Last Modified : 27 June 2016
  * */
@@ -1896,7 +1896,7 @@ function custom_comment($comment, $args, $depth) {
     <li>
         <div class="<?php echo esc_attr($comment_class); ?>">
             <?php if (!$is_pingback_comment) { ?>
-                <div class="mkd-comment-image"> 
+                <div class="mkd-comment-image">
                     <?php
                     $user = $comment->user_id;
                     $custom_avatar_meta_data = get_user_meta($user, 'custom_avatar');
@@ -1904,7 +1904,7 @@ function custom_comment($comment, $args, $depth) {
                         $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0]);
                         ?>
                         <img src="<?php echo $attachment[0]; ?>" width="85px" height="85px"/>
-                    <?php else : ?>                                                    
+                    <?php else : ?>
                         <img src="<?php echo MIKADO_ASSETS_ROOT . '/img/aavathar.jpg' ?>" width="85px" height="85px" />
                     <?php endif; ?>
                 </div>
@@ -1933,7 +1933,7 @@ function custom_comment($comment, $args, $depth) {
                             $blog_id = get_current_blog_id();
                             if ($blog_id != $user_blog_id):
                                 ?>
-                                <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>                                                                   
+                                <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>
                                 <?php
                             else :
                                 comment_reply_link(array_merge($args, array('reply_text' => esc_html__('Reply', 'discussionwp'), 'depth' => $depth, 'max_depth' => $args['max_depth'])));
@@ -1963,24 +1963,24 @@ function custom_comment($comment, $args, $depth) {
 
         switch ($net) {
             case 'facebook':
-                $link = 'window.open(\'http://www.facebook.com/sharer/sharer.php?s=100&amp;p[title]=' . urlencode(discussion_addslashes(get_the_title())) . '&amp;p[summary]=' . urlencode(discussion_addslashes(get_the_excerpt())) . '&amp;u=' . urlencode(get_permalink()) . '/' . rand() . '&amp;p[images][0]=' . $image[0] . '&v=' . rand() . '\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
+                $link = 'window.open(\'http://www.facebook.com/sharer/sharer.php?s=100&amp;p[title]=' . urlencode(discussion_addslashes(get_the_title())) . '&amp;p[summary]=' . urlencode(discussion_addslashes(get_the_excerpt())) . '&amp;u=' . urlencode(get_permalink()) . '?utm_source=facebook%26utm_medium=sharedpost%26utm_campaign=socialshare' . '/' . rand() . '&amp;p[images][0]=' . $image[0] . '&v=' . rand() . '\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
                 break;
             case 'twitter':
                 $count_char = (isset($_SERVER['https'])) ? 23 : 22;
                 $twitter_via = (discussion_options()->getOptionValue('twitter_via') !== '') ? ' via ' . discussion_options()->getOptionValue('twitter_via') . ' ' : '';
-                $link = 'window.open(\'https://twitter.com/intent/tweet?text='. urlencode(discussion_addslashes(get_the_title())) .'&url=' . urlencode(discussion_the_excerpt_max_charlength($count_char) . $twitter_via) . get_permalink() . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+                $link = 'window.open(\'https://twitter.com/intent/tweet?text='. urlencode(discussion_addslashes(get_the_title())) .'&url=' . urlencode(discussion_the_excerpt_max_charlength($count_char) . $twitter_via) . get_permalink() . '?utm_source=twitter%26utm_medium=sharedpost%26utm_campaign=socialshare' . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
                 break;
             case 'google_plus':
-                $link = 'popUp=window.open(\'https://plus.google.com/share?url=' . urlencode(get_permalink()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+                $link = 'popUp=window.open(\'https://plus.google.com/share?url=' . urlencode(get_permalink()) . '?utm_source=gplus%26utm_medium=sharedpost%26utm_campaign=socialshare' . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
                 break;
             case 'linkedin':
-                $link = 'popUp=window.open(\'http://linkedin.com/shareArticle?mini=true&amp;url=' . urlencode(get_permalink()) . '&amp;title=' . urlencode(get_the_title()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+                $link = 'popUp=window.open(\'http://linkedin.com/shareArticle?mini=true&amp;url=' . urlencode(get_permalink()) . '?utm_source%3Dlinkedin%26utm_medium%3Dsharedpost%26utm_campaign%3Dsocialshare' . '&amp;title=' . urlencode(get_the_title()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
                 break;
             case 'tumblr':
                 $link = 'popUp=window.open(\'http://www.tumblr.com/share/link?url=' . urlencode(get_permalink()) . '&amp;name=' . urlencode(get_the_title()) . '&amp;description=' . urlencode(get_the_excerpt()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
                 break;
             case 'pinterest':
-                $link = 'popUp=window.open(\'http://pinterest.com/pin/create/button/?url=' . urlencode(get_permalink()) . '&amp;description=' . discussion_addslashes(get_the_title()) . '&amp;media=' . urlencode($image[0]) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
+                $link = 'popUp=window.open(\'http://pinterest.com/pin/create/button/?url=' . urlencode(get_permalink()) . '?utm_source=pintrest%26utm_medium=sharedpost%26utm_campaign=socialshare'. '&amp;description=' . discussion_addslashes(get_the_title()) . '&amp;media=' . urlencode($image[0]) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
                 break;
             case 'vk':
                 $link = 'popUp=window.open(\'http://vkontakte.ru/share.php?url=' . urlencode(get_permalink()) . '&amp;title=' . urlencode(get_the_title()) . '&amp;description=' . urlencode(get_the_excerpt()) . '&amp;image=' . urlencode($image[0]) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
@@ -1993,7 +1993,7 @@ function custom_comment($comment, $args, $depth) {
     }
 
     /**
-     * Author - Akilan 
+     * Author - Akilan
      * Date - 08-07-2016
      * Purpose - For adding thumb image for facebook sharing
      */
@@ -2053,7 +2053,7 @@ function custom_comment($comment, $args, $depth) {
      * Author - Akilan
      * Date  - 11-07-2016
      * Purpose - For hiding pages from search
-     * 
+     *
      */
     function remove_pages_from_search() {
         global $wp_post_types;
@@ -2066,7 +2066,7 @@ function custom_comment($comment, $args, $depth) {
      * Author - Vinoth Raja
      * Date  - 14-07-2016
      * Purpose - For adding comment approved email functionality
-     * 
+     *
      */
     add_filter('wp_mail_content_type', create_function('', 'return "text/html"; ')); //for adding html content in wp_mail
 //for except admin users
@@ -2177,8 +2177,8 @@ function custom_comment($comment, $args, $depth) {
     /**
      * Author - Vinoth Raja
      * Date  - 16-07-2016
-     * Purpose - For customizing wp_favorite_posts plugin for remove star from remove favorites section  
-     * 
+     * Purpose - For customizing wp_favorite_posts plugin for remove star from remove favorites section
+     *
      */
     function customized_saved_stories() {
         global $post;
@@ -2210,15 +2210,15 @@ function custom_comment($comment, $args, $depth) {
     /**
      * Author - Vinoth Raja
      * Date  - 19-07-2016
-     * Purpose - For Disabling WordPress comment flood prevention  
-     * 
+     * Purpose - For Disabling WordPress comment flood prevention
+     *
      */
     add_filter('comment_flood_filter', '__return_false');
 
     /**
      * Created By   - Muthupandi
      * Created Date - 20-07-2016
-     * Updated By   - Muthupandi 
+     * Updated By   - Muthupandi
      * Updated Date - 20-07-2016
      * Purpose      - For implementing append saved articles while click 'load more' button
      */
@@ -2233,7 +2233,7 @@ function custom_comment($comment, $args, $depth) {
     /**
      * Created By   - Rajasingh
      * Created Date - 25-07-2016
-     * Updated By   - Rajasingh 
+     * Updated By   - Rajasingh
      * Updated Date - 25-07-2016
      * Purpose      - Getting username using user email address
      */
@@ -2252,7 +2252,7 @@ function custom_comment($comment, $args, $depth) {
     /**
      * Created By   - Ramkumar.S
      * Created Date - 27-07-2016
-     * Updated By   - Ramkumar.S 
+     * Updated By   - Ramkumar.S
      * Updated Date - 27-07-2016
      * Purpose      - Add Find Branch/Join link to naviagation menu
      */
@@ -2265,28 +2265,28 @@ function custom_comment($comment, $args, $depth) {
         $homeurl = home_url('/');
         if (!is_user_logged_in()  && get_current_blog_id()==1)
             $link = '<a class="" href="' . $homeurl . 'register"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">Join</span></span></span></a>';
-        // else  
+        // else
         //  $link = '<a class="" href="' . $homeurl . 'register"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">Find a Branch</span></span></span></a>';
 
         return $items.= '<li id="log-in-out-link" class="menu-item menu-item-type-custom menu-item-object-custom  mkd-menu-narrow">' . $link . '</li>';
     }
     add_filter('wp_nav_menu_items', 'add_login_logout_to_menu', 50, 2);
 
-    
-      
+
+
      /**
      * Author - Vinoth Raja
      * Date   - 30-07-2016
      * Purpose - For page view count increasing functionality
      */
-    
+
     remove_action('wp', 'discussion_update_post_count_views');
-    
+
     if(!function_exists('custom_update_post_count_views')) {
 
 	function custom_update_post_count_views(){
 		$postID = discussion_get_page_id();
-		if(is_singular('post')||is_singular('videos')){	
+		if(is_singular('post')||is_singular('videos')){
                         if(isset($_COOKIE['mkd-post-views_'. $postID])){
 				return;
 			} else {
@@ -2305,7 +2305,7 @@ function custom_comment($comment, $args, $depth) {
 
 	add_action('wp', 'custom_update_post_count_views');
 }
-  
+
 
 if(!function_exists('custom_discussion_excerpt')) {
 	/**
@@ -2316,7 +2316,7 @@ if(!function_exists('custom_discussion_excerpt')) {
 	 *
 	 */
 	function custom_discussion_excerpt($excerpt_length_in_chars) {
-		
+
             global $post;
             $empty_content_p='<p class="mkd-post-excerpt-fsp"></p>';
             if(post_password_required()) {
@@ -2331,14 +2331,14 @@ if(!function_exists('custom_discussion_excerpt')) {
                     $more = 0;
                     the_content(true);
             }elseif($post->post_content != "") {
-                $post_excerpt = $post->post_excerpt != "" ? $post->post_excerpt : strip_tags($post->post_content);                    
+                $post_excerpt = $post->post_excerpt != "" ? $post->post_excerpt : strip_tags($post->post_content);
                 $post_excerpt_length = strlen($post_excerpt);
                 if($excerpt_length_in_chars == '0'){
                     $post_excerpt = rtrim(substr($post_excerpt,0,100));
                 }else if($post_excerpt_length > $excerpt_length_in_chars){
                     $post_excerpt = rtrim(substr($post_excerpt,0,$excerpt_length_in_chars));
                 }
-                echo '<p class="mkd-post-excerpt">'.$post_excerpt.'</p>';                                        			
+                echo '<p class="mkd-post-excerpt">'.$post_excerpt.'</p>';
             }
             else {
                 echo $empty_content_p;
@@ -2347,7 +2347,7 @@ if(!function_exists('custom_discussion_excerpt')) {
 }
 
 /**
- * Author - Akilan 
+ * Author - Akilan
  * Date   - 03-08-2016
  * Purpose - For retrieve main category id related with category pages
  */
@@ -2367,11 +2367,11 @@ function get_maincategory_id() {
  * Date  - 03-08-2016
  * Purpose - For generating post category link
  */
-function post_category_link($id,$getPostcat,$main_cat_det,$main_cat_id,$slug_page) {   
-  
-    if ((!empty($main_cat_det) && !empty($main_cat_id)) || $slug_page=='videos'):  
+function post_category_link($id,$getPostcat,$main_cat_det,$main_cat_id,$slug_page) {
+
+    if ((!empty($main_cat_det) && !empty($main_cat_id)) || $slug_page=='videos'):
         $post_link = esc_url(custom_category_permalink($id,$getPostcat, $main_cat_det->term_id, $main_cat_det->slug,$slug_page));
-    else:        
+    else:
         $post_link = esc_url(get_permalink());
     endif;
     return $post_link;
@@ -2406,23 +2406,23 @@ function get_child_catid($getPostcat, $current_cat_id) {
 
 function custom_category_permalink($id,$getPostcat, $current_cat_id,$parent_cat_slug,$slug_page){
     global $post;
-    if ((!empty($current_cat_id) || !empty($parent_cat_slug)) || $slug_page=='videos') {      
+    if ((!empty($current_cat_id) || !empty($parent_cat_slug)) || $slug_page=='videos') {
         $child_cat_id = get_child_catid($getPostcat, $current_cat_id);
         $top_parent_id = category_top_parent_id($current_cat_id);
         $url = site_url();
         if($slug_page=='videos'){
             $url.='/'.$slug_page;
-        } else {     
+        } else {
             if($top_parent_id!=$current_cat_id)
                 $url.='/' . get_category($top_parent_id)->slug;
             $url.='/' . $parent_cat_slug;
             if (!empty($child_cat_id))
                 $url.='/' . get_category($child_cat_id)->slug;
-        }        
+        }
         $url.='/' . $post->post_name;
         return $url;
     } else {
-       
+
         return esc_url(get_permalink());;
     }
 }
@@ -2441,7 +2441,7 @@ function remove_mobile_header(){
 }
 
 function custom_get_mobile_header(){
-    
+
     if(discussion_is_responsive_on()) {
             $header_type = 'header-type3';
 
@@ -2451,8 +2451,8 @@ function custom_get_mobile_header(){
             $parameters = array(
                 'show_logo'              => discussion_options()->getOptionValue('hide_logo') == 'yes' ? false : true,
                 'show_navigation_opener' => has_nav_menu('mobile-navigation')
-            );            
-            include(locate_template('block/mobile-header.php'));            
+            );
+            include(locate_template('block/mobile-header.php'));
         }
 }
 
