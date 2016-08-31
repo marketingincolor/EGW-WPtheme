@@ -41,15 +41,15 @@
                 //echo "q value -".$q;
                 $_SESSION["display_postid_ar"] = $display_postid_ar;
                 $_SESSION["displayed_sub_cat_ar"] = $displayed_sub_cat_ar;
-                $remaining=$_POST['per_page1'] - $q;
-                $args[] = array(
-                    'category' => explode(",", $_POST['sub_catid_ar']),
-                    'post_status' => 'publish',
-                    'post_type' => explode(",", $_POST['post_type']),
-                    'post__not_in' => $_SESSION["display_postid_ar"],
-                    'offset' => $_POST['offset1'],
-                    'numberposts' => $remaining
-                );
+//                $remaining=$_POST['per_page1'] - $q;
+//                $args[] = array(
+//                    'category' => explode(",", $_POST['sub_catid_ar']),
+//                    'post_status' => 'publish',
+//                    'post_type' => explode(",", $_POST['post_type']),
+//                    'post__not_in' => $_SESSION["display_postid_ar"],
+//                    'offset' => $_POST['offset1'],
+//                    'numberposts' => $remaining
+//                );
 
                
             }
@@ -61,10 +61,10 @@
                     'post_status' => 'publish',
                     'post_type' => explode(",", $_POST['post_type']),
                     'posts_per_page' => $_POST['per_page2'],
-                    'category__not_in' => explode(",", $_POST['sub_catid_ar']),
-                    'post__not_in' => explode(",", $_POST['display_postid_ar']),
+//                    'category__not_in' => explode(",", $_POST['sub_catid_ar']),
+                    'post__not_in' => $_SESSION["display_postid_ar"],
                     'offset' => $_POST['offset2'],
-                    'numberposts' => $_POST['per_page2']
+                    'numberposts' => $_POST['per_page2']- $q
                 );
             }
 
