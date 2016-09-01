@@ -150,7 +150,7 @@
                             <?php } ?>
                             <div class="mkd-pt-six-content-holder">
                                 <div class="mkd-pt-six-title-holder <?php echo $title_cls; ?>">
-                                    <?php echo esc_html($title_tag) ?> class="mkd-pt-six-title">
+                                    <<?php echo esc_html($title_tag) ?> class="mkd-pt-six-title">
                                     <a itemprop="url" class="mkd-pt-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self"><?php echo discussion_get_title_substring(get_the_title(), $title_length) ?></a>
                                     </<?php echo esc_html($title_tag) ?>
                                 </div>
