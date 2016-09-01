@@ -5,7 +5,7 @@
  * Purpose - For loading article based on jquery scroll loading in home page based on follow/unfollowed categories article
  */
 ?>
-<script type="text/javascript">
+<script type="text/javascript">  
 <?php
 $cat_name = "";
 $cat_id = "";
@@ -29,11 +29,11 @@ if(!isset($displayed_sub_cat_ar))
          * total followed and unfollowed article based seperate pagination and its continuation
          */
         load_more_display = 18;
-
+        jQuery("html, body").animate({ scrollTop: 0 }, "slow");
         jQuery(window).scroll(function() {
 
             if (jQuery(window).scrollTop() + jQuery(window).height() > jQuery('.mkd-footer-inner').offset().top)
-            {
+            {                
                 post_per_section = parseInt('<?php echo $post_per_section ?>');
                 total_followed_post = parseInt(jQuery('#total_followed_post').val());
                 total_unfollowed_post = parseInt(jQuery('#total_unfollowed_post').val());
@@ -129,7 +129,7 @@ if(!isset($displayed_sub_cat_ar))
                     jQuery('#unfollowed_current_post').val(unfollow_current_total)
                 }
                     
-                if (((current_total+6) % load_more_display === 0) && (total_post > current_total)) {
+                if (((current_total+6) % load_more_display === 0) && (total_post > current_total+6)) {
                     jQuery('#showmore').show();
                 } else {
                     jQuery('#loading').hide();

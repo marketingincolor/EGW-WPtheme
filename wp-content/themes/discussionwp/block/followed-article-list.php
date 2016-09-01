@@ -18,6 +18,8 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                     <div class="mkd-bnl-inner">
 
                         <?php
+//                        $total_followed_posts=0;
+//                        $total_unfollowed_posts=0;
                         if ($total_followed_posts != 0 && !empty($subcat_id_ar)) {
                             $i = 0;
                             $total_post = 0;
@@ -103,7 +105,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                     </div>
                 </div>
                 <?php
-                $total_followed_posts=count($subcat_id_ar);
+                $total_followed_posts=count($displayed_sub_cat_ar);
 //                $total_followed_posts = count(get_posts(array('post_type' => $post_type, 'post__not_in' => $display_postid_ar, 'category' => $subcat_id_ar, 'nopaging' => true)));
                 $total_unfollowed_posts = count(get_posts(array('post_type' => $post_type, 'post__not_in' => $display_postid_ar, 'category' => $cat_id_ar, 'nopaging' => true)));
                 ?>
@@ -114,7 +116,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                 <input type="hidden" id="followed_current_post" value="<?php echo $i;?>">
                 <input type="hidden" id="unfollowed_current_post" value="<?php echo $remaining; ?>">
                 <input type="hidden" id="total_post" value="<?php echo $total_followed_posts + $total_unfollowed_posts; ?>">
-                <input type="hidden" id="current_post" value="0">
+                <input type="hidden" id="current_post" value="">
             </div>
             <?php
             /**
