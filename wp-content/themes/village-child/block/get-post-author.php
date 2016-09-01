@@ -18,7 +18,7 @@ if (!empty($user->first_name) && !empty($user->last_name)) {
 ?>
 <?php if ($role == "coach") { ?>
     <div class="article-created">
-        <div class="vc_col-md-8 vc_col-sm-6 vc_col-xs-12">
+        <div class="vc_col-md-4 vc_col-sm-6 vc_col-xs-12">
             <div class="vc_row">
                 <div class="article-cr-lft">
                     <?php
@@ -39,7 +39,7 @@ if (!empty($user->first_name) && !empty($user->last_name)) {
                 </div>
             </div>
         </div>
-        <div class="vc_col-md-4 vc_col-sm-6 vc_col-xs-12">
+        <div class="vc_col-md-8 vc_col-sm-6 vc_col-xs-12">
             <div class="vc_row">
                 <div class="article-cr-cont">
                     <p><?php echo $user->description; ?></p>
