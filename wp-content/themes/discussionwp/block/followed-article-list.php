@@ -116,7 +116,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                 <input type="hidden" id="followed_current_post" value="<?php echo $i;?>">
                 <input type="hidden" id="unfollowed_current_post" value="<?php echo $remaining; ?>">
                 <input type="hidden" id="total_post" value="<?php echo $total_followed_posts + $total_unfollowed_posts; ?>">
-                <input type="hidden" id="current_post" value="">
+                <input type="hidden" id="current_post" value="0">
             </div>
             <?php
             /**
