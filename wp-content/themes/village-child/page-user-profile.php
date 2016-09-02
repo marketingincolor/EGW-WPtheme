@@ -77,7 +77,7 @@ get_header();
             var dataString = jQuery('#requiredvalues :input').serialize() + '&categoryid=' + this.id;
             jQuery.ajax({
                 type: "POST",
-                url: "<?php echo get_template_directory_uri();?>/unfollowajax.php",
+                url: "<?php echo get_stylesheet_directory_uri();?>/unfollowajax.php",
                 data: dataString,
                 cache: false,
                 success: function (successvalue) {
@@ -111,7 +111,7 @@ get_header();
                                                     ?>
                                                     <img id="image_upload_preview" src="<?php echo $attachment[0]; ?>" width="248" height="248"/>
                                                 <?php else : ?>                                                    
-                                                    <img id="image_upload_preview" src="<?php echo get_template_directory_uri();?>/assets/img/aavathar.jpg" width="248" height="248"/>
+                                                    <img id="image_upload_preview" src="<?php echo get_stylesheet_directory_uri();?>/assets/img/aavathar.jpg" width="248" height="248"/>
                                                 <?php endif; ?>
                                                 <div class="fspgray_btn">
                                                     <input type="file" id="userProfileImage" name="userProfileImage" style="display:none">                                                
@@ -231,7 +231,7 @@ get_header();
                                                             </div>
                                                             <div class="saved_art_cont">
                                                                 <h4 id="<?php the_ID(); ?>"><?php the_title(); ?></h4>
-                                                                <p><?php discussion_excerpt(15); ?></p>
+                                                                <p><?php custom_discussion_excerpt(15); ?></p>
                                                             </div>
                                                             <div class="saved_art_cont_btns">
                                                                 <a class="fsp_remove_btn" href="?wpfpaction=remove&postid=<?php the_ID(); ?>" title="Remove" rel="">Remove</a>
@@ -253,7 +253,7 @@ get_header();
                                             </div>                                          
                                         <?php endif; ?>
                                         <div class="fsp-ads-homepage loader_img" style="display: none;">
-                                            <img src="<?php echo MIKADO_ASSETS_ROOT . '/img/loading.svg'; ?>" width="75">
+                                            <img src="<?php echo get_stylesheet_directory_uri() . '/assets/img/loading.svg'; ?>" width="75">
                                         </div>
                                     <?php else: ?>
                                         <span>No articles found</span> 

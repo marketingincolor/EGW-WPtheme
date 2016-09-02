@@ -1,0 +1,40 @@
+/*
+ Theme Name:   Discussion Child
+ Theme URI:    http://192.168.1.154/evergreen/thevillage/
+ Description:  Village Child Theme
+ Author:       John Doe
+ Author URI:   http://example.com
+ Template:     discussionwp
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Tags:         light, dark, two-columns, right-sidebar, responsive-layout, accessibility-ready
+ Text Domain:  discussion-child
+*/
+
+/**
+For setting main blog style adjustment
+*/
+
+.home .mkd-reveal-nonf-active{
+
+    display:none;
+}
+
+.home .mkd-pb-two-holder.three_fourths_one_fourth .mkd-pb-two-featured{
+    width:100%
+}
+
+.ngg-fancybox > img {
+    height: 123px;
+    margin-bottom: 5px;
+    width: 184px;
+}
+
+.ngg-galleryoverview.ngg-ajax-pagination-none {
+    margin-bottom: 30px;
+}
+
+.slideshowlink {
+    display: none;
+}

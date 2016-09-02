@@ -49,11 +49,9 @@ if(discussion_options()->getOptionValue('enable_search_page_sidebar') === "no"){
 														<?php if(has_post_thumbnail()){ ?>
 															<div class="mkd-pt-two-image-holder">
 																<?php
-                                                                                                                                if(!empty(get_the_category())) {
-                                                                                                                                    discussion_post_info_category(array(
-                                                                                                                                            'category' => 'yes'
-                                                                                                                                    )); 
-                                                                                                                                }?>
+																discussion_post_info_category(array(
+																	'category' => 'yes'
+																)); ?>
 																<a itemprop="url" class="mkd-pt-two-link mkd-image-link" href="<?php echo esc_url(get_permalink()); ?>" target="_self">
 																	<?php
 																		echo discussion_generate_thumbnail(get_post_thumbnail_id(get_the_ID()),null,'273','171');

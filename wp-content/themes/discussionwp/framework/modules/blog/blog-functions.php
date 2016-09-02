@@ -322,9 +322,7 @@ if(!function_exists('discussion_post_info')){
 			'like' => '',
 			'count' => '',
 			'share' => '',
-			'rating' => '',
-                        'category_singlepost' => '',
-                        'save_stories' => ''
+			'rating' => ''
 		);
 
 		extract(shortcode_atts($default_config, $config));
@@ -349,12 +347,6 @@ if(!function_exists('discussion_post_info')){
 		}
 		if($category == 'yes'){
 			discussion_get_module_template_part('templates/parts/post-info/post-info-category', 'blog');
-		}
-                if($category_singlepost == 'yes'){
-			discussion_get_module_template_part('templates/parts/post-info/post-info-category_singlepost', 'blog');
-		}
-                if($save_stories == 'yes'){
-			discussion_get_module_template_part('templates/parts/post-info/post-info-save-stories', 'blog');
 		}
 		if($rating == 'yes'){
 			discussion_get_module_template_part('templates/parts/post-info/post-info-rating', 'blog');
@@ -546,7 +538,7 @@ if(!function_exists('discussion_excerpt')) {
 	 */
 	function discussion_excerpt($excerpt_length) {
 		global $post;
-                $empty_content_p='<p class="mkd-post-excerpt-fsp"></p>';
+
 		if(post_password_required()) {
 			echo get_the_password_form();
 		}
@@ -590,12 +582,8 @@ if(!function_exists('discussion_excerpt')) {
 				if($excerpt !== '') {
 					echo '<p class="mkd-post-excerpt">'.wp_kses_post($excerpt).'</p>';
 				}
-			} else {
-                            echo $empty_content_p;
-                        }
-		} else {
-                    echo $empty_content_p;
-                }
+			}
+		}
 	}
 }
 
@@ -629,7 +617,6 @@ if( !function_exists('discussion_get_single_html') ) {
 	function discussion_get_single_html() {
 
 		$post_format = get_post_format();
-                
 		if($post_format === false){
 			$post_format = 'standard';
 		}
@@ -816,11 +803,8 @@ if (!function_exists('discussion_comment')) {
 						<?php } ?>
 					</h6>
 					<h6 class="mkd-comment-links">
-						<?php   if ( !is_user_logged_in() ) : ?>
-                                                        <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>
-                                                <?php   else :
-                                                            comment_reply_link( array_merge( $args, array('reply_text' => esc_html__('Reply', 'discussionwp'), 'depth' => $depth, 'max_depth' => $args['max_depth']) ) );
-                                                        endif;
+						<?php
+							comment_reply_link( array_merge( $args, array('reply_text' => esc_html__('Reply', 'discussionwp'), 'depth' => $depth, 'max_depth' => $args['max_depth']) ) );
 						?>
 							<span class="mkd-comment-mark"><?php esc_html_e('/', 'discussionwp'); ?></span>
 						<?php

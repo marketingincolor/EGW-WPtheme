@@ -151,7 +151,7 @@ class DiscussionBreakingNews extends DiscussionWidget {
         }
 
         ?>
-        <div class="mkd-bn-holder trending-news-blk" <?php echo discussion_get_inline_attrs($data); ?>>
+        <div class="mkd-bn-holder" <?php echo discussion_get_inline_attrs($data); ?>>
             <?php if($queryResult->have_posts()): ?>
                 <div class="mkd-bn-title"><?php esc_html_e('Trending News', 'discussionwp'); ?><span class="mkd-bn-icon ion-ios-arrow-forward"></span></div>
                 <ul class="mkd-bn-slide">

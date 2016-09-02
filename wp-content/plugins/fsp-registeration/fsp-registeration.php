@@ -185,7 +185,7 @@ function fspr_login_form_fields() {
     ob_start();
     ?>
     <div class="login-container">
-        <h3 class="fspr_header"><?php _e('Login'); ?></h3>
+        <h3 class="fspr_header" style="text-transform: none; color: #4c4d4f; font-weight: 700;" ><?php _e('Log into your branch'); ?></h3>
 
         <?php
         // show any error messages after form submission
@@ -214,6 +214,14 @@ function fspr_login_form_fields() {
                 </div>
             </fieldset>
         </form>
+
+		<script type="text/javascript">
+		    var __ss_noform = __ss_noform || [];
+		    __ss_noform.push(['baseURI', 'https://app-3QMYANU21K.marketingautomation.services/webforms/receivePostback/MzawMDG2NDQxAwA/']);
+		    __ss_noform.push(['endpoint', 'ae4bfb37-9df4-45a7-a93b-6d8ce9e4f287']);
+		</script>
+		<script type="text/javascript" src="https://koi-3QMYANU21K.marketingautomation.services/client/noform.js?ver=1.24" ></script>
+
     </div>
     <?php
     return ob_get_clean();
@@ -225,20 +233,22 @@ function fspr_login_member() {
     if (isset($_POST['fspr_user_login']) && isset($_POST['fspr_login_submit']) && wp_verify_nonce($_POST['fspr_login_nonce'], 'fspr-login-nonce')) {
 
         // Validate email
+        $trimlogin = trim($_POST['fspr_user_login']);
         if (!filter_var($_POST['fspr_user_login'], FILTER_VALIDATE_EMAIL) === false) {
             //echo("is a valid email address");
-            $userinfo = login_with_email_address($_POST['fspr_user_login']);
+            $userinfo = login_with_email_address($trimlogin);
         } else {
             //echo("is not a valid email address");
-            $userinfo = $_POST['fspr_user_login'];
+            $userinfo = $trimlogin;
         }
 
         // this returns the user ID and other info from the user name
+        $trimpass = trim($_POST['fspr_user_pass']);
         $user = get_userdatabylogin($userinfo); //password or Email is a parameter.
         if (!$user) {
             fspr_errors()->add('wrong_username', __('Invalid Username or Password'));
-        } else if (!wp_check_password($_POST['fspr_user_pass'], $user->user_pass, $user->ID)) {
-            fspr_errors()->add('worng_password', __('Invalid Username or Password'));
+        } else if (!wp_check_password($trimpass, $user->user_pass, $user->ID)) {
+            fspr_errors()->add('wrong_password', __('Invalid Username or Password'));
         }
 
         // retrieve all error messages
@@ -247,7 +257,7 @@ function fspr_login_member() {
         // only log the user in if there are no errors
         if (empty($errors)) {
 
-            wp_setcookie($userinfo, $_POST['fspr_user_pass'], true);
+            wp_setcookie($userinfo, $trimpass, true);
             wp_set_current_user($user->ID, $userinfo);
             do_action('wp_login', $userinfo);
             //wp_redirect(home_url('/user-profile'));
