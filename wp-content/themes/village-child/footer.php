@@ -1,3 +1,6 @@
+<?php
+discussion_get_footer();
+?>
 <script>
     jQuery('li.welcome-my-pop a').magnificPopup({
          callbacks: {
@@ -60,7 +63,7 @@
     </div>
 </div>
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
 adroll_adv_id = "ZYDTNLNKUFFZ5LUNLQPX6K";
 adroll_pix_id = "EDOUBMWD4FAZLDGFKPAZIA";
 /* OPTIONAL: provide email to improve user identification */
@@ -80,8 +83,4 @@ document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
 if (window.addEventListener) {window.addEventListener('load', _onload, false);}
 else {window.attachEvent('onload', _onload)}
 }());
-</script>
-
-<?php
-discussion_get_footer();
-?>
+</script>-->

@@ -1,3 +1,7 @@
+
+<?php
+discussion_get_footer();
+?>
 <script>
     jQuery('li.welcome-my-pop a').magnificPopup({
          callbacks: {
@@ -16,9 +20,7 @@
         },
         closeOnBgClick: false
     });
-</script>
 
-<script>
     jQuery('.f-newsletter').magnificPopup({
         type: 'ajax',
         ajax: {
@@ -81,7 +83,3 @@ if (window.addEventListener) {window.addEventListener('load', _onload, false);}
 else {window.attachEvent('onload', _onload)}
 }());
 </script>-->
-
-<?php
-discussion_get_footer();
-?>
