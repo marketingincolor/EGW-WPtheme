@@ -847,8 +847,8 @@ function ajax_forgotPassword() {
 
         if ($update_user) {
 
-            $from = get_option('admin_email');
-
+            //$from = get_option('admin_email');
+            $from = "support@myevergreenwellness.com";
             $to = $user->user_email;
             $subject = 'myEvergreenWellness';
             $sender = 'From: ' . get_option('name') . ' <' . $from . '>' . "\r\n";
