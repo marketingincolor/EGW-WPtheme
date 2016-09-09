@@ -89,9 +89,10 @@ if(!isset($slug_page)) $slug_page=basename(get_permalink());
                                                     $rl_category_color = rl_color($the_category_id);
                                                 }
                                                 ?>
-                                                <div  style="background: <?php echo $rl_category_color; ?>;" class="mkd-post-info-category">                                                    
+                                                <div  style="background: <?php echo $rl_category_color; ?>;" class="mkd-post-info-category">                                                 
                                                     <?php  echo organize_catgory($id); ?>
                                                 </div>
+                                                 <?php do_action('sponsored-post'); ?> 
                                                 <?php
                                             }
                                             ?>
