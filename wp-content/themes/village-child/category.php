@@ -47,6 +47,8 @@ list($post_per_section,$post_type)=scroll_loadpost_settings();
         </div>
       </div>
 </div>
+    </div>
+</div>
 <?php
  /**
  * For loading post based on scrolling
