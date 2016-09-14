@@ -66,7 +66,7 @@
                                                 ?>
                                             </div>
                                         <?php } ?>
-                                        <?php discussion_get_module_template_part('templates/single/parts/title', 'blog'); ?>
+                                        <h1 itemprop="name" class="entry-title mkd-post-title event-title"><?php the_title(); ?></h1>
                                         <?php the_content(); ?>
                                     </div>
                                 </div>
