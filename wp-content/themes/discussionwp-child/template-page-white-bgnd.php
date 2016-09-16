@@ -63,8 +63,35 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
     z-index: 99;
 }
 .login-container { background-color: #edebeb; }
-
 .disclosure-text { font-size: .7em; }
+
+/*small Media Query*/
+@media only screen 
+and (min-device-width : 320px) { 
+
+/*Pretty Featured Images */
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .page-feature-image img {
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+#refer-friend-text { text-align: center; }
+
+}
+
+/*Media Query*/
+@media only screen 
+and (min-device-width : 1000px) { 
+
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .page-feature-image img {
+    border-top-right-radius: 60px;
+    border-bottom-left-radius: 60px;
+}
+#refer-friend-text { padding: 0em 3em; }
+#refer-friend-form { padding: 0em 3em; }
+#refer-friend-text h3 { text-align:left; }
+#refer-friend-text p { text-align:left; }
+
+}
 /* End Custom layouts from MIC */
 </style>
 	<?php discussion_get_title(); ?>
