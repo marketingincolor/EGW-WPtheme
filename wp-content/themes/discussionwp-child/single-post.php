@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<div class="mkd-container-inner"> 
+<div class="mkd-container-inner">
     <?php
     $title_tag = 'h3';
     $title_length = '20';
@@ -41,8 +41,8 @@
                         ))
                         ?>
 <!--                        <div class="mkd-post-fsp-savestories">
-                        <?php 
-                           //customized_saved_stories();    
+                        <?php
+                           //customized_saved_stories();
                         ?>
                         </div>-->
                     </div>
@@ -73,7 +73,7 @@
                                         </div>
                                     <?php } ?>
                                     <?php discussion_get_module_template_part('templates/single/parts/title', 'blog'); ?>
-                                    <div class="mdk-sng-pst"> 
+                                    <div class="mdk-sng-pst">
                                     <?php the_content(); ?>
                                     <?php do_action('last_updated'); ?>
                                     </div>
@@ -82,6 +82,13 @@
                         </div>
                     </article>
                     <?php include(locate_template('block/get-post-author.php')); ?>
+
+                    <?php
+                    $tm_disclaim = get_field('trademark_disclaimer');//set via Custom Fields Plugin
+                    if ($tm_disclaim != "") {
+                        include(locate_template('block/show-trademark-disclaimer.php'));
+                    } ?>
+
                     <div class="disclamier">
                         <p><span>Disclaimer:</span> This content is for entertainment purposes only and it is not meant to be relied on as medical advice, diagnosis, or treatment. Consult your physician before starting any exercise or dietary program or taking any other action respecting your health. In case of a medical emergency, call 911. </p>
                     </div>
@@ -150,8 +157,8 @@
                     <div class="fsp-recommended-stories-cont">
                         <?php echo do_shortcode('[AuthorRecommendedPosts]'); ?>
                     </div>
-                    <?php 
-//                    get_template_part('block/comments-guidelines'); 
+                    <?php
+//                    get_template_part('block/comments-guidelines');
 //                    if (discussion_show_comments()) {
 //                        comments_template('', true);
 //                    }
