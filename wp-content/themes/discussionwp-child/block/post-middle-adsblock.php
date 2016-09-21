@@ -14,7 +14,7 @@ if ($total_post >= $post_per_section) {
          */
         ?>
 
-        <div  class="fsp-ads-homepage hidden-xs"  id="adv_row_<?php echo $i; ?>" <?php if ($i != 1) { ?> style="display:none;clear:both" <?php } else { ?> style="clear:both" <?php } ?>>
+        <div  class="fsp-ads-homepage hidden-xs" id="adv_row_<?php echo $i; ?>" <?php if ($i != 1) { ?> style="display:none;clear:both" <?php } else { ?> style="clear:both" <?php } ?>>
             <?php
             if (function_exists('drawAdsPlace'))
                 drawAdsPlace(array('id' => 1), true);
@@ -33,9 +33,9 @@ if ($total_post >= $post_per_section) {
         </div>
 
 
-        <div  class="fsp-ads-homepage"  id="adv_row_<?php echo $i; ?>" style="clear:both">
+        <div class="fsp-ads-homepage" style="display:none;" id="adv_row_<?php echo $i; ?>" style="clear:both">
 
-            <ins data-revive-zoneid="3" data-revive-id="0be604ef9a1ab68c1665959c06390bf9"></ins>
+            <ins data-revive-zoneid="3" id="zoneid" data-revive-id="0be604ef9a1ab68c1665959c06390bf9"></ins>
             <script async src="//myevergreenwellness.net/www/delivery/asyncjs.php"></script>
             <script type="text/javascript">
     			(function() {
