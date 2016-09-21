@@ -84,8 +84,8 @@
                     <?php include(locate_template('block/get-post-author.php')); ?>
 
                     <?php
-                    $tm_disclaim = get_field('trademark_disclaimer');//set via Custom Fields Plugin
-                    if ($tm_disclaim != "") {
+                    $tm_disclaim = get_field('trademark_disclaimer'); //set via Custom Fields Plugin
+                    if ($tm_disclaim) {
                         include(locate_template('block/show-trademark-disclaimer.php'));
                     } ?>
 
