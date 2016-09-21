@@ -11,7 +11,9 @@ $hide_title = $custom_fields['hide_title'];
 $center_page = $custom_fields['center_page'];
 $centered = (is_page('register-success')) ? 'text-align:center;' : '' ;
 $listed = ( $hide_title || is_page('login') || is_page('sweepstakes-terms-conditions') || is_page('register') || is_page('shipshape')) ? 'true' : null;
-$sidebar = discussion_sidebar_layout(); ?>
+$sidebar = discussion_sidebar_layout(); 
+$mkd_content_padding = ( is_page('how-to-get-involved')) ? 'padding-bottom: 0;' : 'padding-bottom:75px';
+?>
 <?php get_header(); ?>
 <style>
 /* Start Custom layouts from MIC */
@@ -24,9 +26,12 @@ $sidebar = discussion_sidebar_layout(); ?>
 	border-bottom-left-radius: 60px;  
 }
 .page-template-template-page-white-bgnd .mkd-title .mkd-title-holder { height:auto; }
+.page-template-template-page-white-bgnd .mkd-content { <?php echo $mkd_content_padding;?> }
 
 /*Register Page Styles*/
+.remove-margins { margin: 0px !important; }
 h3 { font-family: 'Roboto', sans-serif; font-weight:bold; color:#6c6b6b; font-size:1.733em; padding-top:1em;}
+.heading-four { font-size: 1.4em !important; padding-top: .5em;}
 p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font-size: 1em; }
 .join-content ul li{ list-style-type: disc !important; }
 .join-content { padding: 0% 21% 0% 7%; }
@@ -62,6 +67,16 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
     position: absolute;
     z-index: 99;
 }
+.get-involved-button { 
+	background-color: #f79c49; 
+	color: white; 
+	padding: .5em !important; 
+	text-align: center; 
+	font-weight: 500;
+	display:inline-block;
+}
+.get-involved-button a,.get-involved-button a:hover { color: white; }
+
 .login-container { background-color: #edebeb; }
 .disclosure-text { font-size: .7em; }
 
@@ -77,6 +92,8 @@ and (min-device-width : 320px) {
 #refer-friend-text { text-align: center; }
 
 }
+.story-box { height: 20%; margin-bottom: 1.5em;}
+
 
 /*Media Query*/
 @media only screen 
@@ -90,7 +107,15 @@ and (min-device-width : 1000px) {
 #refer-friend-form { padding: 0em 3em; }
 #refer-friend-text h3 { text-align:left; }
 #refer-friend-text p { text-align:left; }
-
+.get-involved-button { 
+	background-color: #f79c49; 
+	color: white; 
+	padding: .5em !important; 
+	text-align: center; 
+	font-weight: 500;
+	display: inline-block; 
+}
+.story-box { height:33.3%; margin-bottom:3em; }
 }
 /* End Custom layouts from MIC */
 </style>
