@@ -94,7 +94,10 @@ and (min-device-width : 320px) {
 }
 .story-box { height: 20%; margin-bottom: 1.5em;}
 
-
+.story-teller-form {
+    width: 80%;
+    margin: auto;
+}
 /*Media Query*/
 @media only screen 
 and (min-device-width : 1000px) { 
@@ -116,6 +119,10 @@ and (min-device-width : 1000px) {
 	display: inline-block; 
 }
 .story-box { height:33.3%; margin-bottom:3em; }
+.story-teller-form {
+    width: 60% !important;
+    margin: auto;
+}
 }
 /* End Custom layouts from MIC */
 </style>
