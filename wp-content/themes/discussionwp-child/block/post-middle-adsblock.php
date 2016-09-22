@@ -33,21 +33,20 @@ if ($total_post >= $post_per_section) {
         </div>-->
 
         <div class="fsp-ads-homepage" id="mob_adv_row_<?php echo $i; ?>" <?php if ($i != 1) { ?> style="display:none;clear:both" <?php } else { ?> style="clear:both" <?php } ?>>
-
-            <ins data-revive-zoneid="3" id="zoneid" data-revive-id="0be604ef9a1ab68c1665959c06390bf9"></ins>
-            <script async src="//myevergreenwellness.net/www/delivery/asyncjs.php"></script>
             <script type="text/javascript">
-    			(function() {
+                function getzonenum() {
+                    var zonenum = '1';
     				var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    				var elem = document.getElementById("zoneid");
     				if ( w > 480 ) {
-    					elem.setAttribute("data-revive-zoneid", "3"); // normal banner
+                        zonenum = '3';
     				} else {
-    					elem.setAttribute("data-revive-zoneid", "1"); // mobile banner
+                        zonenum = '1';
     				}
-    			})();
+                    document.write('<ins data-revive-zoneid="'+zonenum+'" id="adzoneid" data-revive-id="0be604ef9a1ab68c1665959c06390bf9"></ins>'); // creates INS tag for Revive based on window width
+                };
+                getzonenum();
     		</script>
-
+            <script async src="//myevergreenwellness.net/www/delivery/asyncjs.php"></script>
         </div>
 
         <?php
