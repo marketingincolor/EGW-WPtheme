@@ -75,6 +75,7 @@
                                     <?php discussion_get_module_template_part('templates/single/parts/title', 'blog'); ?>
                                     <div class="mdk-sng-pst"> 
                                     <?php the_content(); ?>
+                                    <?php do_action('last_updated'); ?>
                                     </div>
                                 </div>
                             </div>
