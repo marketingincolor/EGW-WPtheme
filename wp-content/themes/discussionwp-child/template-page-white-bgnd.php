@@ -12,7 +12,8 @@ $center_page = $custom_fields['center_page'];
 $centered = (is_page('register-success')) ? 'text-align:center;' : '' ;
 $listed = ( $hide_title || is_page('login') || is_page('sweepstakes-terms-conditions') || is_page('register') || is_page('shipshape')) ? 'true' : null;
 $sidebar = discussion_sidebar_layout(); 
-$mkd_content_padding = ( is_page('how-to-get-involved')) ? 'padding-bottom: 0;' : 'padding-bottom:75px';
+$mkd_content_padding = ( is_page('how-to-get-involved') || is_page('storytellers') || is_page('welcome-survey')) ? 'padding-bottom: 0;' : 'padding-bottom:75px';
+$story_form = is_page('storytellers') ? 'width:67%; margin:auto;' : '';
 ?>
 <?php get_header(); ?>
 <style>
@@ -26,8 +27,7 @@ $mkd_content_padding = ( is_page('how-to-get-involved')) ? 'padding-bottom: 0;' 
 	border-bottom-left-radius: 60px;  
 }
 .page-template-template-page-white-bgnd .mkd-title .mkd-title-holder { height:auto; }
-.page-template-template-page-white-bgnd .mkd-content { <?php echo $mkd_content_padding;?> }
-
+.refer-a-friend-list ul li { list-style: disc !important; }
 /*Register Page Styles*/
 .remove-margins { margin: 0px !important; }
 h3 { font-family: 'Roboto', sans-serif; font-weight:bold; color:#6c6b6b; font-size:1.733em; padding-top:1em;}
@@ -83,6 +83,8 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
 /*small Media Query*/
 @media only screen 
 and (min-device-width : 320px) { 
+.join-page-mobile { display:flex; flex-direction: column-reverse; }
+.hide-for-small { display:none; }
 
 /*Pretty Featured Images */
 .page-template-template-page-white-bgnd .mkd-content .mkd-container .page-feature-image img {
@@ -90,7 +92,7 @@ and (min-device-width : 320px) {
     border-bottom-left-radius: 25px;
 }
 #refer-friend-text { text-align: center; }
-
+.welcome-survey-p-padding { padding: 0% 0% !important; }
 }
 .story-box { height: 20%; margin-bottom: 1.5em;}
 
@@ -98,9 +100,15 @@ and (min-device-width : 320px) {
     width: 80%;
     margin: auto;
 }
+
 /*Media Query*/
 @media only screen 
 and (min-device-width : 1000px) { 
+
+.join-page-mobile { display: initial !important; }
+.hide-for-large { display:none; }
+.hide-for-small { display:initial; }
+
 
 .page-template-template-page-white-bgnd .mkd-content .mkd-container .page-feature-image img {
     border-top-right-radius: 60px;
@@ -119,11 +127,18 @@ and (min-device-width : 1000px) {
 	display: inline-block; 
 }
 .story-box { height:33.3%; margin-bottom:3em; }
-.story-teller-form {
-    width: 60% !important;
+.storytellers-form {
+    width: 67% !important;
     margin: auto;
 }
+.storytellers { <?php echo $story_form; ?> }
+.welcome-survey-p-padding { padding: 0% 3% !important; }
+/*Formstack - Welcome Survey*/
+#label45573915 > div > label { padding: 7px 0px; }
+#label45574099 > div > label { padding: 7px 0px; }
+#label45574563 > div > label { padding: 7px 0px; }
 }
+
 /* End Custom layouts from MIC */
 </style>
 	<?php discussion_get_title(); ?>
