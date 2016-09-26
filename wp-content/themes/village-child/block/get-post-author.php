@@ -22,11 +22,15 @@ if (!empty($user->first_name) && !empty($user->last_name)) {
             <div class="vc_row">
                 <div class="article-cr-lft">
                     <?php
-                    $custom_avatar_meta_data = get_user_meta($getUserID, 'custom_avatar');
-                    if (isset($custom_avatar_meta_data) && !empty($custom_avatar_meta_data[0])):
-                        $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0], 'thumbnail');
+//                    $custom_avatar_meta_data = get_user_meta($getUserID, 'custom_avatar');
+//                    if (isset($custom_avatar_meta_data) && !empty($custom_avatar_meta_data[0])):
+//                        $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0], 'thumbnail');
+                    //echo "SELECT value FROM wp_2_cimy_uef_data where USER_ID=" . $getUserID . "";
+                  $fetchresult = get_user_meta($getUserID);
+                    if (!empty($fetchresult['wpcf-user-profile-avatar'][0])):
+                            $fetchresultRel = $fetchresult['wpcf-user-profile-avatar'][0];
                         ?>
-                        <img src="<?php echo $attachment[0]; ?>" width="100" height="100" class="avatar avatar-176 photo"/>
+                        <img src="<?php echo $fetchresultRel; ?>" width="100" height="100" class="avatar avatar-176 photo"/>
                     <?php else : ?>                                                    
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/img/aavathar.jpg" width="100" height="100" class="avatar avatar-176 photo"/>
                     <?php endif; ?>
@@ -35,7 +39,7 @@ if (!empty($user->first_name) && !empty($user->last_name)) {
                     <p>Written by</p>
                     <p><span><?php echo $displayNameis; ?></span></p>
                     <p><?php echo $user->signature; ?></p>
-            <!--            <a href="<?php //echo site_url();   ?>/public/<?php //echo get_the_author_meta('user_nicename');   ?>"><?php //echo $displayNameis;   ?></a>-->
+            <!--            <a href="<?php //echo site_url();    ?>/public/<?php //echo get_the_author_meta('user_nicename');    ?>"><?php //echo $displayNameis;    ?></a>-->
                 </div>
             </div>
         </div>
