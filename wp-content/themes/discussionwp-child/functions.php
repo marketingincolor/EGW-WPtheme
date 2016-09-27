@@ -2036,3 +2036,15 @@ function add_last_updated()
     }
 }
 add_action( 'last_updated', 'add_last_updated' );
+
+/**
+ * Description: Adds sponsor post bar to posts
+ */
+function add_sponsored_post_bar()
+{
+    if ( get_field('sponsored_content') == 'Yes')
+    {
+    echo '<div class="sponsored-post-bar">Sponsored Post</div>';
+    }
+}
+add_action('sponsored-post', 'add_sponsored_post_bar');
