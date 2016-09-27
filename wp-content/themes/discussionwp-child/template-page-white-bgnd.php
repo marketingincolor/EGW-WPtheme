@@ -115,7 +115,7 @@ and (min-device-width : 1000px) {
 
 .join-page-mobile { display: initial !important; }
 .hide-for-large { display:none; }
-.hide-for-small { display:initial; }
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .hide-for-small { display:initial !important; }
 
 .page-template-template-page-white-bgnd .mkd-content .mkd-container .page-feature-image img {
     border-top-right-radius: 60px;
