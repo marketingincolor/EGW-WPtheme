@@ -2036,3 +2036,12 @@ function add_last_updated()
     }
 }
 add_action( 'last_updated', 'add_last_updated' );
+/**
+ * Adds site to Google Search Console
+ */
+function add_google_verification()
+{
+    echo '<meta name="google-site-verification" content="mZoOb3v4TAvSTNBKhwAXckZ0SphEFbMtZlIldfYDmIA" />';
+    echo '<meta name="google-site-verification" content="mZoOb3v4TAvSTNBKhwAXckZ0SphEFbMtZlIldfYDmIA" />';
+}
+add_action( 'wp_head', 'add_google_verification' );
