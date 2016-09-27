@@ -17,7 +17,7 @@
                     $start_time = clone $local_date;
                     $start_time->set_time(0, 0, 0);
 
-                    //sets end time to a year from today 
+                    //sets end time to a year from today
                     $end_time = clone $start_time;
                     $end_time->adjust_month(12);
 
@@ -39,7 +39,7 @@
                                 <div class="mkd-pt-seven-item mkd-post-item mkd-active-post-page">
                                     <div class="mkd-pt-seven-item-inner clearfix">
                                         <div class="mkd-pt-seven-image-holder" style="width: 117px">
-                                            <a target="_self" href="<?php echo get_permalink($postid) ?>" title="<?php the_title_attribute(); ?>" class="mkd-pt-seven-link mkd-image-link" itemprop="url"> 
+                                            <a target="_self" href="<?php echo get_permalink($postid) ?>" title="<?php the_title_attribute(); ?>" class="mkd-pt-seven-link mkd-image-link" itemprop="url">
                                                 <img width="117px" alt="a" src="<?php
                                                 $feature_image = wp_get_attachment_url(get_post_thumbnail_id($postid));
                                                 echo $feature_image;
@@ -53,7 +53,7 @@
                                                 </h6>
                                             </div>
                                             <div class="mkd-post-info-date entry-date updated" itemprop="dateCreated" style="display:block">
-                                                <a href="<?php echo get_month_link($year, $month); ?>" itemprop="url"> <?php echo get_the_date("F j, Y", $postid) ?> </a>
+                                                <a href="<?php echo get_month_link($year, $month); ?>" itemprop="url"> <?php echo /*get_the_date("F j, Y", $postid)*/ $event_date; ?> </a>
                                             </div>
                                         </div>
                                     </div>
