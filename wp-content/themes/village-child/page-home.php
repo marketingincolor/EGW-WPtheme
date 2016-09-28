@@ -34,26 +34,31 @@ $merged_new_ar = array();
                                     /**
                                      * Fetching category if user follows subcategory and displaying article based on that categories
                                      */
-                                    if (is_user_logged_in()) {
-                                        $userid = get_current_user_id();
-                                        $fetchresult = $wpdb->get_results("SELECT categoryid FROM wp_follow_category where userid=" . $userid . " AND flag=1 ORDER BY date DESC");
-                                        if (!empty($fetchresult)) {
-                                            foreach ($fetchresult as $results) {
-                                                $subcat_id_ar[$results->categoryid] = $results->categoryid;
-                                            }
-                                            if (!empty($subcat_id_ar)) {
-                                                $total_followed_posts = count(get_posts(array('post_type' => $post_type, 'category' => $subcat_id_ar, 'nopaging' => true)));
-                                                $total_unfollowed_posts = count(get_posts(array('post_type' => $post_type, 'category__not_in' => $subcat_id_ar, 'category' => $cat_id_ar, 'nopaging' => true)));
-                                                include(locate_template('block/followed-article-list.php'));
-                                            }
-                                        } else {
-                                            $my_query = discussion_custom_categorylist_query($post_type, $cat_id_ar, $post_per_section);
-                                        }
-                                    } else {
-                                        /**
+                                    /**
                                          * if user not login                                 */
                                         $my_query = discussion_custom_categorylist_query($post_type, $cat_id_ar, $post_per_section);
-                                    }
+                                        
+                                        
+//                                    if (is_user_logged_in()) {
+//                                        $userid = get_current_user_id();
+//                                        $fetchresult = $wpdb->get_results("SELECT categoryid FROM wp_follow_category where userid=" . $userid . " AND flag=1 ORDER BY date DESC");
+//                                        if (!empty($fetchresult)) {
+//                                            foreach ($fetchresult as $results) {
+//                                                $subcat_id_ar[$results->categoryid] = $results->categoryid;
+//                                            }
+//                                            if (!empty($subcat_id_ar)) {
+//                                                $total_followed_posts = count(get_posts(array('post_type' => $post_type, 'category' => $subcat_id_ar, 'nopaging' => true)));
+//                                                $total_unfollowed_posts = count(get_posts(array('post_type' => $post_type, 'category__not_in' => $subcat_id_ar, 'category' => $cat_id_ar, 'nopaging' => true)));
+//                                                include(locate_template('block/followed-article-list.php'));
+//                                            }
+//                                        } else {
+//                                            $my_query = discussion_custom_categorylist_query($post_type, $cat_id_ar, $post_per_section);
+//                                        }
+//                                    } else {
+//                                        /**
+//                                         * if user not login                                 */
+//                                        $my_query = discussion_custom_categorylist_query($post_type, $cat_id_ar, $post_per_section);
+//                                    }
 
 
                                     if (empty($subcat_id_ar)) {

@@ -141,6 +141,18 @@ if (!function_exists('follow_categorypost_detail')) {
 
 }
 
+    
+function remainfollow_categorypost_detail($post_type, $subcat_id_sgl, $display_postid_ar,$limit) {
+        $posts =get_posts( array(
+            'post_type' => $post_type,
+            'cat' => $subcat_id_sgl,
+            'order' => 'DESC',
+            'posts_per_page' => $limit,
+            'post__not_in' => $display_postid_ar
+        ));
+        return $posts;
+    }
+
 /**
  * Author - Rajasingh
  * Date - 26-08-2016

@@ -15,7 +15,6 @@
             $displayed_sub_cat_ar = $_SESSION["displayed_sub_cat_ar"];
             $q=0;
             if ($_POST['query_type1'] == 'followed') {
-       
                 $sub_catid_ar = explode(",", $_POST['sub_catid_ar']);
                 if (count($displayed_sub_cat_ar) < count($sub_catid_ar)) {
                     $missed_sub_cat_ar = array_diff($sub_catid_ar, $displayed_sub_cat_ar);
@@ -41,29 +40,30 @@
                 //echo "q value -".$q;
                 $_SESSION["display_postid_ar"] = $display_postid_ar;
                 $_SESSION["displayed_sub_cat_ar"] = $displayed_sub_cat_ar;
-//                $remaining=$_POST['per_page1'] - $q;
-//                $args[] = array(
-//                    'category' => explode(",", $_POST['sub_catid_ar']),
-//                    'post_status' => 'publish',
-//                    'post_type' => explode(",", $_POST['post_type']),
-//                    'post__not_in' => $_SESSION["display_postid_ar"],
-//                    'offset' => $_POST['offset1'],
-//                    'numberposts' => $remaining
-//                );
-               
-            }
-            if ($_POST['query_type2'] == 'unfollowed') {
+                $remaining=$_POST['per_page1'] - $q;
                 $args[] = array(
-                    'category' => $_POST['cat_id'],
+                    'category' => explode(",", $_POST['sub_catid_ar']),
                     'post_status' => 'publish',
                     'post_type' => explode(",", $_POST['post_type']),
-                    'posts_per_page' => $_POST['per_page2'],
-//                    'category__not_in' => explode(",", $_POST['sub_catid_ar']),
                     'post__not_in' => $_SESSION["display_postid_ar"],
-                    'offset' => $_POST['offset2'],
-                    'numberposts' => $_POST['per_page2']- $q
+                    'offset' => $_POST['offset1'],
+                    'numberposts' => $remaining
                 );
+               
             }
+            //commented by Rajasingh
+//            if ($_POST['query_type2'] == 'unfollowed') {
+//                $args[] = array(
+//                    'category' => $_POST['cat_id'],
+//                    'post_status' => 'publish',
+//                    'post_type' => explode(",", $_POST['post_type']),
+//                    'posts_per_page' => $_POST['per_page2'],
+////                    'category__not_in' => explode(",", $_POST['sub_catid_ar']),
+//                    'post__not_in' => $_SESSION["display_postid_ar"],
+//                    'offset' => $_POST['offset2'],
+//                    'numberposts' => $_POST['per_page2']- $q
+//                );
+//            }
             foreach ($args as $arg1) {
                 $posts_array = get_posts($arg1);
                 $i = 1;
