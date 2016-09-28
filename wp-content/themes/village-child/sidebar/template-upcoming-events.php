@@ -53,7 +53,7 @@
                                                 </h6>
                                             </div>
                                             <div class="mkd-post-info-date entry-date updated" itemprop="dateCreated" style="display:block">
-                                                <a href="<?php echo get_month_link($year, $month); ?>" itemprop="url"> <?php echo /*get_the_date("F j, Y", $postid)*/ $event_date; ?> </a>
+                                                <a href="<?php echo get_month_link($year, $month); ?>" itemprop="url"> <?php echo $event_date; ?> </a>
                                             </div>
                                         </div>
                                     </div>
