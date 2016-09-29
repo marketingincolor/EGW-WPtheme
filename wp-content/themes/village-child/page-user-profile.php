@@ -196,73 +196,7 @@ get_header();
                             </div>	
                         </div>
                         <!-- Info container ends here -->
-
-
-                        <!-- saved articles starts here -->
-                        <div class="wpb_column vc_col-lg-6 vc_col-md-6 vc_col-sm-12 user-profile-resize">
-                            <div class="fsp-saved-articles">
-                                <h2>Saved Articles</h2>
-                                <div class="saved-articles-container">                                    
-                                    <?php
-                                    global $post;
-                                    $require_post = $post;
-                                    $user_data = get_user_meta(get_current_user_id(), 'wpfp_favorites');
-                                    $post_id_ar = array();
-                                    
-
-                                    if (isset($user_data) && !empty($user_data[0])):                                        
-                                        $post_id_ar = array_reverse($user_data[0]); 
-                                        $total_count=count($post_id_ar);
-                                        $args = array(  
-                                            'orderby' => 'post__in',
-                                            'post__in' => $post_id_ar,
-                                            'posts_per_page' => 3,
-                                            'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1 ),
-                                            'post_type' => array('post','videos'),
-                                        );
-                                        $saved_posts = query_posts($args);                                        
-                                        ?>      
-                                        <ul id="saved-artiles-list">                        
-                                            <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-                                                    <?php if (($sidebar == 'default') || ($sidebar == '')) : ?>
-                                                        <li>
-                                                            <div class="saved_art_img">
-                                                                <?php the_post_thumbnail([117, 117]) ?>
-                                                            </div>
-                                                            <div class="saved_art_cont">
-                                                                <h4 id="<?php the_ID(); ?>"><?php the_title(); ?></h4>
-                                                                <p><?php custom_discussion_excerpt(15); ?></p>
-                                                            </div>
-                                                            <div class="saved_art_cont_btns">
-                                                                <a class="fsp_remove_btn" href="?wpfpaction=remove&postid=<?php the_ID(); ?>" title="Remove" rel="">Remove</a>
-                                                                <a class="fsp_readart_btn" href="<?php the_permalink(); ?>" title="Read Article" rel="">Read Article</a>
-                                                            </div>
-                                                        </li>
-                                                    <?php endif; ?>
-                                                <?php endwhile; ?>     
-                                                <?php
-                                            endif;
-                                            $post = $require_post;
-                                            ?>
-                                        </ul> 
-                                        <div id="displayed_article_count" style="display:none">3</div>
-                                        <div id="total_saved_article_count" style="display:none"><?php echo $total_count; ?></div>
-                                        <?php if($total_count>3): ?>
-                                            <div class="fsporange_btn" id="load-save-article-button">
-                                                <input onclick="load_saved_articles(event)" type="submit" value="Load More" name="Load More">
-                                            </div>                                          
-                                        <?php endif; ?>
-                                        <div class="fsp-ads-homepage loader_img" style="display: none;">
-                                            <img src="<?php echo get_stylesheet_directory_uri() . '/assets/img/loading.svg'; ?>" width="75">
-                                        </div>
-                                    <?php else: ?>
-                                        <span>No articles found</span> 
-                                    <?php endif; ?>  
-                                          
-                                </div>
-                            </div>
-                        </div>
-                        <!-- saved articles ends here -->
+                       
                     </div>
                 </div>
 

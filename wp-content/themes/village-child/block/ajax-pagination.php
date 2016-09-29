@@ -116,20 +116,30 @@ $slug_page=basename(get_permalink()); //For retrieving current page slug and cha
                 offset: displayed_article_count,                                                
             },
             success: function(data)
-            {
-                jQuery('#saved-artiles-list').append(data);
+            {                
+                if(jQuery('#story-send').css('display') === 'black'){
+                    jQuery('.save-article-checkbox').css('display','black');
+                }
+                jQuery(data).insertAfter('.saved-articles-list:last');
                 current_displayed_article_count=displayed_article_count+3;
                 jQuery('#displayed_article_count').text(current_displayed_article_count);
                 jQuery('.loader_img').css('display','none');
                 if(current_displayed_article_count >= total_article_count){
-                    jQuery('#load-save-article-button').css('display','none');
+                    jQuery('.load-save-article-button-section').css('display','none');
                 }else {
-                    jQuery('#load-save-article-button').css('display','block');
+                    jQuery('.load-save-article-button-section').css('display','block');
                 }                                    
             }
         });
         event.preventDefault();
         
-    }    
+    }
+    
+    jQuery(document).ready(function() {
+        jQuery('#enable_story_playlist').click(function(){
+            jQuery('#story-send').css('display','block');
+            jQuery('.save-article-checkbox').css('display','block');
+        });
+    });
 </script>
 <?php ?>

@@ -26,24 +26,33 @@
         $saved_posts = query_posts($args);
         ?>                                      
             <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-                    <?php if (($sidebar == 'default') || ($sidebar == '')) : ?>
-                        <li>
-                            <div class="saved_art_img">
-                                <?php the_post_thumbnail([117, 117]) ?>
+                        <?php if (($sidebar == 'default') || ($sidebar == '')) : ?>                        
+                        <div class="mkd-pt-seven-item mkd-post-item mkd-active-post-page saved-articles-list">
+                            <div class="mkd-pt-seven-item-inner clearfix">
+                                <div class="mkd-pt-seven-image-holder" style="width: 117px">
+                                    <?php if (has_post_thumbnail()) : ?>
+                                        <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+                                            <?php the_post_thumbnail([117,117]) ?>
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="mkd-pt-seven-content-holder">
+                                    <div class="mkd-pt-seven-title-holder">
+                                        <h6 class="mkd-pt-seven-title">
+                                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>                                            
+                                        </h6>                                        
+                                        <div class="saved_art_cont_btns" style="float:left">                                             
+                                            <a class="fsp_remove_btn" href="?wpfpaction=remove&postid=<?php the_ID(); ?>" title="Remove" rel="">Remove</a>
+                                            <a class="fsp_readart_btn" href="<?php the_permalink(); ?>" title="Read Article" rel="">Read Article</a>
+                                        </div>    
+                                        <input type="checkbox" class="save-article-checkbox" id="<?php the_ID(); ?>" style="display:none" />
+                                    </div>
+                                </div>
                             </div>
-                            <div class="saved_art_cont">
-                                <h4><?php the_title(); ?></h4>
-                                <p><?php custom_discussion_excerpt(15); ?></p>
-                            </div>
-                            <div class="saved_art_cont_btns">
-                                <a class="fsp_remove_btn" href="?wpfpaction=remove&postid=<?php the_ID(); ?>" title="Remove" rel="">Remove</a>
-                                <a class="fsp_readart_btn" href="<?php the_permalink(); ?>" title="Read Article" rel="">Read Article</a>
-                            </div>
-                        </li>
-                    <?php endif; ?>
-                <?php endwhile; ?>     
-                <?php
-            endif;
-            $post = $require_post;
+                        </div>
+                        <?php endif; ?>
+                     <?php endwhile; ?> 
+                    <?php endif;
+                    $post = $require_post;                    
     endif;
             ?>                      
