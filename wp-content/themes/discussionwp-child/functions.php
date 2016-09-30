@@ -494,8 +494,8 @@ function execute_php($html) {
 function modify_contact_methods($profile_fields) {
 
     // Add new fields
-    
-    
+
+
     $profile_fields['twitter'] = 'Twitter Username';
     $profile_fields['facebook'] = 'Facebook URL';
     $profile_fields['dob'] = 'Date of Birth';
@@ -924,7 +924,7 @@ function custom_comment($comment, $args, $depth) {
                         $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0]);
                         ?>
                         <img src="<?php echo $attachment[0]; ?>" width="85px" height="85px"/>
-                    <?php else : ?>                                                    
+                    <?php else : ?>
                         <img src="<?php echo get_stylesheet_directory_uri() . '/img/aavathar.jpg' ?>" width="85px" height="85px" />
                     <?php endif; ?>
                 </div>
@@ -1952,8 +1952,8 @@ function custom_get_mobile_nav() {
 
                                                         //echo '<img src="'.z_taxonomy_image_url($category->term_id).'" alt="'.$category->name.'" width="'.$instance['thumb_image_width'].'" height="'.$instance['thumb_image_height'].'" />';
                                                         // echo discussion_generate_thumbnail(z_taxonomy_image_url($category->term_id),null,$thumb_image_width,$thumb_image_height);
-                                                        ?>	
-                                                    </a></div>	
+                                                        ?>
+                                                    </a></div>
 
 
                                                 <div class="mkd-pt-five-content">
@@ -1963,11 +1963,11 @@ function custom_get_mobile_nav() {
                                                                 <?php
                                                                 echo $category->name;
                                                                 ?>
-                                                            </a> 
-                                                        </h6>   
-                                                        <div class="mkd-pt-one-excerpt">                                                    
+                                                            </a>
+                                                        </h6>
+                                                        <div class="mkd-pt-one-excerpt">
                                                         </div>
-                                                    </div>			
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -2048,3 +2048,13 @@ function add_sponsored_post_bar()
     }
 }
 add_action('sponsored-post', 'add_sponsored_post_bar');
+
+/**
+ * Remove CDATA from post save
+ */
+function my_filter_cdata( $content ) {
+  $content = str_replace( '// <![CDATA[', '', $content );
+  $content = str_replace( '// ]]>', '', $content );
+  return $content;
+}
+add_filter( 'content_save_pre', 'my_filter_cdata', 9, 1 );

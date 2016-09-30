@@ -225,7 +225,7 @@ function organize_catgory($id) {
 }
 
 /**
- * 
+ *
  * Author -Akilan
  * Date  - 20-06-2016
  * Purpose -  For featured template image background
@@ -350,7 +350,7 @@ if (!function_exists('discussion_custom_getImageParams')) {
  * Author -Akilan
  * Date  - 20-06-2016
  * purpose - For implementing custom category template for getting category image detail
- * 
+ *
  * @param type $id
  * @return string
  */
@@ -458,7 +458,7 @@ if (!function_exists('discussion_custom_category_query')) {
 /**
  * Author - Akilan
  * Date - 20-06-2016
- * Purpose - For custom template for category query 
+ * Purpose - For custom template for category query
  */
 if (!function_exists('discussion_custom_categorylist_query')) {
 
@@ -511,9 +511,9 @@ if (!function_exists('category_top_parent_id')) {
 }
 
 /* *
- * 
+ *
  * Purpose: Enable PHP in widgets
- * Author: Ramkumar.S 
+ * Author: Ramkumar.S
  * Date : 20 June 2016
  * Last Modified : 20 June 2016
  * */
@@ -556,9 +556,9 @@ function modify_contact_methods($profile_fields) {
 add_filter('user_contactmethods', 'modify_contact_methods');
 
 /* *
- * 
+ *
  * Purpose: Public Profile
- * Author: Ramkumar.S 
+ * Author: Ramkumar.S
  * Date : 22 June 2016
  * Last Modified : 22 June 2016
  * */
@@ -734,7 +734,7 @@ function discussion_author_recommended_posts() {
                 add_filter('posts_where', array($this, 'posts_where'), 10, 2);
             }
 
-            // unset search so results are accurate and not muddled 
+            // unset search so results are accurate and not muddled
             unset($options['s']);
 
             $searchable_posts = get_posts($options);
@@ -767,9 +767,9 @@ function discussion_author_recommended_posts() {
 }
 
 /* *
- * 
- * Purpose: Login direct after login 
- * Author: Ramkumar.S 
+ *
+ * Purpose: Login direct after login
+ * Author: Ramkumar.S
  * Date : 24 June 2016
  * Last Modified : 24 June 2016
  * */
@@ -794,9 +794,9 @@ function redirect_login_page() {
 add_action('init', 'redirect_login_page');
 
 /* *
- * 
+ *
  * Purpose: Disable top menu based on admin/super admin role
- * Author: Ramkumar.S 
+ * Author: Ramkumar.S
  * Date : 24 June 2016
  * Last Modified : 27 June 2016
  * */
@@ -950,7 +950,7 @@ function custom_comment($comment, $args, $depth) {
     <li>
         <div class="<?php echo esc_attr($comment_class); ?>">
     <?php if (!$is_pingback_comment) { ?>
-                <div class="mkd-comment-image"> 
+                <div class="mkd-comment-image">
         <?php
         $user = $comment->user_id;
         $custom_avatar_meta_data = get_user_meta($user, 'custom_avatar');
@@ -958,7 +958,7 @@ function custom_comment($comment, $args, $depth) {
             $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0]);
             ?>
                         <img src="<?php echo $attachment[0]; ?>" width="85px" height="85px"/>
-                    <?php else : ?>                                                    
+                    <?php else : ?>
                         <img src="<?php echo get_stylesheet_directory_uri() . '/assets/img/aavathar.jpg' ?>" width="85px" height="85px" />
                     <?php endif; ?>
                 </div>
@@ -993,7 +993,7 @@ function custom_comment($comment, $args, $depth) {
                             $blog_id = get_current_blog_id();
                             if ($blog_id != $user_blog_id):
                                 ?>
-                                <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>                                                                   
+                                <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>
                                 <?php
                             else :
                                 comment_reply_link(array_merge($args, array('reply_text' => esc_html__('Reply', 'discussionwp'), 'depth' => $depth, 'max_depth' => $args['max_depth'])));
@@ -1053,7 +1053,7 @@ function SocialNetworkShareLink($net, $image) {
 }
 
 /**
- * Author - Akilan 
+ * Author - Akilan
  * Date - 08-07-2016
  * Purpose - For adding thumb image for facebook sharing
  */
@@ -1113,7 +1113,7 @@ function get_main_category_detail() {
  * Author - Akilan
  * Date  - 11-07-2016
  * Purpose - For hiding pages from search
- * 
+ *
  */
 function remove_pages_from_search() {
     global $wp_post_types;
@@ -1126,7 +1126,7 @@ add_action('init', 'remove_pages_from_search');
  * Author - Vinoth Raja
  * Date  - 14-07-2016
  * Purpose - For adding comment approved email functionality
- * 
+ *
  */
 add_filter('wp_mail_content_type', create_function('', 'return "text/html"; ')); //for adding html content in wp_mail
 //for except admin users
@@ -1176,7 +1176,7 @@ function village_article_title_class() {
     $next_post = $wp_query->posts[$wp_query->current_post + 1];
     $data = array(get_the_title(), $next_post->post_title);
     return get_title_class($data);
-    
+
 }
 
 /**
@@ -1224,8 +1224,8 @@ function check_cat_subcat($getPostcat) {
 /**
  * Author - Vinoth Raja
  * Date  - 16-07-2016
- * Purpose - For customizing wp_favorite_posts plugin for remove star from remove favorites section  
- * 
+ * Purpose - For customizing wp_favorite_posts plugin for remove star from remove favorites section
+ *
  */
 function customized_saved_stories() {
     global $post;
@@ -1257,15 +1257,15 @@ function customized_saved_stories() {
 /**
  * Author - Vinoth Raja
  * Date  - 19-07-2016
- * Purpose - For Disabling WordPress comment flood prevention  
- * 
+ * Purpose - For Disabling WordPress comment flood prevention
+ *
  */
 add_filter('comment_flood_filter', '__return_false');
 
 /**
  * Created By   - Muthupandi
  * Created Date - 20-07-2016
- * Updated By   - Muthupandi 
+ * Updated By   - Muthupandi
  * Updated Date - 20-07-2016
  * Purpose      - For implementing append saved articles while click 'load more' button
  */
@@ -1280,7 +1280,7 @@ add_action('wp_ajax_nopriv_custom_scroll_saved_articles_load', 'custom_scroll_sa
 /**
  * Created By   - Rajasingh
  * Created Date - 25-07-2016
- * Updated By   - Rajasingh 
+ * Updated By   - Rajasingh
  * Updated Date - 25-07-2016
  * Purpose      - Getting username using user email address
  */
@@ -1299,7 +1299,7 @@ add_action('init', 'login_with_email_address');
 /**
  * Created By   - Ramkumar.S
  * Created Date - 27-07-2016
- * Updated By   - Ramkumar.S 
+ * Updated By   - Ramkumar.S
  * Updated Date - 27-07-2016
  * Purpose      - Add Find Branch/Join link to naviagation menu
  */
@@ -1312,7 +1312,7 @@ function add_login_logout_to_menu($items, $args) {
     $homeurl = home_url('/');
     if (!is_user_logged_in() && get_current_blog_id() == 1)
         $link = '<a class="" href="' . $homeurl . 'register"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">Join</span></span></span></a>';
-    // else  
+    // else
     //  $link = '<a class="" href="' . $homeurl . 'register"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">Find a Branch</span></span></span></a>';
 
     return $items.= '<li id="log-in-out-link" class="menu-item menu-item-type-custom menu-item-object-custom  mkd-menu-narrow">' . $link . '</li>';
@@ -1392,7 +1392,7 @@ if (!function_exists('custom_discussion_excerpt')) {
 }
 
 /**
- * Author - Akilan 
+ * Author - Akilan
  * Date   - 03-08-2016
  * Purpose - For retrieve main category id related with category pages
  */
@@ -1976,8 +1976,8 @@ class DiscussionCategoryLayoutTabs extends DiscussionWidget {
 
                 //echo '<img src="'.z_taxonomy_image_url($category->term_id).'" alt="'.$category->name.'" width="'.$instance['thumb_image_width'].'" height="'.$instance['thumb_image_height'].'" />';
                 // echo discussion_generate_thumbnail(z_taxonomy_image_url($category->term_id),null,$thumb_image_width,$thumb_image_height);
-                ?>	
-                                                    </a></div>	
+                ?>
+                                                    </a></div>
 
 
                                                 <div class="mkd-pt-five-content">
@@ -1987,11 +1987,11 @@ class DiscussionCategoryLayoutTabs extends DiscussionWidget {
                 <?php
                 echo $category->name;
                 ?>
-                                                            </a> 
-                                                        </h6>   
-                                                        <div class="mkd-pt-one-excerpt">                                                    
+                                                            </a>
+                                                        </h6>
+                                                        <div class="mkd-pt-one-excerpt">
                                                         </div>
-                                                    </div>			
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -2021,3 +2021,14 @@ class DiscussionCategoryLayoutTabs extends DiscussionWidget {
 
         add_action('widgets_init', create_function('', 'return register_widget("DiscussionCategoryLayoutTabs");'));
         ?>
+<?php
+
+/**
+ * Remove CDATA from post save
+ */
+function my_filter_cdata( $content ) {
+  $content = str_replace( '// <![CDATA[', '', $content );
+  $content = str_replace( '// ]]>', '', $content );
+  return $content;
+}
+add_filter( 'content_save_pre', 'my_filter_cdata', 9, 1 );
