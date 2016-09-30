@@ -505,6 +505,12 @@ class Ai1ec_Javascript_Controller {
 			'ticketing_no_tickets_included'  => Ai1ec_I18n::__( '<b>
 				The Event has the cost option Tickets selected but no ticket was included.</b>'
 			),
+			'discovery_event_success'         => Ai1ec_I18n::__(
+				'Event was imported successfully.'
+			),
+			'discovery_event_error'          => Ai1ec_I18n::__(
+				'An error occurred when importing event. Please, try later.'
+			),
 			'language'                       => $this->_registry->get( 'p28n.wpml' )->get_lang(),
 			'ajax_url'                       => $ajax_url,
 			// 24h time format for time pickers
@@ -519,6 +525,7 @@ class Ai1ec_Javascript_Controller {
 			'week_start_day'                 => $settings->get( 'week_start_day' ),
 			'week_view_starts_at'            => $settings->get( 'week_view_starts_at' ),
 			'week_view_ends_at'              => $settings->get( 'week_view_ends_at' ),
+			'google_maps_api_key'            => $settings->get( 'google_maps_api_key' ),
 			'blog_timezone'                  => $blog_timezone,
 			'affix_filter_menu'              => $settings->get( 'affix_filter_menu' ),
 			'affix_vertical_offset_md'       => $settings->get( 'affix_vertical_offset_md' ),

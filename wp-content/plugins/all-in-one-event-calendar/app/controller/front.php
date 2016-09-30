@@ -281,6 +281,8 @@ class Ai1ec_Front_Controller {
 				'ai1ec_perform_scheme_update',
 				array( 'database.datetime-migration', 'filter_scheme_update' )
 			);
+			// Procedures to take when upgrading plugin version
+			$this->_plugin_upgrade_procedures();
 			// Load the css if needed
 			$this->_load_css_if_needed();
 			// Initialize the crons
@@ -603,6 +605,21 @@ class Ai1ec_Front_Controller {
 		}
 
 		if ( is_admin() ) {
+			// Import suggested event
+			$dispatcher->register_action(
+				'wp_ajax_ai1ec_import_suggested_event',
+				array( 'calendar-feed.ics', 'add_discover_events_feed_subscription' )
+			);
+			// Remove suggested event
+			$dispatcher->register_action(
+				'wp_ajax_ai1ec_remove_suggested_event',
+				array( 'calendar-feed.ics', 'delete_individual_event_subscription' )
+			);
+			// Search for events
+			$dispatcher->register_action(
+				'wp_ajax_ai1ec_search_events',
+				array( 'calendar-feed.suggested', 'search_events' )
+			);
 			// get the repeat box
 			$dispatcher->register_action(
 				'wp_ajax_ai1ec_get_repeat_box',
@@ -1098,6 +1115,32 @@ class Ai1ec_Front_Controller {
 			}
 			// Drop the old table
 			$db->query( 'DROP TABLE IF EXISTS ' . $table_name );
+		}
+	}
+
+	/**
+	 * Procedures to take when upgrading plugin version
+	 *
+	 * @return void
+	 */
+	protected function _plugin_upgrade_procedures() {
+		$option     = $this->_registry->get( 'model.option' );
+		$version    = AI1EC_VERSION;
+
+		if ( $option->get( 'ai1ec_version' ) != $version ) {
+			try {
+				// Force regeneration of JS cache
+				$this->_registry->get( 'controller.javascript' )->revalidate_cache();
+				$this->_registry->get( 'controller.javascript-widget' )->revalidate_cache();
+
+				// Run upgrade commands
+				$settings = $this->_registry->get( 'model.settings' );
+				$settings->perform_upgrade_actions();
+			} catch ( Exception $e ) {
+			}
+
+			// Update plugin version
+			$option->set( 'ai1ec_version', $version );
 		}
 	}
 
