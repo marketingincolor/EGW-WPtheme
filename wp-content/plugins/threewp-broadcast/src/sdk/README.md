@@ -41,7 +41,7 @@ After that the classes are loaded automatically. The SDK's function can now be a
 	if ( \plainview\sdk_broadcast\base::is_email( 'test@test.com' ) )
 		echo 'Valid e-mail address!';
 
-Or by dynamically instancing the base:
+Or by dynamically instantiating the base:
 
 	class sdk_test extends \plainview\sdk_broadcast\base
 	{

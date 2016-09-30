@@ -20,7 +20,7 @@ $format = isset($apsc_settings['counter_format'])?$apsc_settings['counter_format
                     case 'facebook':
                         $facebook_page_id = $apsc_settings['social_profile']['facebook']['page_id'];
                         ?>
-                        <a  class="apsc-facebook-icon clearfix" href="<?php echo "https://facebook.com/" . $facebook_page_id; ?>" target="_blank">
+                        <a  class="apsc-facebook-icon clearfix" href="<?php echo "https://facebook.com/" . $facebook_page_id; ?>" target="_blank" <?php do_action('apsc_facebook_link');?>>
                             <div class="apsc-inner-block">
                                 <span class="social-icon"><i class="fa fa-facebook apsc-facebook"></i><span class="media-name">Facebook</span></span>
                                 <span class="apsc-count"><?php echo $count; ?></span><span class="apsc-media-type">Fans</span>
@@ -30,7 +30,7 @@ $format = isset($apsc_settings['counter_format'])?$apsc_settings['counter_format
                             break;
                         case 'twitter':
                               ?>
-                        <a  class="apsc-twitter-icon clearfix"  href="<?php echo 'https://twitter.com/'.$apsc_settings['social_profile']['twitter']['username'];?>" target="_blank">
+                        <a  class="apsc-twitter-icon clearfix"  href="<?php echo 'https://twitter.com/'.$apsc_settings['social_profile']['twitter']['username'];?>" target="_blank"  <?php do_action('apsc_twitter_link');?>>
                             <div class="apsc-inner-block">
                                 <span class="social-icon"><i class="fa fa-twitter apsc-twitter"></i><span class="media-name">Twitter</span></span>
                                 <span class="apsc-count"><?php echo $count; ?></span><span class="apsc-media-type">Followers</span>
@@ -41,7 +41,7 @@ $format = isset($apsc_settings['counter_format'])?$apsc_settings['counter_format
                     case 'googlePlus':
                         $social_profile_url = 'https://plus.google.com/' . $apsc_settings['social_profile']['googlePlus']['page_id'];
                         ?>
-                        <a  class="apsc-google-plus-icon clearfix" href="<?php echo $social_profile_url; ?>" target="_blank">
+                        <a  class="apsc-google-plus-icon clearfix" href="<?php echo $social_profile_url; ?>" target="_blank"  <?php do_action('apsc_googlePlus_link');?>>
                             <div class="apsc-inner-block">
                                 <span class="social-icon"><i class="apsc-googlePlus fa fa-google-plus"></i><span class="media-name">google+</span></span>
                                 <span class="apsc-count"><?php echo $count; ?></span><span class="apsc-media-type">Followers</span>
@@ -54,7 +54,7 @@ $format = isset($apsc_settings['counter_format'])?$apsc_settings['counter_format
                             $user_id = $apsc_settings['social_profile']['instagram']['user_id'];
                             $social_profile_url = 'https://instagram.com/' . $username;
                             ?>
-                            <a  class="apsc-instagram-icon clearfix" href="<?php echo $social_profile_url; ?>" target="_blank">
+                            <a  class="apsc-instagram-icon clearfix" href="<?php echo $social_profile_url; ?>" target="_blank"   <?php do_action('apsc_instagram_link');?>>
                                 <div class="apsc-inner-block">
                                     <span class="social-icon"><i class="apsc-instagram fa fa-instagram"></i><span class="media-name">Instagram</span></span>
                                     <span class="apsc-count"><?php echo $count; ?></span><span class="apsc-media-type">Followers</span>
@@ -65,7 +65,7 @@ $format = isset($apsc_settings['counter_format'])?$apsc_settings['counter_format
                         case 'youtube':
                             $social_profile_url = esc_url($apsc_settings['social_profile']['youtube']['channel_url']);
                             ?>
-                        <a class="apsc-youtube-icon clearfix" href="<?php echo $social_profile_url; ?>" target="_blank">
+                        <a class="apsc-youtube-icon clearfix" href="<?php echo $social_profile_url; ?>" target="_blank"  <?php do_action('apsc_youtube_link');?>>
                             <div class="apsc-inner-block">
                                 <span class="social-icon"><i class="apsc-youtube fa fa-youtube"></i><span class="media-name">Youtube</span></span>
                                 <span class="apsc-count"><?php echo $count; ?></span><span class="apsc-media-type">Subscriber</span>
@@ -77,7 +77,7 @@ $format = isset($apsc_settings['counter_format'])?$apsc_settings['counter_format
                             $username = $apsc_settings['social_profile']['soundcloud']['username'];
                             $social_profile_url = 'https://soundcloud.com/' . $username;
                             ?>
-                        <a class="apsc-soundcloud-icon clearfix" href="<?php echo $social_profile_url; ?>" target="_blank">
+                        <a class="apsc-soundcloud-icon clearfix" href="<?php echo $social_profile_url; ?>" target="_blank" <?php do_action('apsc_soundcloud_link');?>>
                             <div class="apsc-inner-block">
                                 <span class="social-icon"><i class="apsc-soundcloud fa fa-soundcloud"></i><span class="media-name">Soundcloud</span></span>
                                 <span class="apsc-count"><?php echo $count; ?></span><span class="apsc-media-type">Followers</span>
@@ -88,7 +88,7 @@ $format = isset($apsc_settings['counter_format'])?$apsc_settings['counter_format
                         case 'dribbble':
                             $social_profile_url = 'https://dribbble.com/'.$apsc_settings['social_profile']['dribbble']['username'];
                             ?>
-                        <a class="apsc-dribble-icon clearfix" href="<?php echo $social_profile_url; ?>" target="_blank">
+                        <a class="apsc-dribble-icon clearfix" href="<?php echo $social_profile_url; ?>" target="_blank" <?php do_action('apsc_dribbble_link');?>>
                             <div class="apsc-inner-block">
                                 <span class="social-icon"><i class="apsc-dribbble fa fa-dribbble"></i><span class="media-name">dribble</span></span>
                                 <span class="apsc-count"><?php echo $count; ?></span><span class="apsc-media-type">Followers</span>
@@ -98,7 +98,7 @@ $format = isset($apsc_settings['counter_format'])?$apsc_settings['counter_format
                             break;
                         case 'posts':
                             ?>
-                        <a class="apsc-edit-icon clearfix" href="javascript:void(0);">
+                        <a class="apsc-edit-icon clearfix" href="javascript:void(0);" <?php do_action('apsc_posts_link');?>>
                             <div class="apsc-inner-block">
                                 <span class="social-icon"><i class="apsc-posts fa fa-edit"></i><span class="media-name">Post</span></span>
                                 <span class="apsc-count"><?php echo $count; ?></span><span class="apsc-media-type">Post</span>
@@ -108,7 +108,7 @@ $format = isset($apsc_settings['counter_format'])?$apsc_settings['counter_format
                             break;
                         case 'comments':
                             ?>
-                        <a class="apsc-comment-icon clearfix" href="javascript:void(0);">
+                        <a class="apsc-comment-icon clearfix" href="javascript:void(0);" <?php do_action('apsc_comments_link');?>>
                             <div class="apsc-inner-block">
                                 <span class="social-icon"><i class="apsc-comments fa fa-comments"></i><span class="media-name">Comment</span></span>
                                 <span class="apsc-count"><?php echo $count; ?></span><span class="apsc-media-type">Comments</span>

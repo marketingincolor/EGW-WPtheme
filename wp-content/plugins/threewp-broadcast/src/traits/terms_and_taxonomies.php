@@ -18,39 +18,14 @@ trait terms_and_taxonomies
 		Requires only that $bcd->post->post_type be filled in.
 		If $bcd->post->ID exists, only the terms used in the post will be collected, else all the terms will be inserted into $bcd->parent_post_taxonomies[ taxonomy ].
 
+		@see		threewp_broadcast_collect_post_type_taxonomies
 		@since		2014-04-08 13:40:44
 	**/
 	public function collect_post_type_taxonomies( $bcd )
 	{
-		$bcd->parent_blog_taxonomies = get_object_taxonomies( [ 'object_type' => $bcd->post->post_type ], 'array' );
-		$bcd->parent_post_taxonomies = [];
-		foreach( $bcd->parent_blog_taxonomies as $parent_blog_taxonomy => $taxonomy )
-		{
-			if ( isset( $bcd->post->ID ) )
-				$taxonomy_terms = get_the_terms( $bcd->post->ID, $parent_blog_taxonomy );
-			else
-				$taxonomy_terms = get_terms( [ $parent_blog_taxonomy ], [
-					'hide_empty' => false,
-				] );
-
-			// No terms = empty = false.
-			if ( ! $taxonomy_terms )
-				$taxonomy_terms = [];
-
-			$bcd->parent_post_taxonomies[ $parent_blog_taxonomy ] = $this->array_rekey( $taxonomy_terms, 'term_id' );
-
-			// Parent blog taxonomy terms are used for creating missing target term ancestors
-			$o = (object)[];
-			$o->taxonomy = $taxonomy;
-			$o->terms = $bcd->parent_post_taxonomies[ $parent_blog_taxonomy ];
-			$this->get_parent_terms( $o );
-
-			$bcd->parent_blog_taxonomies[ $parent_blog_taxonomy ] =
-			[
-				'taxonomy' => $taxonomy,
-				'terms'    => $o->terms,
-			];
-		}
+		$action = new actions\collect_post_type_taxonomies();
+		$action->broadcasting_data = $bcd;
+		$action->execute();
 	}
 
 	public function get_current_blog_taxonomy_terms( $taxonomy )
@@ -271,6 +246,7 @@ trait terms_and_taxonomies
 			$target_term = (object)$target_terms[ $target_term_id ];
 
 			$action = new actions\wp_update_term;
+			$action->broadcasting_data = $bcd;
 			$action->taxonomy = $taxonomy;
 
 			// The old term is the target term, since it contains the old values.
@@ -330,6 +306,51 @@ trait terms_and_taxonomies
 	}
 
 	/**
+		@brief		Collects the post type's taxonomies into the broadcasting data object.
+		@details
+
+		The taxonomies are places in $bcd->parent_blog_taxonomies.
+		Requires only that $bcd->post->post_type be filled in.
+		If $bcd->post->ID exists, only the terms used in the post will be collected, else all the terms will be inserted into $bcd->parent_post_taxonomies[ taxonomy ].
+
+		@see		collect_post_type_taxonomies
+		@since		2016-07-19 20:45:02
+	**/
+	public function threewp_broadcast_collect_post_type_taxonomies( $action )
+	{
+		$bcd = $action->broadcasting_data;
+		$bcd->parent_blog_taxonomies = get_object_taxonomies( [ 'object_type' => $bcd->post->post_type ], 'array' );
+		$bcd->parent_post_taxonomies = [];
+		foreach( $bcd->parent_blog_taxonomies as $parent_blog_taxonomy => $taxonomy )
+		{
+			if ( isset( $bcd->post->ID ) )
+				$taxonomy_terms = get_the_terms( $bcd->post->ID, $parent_blog_taxonomy );
+			else
+				$taxonomy_terms = get_terms( [ $parent_blog_taxonomy ], [
+					'hide_empty' => false,
+				] );
+
+			// No terms = empty = false.
+			if ( ! $taxonomy_terms )
+				$taxonomy_terms = [];
+
+			$bcd->parent_post_taxonomies[ $parent_blog_taxonomy ] = $this->array_rekey( $taxonomy_terms, 'term_id' );
+
+			// Parent blog taxonomy terms are used for creating missing target term ancestors
+			$o = (object)[];
+			$o->taxonomy = $taxonomy;
+			$o->terms = $bcd->parent_post_taxonomies[ $parent_blog_taxonomy ];
+			$this->get_parent_terms( $o );
+
+			$bcd->parent_blog_taxonomies[ $parent_blog_taxonomy ] =
+			[
+				'taxonomy' => $taxonomy,
+				'terms'    => $o->terms,
+			];
+		}
+	}
+
+	/**
 		@brief		Allows Broadcast plugins to update the term with their own info.
 		@since		2014-04-08 15:12:05
 	**/
@@ -385,7 +406,7 @@ trait terms_and_taxonomies
 	**/
 	public function threewp_broadcast_wp_update_term( $action )
 	{
-		$this->debug( 'wp_update_term: %s', $action );
+		$this->debug( 'wp_update_term: %s', $action->new_term );
 		$update = true;
 
 		// If we are given an old term, then we have a chance of checking to see if there should be an update called at all.

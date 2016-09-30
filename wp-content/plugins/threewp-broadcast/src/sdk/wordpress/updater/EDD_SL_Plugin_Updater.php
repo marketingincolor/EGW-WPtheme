@@ -14,14 +14,16 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Allows plugins to use their own update API.
  *
  * @author Pippin Williamson
- * @version 1.6.3
+ * @version 1.6.4
  */
 class EDD_SL_Plugin_Updater {
-	private $api_url   = '';
-	private $api_data  = array();
-	private $name      = '';
-	private $slug      = '';
-	private $version   = '';
+
+	private $api_url     = '';
+	private $api_data    = array();
+	private $name        = '';
+	private $slug        = '';
+	private $version     = '';
+	private $wp_override = false;
 
 	/**
 	 * Class constructor.
@@ -37,17 +39,17 @@ class EDD_SL_Plugin_Updater {
 
 		global $edd_plugin_data;
 
-		$this->api_url  = trailingslashit( $_api_url );
-		$this->api_data = $_api_data;
-		$this->name     = plugin_basename( $_plugin_file );
-		$this->slug     = basename( $_plugin_file, '.php' );
-		$this->version  = $_api_data['version'];
+		$this->api_url     = trailingslashit( $_api_url );
+		$this->api_data    = $_api_data;
+		$this->name        = plugin_basename( $_plugin_file );
+		$this->slug        = basename( $_plugin_file, '.php' );
+		$this->version     = $_api_data['version'];
+		$this->wp_override = isset( $_api_data['wp_override'] ) ? (bool) $_api_data['wp_override'] : false;
 
 		$edd_plugin_data[ $this->slug ] = $this->api_data;
 
 		// Set up hooks.
 		$this->init();
-		add_action( 'admin_init', array( $this, 'show_changelog' ) );
 
 	}
 
@@ -62,7 +64,6 @@ class EDD_SL_Plugin_Updater {
 
 		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'check_update' ) );
 		add_filter( 'plugins_api', array( $this, 'plugins_api_filter' ), 10, 3 );
-
 		remove_action( 'after_plugin_row_' . $this->name, 'wp_plugin_update_row', 10, 2 );
 		add_action( 'after_plugin_row_' . $this->name, array( $this, 'show_update_notification' ), 10, 2 );
 		add_action( 'admin_init', array( $this, 'show_changelog' ) );
@@ -86,30 +87,30 @@ class EDD_SL_Plugin_Updater {
 
 		global $pagenow;
 
-		if( ! is_object( $_transient_data ) ) {
+		if ( ! is_object( $_transient_data ) ) {
 			$_transient_data = new stdClass;
 		}
 
-		if( 'plugins.php' == $pagenow && is_multisite() ) {
+		if ( 'plugins.php' == $pagenow && is_multisite() ) {
 			return $_transient_data;
 		}
 
-		if ( empty( $_transient_data->response ) || empty( $_transient_data->response[ $this->name ] ) ) {
+		if ( ! empty( $_transient_data->response ) && ! empty( $_transient_data->response[ $this->name ] ) && false === $this->wp_override ) {
+			return $_transient_data;
+		}
 
-			$version_info = $this->api_request( 'plugin_latest_version', array( 'slug' => $this->slug ) );
+		$version_info = $this->api_request( 'plugin_latest_version', array( 'slug' => $this->slug ) );
 
-			if ( false !== $version_info && is_object( $version_info ) && isset( $version_info->new_version ) ) {
+		if ( false !== $version_info && is_object( $version_info ) && isset( $version_info->new_version ) ) {
 
-				if( version_compare( $this->version, $version_info->new_version, '<' ) ) {
+			if ( version_compare( $this->version, $version_info->new_version, '<' ) ) {
 
-					$_transient_data->response[ $this->name ] = $version_info;
-
-				}
-
-				$_transient_data->last_checked = time();
-				$_transient_data->checked[ $this->name ] = $this->version;
+				$_transient_data->response[ $this->name ] = $version_info;
 
 			}
+
+			$_transient_data->last_checked           = time();
+			$_transient_data->checked[ $this->name ] = $this->version;
 
 		}
 
@@ -154,7 +155,6 @@ class EDD_SL_Plugin_Updater {
 
 				set_transient( $cache_key, $version_info, 3600 );
 			}
-
 
 			if( ! is_object( $version_info ) ) {
 				return;
@@ -295,7 +295,7 @@ class EDD_SL_Plugin_Updater {
 			return;
 		}
 
-		if( $this->api_url == home_url() ) {
+		if( $this->api_url == trailingslashit (home_url() ) ) {
 			return false; // Don't allow a plugin to ping itself
 		}
 

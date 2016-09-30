@@ -46,10 +46,10 @@ if( !class_exists( 'Settings_API_Extended_Widget_Options' ) ){
 		 * appends the setting to the tabs array of the object.
 		 */
 		function register_class_settings() {
-			$this->plugin_settings_tabs[$this->class_settings_key] = __( 'Widget Classes', 'extended-widget-options' );
+			$this->plugin_settings_tabs[$this->class_settings_key] = __( 'Widget Classes', 'widget-options' );
 			
 			register_setting( $this->class_settings_key, $this->class_settings_key );
-			add_settings_section( 'general_section', __( 'Widget Classes', 'extended-widget-options' ), array( &$this, 'classes_options_section' ), $this->class_settings_key );
+			add_settings_section( 'general_section', __( 'Widget Classes', 'widget-options' ), array( &$this, 'classes_options_section' ), $this->class_settings_key );
 		}
 
 		function classes_options_section(){ 
@@ -64,69 +64,89 @@ if( !class_exists( 'Settings_API_Extended_Widget_Options' ) ){
 				$classlists = $this->classes_settings['classlists'];
 			}
 			?>
-			<table class="form-table opts-classes-setting-table">
-                <tbody>
-                    <tr valign="top">
-                        <td scope="row">
-                            <strong><?php _e( 'Show ID Fields', 'extended-widget-options' );?></strong> 
-                            <label for="opts-classes-id-yes">
-                            	<input type="radio" value="yes" id="opts-classes-id-yes" name="<?php echo $this->class_settings_key; ?>[id_field]" <?php if( 'yes' == $this->classes_settings['id_field'] ){ echo 'checked="checked"'; }?> /><?php _e( 'Yes', 'extended-widget-options' );?>
-                            </label>&nbsp;&nbsp;
-                            <label for="opts-classes-id-no">
-                            	<input type="radio" value="no" id="opts-classes-id-no" name="<?php echo $this->class_settings_key; ?>[id_field]" <?php if( 'no' == $this->classes_settings['id_field'] ){ echo 'checked="checked"'; }?> /><?php _e( 'No', 'extended-widget-options' );?>
-                            </label>&nbsp;&nbsp;
-                        </td>
-                    </tr>
+			<div id="poststuff" class="fortyfourwp-metabox-holder metabox-holder has-right-sidebar">
+				<div id="side-info-column" class="inner-sidebar">
+					<div class="fortyfourwp-banners">
+						<p><a href="https://phpbits.net/plugin/extended-widget-options/" target="_blank"><img src="<?php echo plugins_url('/assets/images/banner-widget-options.jpg', dirname(__FILE__) )?>" /></a></p>
+						<p><a href="https://wordpress.org/plugins/forty-four/" target="_blank"><img src="<?php echo plugins_url('/assets/images/banner-forty-four.jpg', dirname(__FILE__) )?>" /></a></p>
+					</div>
+				</div>
+				<div id="post-body" class="has-sidebar">
+					<div id="post-body-content" class="has-sidebar-content">
+						<table class="form-table opts-classes-setting-table">
+			                <tbody>
+			                    <tr valign="top">
+			                        <td scope="row">
+			                            <strong><?php _e( 'Show ID Fields', 'widget-options' );?></strong> 
+			                            <label for="opts-classes-id-yes">
+			                            	<input type="radio" value="yes" id="opts-classes-id-yes" name="<?php echo $this->class_settings_key; ?>[id_field]" <?php if( 'yes' == $this->classes_settings['id_field'] ){ echo 'checked="checked"'; }?> /><?php _e( 'Yes', 'widget-options' );?>
+			                            </label>&nbsp;&nbsp;
+			                            <label for="opts-classes-id-no">
+			                            	<input type="radio" value="no" id="opts-classes-id-no" name="<?php echo $this->class_settings_key; ?>[id_field]" <?php if( 'no' == $this->classes_settings['id_field'] ){ echo 'checked="checked"'; }?> /><?php _e( 'No', 'widget-options' );?>
+			                            </label>&nbsp;&nbsp;
+			                        </td>
+			                    </tr>
 
-                    <tr valign="top">
-                        <td scope="row">
-                            <strong><?php _e( 'Classes Field Type', 'extended-widget-options' );?></strong> 
+			                    <tr valign="top">
+			                        <td scope="row">
+			                            <strong><?php _e( 'Classes Field Type', 'widget-options' );?></strong> 
 
-                            <label for="opts-classes-class-text">
-                            	<input type="radio" value="text" id="opts-classes-class-text" name="<?php echo $this->class_settings_key; ?>[class_field]" <?php if( 'text' == $this->classes_settings['class_field'] ){ echo 'checked="checked"'; }?> /><?php _e( 'Text Field', 'extended-widget-options' );?>
-                            </label>&nbsp;&nbsp;
+			                            <label for="opts-classes-class-text">
+			                            	<input type="radio" value="text" id="opts-classes-class-text" name="<?php echo $this->class_settings_key; ?>[class_field]" <?php if( 'text' == $this->classes_settings['class_field'] ){ echo 'checked="checked"'; }?> /><?php _e( 'Text Field', 'widget-options' );?>
+			                            </label>&nbsp;&nbsp;
 
-                            <label for="opts-classes-class-predefined">
-                            	<input type="radio" value="predefined" id="opts-classes-class-predefined" name="<?php echo $this->class_settings_key; ?>[class_field]" <?php if( 'predefined' == $this->classes_settings['class_field'] ){ echo 'checked="checked"'; }?> /><?php _e( 'Predefined Class Checkboxes', 'extended-widget-options' );?>
-                            </label>&nbsp;&nbsp;
+			                            <label for="opts-classes-class-predefined">
+			                            	<input type="radio" value="predefined" id="opts-classes-class-predefined" name="<?php echo $this->class_settings_key; ?>[class_field]" <?php if( 'predefined' == $this->classes_settings['class_field'] ){ echo 'checked="checked"'; }?> /><?php _e( 'Predefined Class Checkboxes', 'widget-options' );?>
+			                            </label>&nbsp;&nbsp;
 
-                            <label for="opts-classes-class-both">
-                            	<input type="radio" value="both" id="opts-classes-class-both" name="<?php echo $this->class_settings_key; ?>[class_field]" <?php if( 'both' == $this->classes_settings['class_field'] ){ echo 'checked="checked"'; }?> /><?php _e( 'Both', 'extended-widget-options' );?>
-                            </label>&nbsp;&nbsp;
+			                            <label for="opts-classes-class-both">
+			                            	<input type="radio" value="both" id="opts-classes-class-both" name="<?php echo $this->class_settings_key; ?>[class_field]" <?php if( 'both' == $this->classes_settings['class_field'] ){ echo 'checked="checked"'; }?> /><?php _e( 'Both', 'widget-options' );?>
+			                            </label>&nbsp;&nbsp;
 
-                            <label for="opts-classes-class-hide">
-                            	<input type="radio" value="hide" id="opts-classes-class-hide" name="<?php echo $this->class_settings_key; ?>[class_field]" <?php if( 'hide' == $this->classes_settings['class_field'] ){ echo 'checked="checked"'; }?> /><?php _e( 'Hide', 'extended-widget-options' );?>
-                            </label>&nbsp;&nbsp;
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <h3><?php _e( 'Predefined Classes', 'extended-widget-options' );?></h3>
-            <p><?php _e( 'Set a class lists that you want to be available as pre-choices on the Class/ID Widget Options tab.', 'extended-widget-options' );?></p>
-            <div id="opts-predefined-classes">
-            	<ul>
-            		<li class="opts-hidden-placeholder"></li>
-            		<?php
-            			if( !empty( $classlists ) && is_array( $classlists ) ){
-            				$classlists = array_unique( $classlists );
-            				foreach ($classlists as $key => $value) {
-            					echo '<li><input type="hidden" name="extwopts_class_settings[classlists][]" value="'. $value .'" /><span class"opts-li-value">'. $value .'</span> <a href="#" class="opts-remove-class-btn"><span class="dashicons dashicons-dismiss"></span></a></li>';
-            				}
-            			}
-            		?>
-            	</ul>
-            </div>
-            <table class="form-table">
-            	<tbody>
-            		<tr valign="top">
-            			<td scope="row" valign="middle">
-            				<input type="text" class="regular-text code opts-add-class-txtfld" />
-            				<a href="#" class="opts-add-class-btn"><span class="dashicons dashicons-plus-alt"></span></a><br />
-            				<small><em><?php _e( 'Note: Click the Plus icon to add the class.', 'extended-widget-options' );?></em></small>
-            			</td>
-            		</tr>
-            	</tbody>
-            </table>
+			                            <label for="opts-classes-class-hide">
+			                            	<input type="radio" value="hide" id="opts-classes-class-hide" name="<?php echo $this->class_settings_key; ?>[class_field]" <?php if( 'hide' == $this->classes_settings['class_field'] ){ echo 'checked="checked"'; }?> /><?php _e( 'Hide', 'widget-options' );?>
+			                            </label>&nbsp;&nbsp;
+			                        </td>
+			                    </tr>
+			                </tbody>
+			            </table>
+			            <h3><?php _e( 'Predefined Classes', 'widget-options' );?></h3>
+			            <p><?php _e( 'Set a class lists that you want to be available as pre-choices on the Class/ID Widget Options tab.', 'widget-options' );?></p>
+			            <div id="opts-predefined-classes">
+			            	<ul>
+			            		<li class="opts-hidden-placeholder"></li>
+			            		<?php
+			            			if( !empty( $classlists ) && is_array( $classlists ) ){
+			            				$classlists = array_unique( $classlists );
+			            				foreach ($classlists as $key => $value) {
+			            					echo '<li><input type="hidden" name="extwopts_class_settings[classlists][]" value="'. $value .'" /><span class"opts-li-value">'. $value .'</span> <a href="#" class="opts-remove-class-btn"><span class="dashicons dashicons-dismiss"></span></a></li>';
+			            				}
+			            			}
+			            		?>
+			            	</ul>
+			            </div>
+			            <table class="form-table">
+			            	<tbody>
+			            		<tr valign="top">
+			            			<td scope="row" valign="middle">
+			            				<input type="text" class="regular-text code opts-add-class-txtfld" />
+			            				<a href="#" class="opts-add-class-btn"><span class="dashicons dashicons-plus-alt"></span></a><br />
+			            				<small><em><?php _e( 'Note: Click the Plus icon to add the class.', 'widget-options' );?></em></small>
+			            			</td>
+			            		</tr>
+			            	</tbody>
+			            </table>
+						
+						<?php 
+						if(function_exists('submit_button')) { submit_button(); } else { ?>
+						<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes"></p>
+						<?php }?>
+
+					</div>
+				</div>
+				<br class="clear"/>
+			</div>
+			
 			
 		<?php }
 
@@ -135,10 +155,10 @@ if( !class_exists( 'Settings_API_Extended_Widget_Options' ) ){
 		 * appends the setting to the tabs array of the object.
 		 */
 		function register_upgrade_tab() {
-			$this->plugin_settings_tabs[$this->upgrade_settings_key] = __( 'Extended Features', 'extended-widget-options' );
+			$this->plugin_settings_tabs[$this->upgrade_settings_key] = __( 'Extended Features', 'widget-options' );
 			
 			register_setting( $this->upgrade_settings_key, $this->upgrade_settings_key );
-			add_settings_section( 'general_section', __( 'Upgrade to Extended Widget Options', 'extended-widget-options' ), array( &$this, 'upgrade_options_section' ), $this->upgrade_settings_key );
+			add_settings_section( 'general_section', __( 'Upgrade to Extended Widget Options', 'widget-options' ), array( &$this, 'upgrade_options_section' ), $this->upgrade_settings_key );
 		}
 
 		function upgrade_options_section(){ 
@@ -161,6 +181,8 @@ if( !class_exists( 'Settings_API_Extended_Widget_Options' ) ){
 	                <li><span class="dashicons dashicons-yes"></span> <?php _e( 'Display Widget Logic', 'widget-options' );?></li>
 	                <li><span class="dashicons dashicons-yes"></span> <?php _e( 'and other improvements...', 'widget-options' );?></li>
 	            </ul>
+
+	            <p><span class="dashicons dashicons-plus"></span> <strong><?php _e( 'PLUGIN LIFETIME UPDATES', 'widget-options' );?></strong></p>
 	            
 	            <p><strong><a href="https://phpbits.net/plugin/extended-widget-options/" class="widget-opts-learnmore" target="_blank"><?php _e( 'Learn More', 'widget-options' );?> <span class="dashicons dashicons-arrow-right-alt"></span></a></strong></p>
 			</div>
@@ -173,7 +195,7 @@ if( !class_exists( 'Settings_API_Extended_Widget_Options' ) ){
 		 * using the wplftr_plugin_options_page method.
 		 */
 		function add_admin_menus() {
-			add_options_page( __( 'Widget Options', 'extended-widget-options' ), __( 'Widget Options', 'extended-widget-options' ), 'manage_options', $this->plugin_options_key, array( &$this, 'plugin_options_page' ) );
+			add_options_page( __( 'Widget Options', 'widget-options' ), __( 'Widget Options', 'widget-options' ), 'manage_options', $this->plugin_options_key, array( &$this, 'plugin_options_page' ) );
 		}
 		
 		/*
@@ -191,10 +213,6 @@ if( !class_exists( 'Settings_API_Extended_Widget_Options' ) ){
 					<?php wp_nonce_field( 'update-options' ); ?>
 					<?php settings_fields( $tab ); ?>
 					<?php do_settings_sections( $tab ); ?>
-					<?php 
-					if(function_exists('submit_button')) { submit_button(); } else { ?>
-					<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes"></p>
-					<?php }?>
 				</form>
 			</div>
 			<?php

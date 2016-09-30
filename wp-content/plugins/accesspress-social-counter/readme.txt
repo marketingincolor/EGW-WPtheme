@@ -2,15 +2,17 @@
 Contributors: Access Keys
 Tags: social count, social counter, social counters, social media counters, social media, social network, social profiles counter, social profile count, social profile, social icons, social icon counter
 Donate link: http://accesspressthemes.com/donation/
-Requires at least: 3.8
-Tested up to: 4.5
-Stable tag: 1.5.8
+Requires at least: 4.0
+Tested up to: 4.6
+Stable tag: 1.6.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 A plugin to display your social accounts fans, subscribers and followers number on your website with handful of backend settings.
 
 == Description ==
+[Homepage](https://accesspressthemes.com/) | [Documentation](https://accesspressthemes.com/documentation/accesspress-social-counter/) | [Support](https://accesspressthemes.com/support) | [Demo](http://demo.accesspressthemes.com/wordpress-plugins/accesspress-social-counter/) | [Premium Version](https://accesspressthemes.com/wordpress-plugins/accesspress-social-pro/)
+
 <strong>AccessPress Social Counter</strong> is a <strong>Free WordPress plugin</strong> to display your social accounts fans, subscribers and followers number on your website!
 A perfect plugin to show your social media stats and encourage more to join your network.
 
@@ -46,6 +48,8 @@ Note: If Instagram followers count is returning 0, it is due to change in the in
         - Dedicated email, forum support
 * <strong>Free updates</strong>
         - Get free updates for lifetime.
+        
+[youtube https://www.youtube.com/watch?v=96E67Z6AKM8]
 
 = Premium Features: =
 	★ Major 18 social media included(Facebook, Twitter, Google+, Instagram,
@@ -72,9 +76,11 @@ Note: If Instagram followers count is returning 0, it is due to change in the in
 = Available Languages = 
 * English
 * Serbo-Croatian
+* Belarussian
 
 = Translators = 
 * Serbo-Croatian - Borisa Djuraskovic ( http://www.webhostinghub.com )
+* Belarussian - UStarCash ( https://www.ustarcash.com )
 
 = Some Useful Links =
 * <strong>Support Email</strong>: support@accesspressthemes.com
@@ -91,9 +97,11 @@ For complete information and documentation regarding plugin,please visit below l
 
 [Plugin information](https://accesspressthemes.com/wordpress-plugins/accesspress-social-counter/)
 
-[Docs](https://accesspressthemes.com/documentation/documentation-plugin-instruction-accesspress-social-counter/ )
+[Docs](https://accesspressthemes.com/documentation/accesspress-social-counter/ )
 
 [Demo](http://demo.accesspressthemes.com/wordpress-plugins/accesspress-social-counter/)
+
+[Browse More WordPress Plugin Resources](http://wpall.club)
 
 == Installation ==
 1. Unzip accesspress-social-counter.zip
@@ -125,6 +133,35 @@ Once you install the plugin , you can check some general documentation about how
 5. Backend Cache Settings Section
 
 == Changelog ==
+= 1.6.4 = 
+* Updated Documentation link in how to use section 
+
+= 1.6.3 = 
+* Changed backend settings tabs layout
+* Added More WordPress Resources link
+
+= 1.6.2 =
+* Fixed the facebook counter issue for the wordpress version 4.6.
+
+= 1.6.1 = 
+* Updated backend notes to dismissible notices
+* Added below hooks on all the social network anchor links
+    - apsc_facebook_link
+    - apsc_twitter_link
+    - apsc_googlePlus_link
+    - apsc_instagram_link
+    - apsc_youtube_link
+    - apsc_soundcloud_link
+    - apsc_dribbble_link
+    - apsc_posts_link
+    - apsc_comments_link
+    
+= 1.6.0 = 
+* Added tutuorial video in how to use section.
+
+= 1.5.9 = 
+* Added Belarussian Language 
+
 = 1.5.8 =
 * Fixed the Facebook followers count issue for Facebook APP API version 2.5 and above.
 

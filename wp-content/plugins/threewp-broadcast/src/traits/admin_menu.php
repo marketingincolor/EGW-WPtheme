@@ -55,7 +55,7 @@ trait admin_menu
 		$r = '';
 		$r .= $this->html_css();
 		$contents = file_get_contents( __DIR__ . '/../../html/premium_pack_info.html' );
-		$r .= $this->wrap( $contents, $this->_( 'Broadcast plugin packs info' ) );
+		$r .= $this->wrap( $contents, $this->_( 'Broadcast add-on packs info' ) );
 		echo $r;
 	}
 
@@ -439,8 +439,8 @@ trait admin_menu
 		if ( $this->display_premium_pack_info && is_super_admin() )
 		$this->add_submenu_page(
 				'threewp_broadcast',
-				$this->_( 'Plugin packs info' ),
-				$this->_( 'Plugin packs' ),
+				$this->_( 'Add-on packs info' ),
+				$this->_( 'Add-on packs' ),
 				'edit_posts',
 				'threewp_broadcast_premium_pack_info',
 				[ &$this, 'admin_menu_premium_pack_info' ]

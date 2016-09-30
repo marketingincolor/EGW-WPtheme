@@ -11,6 +11,8 @@ namespace plainview\sdk_broadcast;
 
 	@par			Changelog
 
+	- 20160718		Wordpress: Newer updater.
+	- 20160630		Wordpress: db trait should use static:: not self::.
 	- 20160621		Form: File input has accepts() function for restricting file types.
 	- 20160414		Wordpress: Allow updated SSL workaround to be forced on.
 	- 20160330		Wordpress: Updater has built in Redhat SSL Workaround.
@@ -196,10 +198,10 @@ class base
 
 	/**
 		@brief		The version of this SDK file.
-		@since		20130416
+		@since		20130630
 		@var		$sdk_version
 	**/
-	protected $sdk_version = 20160621;
+	protected $sdk_version = 20160718;
 
 	/**
 		@brief		Constructor.

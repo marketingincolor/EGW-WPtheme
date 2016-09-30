@@ -270,12 +270,13 @@ trait post_actions
 
 					$blog->switch_to();
 
-					$args = array(
+					$args = [
 						'cache_results' => false,
 						'name' => $post->post_name,
-						'numberposts' => 2,
-						'post_type'=> $post->post_type,
-					);
+						'post_type' => $post->post_type,
+						'post_status' => $post->post_status,
+					];
+					$this->debug( 'Searching for posts on blog %s: %s', $args, $blog->id );
 					$posts = get_posts( $args );
 
 					// An exact match was found.
@@ -287,6 +288,7 @@ trait post_actions
 						if ( $child_broadcast_data->get_linked_parent() === false )
 							if ( ! $child_broadcast_data->has_linked_children() )
 							{
+								$this->debug( 'Adding linked child %s on blog %s', $unlinked->ID, $blog->id );
 								$broadcast_data->add_linked_child( $blog->id, $unlinked->ID );
 
 								// Add link info for the new child.
@@ -294,6 +296,8 @@ trait post_actions
 								$this->set_post_broadcast_data( $blog->id, $unlinked->ID, $child_broadcast_data );
 							}
 					}
+					else
+						$this->debug( 'Not exactly one match on blog.' );
 
 					$blog->switch_from();
 				}

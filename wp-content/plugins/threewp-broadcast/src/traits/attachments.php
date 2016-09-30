@@ -18,6 +18,43 @@ trait attachments
 	}
 
 	/**
+		@brief		Copy the attachments from the parent to the child.
+		@since		2016-07-22 16:50:54
+	**/
+	public function copy_attachments_to_child( $bcd )
+	{
+		if ( $bcd->copied_attachments_to_blog->has( get_current_blog_id() ) )
+			return $this->debug( 'Already copied attachments to child blog.' );
+
+		$bcd->copied_attachments_to_blog->set( get_current_blog_id(), true );
+
+		$this->debug( 'Copying attachments to the child blog.' );
+
+		$bcd->copied_attachments = [];
+		$this->debug( 'Looking through %s attachments.', count( $bcd->attachment_data ) );
+		foreach( $bcd->attachment_data as $key => $attachment )
+		{
+			$o = clone( $bcd );
+			$o->attachment_data = clone( $attachment );
+			$o->attachment_data->post = clone( $attachment->post );
+			$this->debug( "The attachment's post parent is %s.", $o->attachment_data->post->post_parent );
+			if ( $o->attachment_data->is_attached_to_parent() )
+			{
+				$this->debug( 'Assigning new post parent ID (%s) to attachment %s.', $bcd->new_post( 'ID' ), $o->attachment_data->post->ID );
+				$o->attachment_data->post->post_parent = $bcd->new_post( 'ID' );
+			}
+			else
+			{
+				$this->debug( 'Resetting post parent for attachment %s.', $o->attachment_data->post->ID );
+				$o->attachment_data->post->post_parent = 0;
+			}
+			$this->maybe_copy_attachment( $o );
+			$bcd->copied_attachments()->add( $attachment->post, get_post( $o->attachment_id ) );
+			$this->debug( 'Copied attachment %s to %s', $attachment->post->ID, $o->attachment_id );
+		}
+	}
+
+	/**
 		@brief		threewp_broadcast_apply_existing_attachment_action
 		@since		2015-11-16 14:10:32
 	**/
@@ -66,20 +103,17 @@ trait attachments
 			return;
 
 		$attachment_data = $action->attachment_data;
-		$is_url = false;
+		$is_url = $attachment_data->is_url();			// Convenience. Shorter.
 		$source = $attachment_data->filename_path;
 
-		if ( file_exists( $source ) )
+		if ( $is_url )
 		{
-			$this->debug( 'Copy attachment: File "%s" is on local file-system', $source );
+			$this->debug( 'Copy attachment: File "%s" is an external URL', $source );
 		}
 		else
 		{
-			if ( $attachment_data->is_url() && curl_init( $attachment_data->filename_path ) )
-			{
-				$is_url = true;
-				$this->debug( 'Copy attachment: File "%s" is an external URL', $source );
-			}
+			if ( file_exists( $source ) )
+				$this->debug( 'Copy attachment: File "%s" is on local file-system', $source );
 			else
 			{
 				// File does not exist.
@@ -124,8 +158,18 @@ trait attachments
 			'post_status' => 'inherit',
 		];
 		$this->debug( 'Copy attachment: Inserting attachment: %s', $attachment );
-		$attachment_id = wp_insert_attachment( $attachment, $target, $attachment_data->post->post_parent );
-		$action->set_attachment_id( $attachment_id );
+		$new_attachment_id = wp_insert_attachment( $attachment, $target, $attachment_data->post->post_parent );
+		$action->set_attachment_id( $new_attachment_id );
+
+		// Now set the post name to what it should be.
+		global $wpdb;
+		$query = sprintf( "UPDATE `%s` SET `post_name` = '%s' WHERE `ID` = %s",
+			$wpdb->posts,
+			$attachment_data->post->post_name,
+			$new_attachment_id
+		);
+		$this->debug( 'Renaming attachment to match original: %s', $query );
+		$this->query( $query );
 
 		// Now to maybe handle the metadata.
 		if ( ! $is_url )
@@ -158,7 +202,7 @@ trait attachments
 
 				// 3. Overwrite the metadata that needs to be overwritten with fresh data.
 				$this->debug( 'Copy attachment: Updating metadata.' );
-				wp_update_attachment_metadata( $action->attachment_id,  $attach_data );
+				wp_update_attachment_metadata( $action->attachment_id, $attach_data );
 			}
 		}
 		else
@@ -209,8 +253,6 @@ trait attachments
 
 		$key = get_current_blog_id();
 
-		$this->debug( 'Maybe copy attachment: Searching for attachment posts with the name %s.', $attachment_data->post->post_name );
-
 		// Start by assuming no attachments.
 		$attachment_posts = [];
 
@@ -220,11 +262,12 @@ trait attachments
 			$wpdb->posts,
 			$attachment_data->post->post_name
 		);
+		$this->debug( 'Maybe copy attachment: Searching for attachment posts with the name %s: %s', $attachment_data->post->post_name, $query );
 		$results = $this->query( $query );
+		$this->debug( 'Maybe copy attachment: Found %s attachment posts.', count( $results ) );
 		if ( count( $results ) > 0 )
 			foreach( $results as $result )
 				$attachment_posts[] = get_post( $result[ 'ID' ] );
-		$this->debug( 'Maybe copy attachment: Found %s attachment posts.', count( $attachment_posts ) );
 
 		// Is there an existing media file?
 		// Try to find the filename in the GUID.

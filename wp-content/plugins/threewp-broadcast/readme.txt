@@ -4,7 +4,7 @@ License: GPLv3
 Requires at least: 3.9
 Stable tag: trunk
 Tags: broadcast, multipost, sharing, share content, duplicate, posts, syndicate, syndication, marketing, threewp, linking, aggregator, aggregation, autoblogging, news, content hub, content sharing, publishing
-Tested up to: 4.5.2
+Tested up to: 4.7
 
 Network content syndication made easy! Automatically share content by multiposting between multisite blogs.
 
@@ -53,7 +53,8 @@ There are several <a href="https://broadcast.plainviewplugins.com/"><em>Broadcas
 * <a href="https://broadcast.plainviewplugins.com/addon/advanced-custom-fields/">Advanced Custom Fields</a> adds support for correctly broadcasting various field types using Elliot Condon’s <a href="http://www.advancedcustomfields.com/">Advanced Custom Fields plugin</a>.
 * <a href="https://broadcast.plainviewplugins.com/addon/all-in-one-calendar/">All In One Calendar</a> adds support for <a href="http://www.wordpress.org/plugins/all-in-one-event-calendar/">Timely’s All In One Calendar</a> plugin.
 * <a href="https://broadcast.plainviewplugins.com/addon/bbpress/">bbPress</a> adds support for <a href="https://wordpress.org/plugins/bbpress/">BBPress</a> forums, topics and replies.
-* <a href="https://broadcast.plainviewplugins.com/addon/calendarize-it/">Calendarize It</a>: New add-on. Adds support for <a href="http://codecanyon.net/item/calendarize-it-for-wordpress/2568439">Calendarize It!</a> events.
+* <a href="https://broadcast.plainviewplugins.com/addon/calendarize-it/">Calendarize It</a> adds support for <a href="http://codecanyon.net/item/calendarize-it-for-wordpress/2568439">Calendarize It!</a> events.
+* <a href="https://broadcast.plainviewplugins.com/addon/contact-form-7/">Contact Form 7</a> adds support for <a href="https://wordpress.org/plugins/contact-form-7/">Takayuki Miyoshi's Contact Form 7</a> plugin.
 * <a href="https://broadcast.plainviewplugins.com/addon/download-monitor/">Download Monitor</a> adds support for downloads and shortcodes from <a href="https://wordpress.org/plugins/download-monitor/">Never5's Download Monitor</a> plugin.
 * <a href="https://broadcast.plainviewplugins.com/addon/eventon/">EventOn</a> adds support for Ashan Jay's <a href="http://www.myeventon.com/">EventON</a> plugin with tickets.
 * <a href="https://broadcast.plainviewplugins.com/addon/event-organiser/">Event Organiser</a> adds support for Stephen Harris’ <a href="http://wordpress.org/plugins/event-organiser/">Event Organiser plugin</a>, with events and venues.
@@ -74,13 +75,13 @@ There are several <a href="https://broadcast.plainviewplugins.com/"><em>Broadcas
 * <a href="https://broadcast.plainviewplugins.com/addon/woocommerce/">WooCommerce</a> allows attribute taxonomies and product variations to be broadcasted.
 * <a href="https://broadcast.plainviewplugins.com/addon/wpml/">WPML</a> adds support for <a href="http://wpml.org/">ICanLocalize’s WPML</a> translation plugin.
 * <a href="https://broadcast.plainviewplugins.com/addon/wp-ultimate-recipe/">WP Ultimate Recipe</a> adds support for recipes and ingredients from <a href="http://bootstrapped.ventures">Bootstrapped Ventures’</a> <a href="http://bootstrapped.ventures">WP Ultimate Recipe</a> plugin.
+* <a href="https://broadcast.plainviewplugins.com/addon/yoast-seo/">Yoast SEO</a> adds support for the <a href="https://wordpress.org/plugins/wordpress-seo/">Yoast SEO</a> plugin.
 
 Control pack
 ------------
 
 * <a href="https://broadcast.plainviewplugins.com/addon/all-blogs/">All Blogs</a> gives all users access to all of the blogs in the network.
 * <a href="https://broadcast.plainviewplugins.com/addon/all-blogs/">All Blogs Superadmin</a> allows only superadmins to broadcast to all blogs in the network without having to be a user of the blog.
-* <a href="https://broadcast.plainviewplugins.com/addon/attachment-shortcodes/">Attachment Shortcodes</a> copies attachments specified in custom shortcodes.
 * <a href="https://broadcast.plainviewplugins.com/addon/back-to-parent/">Back To Parent</a> updates the parent post with the new child content.
 * <a href="https://broadcast.plainviewplugins.com/addon/comments/">Comments</a> adds support for broadcasting of comments.
 * <a href="https://broadcast.plainviewplugins.com/addon/custom-field-attachments/">Custom Field Attachments</a> allows post custom field containing attachment IDs to be broadcasted correctly.
@@ -93,6 +94,8 @@ Control pack
 * <a href="https://broadcast.plainviewplugins.com/addon/permalinks/">Permalinks</a> provides more precise control of permalinks for both parents and children.
 * <a href="https://broadcast.plainviewplugins.com/addon/protect-child-properties/">Protect Child Properties</a> prevents various properties of child posts from being overwritten.
 * <a href="https://broadcast.plainviewplugins.com/addon/redirect-all-children/">Redirect All Children</a> redirects single post views from visitors of child posts to the parent post.
+* <a href="https://broadcast.plainviewplugins.com/addon/shortcode-attachments/">Shortcode Attachments</a> modifies attachment IDs found in shortcodes to match their equivalent attachments on each blog.
+* <a href="https://broadcast.plainviewplugins.com/addon/shortcode-menus/">Shortcode Menus</a> modifies menu IDs found in shortcodes to match their equivalent menus on each blog.
 * <a href="https://broadcast.plainviewplugins.com/addon/update-attachments/">Update Attachments</a> updates existing attachments by copying over the files to the child blogs.
 * <a href="https://broadcast.plainviewplugins.com/addon/thumbnail-sizes/">Thumbnail Sizes</a> allows for different additional thumbnail sizes on a per-blog basis.
 * <a href="https://broadcast.plainviewplugins.com/addon/user-blog-settings/">User &amp; Blog Settings</a> (UBS) can hide the broadcast meta box and/or menu, modify the meta box to force/prevent broadcast to blogs, with separate settings for users / blogs / roles.
@@ -121,18 +124,18 @@ Utilities pack
 
 = Documentation =
 
-Although Broadcast is relatively easy to understand by itself, for extra documentation see <a href="https://plainviewplugins.com/threewp-broadcast/">Broadcast's online documentation</a>, which covers:
+Although Broadcast is relatively easy to understand by itself, for extra documentation see <a href="https://broadcast.plainviewplugins.com/doc/documentation/">Broadcast's online documentation</a>, which covers:
 
-* <a href="https://plainviewplugins.com/doc/attachments-images-and-media/">Attachments, images and media</a>
-* <a href="https://plainviewplugins.com/doc/custom-fields/">Custom fields</a>
-* <a href="https://plainviewplugins.com/doc/linking/">Linking</a>
-* <a href="https://plainviewplugins.com/doc/post-actions/">Post actions and the bulk action dropdown</a>
+* <a href="https://broadcast.plainviewplugins.com/doc/attachments-images-and-media/">Attachments, images and media</a>
+* <a href="https://broadcast.plainviewplugins.com/doc/custom-fields/">Custom fields</a>
+* <a href="https://broadcast.plainviewplugins.com/doc/linking/">Linking</a>
+* <a href="https://broadcast.plainviewplugins.com/doc/post-actions/">Post actions and the bulk action dropdown</a>
 
 For developers: the code should be well-commented and easily legible for the most part. Extra developer documentation covers:
 
-* <a href="https://plainviewplugins.com/doc/developer-api/">API</a>
-* <a href="https://plainviewplugins.com/doc/developer-actions/">Actions</a>
-* <a href="https://plainviewplugins.com/doc/developer-post-actions/">Post actions</a>
+* <a href="https://broadcast.plainviewplugins.com/doc/developer-api/">API</a>
+* <a href="https://broadcast.plainviewplugins.com/doc/developer-actions/">Actions</a>
+* <a href="https://broadcast.plainviewplugins.com/doc/developer-post-actions/">Post actions</a>
 
 = Misc =
 
@@ -200,8 +203,6 @@ Attachments are force-broadcasted: the child posts have all their attachments de
 
 If you have a gallery shortcode in the post ( [gallery columns="2" ids="427,433,430,429,428"] ) then Broadcast will first check that the image does not already exist on the child blog. It does this by searching for the post name (the filename minus the extension). If no image is found, it is copied.
 
-Users report that image filenames ending in dashes or numbers (example-.jpg, example-1.jpg) confuse both Wordpress and Broadcast.
-
 If you have manually modified the thumbnails on the parent blog, you might want to use the <em>Duplicate Attachments</em> plugin in an add-on pack, otherwise Wordpress will generate new thumbnails on each child blog.
 
 Do you have a lot of attachments that you don't want duplicated to hundreds of child blogs, in order to save space? You'll have to find a way to refer to the images statically instead of using their media IDs. The reason for this is that when Wordpress is referred to an attachment, it can only read the media IDs from the current blog. It cannot switch blogs in order to load the image.
@@ -220,7 +221,7 @@ If your web host refuses to upgrade to a supported version, go find a new host.
 
 Below is a list of plugins that just will not work properly with Broadcast and / or it's addons:
 
-* Post Type Switcher and Woocommerce variations. All images and variations are given the same post type as the product itself, so images and variations are treated as products.
+* Post Type Switcher. All images (and indeed WooCommerce variations) are given the same post type as the product itself, so images and variations are treated as products.
 
 = Orphans? =
 
@@ -228,7 +229,7 @@ If you have already created posts on other blogs that are supposed to be childre
 
 To be considered an orphan the orphaned posts must have the exact same title (name) as the soon-to-be parent and be of the same post type.
 
-You can also use the <em>Delete Before Broadcast</em> plugin from the pack to delete any similar posts on the child blog before broadcasting.
+You can also use the <a href="https://broadcast.plainviewplugins.com/addon/delete-before-broadcast/">Delete Before Broadcast add-on</a> from the pack to delete any similar posts on the child blog before broadcasting.
 
 = Timeout problems =
 
@@ -237,8 +238,8 @@ If you have many attachments in your post, and are broadcasting the post to many
 There are several solutions to this problem:
 
 1. Increase the PHP timeout in your PHP.ini settings. This will not speed up broadcasting, only increase your chances of completely broadcasting the post.
-2. Use the <em>Duplicate Attachments</em> plugin in the pack. This will duplicate any attachments + thumbnails instead of regenerating them on each child blog.
-3. Use the <em>Queue</em> plugin to put each child broadcast into a queue that is emptied by javascript.
+2. Use the <a href="https://broadcast.plainviewplugins.com/addon/duplicate-attachments/">Duplicate Attachments add-on</a>. This will duplicate any attachments + thumbnails instead of regenerating them on each child blog.
+3. Use the <a href="https://broadcast.plainviewplugins.com/addon/queue/">Queue add-on</a> to put each child broadcast into a queue that is emptied by javascript.
 
 You will not need solution #1 if you use solutions #2 and #3. :)
 
@@ -256,20 +257,20 @@ Make sure that:
 
 Broadcast is capable of handling WooCommerce products.
 
-1. In the custom post type settings: Add "product"
+1. In the Broadcast custom post type settings: Add "product"
 2. When broadcasting, select custom fields and taxonomies.
 
 This will broadcast all normal product settings: SKU, price, etc.
 
-If your products have variations, or you want the attribute taxonomies to be synced, you'll be wanting the WooCommerce plugin from the add-on packs.
+If your products have variations, want to sync stock, want to sync orders, need the attribute taxonomies to be synced, you'll be wanting the <a href="https://broadcast.plainviewplugins.com/addon/woocommerce/">WooCommerce add-on</a>.
 
-If you have a product gallery, use the "Custom Field Attachments" plugin to broadcast the "_product_image_gallery" custom field.
+If you have a product gallery, use the <a href="https://broadcast.plainviewplugins.com/addon/custom-field-attachments/">Custom Field Attachments</a> add-on to broadcast the "_product_image_gallery" custom field.
 
-Need your stock or PDF vouchers synced upon each purchase? See the WooCommerce extras in the premium add-on pack.
+Need your PDF vouchers synced upon each purchase? See the WooCommerce extras in the premium add-on pack.
 
 = WPML Sitepress =
 
-WPML is semi-supported via a plugin in the 3rd party pack. For more information, see WPML discussion here: http://wordpress.org/support/topic/wmpl-integration-not-working
+WPML is supported via the <a href="https://broadcast.plainviewplugins.com/addon/wpml/">WPML add-on in the 3rd party pack</a>. For more information, see WPML discussion here: http://wordpress.org/support/topic/wmpl-integration-not-working
 
 The author suggests using PolyLang instead due to far superior support.
 
@@ -282,6 +283,43 @@ Xcache v2 does not support PHP namespaces, which is a PHP 5.3 feature. Trying to
 Xcache v3, which does support namespaces, has not yet been tested. Anyone with Xcache v3 experience is welcome to contact me with info.
 
 == Changelog ==
+
+= 34 20160925 =
+
+* Fix: Prevent duplicate attachments by forcing renaming of copied attachments. This fixes the long-standing problem of attachments with numbers at the end of the filenames being duplicated.
+
+This stems from a Wordpress feature / bug that removes the numbers when copying the images to each child blog. For some reason attachments inserted by PHP code, using normal Wordpress functions, are not assigned the same post_names as on the parent blog, which prevents Broadcast from finding the attachments when updating the post. This will cause Broadcast to recopy the attachment, creating a dupe.
+
+* Code: Added broadcasting_data->copied_attachments_to_blog code, together with ThreeWP_Broadcast->copy_attachments_to_blog().
+* The "ThreeWP" part of the plugin name will be dropped in the future.
+
+= 33.1 20160913 =
+
+Minor release. Upgrade not mandatory.
+
+* Code: Initialize broadcasting_data->attachment_data array in the class.
+* Code: Display even more debug info when updating / inserting the child post.
+= 33 20160817 =
+
+* Fix: Find Unlinked Children finds children with the same status. So a draft will find unlinked drafts. To find different child statuses, just change the status of the parent post before finding.
+* Fix: Stricter handling of attachment paths. This fixes Amazon S3 file paths being incorrectly detected as local files by PHP.
+* Code: Added collect_post_type_taxonomies action to help plugins sync extra taxonomy data, like ACF images and what not.
+* Code: save_post() method returns the broadcasting_data object if anything was broadcasted.
+* New add-on: <a href="https://broadcast.plainviewplugins.com/addon/contact-form-7/">Contact Form 7</a>. Adds support for <a href="https://wordpress.org/plugins/contact-form-7/">Takayuki Miyoshi's Contact Form 7</a> plugin.
+* New add-on: <a href="https://broadcast.plainviewplugins.com/addon/yoast-seo/">Yoast SEO</a>. Adds support for the <a href="https://wordpress.org/plugins/wordpress-seo/">Yoast SEO</a> plugin. Only needed if you want taxonomy SEO data synced when broadcasting.
+* 4.6.0 compatibility.
+
+= 32.3 20160722 =
+
+* Fix: Check for existence of get_plugin_data() function before broadcasting. Fixes HTTP processing with Queue add-on. Quite an unexpected and illogical bug.
+
+= 32.2 20160719 =
+
+* Fix: A workaround for an existing Yoast SEO workaround. Fixing the first Yoast problem prevented Woocommerce variations from being broadcasted properly. Applies only to users of Yoast + Woocommerce variations.
+* New add-on: <a href="https://broadcast.plainviewplugins.com/addon/shortcode-attachments/">Shortcode Attachments</a> modifies attachment IDs found in shortcodes to match their equivalent attachments on each blog.
+* New add-on: <a href="https://broadcast.plainviewplugins.com/addon/shortcode-menus/">Shortcode Menus</a> modifies menu IDs found in shortcodes to match their equivalent menus on each blog.
+* More debug code, showing the active plugins.
+* SDK update.
 
 = 32.1 20160718 =
 
