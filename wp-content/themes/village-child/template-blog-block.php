@@ -43,14 +43,14 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                 $thumb_image_width = '';
                                 $thumb_image_height = '';
                                 $thumb_image_size = '150';
-                                $excerpt_length = '12';                                
-                                ?>        
+                                $excerpt_length = '12';
+                                ?>
                                 <?php
                                 /**
                                  * For implement two coloumn based post in one row
                                  */
                                 ?>
-                        
+
                                 <div class="mkd-pt-six-item mkd-post-item">
                                     <?php if (has_post_thumbnail()) { ?>
                                         <div class="mkd-pt-six-image-holder">
@@ -131,7 +131,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                                     'share' => $display_share
                                                 ));
                                                 ?>
-                                               <?php   
+                                               <?php
                                                discussion_post_info_comments(array(
                                                    'comments' => $display_comments
                                                ));
@@ -139,8 +139,8 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                                             </div>
                                             <div class="mkd-pt-info-section-background"></div>
                                         </div>
-                                    <?php } ?> 
-                                </div>                      
+                                    <?php } ?>
+                                </div>
                                 <?php
                                 $i++;
                             endwhile;
@@ -173,13 +173,15 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
             if ($total_post >= $post_per_section) {
                 $no_of_adds = floor($total_post / $post_per_section);
                 for ($i = 1; $i <= $no_of_adds; $i++) {
-                    ?> 
+                    ?>
 
-                    <div  class="fsp-ads-homepage"  id="adv_row_<?php echo $i; ?>" <?php if ($i != 1) { ?> style="display:none;clear:both" <?php } else { ?> style="clear:both" <?php } ?>>  
+                    <div  class="fsp-ads-homepage"  id="adv_row_<?php echo $i; ?>" <?php if ($i != 1) { ?> style="display:none;clear:both" <?php } else { ?> style="clear:both" <?php } ?>>
                         <?php
-                        if (function_exists('drawAdsPlace'))
-                            drawAdsPlace(array('id' => 1), true);
+                        //if (function_exists('drawAdsPlace'))
+                        //    drawAdsPlace(array('id' => 1), true);
                         ?>
+                        <ins data-revive-zoneid="2" data-revive-id="0be604ef9a1ab68c1665959c06390bf9"></ins>
+                        <script async src="//myevergreenwellness.net/www/delivery/asyncjs.php"></script>
                     </div>
                     <?php
                 }
@@ -195,4 +197,3 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
  */
 get_template_part('sidebar/template-ajax-image');
 ?>
-

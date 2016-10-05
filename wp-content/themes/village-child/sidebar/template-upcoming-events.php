@@ -41,7 +41,13 @@
                                         <div class="mkd-pt-seven-image-holder" style="width: 117px">
                                             <a target="_self" href="<?php echo get_permalink($postid) ?>" title="<?php the_title_attribute(); ?>" class="mkd-pt-seven-link mkd-image-link" itemprop="url">
                                                 <img width="117px" alt="a" src="<?php
-                                                $feature_image = wp_get_attachment_url(get_post_thumbnail_id($postid));
+                                                $imageid = get_post_meta($postid, 'event_banner_image', true);
+                                                //$feature_image = wp_get_attachment_url(get_post_thumbnail_id($postid));
+                                                if ($imageid) {
+                                                    $feature_image = wp_get_attachment_url($imageid);
+                                                } else {
+                                                    $feature_image = wp_get_attachment_url(get_post_thumbnail_id($postid));
+                                                }
                                                 echo $feature_image;
                                                 ?> ">
                                             </a>
