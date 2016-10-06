@@ -3,7 +3,7 @@
  * Plugin Name: AccessPress Social Counter
  * Plugin URI: https://accesspressthemes.com/wordpress-plugins/accesspress-social-counter/
  * Description: A plugin to display your social accounts fans, subscribers and followers number on your website with handful of backend settings and interface. 
- * Version: 1.5.8
+ * Version: 1.6.4
  * Author: AccessPress Themes
  * Author URI: http://accesspressthemes.com
  * Text Domain: aps-counter
@@ -24,7 +24,7 @@ if (!defined('SC_CSS_DIR')) {
     define('SC_CSS_DIR', plugin_dir_url(__FILE__) . 'css');
 }
 if (!defined('SC_VERSION')) {
-    define('SC_VERSION', '1.5.8');
+    define('SC_VERSION', '1.6.4');
 }
 /**
  * Register of widgets
@@ -410,13 +410,12 @@ if (!class_exists('SC_Class')) {
             $apsc_settings = $this->apsc_settings;
             $api_url = 'https://graph.facebook.com/';
             	$url = sprintf(
-        			'%s/oauth/access_token?client_id=%s&client_secret=%s&grant_type=client_credentials',
+        			'%soauth/access_token?client_id=%s&client_secret=%s&grant_type=client_credentials',
         			$api_url,
         			$apsc_settings['social_profile']['facebook']['app_id'] ,
         			$apsc_settings['social_profile']['facebook']['app_secret']
         		);
         		$access_token = wp_remote_get( $url, array( 'timeout' => 60 ) );
-        
         		if ( is_wp_error( $access_token ) || ( isset( $access_token['response']['code'] ) && 200 != $access_token['response']['code'] ) ) {
         			return '';
         		} else {

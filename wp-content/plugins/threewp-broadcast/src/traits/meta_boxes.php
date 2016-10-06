@@ -179,7 +179,6 @@ trait meta_boxes
 		}
 
 		$filter = new actions\get_user_writable_blogs( $this->user_id() );
-                
 		$blogs = $filter->execute()->blogs;
 
 		$blogs_input = $form->checkboxes( 'blogs' )

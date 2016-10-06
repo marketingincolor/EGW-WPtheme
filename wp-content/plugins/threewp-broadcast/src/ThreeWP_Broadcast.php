@@ -113,6 +113,8 @@ class ThreeWP_Broadcast
 		// Don't want to break anyone's plugins.
 		$this->add_action( 'threewp_broadcast_broadcast_post' );
 
+		$this->add_action( 'threewp_broadcast_collect_post_type_taxonomies', 5 );
+
 		$this->add_action( 'threewp_broadcast_each_linked_post' );
 		$this->add_action( 'threewp_broadcast_get_user_writable_blogs', 100 );		// Allow other plugins to do this first.
 		$this->add_filter( 'threewp_broadcast_get_post_types', 5 );					// Add our custom post types to the array of broadcastable post types.
@@ -597,6 +599,8 @@ class ThreeWP_Broadcast
 	{
 		global $wp_filter;
 		$filters = $wp_filter[ $hook ];
+		if ( is_object( $filters ) )
+			$filters = $filters->callbacks;
 		ksort( $filters );
 		$hook_callbacks = [];
 		//$wp_filter[$tag][$priority][$idx] = array('function' => $function_to_add, 'accepted_args' => $accepted_args);
@@ -611,7 +615,7 @@ class ThreeWP_Broadcast
 				{
 					$function_name = $function[ 0 ];
 					if ( is_object( $function_name ) )
-						$function_name = get_class( $function_name );
+						$function_name = sprintf( '%s::%s', get_class( $function_name ), $function[ 1 ] );
 					else
 						$function_name = sprintf( '%s::%s', $function_name, $function[ 1 ] );
 				}
@@ -621,6 +625,28 @@ class ThreeWP_Broadcast
 			}
 		}
 		return $hook_callbacks;
+	}
+
+	/**
+		@brief		Return a table containing the info of each plugin.
+		@since		2016-07-19 13:46:46
+	**/
+	public function get_plugin_info_array( $plugins )
+	{
+		$r = [];
+		if ( function_exists( 'get_plugin_data' ) )
+			foreach( $plugins as $plugin_filename )
+			{
+				$s = [];
+				$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin_filename );
+				$plugin_data = (object)$plugin_data;
+				$s []= $plugin_filename;
+				$s []= $plugin_data->Name;
+				$s []= $plugin_data->Version;
+				$s = implode( ', ', $s );
+				$r []= $s;
+			}
+		return $r;
 	}
 
 	/**
@@ -687,12 +713,28 @@ class ThreeWP_Broadcast
 		$row->td()->text( $text );
 
 		$row = $table->body()->row();
+		$row->td()->text_( 'Hooked into save_post' );
+		$hooks = $this->get_hooks( 'save_post' );
+		$row->td()->text( implode( "<br>\n", $hooks ) );
+
+		$row = $table->body()->row();
 		$row->td()->text_( 'Save post decoys' );
 		$row->td()->text( $this->get_site_option( 'save_post_decoys' ) );
 
 		$row = $table->body()->row();
 		$row->td()->text_( 'Save post priority' );
 		$row->td()->text( $this->get_site_option( 'save_post_priority' ) );
+
+		$row = $table->body()->row();
+		$row->td()->text_( 'Plugins active on blog' );
+		$plugins = $this->get_plugin_info_array( get_option( 'active_plugins' ) );
+		$row->td()->text( implode( "<br>\n", $plugins ) );
+
+		$row = $table->body()->row();
+		$row->td()->text_( 'Plugins active on network' );
+		$plugins = get_site_option( 'active_sitewide_plugins' );
+		$plugins = $this->get_plugin_info_array( array_keys( $plugins ) );
+		$row->td()->text( implode( "<br>\n", $plugins ) );
 
 		return $table;
 	}
@@ -733,15 +775,6 @@ class ThreeWP_Broadcast
 		$blog->switch_from();
 
 		return $r;
-	}
-
-	/**
-		@brief		Needed to check whether Yoast SEO is installed.
-		@since		2016-06-29 17:54:31
-	**/
-	public function is_yoast_installed()
-	{
-		return defined( 'WPSEO_FILE' );
 	}
 
 	/**

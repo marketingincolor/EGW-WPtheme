@@ -81,7 +81,7 @@ class attachment_data
 	**/
 	public function is_url()
 	{
-		return ( filter_var( $this->filename_path, FILTER_VALIDATE_URL) !== FALSE );
+		return strpos( $this->filename_path, '://' ) !== false;
 	}
 
 	/**

@@ -4,8 +4,8 @@ Tags: calendar, events, ics, ics feed, wordpress ical importer, google
 calendar, ical, iCalendar, all-in-one, events sync, events widget,
 calendar widget
 Requires WordPress at least: 3.5
-Tested up to: 4.5
-Stable tag: 2.4.0
+Tested up to: 4.6
+Stable tag: 2.5.11
 License: GNU General Public License, version 3 (GPL-3.0)
 
 A calendar system with many views, upcoming events widget, color-coded
@@ -149,8 +149,67 @@ https://vimeo.com/135004810
 
 == Changelog ==
 
-= Version 2.4.0 = 
+= Version 2.5.11 =
+* Fixed: Duplication of recurrent events for events imported from Google Calendar.
+* Fixed: Choosing a date using calendar button will move user to top of the page instead of bottom of the page in the Posterboard view.
 
+= Version 2.5.10 =
+* Fixed: The timezone will only show in the event if the "Display events in calendar time zone" option is checked in the Settings page.
+
+= Version 2.5.9 =
+* Changed: Now the “Free Event” checkbox in the “Event Cost and Tickets” section is unchecked by default when adding an event.
+* Changed: Now the timezone of start/end date of the event is always being shown in the event’s page.
+* Fixed: Attempt to fix CSS issues in some installations.
+* Fixed: A warning message would pop-up when the feed’s table wasn’t created yet and WP debug flag was set to on.
+* Fixed: Widget creator – Even when “No navigation bar” option was specified for the “Full Calendar”, the navigation bar would show.
+* Fixed: Now Ticketing displays the correct currency selected.
+
+= Version 2.5.8 =
+* Fixed: API Sign in wasn't refreshing correctly the subscriptions.
+
+= Version 2.5.7 =
+* Fixed: Exhibition of recurrent events which start date is older than 3 years.
+* Fixed: All day events weren't being imported correctly.
+* Fixed: Now "Add Tax & Invoice Options" (Time.ly Tickets) opens correctly in Safari.
+* Fixed: API Sign out wasn't working for some users.
+
+= Version 2.5.6 =
+* Changed: Added Google Maps API Key setting. Starting June 22nd, 2016, Google may request an API key in order to make Google Maps work.
+
+= Version 2.5.5 =
+* Changed: When importing feeds, you can now choose to keep event's original date/time or convert it to the calendar's timezone
+
+= Version 2.5.4 =
+* Fixed: Compatibility with PHP 7
+* Fixed: Calendar was crashing when FrontEnd Submissions was installed
+
+= Version 2.5.3 =
+* Fixed: When using Agenda view some calendars were not showing today's events, only the next ones
+* Fixed: Timezone of imported events was not being considered correctly
+* Fixed: Compatibility with PHP 7
+* Fixed: When saving settings, the user was being taken to the "List of events" page
+* Improved: Add option to Sign out of Timely Network
+* Improved: Cached CSS files will be automatically regenerated after version upgrade
+
+= Version 2.5.2 =
+* Fixed compatibility with PHP 5.2
+
+= Version 2.5.1 =
+* Fixed: Advanced and Add-ons tabs are now working correctly in the Settings page
+
+= Version 2.5.0 =
+* Changed: ICS feeds are now handled through API
+* Added support for Timely Ticketing to the tickets button
+* Fixed: Error was popping up when clicking on "Your Saved Events" button 
+* Fixed: Tickets button were appearing twice on Month view popup
+* Fixed: A few users were getting error while trying to upgrade plugin
+
+= Version 2.4.1 =
+* Fixed: Security vulnerability related to stored XSS
+* Fixed: Security vulnerability related to not sanitizing correctly some URLs
+* Improved: Exhibition of ticket's quantity field, that was too small and no number could be seen
+
+= Version 2.4.0 =
 * Improved: Changed the default number of ticket in the dropdown to 0 on any ticket type, instead of 2.
 * Improved: Allowing user to change sender's name from 'WordPress' to their own name (site name) when sending email notification.
 * Improved: Allowing user to edit ticket even after sale starts.
@@ -166,7 +225,7 @@ https://vimeo.com/135004810
 * Fixed: Venue option of the event used to be exported as a category.
 * Fixed: Some items of Add-ons page was using broken urls.
 
-= Version 2.3.12 = 
+= Version 2.3.12 =
 * Improved: Added "Videos" button in the box support section.
 * Improved: Restructured event cost vs ticketing for a better user experience.
 * Improved: Edit event page to prevent invalid email for Organizer.
