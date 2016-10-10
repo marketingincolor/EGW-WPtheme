@@ -162,6 +162,7 @@
 //                    if (discussion_show_comments()) {
 //                        comments_template('', true);
 //                    }
+                        
                     ?>
                 </div>
             </div>
@@ -170,6 +171,7 @@
             <div class="mkd-column-inner">
                 <aside class="mkd-sidebar" style="transform: translateY(0px);">
                     <?php get_template_part('sidebar/template-sidebar-single'); ?>
+                    <?php get_template_part( 'sidebar/template-ads-mobile-bottom' ); ?>
                 </aside>
             </div>
         </div>

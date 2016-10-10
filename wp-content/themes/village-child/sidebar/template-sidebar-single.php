@@ -8,6 +8,7 @@
       
       if(is_single() && get_post_type() == 'videos'){
           get_template_part( 'sidebar/template-related-articles', 'page' );
+          get_template_part( 'sidebar/template-ads-bottom', 'page' );
       }
       else if(is_single() && get_post_type() == 'ai1ec_event')
       {
@@ -15,7 +16,7 @@
       }
       else {
           get_template_part( 'sidebar/template-related-stories', 'page' );
+          get_template_part( 'sidebar/template-ads-bottom', 'page' );
       }
        
-      
 ?>
