@@ -15,6 +15,22 @@ if(!isset($slug_page)) $slug_page=basename(get_permalink());
 <div class="wpb_column vc_column_container vc_col-sm-12">
         <div class="wpb_wrapper">
             <div class="vc_empty_space" style="height: 40px"><span class="vc_empty_space_inner"></span></div>
+            <div class="fsp-ads-homepage">
+                <script type="text/javascript">
+                    function getzonenum() {
+                        var zonenum = '5';
+                        var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+                        if ( w > 480 ) {
+                            zonenum = '4';
+                        } else {
+                            zonenum = '5';
+                        }
+                        document.write('<ins data-revive-zoneid="'+zonenum+'" id="adzoneid" data-revive-id="0be604ef9a1ab68c1665959c06390bf9"></ins>'); // creates INS tag for Revive based on window width
+                    };
+                    getzonenum();
+                </script>
+                <script async src="//myevergreenwellness.net/www/delivery/asyncjs.php"></script>
+            </div>
             <div class="mkd-bnl-holder mkd-pl-five-holder  mkd-post-columns-2"  data-base="mkd_post_layout_five"  data-number_of_posts="3" data-column_number="3" data-category_id="7"         data-thumb_image_size="custom_size" data-thumb_image_width="302" data-thumb_image_height="198" data-title_tag="h6" data-title_length="27" data-display_date="no"  data-display_category="no" data-display_comments="no" data-display_share="no" data-display_count="no" data-display_excerpt="yes" data-excerpt_length="7" data-display_read_more="no"  data-paged="1" data-max_pages="8">
                 <div class="mkd-bnl-outer">
                     <div class="mkd-bnl-inner">
@@ -34,7 +50,7 @@ if(!isset($slug_page)) $slug_page=basename(get_permalink());
                                 $params['background_image_style'] = $background_image_style;
                                 $post_no_class = 'mkd-post-number-' . $post_no;
                                 $total_post = $wp_query->found_posts;
-                               
+
 
                                 /**
                                  * For hide date/category for videos section
@@ -51,16 +67,16 @@ if(!isset($slug_page)) $slug_page=basename(get_permalink());
                                 $thumb_image_width = '';
                                 $thumb_image_height = '';
                                 $thumb_image_size = '150';
-                                $excerpt_length = '9';                                
-                                ?>        
+                                $excerpt_length = '9';
+                                ?>
                                 <?php
                                 $getPostcat = wp_get_post_categories($id);
-                                $post_link=post_category_link($id,$getPostcat,$main_cat_det,$main_cat_id,$slug_page); 
+                                $post_link=post_category_link($id,$getPostcat,$main_cat_det,$main_cat_id,$slug_page);
                                 /**
                                  * For implement two coloumn based post in one row
                                  */
                                 ?>
-                        
+
                                 <div class="mkd-pt-six-item mkd-post-item">
                                     <?php if (has_post_thumbnail()) { ?>
                                         <div class="mkd-pt-six-image-holder">
@@ -74,7 +90,7 @@ if(!isset($slug_page)) $slug_page=basename(get_permalink());
                                                 ?>
                                                 <div  style="background: <?php echo $rl_category_color; ?>;" class="mkd-post-info-category">
                                                     <?php echo organize_catgory($id);?>
-                                                   
+
                                                 </div>
                                                 <?php
                                             }
@@ -126,7 +142,7 @@ if(!isset($slug_page)) $slug_page=basename(get_permalink());
                                                     'share' => $display_share
                                                 ));
                                                 ?>
-                                               <?php   
+                                               <?php
                                                discussion_post_info_comments(array(
                                                    'comments' => $display_comments
                                                ));
@@ -134,8 +150,8 @@ if(!isset($slug_page)) $slug_page=basename(get_permalink());
                                             </div>
                                             <div class="mkd-pt-info-section-background"></div>
                                         </div>
-                                    <?php } ?> 
-                                </div>                      
+                                    <?php } ?>
+                                </div>
                                 <?php
                                 $i++;
                             endwhile;
@@ -166,8 +182,8 @@ if(!isset($slug_page)) $slug_page=basename(get_permalink());
             <?php
             /**
              * For displaying ads based on total count of post
-             */         
-            include(locate_template('block/post-middle-adsblock.php'));   
+             */
+            include(locate_template('block/post-middle-adsblock.php'));
             ?>
         </div>
 
@@ -179,4 +195,3 @@ if(!isset($slug_page)) $slug_page=basename(get_permalink());
  */
 get_template_part('sidebar/template-ajax-image');
 ?>
-
