@@ -215,12 +215,12 @@ function fspr_login_form_fields() {
             </fieldset>
         </form>
 
-		<script type="text/javascript">
-		    var __ss_noform = __ss_noform || [];
-		    __ss_noform.push(['baseURI', 'https://app-3QMYANU21K.marketingautomation.services/webforms/receivePostback/MzawMDG2NDQxAwA/']);
-		    __ss_noform.push(['endpoint', 'ae4bfb37-9df4-45a7-a93b-6d8ce9e4f287']);
-		</script>
-		<script type="text/javascript" src="https://koi-3QMYANU21K.marketingautomation.services/client/noform.js?ver=1.24" ></script>
+               <script type="text/javascript">
+                   var __ss_noform = __ss_noform || [];
+                   __ss_noform.push(['baseURI', 'https://app-3QMYANU21K.marketingautomation.services/webforms/receivePostback/MzawMDG2NDQxAwA/']);
+                   __ss_noform.push(['endpoint', 'ae4bfb37-9df4-45a7-a93b-6d8ce9e4f287']);
+               </script>
+               <script type="text/javascript" src="https://koi-3QMYANU21K.marketingautomation.services/client/noform.js?ver=1.24" ></script>
 
     </div>
     <?php
