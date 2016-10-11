@@ -40,7 +40,7 @@ if (!empty($user->first_name) && !empty($user->last_name)) {
                     <?php endif; ?>
                 </div>
                 <div class="article-cr-rgt">
-                    <p>Written by</p>
+                    <p><?php the_field('written_by_condition'); ?></p>
                     <p><span><?php echo $displayNameis; ?></span></p>
                     <p><?php echo $user->signature; ?></p>
             <!--            <a href="<?php //echo site_url();         ?>/public/<?php //echo get_the_author_meta('user_nicename');         ?>"><?php //echo $displayNameis;         ?></a>-->
