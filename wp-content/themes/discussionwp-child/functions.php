@@ -2083,17 +2083,32 @@ add_shortcode('egw-learn-more', 'egw_category_shortcode');
 /**
  * Author - Doe
  * Date - 10-11-2016
- * Purpose - For adding Evergreen Admin Theme
+ * Purpose - For adding Evergreen Wellness - The Villages theme to Villages subsite.
  */
-function egw_admin_color_scheme() {
+if (get_current_blog_id() == '2')
+{
+    function egw_admin_color_scheme() {
 
-    $theme_dir = get_stylesheet_directory_uri();
+        $theme_dir = get_stylesheet_directory_uri();
 
-    wp_admin_css_color(
-        'evergreen', __('Evergreen Wellness - The Villages'),
-        $theme_dir . '/admin-colors/evergreen/colors.css',
-        array( '#bed743', '#f89d38', '#3a7d3b', '#7d7d7d')
-        );
-}
-        
+        wp_admin_css_color(
+            'evergreen', __('Evergreen Wellness - The Villages'),
+            $theme_dir . '/admin-colors/evergreen/colors.css',
+            array( '#bed743', '#f89d38', '#3a7d3b', '#7d7d7d')
+            );
+    }
+}        
 add_action('admin_init', 'egw_admin_color_scheme');
+/**
+ * Author - Doe
+ * Date - 10-11-2016
+ * Purpose - For Setting Default Color Scheme of new users to Evergreen Wellness - The Villages
+ */
+function set_default_admin_color($user_id) {
+    $args = array(
+        'ID' => $user_id,
+        'admin_color' => 'Evergreen Wellness - The Villages'
+    );
+    wp_update_user( $args );
+}
+add_action('user_register', 'set_default_admin_color');
