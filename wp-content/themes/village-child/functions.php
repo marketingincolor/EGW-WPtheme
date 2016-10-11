@@ -2050,3 +2050,21 @@ function add_last_updated()
     }
 }
 add_action( 'last_updated', 'add_last_updated' );
+
+/**
+ * Author - Doe
+ * Date - 10-10-2016
+ * Purpose - Admin Color Schemes
+ */
+function egw_admin_color_scheme() {
+
+    $theme_dir = get_stylesheet_directory_uri();
+
+    wp_admin_css_color(
+        'evergreen', __('Evergreen Wellness'),
+        $theme_dir . '/admin-colors/evergreen/colors.css',
+        array( '#bed743', '#f89d38', '#3a7d3b', '#7d7d7d')
+        );
+}
+        
+add_action('admin_init', 'egw_admin_color_scheme');

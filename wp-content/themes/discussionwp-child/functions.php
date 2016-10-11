@@ -2079,3 +2079,16 @@ function egw_category_shortcode($atts)
     }
 }
 add_shortcode('egw-learn-more', 'egw_category_shortcode');
+
+function egw_admin_color_scheme() {
+
+    $theme_dir = get_stylesheet_directory_uri();
+
+    wp_admin_css_color(
+        'evergreen', __('Evergreen Wellness - The Villages'),
+        $theme_dir . '/admin-colors/evergreen/colors.css',
+        array( '#bed743', '#f89d38', '#3a7d3b', '#7d7d7d')
+        );
+}
+        
+add_action('admin_init', 'egw_admin_color_scheme');
