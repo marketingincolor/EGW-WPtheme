@@ -2053,15 +2053,15 @@ add_action( 'last_updated', 'add_last_updated' );
 
 /**
  * Author - Doe
- * Date - 10-10-2016
- * Purpose - Admin Color Schemes
+ * Date - 10-11-2016
+ * Purpose - For adding Evergreen Admin Theme
  */
 function egw_admin_color_scheme() {
 
     $theme_dir = get_stylesheet_directory_uri();
 
     wp_admin_css_color(
-        'evergreen', __('Evergreen Wellness'),
+        'evergreen', __('Evergreen Wellness - The Villages'),
         $theme_dir . '/admin-colors/evergreen/colors.css',
         array( '#bed743', '#f89d38', '#3a7d3b', '#7d7d7d')
         );

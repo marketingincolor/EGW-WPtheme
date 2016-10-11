@@ -2080,6 +2080,11 @@ function egw_category_shortcode($atts)
 }
 add_shortcode('egw-learn-more', 'egw_category_shortcode');
 
+/**
+ * Author - Doe
+ * Date - 10-11-2016
+ * Purpose - For adding Evergreen Admin Theme
+ */
 function egw_admin_color_scheme() {
 
     $theme_dir = get_stylesheet_directory_uri();
