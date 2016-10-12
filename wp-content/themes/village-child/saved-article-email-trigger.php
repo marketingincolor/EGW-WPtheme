@@ -7,7 +7,7 @@
                     <div class="form-group">
                         <div class="vc_col-lg-12 saved_art_form-box">
                             <?php $selectedArticles = $_POST['offset']; ?>
-                            <input type="text" value="" maxlength="100" class="form-control" name="emailaddress" id="name" placeholder="Email">
+                            <input type="text" value="" maxlength="100" class="form-control" name="emailaddress" id="email_address" placeholder="Email">
                             <div id="errorBox-email"></div>
                             <textarea  name="comments" placeholder="Type Message here..."  rows="4" cols="50"></textarea>
                             <div id="errorBox-comments"></div>
@@ -59,8 +59,8 @@
                                 </div>
                             </div>
                             <div class="saved_art_action_btns-pop">
-                                <input class="fsp_cancel_btn_pop"type="button" value="Cancel" name="Cancel">
-<!--                                        <a class="fsp_send_btn_pop" href="<?php //the_permalink();                                 ?>" title="Send" rel="">Send</a>-->
+                                <input class="fsp_cancel_btn_pop"type="reset" value="Cancel" name="Cancel">
+<!--                                        <a class="fsp_send_btn_pop" href="<?php //the_permalink();                                  ?>" title="Send" rel="">Send</a>-->
                                 <input class="fsp_send_btn_pop" id="emailsend" type="button" value="Send" name="Send">
                             </div>
                             <!-- saved articles ends here -->
@@ -144,6 +144,14 @@
 
 
             }
+            return false;
+        });
+
+        jQuery(".fsp_cancel_btn_pop").click(function () {
+            var isValidated = validate_popupform();
+            jQuery('#email_address').val()="";
+            jQuery('#email_address').val()="";
+
             return false;
         });
     });

@@ -23,16 +23,16 @@ if (isset($_POST)) {
         );
         $saved_posts_values = get_posts($args);
 //        if (have_posts()) : while (have_posts()) : the_post();
-        $articlefetched = '<ul style="width=50%;"><li style="margin:30px 0px 30px 0px; list-style: none;">' . $original_arraylist['comments'] . '</li>';
+        $articlefetched = '<ul style="width=50%;"><li style="margin:30px 0px 30px 0px; list-style: none; width:730px;">' . $original_arraylist['comments'] . '</li>';
         if ($saved_posts_values) {
             foreach ($saved_posts_values as $post) {
                 setup_postdata($post);
                 $articlefetched.='<li style="list-style: none;">';
                 $articlefetched.='<div class="art-cont-dis">';
-                $articlefetched.='<div class="saved_art_img">' . get_the_post_thumbnail($post->ID, array(2000,300)) . '</div>';
+                $articlefetched.='<div class="saved_art_img">' . get_the_post_thumbnail($post->ID, array(2400,400)) . '</div>';
                 $articlefetched.='<div class = "saved_art_cont-pop">';
                 $articlefetched.='<h4 id = "' . $post->ID . '" style="font-weight:bold; margin:30px 0px 30px 0px">' . get_the_title($post->ID) . '</h4>';
-                $articlefetched.= '<p style="margin:30px 0px 30px 0px">' . get_the_content($post->ID) . '</p>';
+                $articlefetched.= '<p style="margin:30px 0px 30px 0px; width:730px;">' . get_the_content($post->ID) . '</p>';
                 $articlefetched.='</div>';
                 $articlefetched.='</div>';
                 $articlefetched.='</li>';
