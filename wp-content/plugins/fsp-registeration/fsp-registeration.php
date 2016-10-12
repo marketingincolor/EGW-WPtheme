@@ -209,8 +209,10 @@ function fspr_login_form_fields() {
                     <input id="fspr_login_submit" name="fspr_login_submit" type="submit" value="Login" class="fsplogin_btn"/>
                 </p>
                 <div class="fs_forgot_password">
-                    <a href="<?php echo home_url('/register') ?>">Register</a> |
-                    <a href="<?php echo home_url('/forgot-password') ?>">Forgot your password?</a>                 
+                    <!-- <a href="<?php #echo home_url('/register') ?>">Register</a> | -->
+                    <a href="<?php echo home_url('/forgot-password') ?>">Forgot your password?</a>
+                    <br/>
+                    <p>Not a member yet? <a href="<?php echo home_url('/register/') ?>">Click here to sign up for a FREE account!</a></p>
                 </div>
             </fieldset>
         </form>
