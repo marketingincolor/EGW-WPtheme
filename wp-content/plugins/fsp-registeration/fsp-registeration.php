@@ -212,7 +212,7 @@ function fspr_login_form_fields() {
                     <!-- <a href="<?php #echo home_url('/register') ?>">Register</a> | -->
                     <a href="<?php echo home_url('/forgot-password') ?>">Forgot your password?</a>
                     <br/>
-                    <p>Not a member yet? <a href="<?php echo home_url('/register/') ?>">Click here to sign up for a FREE account!</a></p>
+                    <p style="font-size:13px;">Not a member yet?<br/> <a href="<?php echo home_url('/register/') ?>">Click here to sign up for a FREE account!</a></p>
                 </div>
             </fieldset>
         </form>
