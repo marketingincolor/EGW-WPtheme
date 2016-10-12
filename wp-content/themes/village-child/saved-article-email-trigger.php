@@ -136,9 +136,9 @@
                         emaildata: dataString,
                     },
                     success: function (result) {
-                        alert(result);
                         jQuery('.form-group').hide();
-                        document.getElementById("#successmsg h3").innerHTML = "Re-enter the email addtess";
+                        jQuery('#successmsg').show();
+                        jQuery('#successmsg>h3').html(result);
                     }
                 });
 

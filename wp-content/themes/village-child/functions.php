@@ -2026,7 +2026,6 @@ function saved_articles_popup_email() {
     get_template_part('article_share_via_email');
     exit;
 }
-
 add_action('wp_ajax_saved_articles_popup_email', 'saved_articles_popup_email');
 add_action('wp_ajax_nopriv_saved_articles_popup_email', 'saved_articles_popup_email');
 
