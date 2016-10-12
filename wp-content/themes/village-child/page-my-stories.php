@@ -55,8 +55,6 @@ $merged_new_ar = array();
                                             //$my_query = discussion_custom_categorylist_query($post_type, $cat_id_ar, $post_per_section);
                                         }
                                     }
-
-                                    
                                     ?>      
                                 </div>
                             </div>		
@@ -78,5 +76,55 @@ $merged_new_ar = array();
     </div>
 </div>
 <!-- For post pagintation maintain -->
+<?php //include(locate_template('block/ajax-pagination.php')); ?>
 <?php get_footer(); ?>
+<script>
+
+    function load_saved_articles(event) {
+
+        var displayed_article_count = parseInt(jQuery('#displayed_article_count').text());
+        var total_article_count = parseInt(jQuery('#total_saved_article_count').text());
+        jQuery('#load-save-article-button').css('display', 'none');
+        jQuery('.loader_img').css('display', 'block');
+        jQuery.ajax({
+            type: "POST",
+            url: "<?php echo bloginfo('wpurl'); ?>/wp-admin/admin-ajax.php",
+            data: {
+                action: 'custom_scroll_saved_articles_load',
+                offset: displayed_article_count,
+            },
+            success: function (data)
+            {
+                if (jQuery('#story-send').css('display') === 'black') {
+                    jQuery('.save-article-checkbox').css('display', 'black');
+                }
+                jQuery(data).insertAfter('.saved-articles-sidelist-nw:last');
+                current_displayed_article_count = displayed_article_count + 3;
+                jQuery('#displayed_article_count').text(current_displayed_article_count);
+                jQuery('.loader_img').css('display', 'none');
+                if (current_displayed_article_count >= total_article_count) {
+                    jQuery('.load-save-article-button-section').css('display', 'none');
+                } else {
+                    jQuery('.load-save-article-button-section').css('display', 'block');
+                }
+            }
+        });
+        if (jQuery('#story-send').css("display") == "block") {
+            setTimeout(function () {
+                jQuery('.save-article-checkbox').css('display', 'block');
+            }, 1200);
+
+            
+        }
+        event.preventDefault();
+
+    }
+
+    jQuery(document).ready(function () {
+        jQuery('#enable_story_playlist').click(function () {
+            jQuery('#story-send').css('display', 'block');
+            jQuery('.save-article-checkbox').css('display', 'block');
+        });
+    });
+</script>
 

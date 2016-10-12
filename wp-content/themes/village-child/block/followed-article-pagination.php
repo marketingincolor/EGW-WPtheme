@@ -116,8 +116,8 @@ if(!isset($displayed_sub_cat_ar))
                 Current_loop = jQuery('#currentloop').val();
                 active_loop = parseInt(Current_loop) + parseInt(1);
                 jQuery('#currentloop').val(active_loop)
-                jQuery('#adv_row_' + active_loop).show();
-                jQuery(data).insertAfter('#adv_row_' + Current_loop);
+                jQuery('#mob_adv_row_' + active_loop).show();
+                jQuery(data).insertAfter('#mob_adv_row_' + Current_loop);
                 current_total = parseInt(parseInt(jQuery('#current_post').val()) + post_per_section);
                 if(query_type1==='followed'){
                     follow_current_total=parseInt(parseInt(jQuery('#followed_current_post').val()) + post_per_section);

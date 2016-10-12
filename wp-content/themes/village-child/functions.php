@@ -7,6 +7,7 @@ function my_theme_enqueue_styles() {
     wp_enqueue_style('discussion_modules', get_stylesheet_directory_uri() . '/assets/css/modules.css');
     wp_enqueue_style('fsp_custom_css', get_stylesheet_directory_uri() . '/assets/css/fspstyles.css');
     wp_enqueue_style('fsp_custom_popup', get_stylesheet_directory_uri() . '/assets/css/magnific-popup.css');
+    wp_enqueue_style('fsp_nice_scroll_css', get_stylesheet_directory_uri() . '/assets/css/nice-scroll.css');
 }
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
@@ -36,7 +37,7 @@ if (!function_exists('discussion_scripts')) {
         wp_enqueue_script('discussion_modules', MIKADO_ASSETS_ROOT . '/js/modules.min.js', array('jquery'), false, true);
         wp_enqueue_script('fsp-custom-popupjs', get_stylesheet_directory_uri() . '/assets/js/jquery.magnific-popup.js', array('jquery'), false, true);
         wp_enqueue_script('common script', get_stylesheet_directory_uri() . '/assets/js/common.js', array('jquery'), false, true);
-
+        wp_enqueue_script('nicescroll script', get_stylesheet_directory_uri() . '/assets/js/jquery.nicescroll.min.js', array('jquery'), false, true);
         //include comment reply script
         $wp_scripts->add_data('comment-reply', 'group', 1);
         if (is_singular()) {
@@ -141,17 +142,16 @@ if (!function_exists('follow_categorypost_detail')) {
 
 }
 
-    
-function remainfollow_categorypost_detail($post_type, $subcat_id_sgl, $display_postid_ar,$limit) {
-        $posts =get_posts( array(
-            'post_type' => $post_type,
-            'cat' => $subcat_id_sgl,
-            'order' => 'DESC',
-            'posts_per_page' => $limit,
-            'post__not_in' => $display_postid_ar
-        ));
-        return $posts;
-    }
+function remainfollow_categorypost_detail($post_type, $subcat_id_sgl, $display_postid_ar, $limit) {
+    $posts = get_posts(array(
+        'post_type' => $post_type,
+        'cat' => $subcat_id_sgl,
+        'order' => 'DESC',
+        'posts_per_page' => $limit,
+        'post__not_in' => $display_postid_ar
+    ));
+    return $posts;
+}
 
 /**
  * Author - Rajasingh
@@ -958,77 +958,66 @@ function custom_comment($comment, $args, $depth) {
     if ($is_pingback_comment) {
         $comment_class .= ' mkd-pingback-comment';
     }
-    ?>
-    <li>
-        <div class="<?php echo esc_attr($comment_class); ?>">
-    <?php if (!$is_pingback_comment) { ?>
-                <div class="mkd-comment-image"> 
-        <?php
+    echo '<li>';
+    echo '<div class="' . esc_attr($comment_class) . '">';
+    if (!$is_pingback_comment) {
+        echo '<div class="mkd-comment-image">';
         $user = $comment->user_id;
         $custom_avatar_meta_data = get_user_meta($user, 'custom_avatar');
         if (isset($custom_avatar_meta_data) && !empty($custom_avatar_meta_data[0])):
             $attachment = wp_get_attachment_image_src($custom_avatar_meta_data[0]);
-            ?>
-                        <img src="<?php echo $attachment[0]; ?>" width="85px" height="85px"/>
-                    <?php else : ?>                                                    
-                        <img src="<?php echo get_stylesheet_directory_uri() . '/assets/img/aavathar.jpg' ?>" width="85px" height="85px" />
-                    <?php endif; ?>
-                </div>
-                <?php } ?>
-            <div class="mkd-comment-text-and-info">
-                <div class="mkd-comment-info-and-links">
-                    <h6 class="mkd-comment-name">
-            <?php
-            if ($is_pingback_comment) {
-                esc_html_e('Pingback:', 'discussionwp');
-            }
-            $user_name = get_user_meta($user);
-            ?><span class="mkd-comment-author"><?php
-                        if (!empty($user_name['first_name'][0])) {
-                            echo $user_name['first_name'][0];
-                        } else {
-                            echo wp_kses_post(get_comment_author_link());
-                        }
-                        ?></span>
-                        <?php if ($is_author_comment) { ?>
-                            <span class="mkd-comment-mark"><?php esc_html_e('/', 'discussionwp'); ?></span>
-                            <span class="mkd-comment-author-label"><?php esc_html_e('Author', 'discussionwp'); ?></span>
-    <?php } ?>
-                    </h6>
-                    <h6 class="mkd-comment-links">
-    <?php if (!is_user_logged_in()) : ?>
-                            <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>
-                            <?php
-                        else :
-                            $userid = get_current_user_id();
-                            $user_blog_id = get_user_meta($userid, 'primary_blog', true);
-                            $blog_id = get_current_blog_id();
-                            if ($blog_id != $user_blog_id):
-                                ?>
-                                <a href="<?php echo home_url('/login') ?>"><?php _e('Login To Reply', 'discussionwp'); ?></a>                                                                   
-                                <?php
-                            else :
-                                comment_reply_link(array_merge($args, array('reply_text' => esc_html__('Reply', 'discussionwp'), 'depth' => $depth, 'max_depth' => $args['max_depth'])));
-                            endif;
-                        endif;
-                        ?>
-                        <span class="mkd-comment-mark"><?php esc_html_e('/', 'discussionwp'); ?></span>
-                        <?php
-                        edit_comment_link(esc_html__('Edit', 'discussionwp'));
-                        ?>
-                    </h6>
-                </div>
-    <?php if (!$is_pingback_comment) { ?>
-                    <div class="mkd-comment-text">
-                        <div class="mkd-text-holder" id="comment-<?php echo comment_ID(); ?>">
-        <?php comment_text(); ?>
-                            <span class="mkd-comment-date"><?php comment_time(get_option('date_format')); ?></span>
-                        </div>
-                    </div>
-    <?php } ?>
-            </div>
-        </div>
-    <?php
+            echo '<img src="' . $attachment[0] . '" width="85px" height="85px"/>';
+        else :
+            echo '<img src="' . get_stylesheet_directory_uri() . "/assets/img/aavathar.jpg" . '" width="85px" height="85px" />';
+        endif;
+        echo '</div>';
+    }
+    echo '<div class="mkd-comment-text-and-info">';
+    echo '<div class="mkd-comment-info-and-links">';
+    echo '<h6 class="mkd-comment-name">';
+    if ($is_pingback_comment) {
+        esc_html_e('Pingback:', 'discussionwp');
+    }
+    $user_name = get_user_meta($user);
+    echo '<span class="mkd-comment-author">';
+    if (!empty($user_name['first_name'][0])) {
+        echo $user_name['first_name'][0];
+    } else {
+        echo wp_kses_post(get_comment_author_link());
+    }
+    echo '</span>';
+    if ($is_author_comment) {
+        echo '<span class="mkd-comment-mark">' . esc_html_e('/', 'discussionwp') . '</span>';
+        echo '<span class="mkd-comment-author-label">' . esc_html_e('Author', 'discussionwp') . '</span>';
+    }
+    echo '</h6>';
+    echo '<h6 class="mkd-comment-links">';
+    if (!is_user_logged_in()) :
+        echo '<a href="' . home_url('/login') . '">' . _e('Login To Reply', 'discussionwp') . '</a>';
+    else :
+        $userid = get_current_user_id();
+        $user_blog_id = get_user_meta($userid, 'primary_blog', true);
+        $blog_id = get_current_blog_id();
+        if ($blog_id != $user_blog_id):
+            echo '<a href="' . home_url('/login') . '">' . _e('Login To Reply', 'discussionwp') . '</a>';
+        else :
+            comment_reply_link(array_merge($args, array('reply_text' => esc_html__('Reply', 'discussionwp'), 'depth' => $depth, 'max_depth' => $args['max_depth'])));
+        endif;
+    endif;
+    echo '<span class="mkd-comment-mark">' . esc_html_e('/', 'discussionwp') . '</span>';
+    edit_comment_link(esc_html__('Edit', 'discussionwp'));
+    echo '</h6>';
+    echo '</div>';
+    if (!$is_pingback_comment) {
+        echo '<div class="mkd-comment-text">';
+        echo '<div class="mkd-text-holder" id="comment-' . comment_ID . '">';
+        comment_text();
+        echo '<span class="mkd-comment-date">' . comment_time(get_option('date_format')) . '</span>';
+        echo '</div>';
+        echo '</div>';
+    }
+    echo '</div>';
+    echo '</div>';
 }
 
 function SocialNetworkShareLink($net, $image) {
@@ -1188,7 +1177,6 @@ function village_article_title_class() {
     $next_post = $wp_query->posts[$wp_query->current_post + 1];
     $data = array(get_the_title(), $next_post->post_title);
     return get_title_class($data);
-    
 }
 
 /**
@@ -1322,6 +1310,8 @@ function add_login_logout_to_menu($items, $args) {
 
     $redirect = ( is_home() ) ? home_url('/') : home_url('/');
     $homeurl = home_url('/');
+    if (is_user_logged_in() && get_current_blog_id() != 1)
+        $link = '<a class="" href="' . $homeurl . 'my-stories/"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">My Stories</span></span></span></a>';
     if (!is_user_logged_in() && get_current_blog_id() == 1)
         $link = '<a class="" href="' . $homeurl . 'register"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">Join</span></span></span></a>';
     // else  
@@ -1957,79 +1947,87 @@ class DiscussionCategoryLayoutTabs extends DiscussionWidget {
 
 
             $i = 1;
-            ?>
-                <div class="mkd-plw-tabs-content">
-                <?php foreach ($sub_categories as $category) { ?>
+            echo '<div class="mkd-plw-tabs-content">';
+            foreach ($sub_categories as $category) {
 
-                    <?php if ($i == 1 || $i % 3 == 1): ?>
-                            <div class="mkd-bnl-holder mkd-pl-five-holder  mkd-post-columns-3">
-                                <div class="mkd-bnl-outer">
-                                    <div class="mkd-bnl-inner">
-                            <?php
-                        endif;
-                        ?>
+                if ($i == 1 || $i % 3 == 1):
+                    echo '<div class="mkd-bnl-holder mkd-pl-five-holder  mkd-post-columns-3">';
+                    echo '<div class="mkd-bnl-outer">';
+                    echo '<div class="mkd-bnl-inner">';
+                endif;
 
-                                    <div class="mkd-pt-five-item mkd-post-item">
-                                        <div class="mkd-pt-five-item-inner">
-                                            <div class="mkd-pt-five-top-content">
+                echo '<div class="mkd-pt-five-item mkd-post-item">';
+                echo '<div class="mkd-pt-five-item-inner">';
+                echo '<div class="mkd-pt-five-top-content">';
 
-                                                <!-- image section -->
-                                                <div class="mkd-pt-five-image">
-                                                    <a itemprop="url" class="mkd-pt-five-link mkd-image-link" href="<?php echo esc_url(get_category_link($category->term_id)) ?>" target="_self">
-                <?php
+                //<!-- image section -->
+                echo '<div class="mkd-pt-five-image">';
+                echo '<a itemprop="url" class="mkd-pt-five-link mkd-image-link" href="' . esc_url(get_category_link($category->term_id)) . '" target="_self">';
+
                 $attr = array(
                     'class' => '',
                     'alt' => $category->name,
-                    //                        'height' =>198,
-                    //                        'width' => 302,
+                    // 'height' =>198,
+                    // 'width' => 302,
                     'title' => $category->name,
                 );
                 z_taxonomy_image($category->term_id, 'full', $attr);
-
-                //echo '<img src="'.z_taxonomy_image_url($category->term_id).'" alt="'.$category->name.'" width="'.$instance['thumb_image_width'].'" height="'.$instance['thumb_image_height'].'" />';
-                // echo discussion_generate_thumbnail(z_taxonomy_image_url($category->term_id),null,$thumb_image_width,$thumb_image_height);
-                ?>	
-                                                    </a></div>	
-
-
-                                                <div class="mkd-pt-five-content">
-                                                    <div class="mkd-pt-five-content-inner">
-                                                        <h6 class="mkd-pt-five-title">
-                                                            <a itemprop="url" class="mkd-pt-link" href="<?php echo esc_url(get_category_link($category->term_id)) ?>" target="_self">
-                <?php
+                echo '</a></div>';
+                echo '<div class="mkd-pt-five-content">';
+                echo '<div class="mkd-pt-five-content-inner">';
+                echo '<h6 class="mkd-pt-five-title">';
+                echo '<a itemprop="url" class="mkd-pt-link" href="' . esc_url(get_category_link($category->term_id)) . '"target="_self">';
                 echo $category->name;
-                ?>
-                                                            </a> 
-                                                        </h6>   
-                                                        <div class="mkd-pt-one-excerpt">                                                    
-                                                        </div>
-                                                    </div>			
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                <?php if ($i % 3 == 0 || $i == count($sub_categories)): ?>
-                                    </div>
-                                </div>
-                            </div>
-                                        <?php
-                                    endif;
-                                    $i++;
-                                    //echo do_shortcode('[mkd_post_layout_'.$layout.' '.${$params_label.$key}.']'); // XSS OK
+                echo '</a>';
+                echo '</h6>';
+                echo '<div class="mkd-pt-one-excerpt">';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                if ($i % 3 == 0 || $i == count($sub_categories)):
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                endif;
+                $i++;
+                //echo do_shortcode('[mkd_post_layout_'.$layout.' '.${$params_label.$key}.']'); // XSS OK
 //                        echo'</div>';
-                                }
-                                ?>
-                </div>
-                    <?php
-                }
-                echo '</div>'; //close div.mkd-plw-tabs-content-holder
-                echo '</div>'; //close div.mkd-plw-tabs-inner
-                echo '</div>'; //close div.mkd-plw-tabs
             }
 
+            echo '</div>';
         }
+        echo '</div>'; //close div.mkd-plw-tabs-content-holder
+        echo '</div>'; //close div.mkd-plw-tabs-inner
+        echo '</div>'; //close div.mkd-plw-tabs
+    }
 
-        add_action('widgets_init', create_function('', 'return register_widget("DiscussionCategoryLayoutTabs");'));
-        ?>
+}
+
+add_action('widgets_init', create_function('', 'return register_widget("DiscussionCategoryLayoutTabs");
+                    '));
+
+
+
+
+function saved_articles_load_popup() {
+    get_template_part('saved-article-email-trigger');
+    exit;
+}
+
+add_action('wp_ajax_saved_articles_load_popup', 'saved_articles_load_popup');
+add_action('wp_ajax_nopriv_saved_articles_load_popup', 'saved_articles_load_popup');
+
+//Email
+
+function saved_articles_popup_email() {
+    get_template_part('article_share_via_email');
+    exit;
+}
+
+add_action('wp_ajax_saved_articles_popup_email', 'saved_articles_popup_email');
+add_action('wp_ajax_nopriv_saved_articles_popup_email', 'saved_articles_popup_email');
+
+?>
