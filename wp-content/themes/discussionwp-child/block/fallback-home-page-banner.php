@@ -1,25 +1,9 @@
-<?php
-/**
- * Author - Akilan, Doe
- * Date - 20-07-2015
- * Purpose - For keeping home page banner as seperate process
- * Last Updated - 10-13-2016
- */
-$category='feature-home';
-?>
-<div style="" class="vc_row wpb_row vc_row-fluid mkd-section mkd-content-aligment-left">
-    <div class="clearfix mkd-full-section-inner">
-        <div class="wpb_column vc_column_container vc_col-sm-12">
-            <div class="vc_column-inner ">
-                <div class="wpb_wrapper">
-                    <div class="mkd-bnl-holder mkd-psi-holder  mkd-psi-number-5" style="opacity: 1;">
-                        <div class="mkd-bnl-outer">
-                            <?php
+ <?php
+ $category='feature-home';
+
                             $args = array(
                                 'post_type' => array('post', 'videos'),
                                 'posts_per_page' => '1',
-                                'order' => 'DESC',
-                                'post_status' => 'publish',
                                 'title_tag' => 'h2',
                                 'display_category' => 'no',
                                 'display_date' => 'no',
@@ -27,9 +11,10 @@ $category='feature-home';
                                 'display_comments' => 'no',
                                 'display_count' => 'yes',
                                 'display_share' => 'no',
-                                'slider_height' => '',
-                                'meta_key' => 'featured_post',
-                                'meta_value' => 'Yes'
+                                'order' => 'DESC',
+                                'post_status' => 'publish',
+                                'category_name' => 'feature-home',
+                                'slider_height' => ''
                             );
                             $my_query = new WP_Query ($args);
                             $atts['query_result'] = discussion_custom_featured_query($category);
@@ -37,7 +22,7 @@ $category='feature-home';
                             $html = '';
                             $thumb_html = '';
                             $data = discussion_custom_getData($params, $atts);
-                            if ( $my_query->have_posts() && $args['meta_value'] == 'Yes'):
+                            if ( $my_query->have_posts() && $args['category_name'] == 'feature-home'):
                                 $title_ta = 'h2';
                                 $display_category = 'no';
                                 $display_date = 'yes';
@@ -100,18 +85,10 @@ $category='feature-home';
                                     <?php
                                 endwhile;
 
-
                             else:
-                                require_once('fallback-home-page-banner.php');
+                                discussion_get_module_template_part('templates/parts/no-posts', 'blog');
 
                             endif;
                             wp_reset_postdata();
                             echo $html;
                             ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>    
-    </div>
-</div>
