@@ -1,8 +1,9 @@
 <?php
 /**
- * Author - Akilan
+ * Author - Akilan, Doe
  * Date - 20-07-2015
  * Purpose - For keeping home page banner as seperate process
+ * Last Updated - 10-13-2016
  */
 $category='feature-home';
 ?>
@@ -17,6 +18,8 @@ $category='feature-home';
                             $args = array(
                                 'post_type' => array('post', 'videos'),
                                 'posts_per_page' => '1',
+                                'order' => 'DESC',
+                                'post_status' => 'publish',
                                 'title_tag' => 'h2',
                                 'display_category' => 'no',
                                 'display_date' => 'no',
@@ -24,7 +27,9 @@ $category='feature-home';
                                 'display_comments' => 'no',
                                 'display_count' => 'yes',
                                 'display_share' => 'no',
-                                'slider_height' => ''
+                                'slider_height' => '',
+                                'meta_key' => 'featured_post',
+                                'meta_value' => 'Yes'
                             );
                             $my_query = new WP_Query ($args);
                             $atts['query_result'] = discussion_custom_featured_query($category);
@@ -32,7 +37,7 @@ $category='feature-home';
                             $html = '';
                             $thumb_html = '';
                             $data = discussion_custom_getData($params, $atts);
-                            if ($my_query->have_posts()):
+                            if ( $my_query->have_posts() && $args['meta_value'] == 'Yes'):
                                 $title_ta = 'h2';
                                 $display_category = 'no';
                                 $display_date = 'yes';
@@ -42,7 +47,7 @@ $category='feature-home';
                                 $display_share = 'yes';
                                 $slider_height = '';
 
-                                while ($my_query->have_posts()) : $my_query->the_post();
+                                while ( $my_query->have_posts()) : $my_query->the_post();
                                     $id = get_the_ID();
                                     $image_params = discussion_custom_getImageParams($id);
                                     $params = array_merge($params, $image_params);
@@ -95,8 +100,9 @@ $category='feature-home';
                                     <?php
                                 endwhile;
 
+
                             else:
-                                discussion_get_module_template_part('templates/parts/no-posts', 'blog');
+                                require_once('fallback-home-page-banner.php');
 
                             endif;
                             wp_reset_postdata();
