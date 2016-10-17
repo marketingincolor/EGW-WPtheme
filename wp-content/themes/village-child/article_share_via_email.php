@@ -55,7 +55,7 @@ if (isset($_POST)) {
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <table align="center" style="" cellspacing="0" cellpadding="0">
+                                                        <table align="center" width="509" style="" cellspacing="0" cellpadding="0">
                                                             <tbody>
                                                                 <tr>
                                                                     <td style="background:#ffffff; padding-top:20px; padding-bottom:25px; padding-left:20px; padding-right:20px;">
@@ -77,7 +77,7 @@ if (isset($_POST)) {
                 setup_postdata($post);
                 $articlefetched.='<tr>
                                         <td>
-                                            <table align="center" style="box-shadow: 1px 4px 12px #eeeeee;" cellspacing="0" cellpadding="0">
+                                            <table align="center" width="509" style="box-shadow: 1px 4px 12px #eeeeee;" cellspacing="0" cellpadding="0">
                                                 <tbody>
                                                     <tr>
                                                         <td colspan="2" style="background: #3d7f3c; padding-top:10px; padding-bottom:10px;padding-left:15px;" > 
@@ -92,7 +92,7 @@ if (isset($_POST)) {
                                                                         <td align="top">' . get_the_post_thumbnail($post->ID, array(126, 126)) . ' </td>
                                                                         <td style="padding-left:20px; padding-right:20px;">
                                                                             <p style="font-size:13px; color:#787b80; margin-top: 0; line-height: 17px;min-height: 80px;">' . substr(get_the_content($post->ID), 0, 125) . '... </p> 
-                                                                            <a href="' . get_post_permalink($post->ID) . '" target="_blank" style="background: #f39e46;color: #ffffff; float: left; font-size: 12px; font-weight: bold; padding-top:10px; padding-bottom:10px; padding-left:25px; padding-right:25px; text-decoration: none;">Read Article</a> 
+                                                                            <a href="' . get_permalink($post->ID) . '" target="_blank" style="background: #f39e46;color: #ffffff; float: left; font-size: 12px; font-weight: bold; padding-top:10px; padding-bottom:10px; padding-left:25px; padding-right:25px; text-decoration: none;">Read Article</a> 
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
