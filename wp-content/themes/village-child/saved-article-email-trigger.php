@@ -89,7 +89,7 @@
         if (emailaddress == "")
         {
             document.selectedArticleform.emailaddress.focus();
-            document.getElementById("errorBox-email").innerHTML = "Re-enter the email addtess";
+            document.getElementById("errorBox-email").innerHTML = "Enter the email address";
             return false;
         } else {
             //this validates all the emails that are seperated by a comma
@@ -148,11 +148,7 @@
         });
 
         jQuery(".fsp_cancel_btn_pop").click(function () {
-            var isValidated = validate_popupform();
-            jQuery('#email_address').val()="";
-            jQuery('#email_address').val()="";
-
-            return false;
+            jQuery.magnificPopup.close();
         });
     });
 </script>

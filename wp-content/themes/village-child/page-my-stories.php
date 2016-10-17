@@ -28,8 +28,10 @@ $merged_new_ar = array();
             <div class="mkd-full-width-inner">               
                 <?php get_template_part('block/home-page-banner'); ?>
                 <!-- Articles display block --->
+
                 <div class="mkd-container">
                     <div class="mkd-container-inner clearfix">
+                        <?php get_template_part('block/follow-and-unfollow-pack'); ?>
                         <div class="mkd-two-columns-75-25  mkd-content-has-sidebar clearfix">
                             <div class="mkd-column1 mkd-content-left-from-sidebar">
                                 <div class="mkd-column-inner">
@@ -98,7 +100,7 @@ $merged_new_ar = array();
                 if (jQuery('#story-send').css('display') === 'black') {
                     jQuery('.save-article-checkbox').css('display', 'black');
                 }
-                jQuery(data).insertAfter('.saved-articles-sidelist-nw:last');
+                jQuery(data).insertAfter('.sv-art-inside-container:last');
                 current_displayed_article_count = displayed_article_count + 3;
                 jQuery('#displayed_article_count').text(current_displayed_article_count);
                 jQuery('.loader_img').css('display', 'none');
@@ -113,18 +115,58 @@ $merged_new_ar = array();
             setTimeout(function () {
                 jQuery('.save-article-checkbox').css('display', 'block');
             }, 1200);
-
-            
         }
         event.preventDefault();
-
     }
-
     jQuery(document).ready(function () {
         jQuery('#enable_story_playlist').click(function () {
             jQuery('#story-send').css('display', 'block');
             jQuery('.save-article-checkbox').css('display', 'block');
         });
     });
+</script>
+<script type = "text/javascript">
+    jQuery(function () {
+        jQuery(".comment_button").unbind('click').click(function () {
+            var dataString = jQuery('#followsubcat').serialize();
+            jQuery.ajax({
+                type: "POST",
+                url: "<?php echo get_stylesheet_directory_uri(); ?>/followajax.php",
+                data: dataString,
+                cache: false,
+                success: function (successvalue) {
+                    jQuery('#followedSubcat').html(successvalue);
+                }
+            });
+            return false;
+        });
+
+        //Delete ajax
+        jQuery("#unfollow_button").unbind('click').click(function () {
+            var dataString = jQuery('#unfollowsubcat').serialize();
+
+            var values = jQuery('input:checkbox:checked.followedsubcates').map(function () {
+                return this.value;
+            }).get(); // ["18", "55", "10"]
+            if (values.length == 0) {
+                alert('You must check at least one box!');
+                return false; // The form will *not* submit
+            } else {
+                jQuery.ajax({
+                    type: "POST",
+                    url: "<?php echo get_stylesheet_directory_uri(); ?>/followajax.php",
+                    data: dataString,
+                    cache: false,
+                    success: function (deletedvalue) {
+                        jQuery('#followedSubcat').html(deletedvalue);
+                    }
+                });
+                return false;
+            }
+        });
+
+
+    });
+
 </script>
 

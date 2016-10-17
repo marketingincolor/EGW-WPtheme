@@ -24,7 +24,7 @@
                         $saved_posts = query_posts($args);
                         ?>
 
-                        <div class="saved-articles-sidelist-nw">
+                        <div class="saved-articles-sidelist-nw saved-articles-border-btm">
                             <a id="enable_story_playlist" href="javascript:void(0)">Send stories to friends <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                             <div id="story-send" style="display:none">
                                 <div class="send-str-blk">
@@ -37,33 +37,32 @@
                         <form action="" name="savedStories" id="savedArticles" method="post">
                             <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
                                     <?php if (($sidebar == 'default') || ($sidebar == '')) : ?>
-
-                                        <div class="saved-articles-sidelist-nw">
-                                            <div class="sidelist-nw-innercontainer clearfix">
-                                                <div class="sidelist-nw-imgblk">
-                                                    <?php if (has_post_thumbnail()) : ?>
-                                                        <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-                                                            <?php the_post_thumbnail([70, 70]) ?>
-                                                        </a>
-                                                    <?php endif; ?>
+                                        <div class="sv-art-inside-container">
+                                            <input type="checkbox" name="saved-posts[]" value="<?php the_ID(); ?>" class="save-article-checkbox" id="<?php the_ID(); ?>" style="display:none" />
+                                                <div class="saved-articles-sidelist-nw">
+                                                <div class="sidelist-nw-innercontainer clearfix">
+                                                    <div class="sidelist-nw-imgblk">
+                                                        <?php if (has_post_thumbnail()) : ?>
+                                                            <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+                                                                <?php the_post_thumbnail([70, 70]) ?>
+                                                            </a>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                    <div class="sidelist-nw-contblk">
+                                                        <h6 class="mkd-pt-seven-title">
+                                                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>                                            
+                                                        </h6>   
+                                                    </div>
                                                 </div>
-                                                <div class="sidelist-nw-contblk">
-                                                    <h6 class="mkd-pt-seven-title">
-                                                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>                                            
-                                                    </h6>                                        
-
-                                                    <input type="checkbox" name="saved-posts[]" value="<?php the_ID(); ?>" class="save-article-checkbox" id="<?php the_ID(); ?>" style="display:none" />
-                                                </div>
+                                                <div class="saved_art_cont_btns sidelist-nw_cont_btns">                                             
+                                                    <a class="fsp_remove_btn" href="?wpfpaction=remove&postid=<?php the_ID(); ?>" title="Remove" rel="">Remove</a>
+                                                    <a class="fsp_readart_btn" href="<?php the_permalink(); ?>" title="Read Article" rel="">Read</a>
+                                                </div> 
                                             </div>
-                                            <div class="saved_art_cont_btns sidelist-nw_cont_btns">                                             
-                                                <a class="fsp_remove_btn" href="?wpfpaction=remove&postid=<?php the_ID(); ?>" title="Remove" rel="">Remove</a>
-                                                <a class="fsp_readart_btn" href="<?php the_permalink(); ?>" title="Read Article" rel="">Read</a>
-                                            </div> 
                                         </div>
-
                                     <?php endif; ?>
                                 <?php endwhile; ?> 
-                            <?php
+                                <?php
                             endif;
 
                             $post = $require_post;
@@ -73,7 +72,7 @@
                         <div id="total_saved_article_count" style="display:none"><?php echo $total_count; ?></div>
 
 
-    <?php if ($total_count > 3): ?>
+                        <?php if ($total_count > 3): ?>
                             <div class="mkd-pt-seven-item mkd-post-item mkd-active-post-page load-save-article-button-section">
                                 <div class="mkd-pt-seven-item-inner clearfix">
                                     <div class="mkd-pt-seven-content-holder">
@@ -91,7 +90,7 @@
                         <?php endif; ?>                                                                            
                     <?php else: ?>
                         <span>No articles found</span> 
-<?php endif; ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
