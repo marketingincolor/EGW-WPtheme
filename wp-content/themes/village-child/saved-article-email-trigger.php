@@ -59,9 +59,10 @@
                                 </div>
                             </div>
                             <div class="saved_art_action_btns-pop">
+                                <input class="fsp_send_btn_pop" id="emailsend" type="button" value="Send" name="Send">
                                 <input class="fsp_cancel_btn_pop"type="reset" value="Cancel" name="Cancel">
 <!--                                        <a class="fsp_send_btn_pop" href="<?php //the_permalink();                                  ?>" title="Send" rel="">Send</a>-->
-                                <input class="fsp_send_btn_pop" id="emailsend" type="button" value="Send" name="Send">
+                                
                             </div>
                             <!-- saved articles ends here -->
                         </div>

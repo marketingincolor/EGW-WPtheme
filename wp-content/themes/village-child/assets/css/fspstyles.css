@@ -1702,12 +1702,11 @@ table.ai1ec-month-view {
 .saved_art_action_btns-pop input.fsp_cancel_btn_pop{
     background: #f69c4a none repeat scroll 0 0;
     border: 1px solid #e8882e;
-    margin-right: 15px;
-
 }
 .saved_art_action_btns-pop input.fsp_send_btn_pop{
     background: #b3cc36 none repeat scroll 0 0;
     border: 1px solid #a4bb6a;
+    margin-right: 15px;
 }
 .saved_art_cont-pop h4{
     font-size:14px;
