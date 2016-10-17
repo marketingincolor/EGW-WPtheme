@@ -6,7 +6,7 @@
  */
 ?>
 
-<div class="widget mkd-rpc-holder hidden-xs">
+<div class="widget mkd-rpc-holder">
     <div class="widget widget_categories">
         <div class="mkd-rpc-content">
             <!-- Insert Ads here -->
