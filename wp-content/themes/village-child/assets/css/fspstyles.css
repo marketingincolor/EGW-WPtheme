@@ -1659,6 +1659,7 @@ table.ai1ec-month-view {
     right: 14px;
     top: 10px;
     font-size: 24px;
+    cursor: pointer;
 }
 
 .saved_art_form-box textarea{

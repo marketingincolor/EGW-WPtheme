@@ -10,13 +10,12 @@ if (isset($_POST)) {
     $original_arraylist['comments'];
 
     //Fetching thier selected articles
-    $fetchedArtcilelist = $original_arraylist['articlefetched'];
-    parse_str($fetchedArtcilelist, $original_fetchedarticles);
+    $sendArticleemail = $original_arraylist['fetchedarticles'];
 
-    if (isset($fetchedArtcilelist) && !empty($fetchedArtcilelist)) {
+    if (isset($sendArticleemail) && !empty($sendArticleemail)) {
         $args = array(
             'orderby' => 'post__in',
-            'post__in' => $original_fetchedarticles['saved-posts'],
+            'post__in' => $sendArticleemail,
             'posts_per_page' => 100,
             'paged' => 1,
             'post_type' => array('post', 'videos')

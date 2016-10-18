@@ -30,24 +30,28 @@
                                             'post_type' => array('post', 'videos')
                                         );
                                         $saved_posts = query_posts($args);
+                                        $loopCount = 0;
                                         ?>
                                         <input type="hidden" name="articlefetched" value="<?php echo $selectedArticles ?>">
                                         <ul id="saved-artiles-list">                        
-                                            <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-                                                    <li>
+                                            <?php
+                                            if (have_posts()) : while (have_posts()) : the_post();
+                                                    $loopCount++;
+                                                    ?>
+                                                    <li id="element_<?php echo $loopCount; ?>">
                                                         <div class="art-cont-dis">
-                                                            <div class="saved_art_img">
-                                                                <?php the_post_thumbnail([117, 117]) ?>
-                                                            </div>
+                                                            <div class="saved_art_img"><?php the_post_thumbnail([117, 117]) ?></div>
                                                             <div class="saved_art_cont-pop">
                                                                 <h4 id="<?php the_ID(); ?>"><?php the_title(); ?></h4>
                                                                 <p><?php custom_discussion_excerpt(15); ?></p>
                                                             </div>
                                                         </div>
                                                         <div class="saved_art_cont_btns-close">
-                                                            <div class="ion-android-close" data-pack="android" data-tags="delete, remove" style="display: inline-block;"></div>
+                                                            <div class="ion-android-close" id="<?php echo $loopCount; ?>" data-pack="android" data-tags="delete, remove" style="display: inline-block;"></div>
                                                         </div>
+                                                        <input type="hidden" name="fetchedarticles[]" value="<?php the_ID(); ?>">
                                                     </li>
+
                                                 <?php endwhile; ?>     
                                                 <?php
                                             endif;
@@ -61,8 +65,8 @@
                             <div class="saved_art_action_btns-pop">
                                 <input class="fsp_send_btn_pop" id="emailsend" type="button" value="Send" name="Send">
                                 <input class="fsp_cancel_btn_pop"type="reset" value="Cancel" name="Cancel">
-<!--                                        <a class="fsp_send_btn_pop" href="<?php //the_permalink();                                  ?>" title="Send" rel="">Send</a>-->
-                                
+<!--                                        <a class="fsp_send_btn_pop" href="<?php //the_permalink();                                          ?>" title="Send" rel="">Send</a>-->
+
                             </div>
                             <!-- saved articles ends here -->
                         </div>
@@ -150,6 +154,24 @@
 
         jQuery(".fsp_cancel_btn_pop").click(function () {
             jQuery.magnificPopup.close();
+            jQuery("#savedArticles").trigger('reset')
+            //location.reload();
         });
+        jQuery(".mfp-close").click(function () {
+            jQuery.magnificPopup.close();
+            //location.reload();
+            jQuery("#savedArticles").trigger('reset')
+        });
+
+        //Close selected articles from popup
+        jQuery(".ion-android-close").click(function () {
+            var x;
+            if (confirm("Do you want to remove this article?") == true) {
+                jQuery('#element_' + this.id).remove();
+            } else {
+
+            }
+        });
+
     });
 </script>
