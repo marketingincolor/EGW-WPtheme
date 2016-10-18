@@ -129,15 +129,18 @@ $merged_new_ar = array();
     jQuery(function () {
         jQuery(".comment_button").unbind('click').click(function () {
             var dataString = jQuery('#followsubcat').serialize();
-             var datasubcatslectbox = jQuery('#subcatslectbox').val();
+            var datasubcatslectbox = jQuery('#subcatslectbox').val();
             jQuery.ajax({
                 type: "POST",
                 url: "<?php echo get_stylesheet_directory_uri(); ?>/followajax.php",
                 data: dataString,
                 cache: false,
                 success: function (successvalue) {
-                    jQuery('#followedSubcat').html(successvalue);
+                    if (jQuery('#followedSubcat').html(successvalue)) {
+                        alert("You have followed selected sub category successfully");
+                    }
                     jQuery('select').children('option[value="' + datasubcatslectbox + '"]').attr('disabled', true);
+
                 }
             });
             return false;
@@ -160,7 +163,9 @@ $merged_new_ar = array();
                     data: dataString,
                     cache: false,
                     success: function (deletedvalue) {
-                        jQuery('#followedSubcat').html(deletedvalue);
+                        if (jQuery('#followedSubcat').html(deletedvalue)) {
+                            alert("You have unfollowed successfully");
+                        }
                     }
                 });
                 return false;

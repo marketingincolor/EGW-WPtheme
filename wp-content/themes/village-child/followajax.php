@@ -36,7 +36,7 @@ if ($_POST['submit'] == 'insert') {
             </li>';
         }
     }
-    
+
     if ($rowresult == 0) {
 
         $followedCatappend = '<li class="vc_col-md-8">No Record found.</li>';
@@ -85,7 +85,7 @@ if ($_POST['submit'] == 'delete') {
             </li>';
         }
     }
-    
+
 
 
     if ($rowresult == 0) {
@@ -119,7 +119,9 @@ if ($_POST['submit'] == 'delete') {
                 data: dataString,
                 cache: false,
                 success: function (successvalue) {
-                    jQuery('#followedSubcat').html(successvalue);
+                    if (jQuery('#followedSubcat').html(successvalue)) {
+                        alert("You have followed selected sub category successfully");
+                    }
                     jQuery('select').children('option[value="' + datasubcatslectbox + '"]').attr('disabled', true);
                 }
             });
@@ -144,7 +146,9 @@ if ($_POST['submit'] == 'delete') {
                     data: dataString,
                     cache: false,
                     success: function (deletedvalue) {
-                        jQuery('#followedSubcat').html(deletedvalue);
+                        if (jQuery('#followedSubcat').html(deletedvalue)) {
+                            alert("You have unfollowed successfully");
+                        }
                     }
                 });
                 return false;
