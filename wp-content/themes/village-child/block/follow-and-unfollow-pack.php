@@ -27,47 +27,47 @@
             <div class="follow-mani-cont-nw vc_col-md-12">
                 <div class="unfollow-container-nw">
                     <form action="" name="followsubcat" id="followsubcat">
-                         <h2>Select Subcategory You Want to Follow:</h2>
+                        <h2>Select Subcategory You Want to Follow:</h2>
                         <div class="selectcat-container">
                             <div class="select-inn-cnt">
-                            <select name="categoryid">
-                                <option value=""><?php echo "Sub Categories" ?></option>
-                                <?php
-                                //example code for reference
-                                /* $args = array(
-                                  'exclude' => $fetchedparentCat // desire id
-                                  );
-                                  $cats = get_categories($args);
-                                  foreach ($cats as $category) {
-                                  $option = '<option value="/category/archives/' . $category->category_nicename . '">';
-                                  $option .= $category->cat_name;
-                                  $option .= '</option>';
-                                  echo '<a href="' . get_category_link($category->term_id) . '">' . $option . '</a>';
-                                  } */
-
-
-                                $args = array(
-                                    'exclude' => $fetchedparentCat // desire id
-                                );
-                                $cats = get_categories($args);
-
-                                foreach ($cats as $category) {
-                                    if (in_array($category->term_id, $getSubcatids)) {
-                                        $disabled = "disabled";
-                                    } else {
-                                        $disabled = '';
-                                    }
-                                    ?>
-                                    <option <?php echo $disabled ?> value="<?php echo $category->term_id ?>"><?php echo $category->cat_name ?></option>
+                                <select name="categoryid" id="subcatslectbox">
+                                    <option value=""><?php echo "Sub Categories" ?></option>
                                     <?php
-                                }
-                                ?> 
-                            </select>
+                                    //example code for reference
+                                    /* $args = array(
+                                      'exclude' => $fetchedparentCat // desire id
+                                      );
+                                      $cats = get_categories($args);
+                                      foreach ($cats as $category) {
+                                      $option = '<option value="/category/archives/' . $category->category_nicename . '">';
+                                      $option .= $category->cat_name;
+                                      $option .= '</option>';
+                                      echo '<a href="' . get_category_link($category->term_id) . '">' . $option . '</a>';
+                                      } */
+
+
+                                    $args = array(
+                                        'exclude' => $fetchedparentCat // desire id
+                                    );
+                                    $cats = get_categories($args);
+
+                                    foreach ($cats as $category) {
+                                        if (in_array($category->term_id, $getSubcatids)) {
+                                            $disabled = "disabled";
+                                        } else {
+                                            $disabled = '';
+                                        }
+                                        ?>
+                                        <option <?php echo $disabled ?> value="<?php echo $category->term_id ?>"><?php echo $category->cat_name ?></option>
+                                        <?php
+                                    }
+                                    ?> 
+                                </select>
                             </div>
                             <input type="hidden" name="updateflag" id="flagvalue" value="1">
                             <input type="hidden" name="submit" id="submitvalue" value="insert">
                             <input type="hidden" name="userid" value="<?php echo $userid; ?>">
-                <!--            <input type="hidden" name="categoryid" value="<?php //echo $categoryid;                          ?>"> -->
+                <!--            <input type="hidden" name="categoryid" value="<?php //echo $categoryid;                           ?>"> -->
                             <button type="button" value="Follow" name="follow" class="comment_button"><?php echo 'Follow'; ?></button>
                         </div>
                     </form>

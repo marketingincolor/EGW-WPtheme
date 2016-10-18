@@ -1237,11 +1237,11 @@ function customized_saved_stories() {
     $str .= wpfp_before_link_img();
     $str .= wpfp_loading_img();
     if ($action == "remove"):
-        $str .= "<a href='" . home_url('/user-profile') . "'>" . wpfp_get_option('remove_favorite') . "</a>";
+        $str .= "<a href='" . home_url('/my-stories/') . "'>" . wpfp_get_option('remove_favorite') . "</a>";
     elseif ($action == "add"):
         $str .= "<i class='fa fa-star-o fa-star-rightpad' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
     elseif (wpfp_check_favorited($post_id)):
-        $str .= "<a href='" . home_url('/user-profile') . "'>" . wpfp_get_option('remove_favorite') . "</a>";
+        $str .= "<a href='" . home_url('/my-stories/') . "'>" . wpfp_get_option('remove_favorite') . "</a>";
     else:
         $str .= "<i class='fa fa-star-o fa-star-rightpad' aria-hidden='true'></i><a class='wpfp-link' href='?wpfpaction=add&amp;postid=" . esc_attr($post_id) . "' title='" . wpfp_get_option('add_favorite') . "' rel='nofollow'>" . wpfp_get_option('add_favorite') . "</a>";
     endif;

@@ -112,6 +112,7 @@ if ($_POST['submit'] == 'delete') {
     jQuery(function () {
         jQuery(".comment_button").unbind('click').click(function () {
             var dataString = jQuery('#followsubcat').serialize();
+            var datasubcatslectbox = jQuery('#subcatslectbox').val();
             jQuery.ajax({
                 type: "POST",
                 url: "<?php echo get_stylesheet_directory_uri(); ?>/followajax.php",
@@ -119,6 +120,7 @@ if ($_POST['submit'] == 'delete') {
                 cache: false,
                 success: function (successvalue) {
                     jQuery('#followedSubcat').html(successvalue);
+                    jQuery('select').children('option[value="' + datasubcatslectbox + '"]').attr('disabled', true);
                 }
             });
             return false;
