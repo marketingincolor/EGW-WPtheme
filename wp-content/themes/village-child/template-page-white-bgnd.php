@@ -7,12 +7,15 @@
  *
 */ 
 
+$custom_fields = get_post_custom();
+$hide_title = $custom_fields['hide_title'];
+$center_page = $custom_fields['center_page'];
 /* add centered text to entire page by slug */
 $centered = ( is_page('welcome') || is_page('welcome-sweeps-success') ) ? 'text-align:center;' : '' ;
 /* add margins to paragraphs in the_content by slug */
 $margined = ( is_page('welcome') ) ? ' margin:2% 14%;' : null;
 /* show the_title by slug */
-$listed = (is_page('welcome-sweeps')) ? 'true' : null;
+$listed = (  $hide_title || is_page('welcome-sweeps')) ? 'true' : null;
 
 $sidebar = discussion_sidebar_layout(); ?>
 <?php get_header(); ?>
@@ -64,6 +67,18 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
     z-index: 98;
     width: 220px;
 }
+
+.page-template-template-page-white-bgnd .page-id-2981 h4 { font-size: 1.4em !important; padding-top: .5em; font-weight:bold; font-color: #6c6b6b; }
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .get-involved-button { 
+	background-color: #f79c49; 
+	color: white; 
+	padding: .5em !important; 
+	text-align: center; 
+	font-weight: 500;
+	display:inline-block;
+}
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .get-involved-button a,.get-involved-button a:hover { color: white; }
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .story-box { height: 20%; margin-bottom: 1.5em; }
 
 .login-container { background-color: #edebeb; }
 

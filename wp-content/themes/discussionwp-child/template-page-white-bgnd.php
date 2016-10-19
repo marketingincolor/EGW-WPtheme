@@ -11,26 +11,38 @@ $hide_title = $custom_fields['hide_title'];
 $center_page = $custom_fields['center_page'];
 $centered = (is_page('register-success')) ? 'text-align:center;' : '' ;
 $listed = ( $hide_title || is_page('login') || is_page('sweepstakes-terms-conditions') || is_page('register') || is_page('shipshape')) ? 'true' : null;
-$sidebar = discussion_sidebar_layout(); ?>
+$sidebar = discussion_sidebar_layout(); 
+$mkd_content_padding = ( is_page('how-to-get-involved') || is_page('storytellers') || is_page('welcome-survey')) ? 'padding-bottom: 0;' : 'padding-bottom:75px';
+$story_form = is_page('storytellers') ? 'width:67%; margin:auto;' : '';
+?>
 <?php get_header(); ?>
 <style>
-/* Start Custom layouts from MIC */
+/*------------------------------------------------------------------------------
+ * MIC CUSTOM STYLES
+ *
+ *  1.0.0 NORMALIZE PAGE STYLES
+ *  ---1.0.1 HOW TO GET INVOLVED
+ *  ---1.0.2 REGISTER
+ *  ---1.0.3 LOGIN
+ *  2.0 SMALL MEDIA QUERY
+ *  3.0 LARGE MEDIA QUERY
+ * 
+ * -----------------------------------------------------------------------------
+ * 1.0.0 NORMALIZE PAGE STYLE
+ * -----------------------------------------------------------------------------
+ */
+.page-template-template-page-white-bgnd p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font-size: 1em; }
+.page-template-template-page-white-bgnd h3 { font-family: 'Roboto', sans-serif; font-weight:bold; color:#6c6b6b; font-size:1.733em; padding-top:1em; }
+.page-template-template-page-white-bgnd h4 { font-family: 'Roboto', sans-serif; font-weight:bold; color:#6c6b6b; font-size:1.4em; padding-top:1em; }
 .page-template-template-page-white-bgnd { background-color: #ffffff; }
 .page-template-template-page-white-bgnd .mkd-title-breadcrumb-holder { display:none !important; }
 .page-template-template-page-white-bgnd .mkd-content { background-color: #ffffff; }
 .page-template-template-page-white-bgnd .mkd-content .mkd-container .mkd-container-inner {<?php echo $centered; ?> }
-.page-template-template-page-white-bgnd .mkd-content .mkd-container .page-feature-image img { 
-	border-top-right-radius: 60px; 
-	border-bottom-left-radius: 60px;  
-}
 .page-template-template-page-white-bgnd .mkd-title .mkd-title-holder { height:auto; }
-
-/*Register Page Styles*/
-h3 { font-family: 'Roboto', sans-serif; font-weight:bold; color:#6c6b6b; font-size:1.733em; padding-top:1em;}
-p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font-size: 1em; }
-.join-content ul li{ list-style-type: disc !important; }
-.join-content { padding: 0% 21% 0% 7%; }
-.sign-up-text { 
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .refer-a-friend-list ul li { list-style: disc !important; }
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .remove-margins { margin: 0px !important; }
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .disclosure-text { font-size: .7em; }
+.page-template-template-page-white-bgnd .large-orange-header { 
 	text-align: center; 
 	color: #f79c49; 
 	font-size:3.200em; 
@@ -38,34 +50,117 @@ p { font-family: 'Roboto', sans-serif; font-weight: normal; color: #6c6b6b; font
 	font-weight:bold;
 	padding: 15% 10% 0%; 
 }
-.tooltip{ display: inline; position: relative; }
-.tooltip:hover:after{
-    background: #333;
-    background: rgba(0,0,0,.8);
-    border-radius: 5px;
-    bottom: 26px;
-    color: #fff;
-    content: attr(title);
-    left: 20%;
-    padding: 5px 15px;
-    position: absolute;
-    z-index: 98;
-    width: 220px;
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .page-feature-image img { 
+	border-top-right-radius: 60px; 
+	border-bottom-left-radius: 60px;  
 }
-.tooltip:hover:before{
-    border: solid;
-    border-color: #333 transparent;
-    border-width: 6px 6px 0 6px;
-    bottom: 20px;
-    content: "";
-    left: 50%;
-    position: absolute;
-    z-index: 99;
+/**
+ * -----------------------------------------------------------------------------
+ * 1.0.1 HOW TO GET INVOLVED
+ * -----------------------------------------------------------------------------
+ */
+.page-template-template-page-white-bgnd .page-id-2981 h4 { font-size: 1.4em !important; padding-top: .5em; font-weight:bold; font-color: #6c6b6b; }
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .get-involved-button { 
+	background-color: #f79c49; 
+	color: white; 
+	padding: .5em !important; 
+	text-align: center; 
+	font-weight: 500;
+	display:inline-block;
 }
-.login-container { background-color: #edebeb; }
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .get-involved-button a,.get-involved-button a:hover { color: white; }
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .story-box { height: 20%; margin-bottom: 1.5em; }
+/**
+ * -----------------------------------------------------------------------------
+ * 1.0.2 REGISTER
+ * -----------------------------------------------------------------------------
+ */
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .join-content { padding: 0% 21% 0% 7%; }
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .join-content ul li { list-style: disc !important; }
+/**
+ * -----------------------------------------------------------------------------
+ * 1.0.3 LOGIN
+ * -----------------------------------------------------------------------------
+ */
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .login-container { background-color: #edebeb; }
+/**
+ * -----------------------------------------------------------------------------
+ * 2.0 SMALL MEDIA QUERY
+ * -----------------------------------------------------------------------------
+ */
+@media only screen 
+and (min-device-width : 320px) { 
 
-.disclosure-text { font-size: .7em; }
-/* End Custom layouts from MIC */
+/*Pretty Featured Images For Small Devices */
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .page-feature-image img {
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+/*Refer Friend Join Page*/
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .join-page-mobile { display:flex; flex-direction: column-reverse; }
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .hide-for-small { display:none; }
+
+#refer-friend-text { text-align: center; }
+.welcome-survey-p-padding { padding: 0% 0% !important; }
+
+}
+/*
+ * -----------------------------------------------------------------------------
+ * 3.0 LARGE MEDIA QUERY
+ * -----------------------------------------------------------------------------
+ */
+@media only screen 
+and (min-device-width : 1000px) { 
+
+.join-page-mobile { display: initial !important; }
+.hide-for-large { display:none; }
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .hide-for-small { display:initial !important; }
+
+.page-template-template-page-white-bgnd .mkd-content .mkd-container .page-feature-image img {
+    border-top-right-radius: 60px;
+    border-bottom-left-radius: 60px;
+}
+/*
+ * Page: Refer A Friend
+ * Media Query: >1000px
+ */
+#refer-friend-text { padding: 0em 3em; }
+#refer-friend-form { padding: 0em 3em; }
+#refer-friend-text h3 { text-align:left; }
+#refer-friend-text p { text-align:left; }
+.get-involved-button { 
+	background-color: #f79c49; 
+	color: white; 
+	padding: .5em !important; 
+	text-align: center; 
+	font-weight: 500;
+	display: inline-block; 
+}
+.story-box { height:33.3%; margin-bottom:3em; }
+.storytellers-form {
+    width: 67% !important;
+    margin: auto;
+}
+.storytellers { <?php echo $story_form; ?> }
+
+/*
+ * Page: Welcome Survey
+ * Media Query: >1000px
+ */
+.welcome-survey-p-padding { padding: 0% 3% !important; }
+
+/*Formstack - Welcome Survey*/
+#label45573915 > div > label { padding: 7px 0px; }
+#label45574099 > div > label { padding: 7px 0px; }
+#label45574563 > div > label { padding: 7px 0px; }
+}
+
+/**
+ * -----------------------------------------------------------------------------
+ * END CUSTOM STYLES
+ * -----------------------------------------------------------------------------
+ */
 </style>
 	<?php discussion_get_title(); ?>
 	<?php get_template_part('slider'); ?>
