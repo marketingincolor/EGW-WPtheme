@@ -674,21 +674,28 @@ function discussion_author_recommended_posts() {
                 return;
             }
             switch_to_blog( $parent[ 'blog_id' ] );
-            $parent_id = get_the_ID();
-            $recommended_ids = get_post_meta($parent_id, $namespace, true);
+            
+            $namespace = $this->namespace;
+
+            if (isset($atts['post_id']) && !empty($atts['post_id'])) {
+                $shortcode_post_id = $atts['post_id'];
+            } else {
+                $shortcode_post_id = $parent['post_id'];
+            }
+
+            $recommended_ids = get_post_meta($shortcode_post_id, $namespace, true);
             $blog_name = get_bloginfo( 'name' );
             restore_current_blog();
             $html = '';
 
-            echo "shortcode post id <br/>";
-            var_dump($shorecode_post_id);
-            echo "<br/>Namespace<br/>";
-            var_dump($namespace);
-            echo "<br/>Recommended Ids<br/>";
-            var_dump($recommended_ids);
+            echo "<br/>Shortcode Post ID: " . $shortcode_post_id . "<br/>";
+            echo "<br/>Namespace: " . $namespace . "<br/>";
+            echo "<br/>Recommended Ids: " . implode(",",$recommended_ids) ."<br/>";
 
             if ( isset($recommended_ids) ) {
-                echo "I HAVE THE ID: " . $recommended_ids . "<br/>Blog Name: " . $blog_name;
+                            echo "<br/>Recommended Ids: " . implode(",",$recommended_ids) ."<br/>";
+
+            echo "<br/>Namespace: " . $namespace . "<br/>";
                 $html_title = $this->get_option("{$namespace}_title");
                 $show_title = $this->get_option("{$namespace}_show_title");
                 $show_featured_image = $this->get_option("{$namespace}_show_featured_image");

@@ -617,13 +617,11 @@ function discussion_author_recommended_posts() {
             $recommended_ids = get_post_meta($shortcode_post_id, $namespace, true);
 
             $html = '';
-            echo "shortcode post id <br/>";
-            var_dump($shorecode_post_id);
-            echo "<br/>Namespace<br/>";
-            var_dump($namespace);
-            echo "<br/>Recommended Ids<br/>";
-            var_dump($recommended_ids);
+            echo "<br/>Shortcode Post ID: " . $shortcode_post_id . "<br/>";
+            echo "<br/>Namespace: " . $namespace . "<br/>";
+            echo "<br/>Recommended Ids: " . implode(",",$recommended_ids) ."<br/>";
             if ($recommended_ids) {
+                            echo "<br/>Namespace: " . $namespace . "<br/>";
 
                 $html_title = $this->get_option("{$namespace}_title");
                 $show_title = $this->get_option("{$namespace}_show_title");
