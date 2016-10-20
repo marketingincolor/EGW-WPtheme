@@ -6,6 +6,7 @@
  * Updated Date: 26-08-2016
  * Updated by: Rajasingh
  */
+list($post_per_section, $post_type) = scroll_loadpost_settings();
 ?>
 <div class="mkd-bnl-holder mkd-pl-five-holder  mkd-post-columns-2">
     <div class="mkd-bnl-outer">
@@ -17,10 +18,10 @@
             if ($_POST['query_type1'] == 'followed') {
                 $sub_catid_ar = explode(",", $_POST['sub_catid_ar']);
                 if (count($displayed_sub_cat_ar) < count($sub_catid_ar)) {
-                    $missed_sub_cat_ar = array_diff($sub_catid_ar, $displayed_sub_cat_ar);
+                    $missed_sub_cat_ar = array_diff($sub_catid_ar, $displayed_sub_cat_ar);                       
                     foreach ($missed_sub_cat_ar as $subcat_id_sgl) {                        
-                        $posts_retrived = follow_categorypost_detail_set($post_type, array($subcat_id_sgl), $display_postid_ar);
-                        $posts=get_posts($posts_retrived);
+                        $posts_retrived = follow_categorypost_detail_set($post_type, array($subcat_id_sgl), $display_postid_ar); 
+                        $posts=get_posts($posts_retrived);                        
                         if (!empty($posts)) {
                             foreach ($posts as $post): setup_postdata($post);
                                 if ($q == $_POST['per_page1'])
@@ -31,12 +32,13 @@
                             endforeach;
                             wp_reset_postdata();
                         }
+                        
                         array_push($displayed_sub_cat_ar, $subcat_id_sgl);
                     }
                 } else {
                     
                 }
-                
+               
                 //echo "q value -".$q;
                 $_SESSION["display_postid_ar"] = $display_postid_ar;
                 $_SESSION["displayed_sub_cat_ar"] = $displayed_sub_cat_ar;

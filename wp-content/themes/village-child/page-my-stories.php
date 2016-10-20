@@ -140,6 +140,7 @@ $merged_new_ar = array();
                         alert("You have followed selected sub category successfully");
                     }
                     jQuery('select').children('option[value="' + datasubcatslectbox + '"]').attr('disabled', true);
+                    location.reload();
 
                 }
             });
@@ -165,6 +166,7 @@ $merged_new_ar = array();
                     success: function (deletedvalue) {
                         if (jQuery('#followedSubcat').html(deletedvalue)) {
                             alert("You have unfollowed successfully");
+                            location.reload();
                         }
                     }
                 });
