@@ -39,11 +39,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                 } else {
                     
                 }
-                echo "<pre>";
-               print_r($args);
-               echo "---------------";
-               print_r($missed_sub_cat_ar);
-               echo "</pre>";
+             
                 //echo "q value -".$q;
                 $_SESSION["display_postid_ar"] = $display_postid_ar;
                 $_SESSION["displayed_sub_cat_ar"] = $displayed_sub_cat_ar;
