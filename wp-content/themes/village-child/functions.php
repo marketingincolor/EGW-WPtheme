@@ -621,10 +621,10 @@ if (!function_exists('custom_related_posts')) {
 }
 
 /**
- * Author- Muthupandi
+ * Author- Muthupandi,Doe
  * Create Date  - 23-06-2016
  * Updated Date - 01-08-2016
- * Purpose - Related to Author Recommended posts section
+ * Purpose - Related to Author Recommended posts section. Updates for Broadcasting Author Recommended Posts.
  */
 add_action('init', 'discussion_author_recommended_posts');
 
@@ -652,10 +652,10 @@ function discussion_author_recommended_posts() {
 
 
         private function _add_hooks() {
+                        add_shortcode( 'AuthorRecommendedPosts', array(&$this, 'shortcode' ) );
 
             add_action( 'add_meta_boxes', array( &$this, 'add_recommended_meta_box' ) );
             add_action( 'save_post', array( &$this, 'saving_recommended_posts_ids' ), 10, 2 );
-            add_shortcode( 'AuthorRecommendedPosts', array(&$this, 'shortcode' ) );
 
         }
 
@@ -675,8 +675,6 @@ function discussion_author_recommended_posts() {
             }
             switch_to_blog( $parent[ 'blog_id' ] );
             
-            $namespace = $this->namespace;
-
             if (isset($atts['post_id']) && !empty($atts['post_id'])) {
                 $shortcode_post_id = $atts['post_id'];
             } else {
@@ -684,18 +682,16 @@ function discussion_author_recommended_posts() {
             }
 
             $recommended_ids = get_post_meta($shortcode_post_id, $namespace, true);
-            $blog_name = get_bloginfo( 'name' );
-            restore_current_blog();
+            //$blog_name = get_bloginfo( 'name' );
+            //restore_current_blog();
             $html = '';
 
-            echo "<br/>Shortcode Post ID: " . $shortcode_post_id . "<br/>";
-            echo "<br/>Namespace: " . $namespace . "<br/>";
-            echo "<br/>Recommended Ids: " . implode(",",$recommended_ids) ."<br/>";
+            // USE FOR TESTING BROADCAST PLUGIN
+            // echo "<br/>Shortcode Post ID: " . $shortcode_post_id . "<br/>";
+            // echo "<br/>Namespace: " . $namespace . "<br/>";
+            // echo "<br/>Recommended Ids: " . implode(",",$recommended_ids) ."<br/>";
 
             if ( isset($recommended_ids) ) {
-                            echo "<br/>Recommended Ids: " . implode(",",$recommended_ids) ."<br/>";
-
-            echo "<br/>Namespace: " . $namespace . "<br/>";
                 $html_title = $this->get_option("{$namespace}_title");
                 $show_title = $this->get_option("{$namespace}_show_title");
                 $show_featured_image = $this->get_option("{$namespace}_show_featured_image");
@@ -706,9 +702,7 @@ function discussion_author_recommended_posts() {
                 include('custom_author-recommended-posts-list.php' );
                 $html .= ob_get_contents();
                 ob_end_clean();
-            }
-            else {
-                echo "FAILED TO GET RECOMMENDED ID.";
+                restore_current_blog();
             }
 
             return $html;
