@@ -577,6 +577,7 @@ if (!function_exists('custom_related_posts')) {
 
 }
 
+
 /**
  * Author- Muthupandi
  * Create Date  - 23-06-2016
@@ -600,6 +601,7 @@ function discussion_author_recommended_posts() {
             $this->option_name = '_' . $this->namespace . '--options';
             add_shortcode('AuthorRecommendedPosts', array(&$this, 'shortcode'));
             add_action( 'add_meta_boxes', array( &$this, 'add_recommended_meta_box' ) );
+            // Add all action, filter and shortcode hooks
         }
 
         function shortcode($atts) {
@@ -615,7 +617,12 @@ function discussion_author_recommended_posts() {
             $recommended_ids = get_post_meta($shortcode_post_id, $namespace, true);
 
             $html = '';
-
+            echo "shortcode post id <br/>";
+            var_dump($shorecode_post_id);
+            echo "<br/>Namespace<br/>";
+            var_dump($namespace);
+            echo "<br/>Recommended Ids<br/>";
+            var_dump($recommended_ids);
             if ($recommended_ids) {
 
                 $html_title = $this->get_option("{$namespace}_title");
@@ -623,7 +630,6 @@ function discussion_author_recommended_posts() {
                 $show_featured_image = $this->get_option("{$namespace}_show_featured_image");
                 $format_horizontal = $this->get_option("{$namespace}_format_is_horizontal");
                 $author_recommended_posts_post_types = $this->get_option("{$namespace}_post_types");
-
                 ob_start();
                 include('custom_author-recommended-posts-list.php' );
                 $html .= ob_get_contents();
@@ -650,6 +656,78 @@ function discussion_author_recommended_posts() {
             }
 
         }
+
+            function saving_recommended_posts_ids( $post_id, $post ) {
+        
+        if( isset( $_REQUEST['_post_ids_nonce'] ) && !empty( $_REQUEST['_post_ids_nonce'] ) ){
+            
+            // Verfiy the nonce before proceeding
+            if( !wp_verify_nonce( $_REQUEST['_post_ids_nonce'], "{$this->namespace}_post_ids_nonce" ) ) {
+                return $post_id;
+            }
+            
+            // Get the post type object.
+            $post_type = get_post_type_object( $post->post_type );
+            
+            // Check if the current user has permissions to edit the post.
+            if( !current_user_can( $post_type->cap->edit_post, $post_id ) ) {
+                return $post_id;
+            }
+            
+            // Get the posted data and sanitize
+            $new_meta_value = ( isset( $_POST['author-recommended-posts'] ) ? $this->_sanitize( $_POST['author-recommended-posts'] ) : '' );
+            
+            // Get the meta key
+            $meta_key = $this->namespace;
+            
+            // Get the meta value of the custom field key
+            $meta_value = get_post_meta( $post_id, $meta_key, true );
+            
+            // If the new meta value was added and there was no previous value, add it.
+            if ( $new_meta_value && ( '' == $meta_value ) ) {
+                add_post_meta( $post_id, $meta_key, $new_meta_value, true );
+            
+            // If the new meta value does not match the old value, update it.
+            } elseif ( $new_meta_value && $new_meta_value != $meta_value ) {
+                update_post_meta( $post_id, $meta_key, $new_meta_value );
+            
+            // If there is no new meta value but an old value exists, delete it.
+            } elseif ( ( '' == $new_meta_value ) && $meta_value ) {
+                delete_post_meta( $post_id, $meta_key, $meta_value );
+            }
+            
+        }
+    }
+
+        /**
+     * Sanitize data
+     * 
+     * @param mixed $str The data to be sanitized
+     * 
+     * @uses wp_kses()
+     * 
+     * @return mixed The sanitized version of the data
+     */
+    private function _sanitize( $str ) {
+        if ( !function_exists( 'wp_kses' ) ) {
+            require_once( ABSPATH . 'wp-includes/kses.php' );
+        }
+        global $allowedposttags;
+        global $allowedprotocols;
+        
+        if ( is_string( $str ) ) {
+            $str = wp_kses( $str, $allowedposttags, $allowedprotocols );
+        } elseif( is_array( $str ) ) {
+            $arr = array();
+            foreach( (array) $str as $key => $val ) {
+                $arr[$key] = $this->_sanitize( $val );
+            }
+            $str = $arr;
+        }
+        
+        return $str;
+    }
+
 
         function recommended_meta_box( $object, $box ) {
 
@@ -2079,3 +2157,28 @@ function egw_category_shortcode($atts)
     }
 }
 add_shortcode('egw-learn-more', 'egw_category_shortcode');
+
+function broadcasted_from()
+{
+    // Check that Broadcast is enabled.
+    if ( ! function_exists( 'ThreeWP_Broadcast' ) )
+        return;
+    // Load the broadcast data for this post.
+    global $post;
+    $broadcast_data = ThreeWP_Broadcast()->get_post_broadcast_data( get_current_blog_id(), $post->ID );
+    // This post must be a child. Check for a parent.
+    $parent = $broadcast_data->get_linked_parent();
+    if ( ! $parent )
+        return;
+
+    // Fetch the permalink
+    switch_to_blog( $parent[ 'blog_id' ] );
+    $blog_name = get_bloginfo( 'name' );
+    $permalink = get_post_permalink( $parent[ 'post_id' ] );
+    restore_current_blog();
+
+    // And now assemble a text.
+    $r = sprintf( 'This post was broadcasted from <a href="%s">%s</a>.', $permalink, $blog_name );
+    echo $r;
+}
+add_shortcode( 'broadcasted_from', 'broadcasted_from' );

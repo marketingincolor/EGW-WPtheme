@@ -32,7 +32,7 @@
         } else {
             body_class();
         } ?> itemscope itemtype="http://schema.org/WebPage">
-        		<?php include ('gtm.php'); ?>
+        		<?php //include ('gtm.php'); ?>
                 <?php discussion_get_side_area(); ?>
         <div class="mkd-wrapper">
             <div class="mkd-wrapper-inner">

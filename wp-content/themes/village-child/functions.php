@@ -633,7 +633,7 @@ function discussion_author_recommended_posts() {
     //Remove default short code
     remove_shortcode('AuthorRecommendedPosts');
     global $AuthorRecommendedPosts;
-    remove_action('add_meta_boxes', array($AuthorRecommendedPosts, 'add_recommended_meta_box'));
+    remove_action('add_meta_boxes', array($AuthorRecommendedPosts,'add_recommended_meta_box'));
 
     //Create class and extend author recommended post class to override author recommended section design
     class DiscussionAuthorRecommendPosts extends AuthorRecommendedPosts {
@@ -641,26 +641,54 @@ function discussion_author_recommended_posts() {
         function __construct() {
 
             $this->option_name = '_' . $this->namespace . '--options';
-            add_shortcode('AuthorRecommendedPosts', array(&$this, 'shortcode'));
-            add_action('add_meta_boxes', array(&$this, 'add_recommended_meta_box'));
+            $this->_add_hooks();
+        }
+
+        /**
+         * [get_recommended_id_from_parent description]
+         * @return [type] [description]
+         */
+
+
+
+        private function _add_hooks() {
+
+            add_action( 'add_meta_boxes', array( &$this, 'add_recommended_meta_box' ) );
+            add_action( 'save_post', array( &$this, 'saving_recommended_posts_ids' ), 10, 2 );
+            add_shortcode( 'AuthorRecommendedPosts', array(&$this, 'shortcode' ) );
+
         }
 
         function shortcode($atts) {
+
             global $post;
             $namespace = $this->namespace;
-
-            if (isset($atts['post_id']) && !empty($atts['post_id'])) {
-                $shortcode_post_id = $atts['post_id'];
-            } else {
-                $shortcode_post_id = $post->ID;
+            if ( ! function_exists( 'ThreeWP_Broadcast' ) )
+            {
+                return;
             }
-
-            $recommended_ids = get_post_meta($shortcode_post_id, $namespace, true);
-
+            $broadcast_data = ThreeWP_Broadcast()->get_post_broadcast_data( get_current_blog_id(), $post->ID );
+            $parent = $broadcast_data->get_linked_parent();
+            if ( ! $parent )
+            {
+                return;
+            }
+            switch_to_blog( $parent[ 'blog_id' ] );
+            $parent_id = get_the_ID();
+            $recommended_ids = get_post_meta($parent_id, $namespace, true);
+            $blog_name = get_bloginfo( 'name' );
+            restore_current_blog();
             $html = '';
 
-            if ($recommended_ids) {
+            echo "shortcode post id <br/>";
+            var_dump($shorecode_post_id);
+            echo "<br/>Namespace<br/>";
+            var_dump($namespace);
+            echo "<br/>Recommended Ids<br/>";
+            var_dump($recommended_ids);
 
+            if ( isset($recommended_ids) ) {
+                echo "I HAVE THE ID: " . $recommended_ids . "<br/>Blog Name: " . $blog_name;
                 $html_title = $this->get_option("{$namespace}_title");
                 $show_title = $this->get_option("{$namespace}_show_title");
                 $show_featured_image = $this->get_option("{$namespace}_show_featured_image");
@@ -672,94 +700,177 @@ function discussion_author_recommended_posts() {
                 $html .= ob_get_contents();
                 ob_end_clean();
             }
+            else {
+                echo "FAILED TO GET RECOMMENDED ID.";
+            }
 
             return $html;
         }
 
         function add_recommended_meta_box() {
             // set post_types that this meta box shows up on.
-            $author_recommended_posts_post_types = $this->get_option("{$this->namespace}_post_types");
+            $author_recommended_posts_post_types = $this->get_option( "{$this->namespace}_post_types" );
 
-            foreach ($author_recommended_posts_post_types as $author_recommended_posts_post_type) {
+            foreach( $author_recommended_posts_post_types as $author_recommended_posts_post_type ) {
                 // adds to posts $post_type
                 add_meta_box(
-                        $this->namespace . '-recommended_meta_box', __('Author Recommended Posts', $this->namespace), array(&$this, 'recommended_meta_box'), $author_recommended_posts_post_type, 'side', 'high'
+                    $this->namespace . '-recommended_meta_box',
+                    __( 'Author Recommended Posts', $this->namespace ),
+                    array( &$this, 'recommended_meta_box' ),
+                    $author_recommended_posts_post_type,
+                    'side',
+                    'high'
                 );
             }
+
         }
 
-        function recommended_meta_box($object, $box) {
+            function saving_recommended_posts_ids( $post_id, $post ) {
+        
+        if( isset( $_REQUEST['_post_ids_nonce'] ) && !empty( $_REQUEST['_post_ids_nonce'] ) ){
+            
+            // Verfiy the nonce before proceeding
+            if( !wp_verify_nonce( $_REQUEST['_post_ids_nonce'], "{$this->namespace}_post_ids_nonce" ) ) {
+                return $post_id;
+            }
+            
+            // Get the post type object.
+            $post_type = get_post_type_object( $post->post_type );
+            
+            // Check if the current user has permissions to edit the post.
+            if( !current_user_can( $post_type->cap->edit_post, $post_id ) ) {
+                return $post_id;
+            }
+            
+            // Get the posted data and sanitize
+            $new_meta_value = ( isset( $_POST['author-recommended-posts'] ) ? $this->_sanitize( $_POST['author-recommended-posts'] ) : '' );
+            
+            // Get the meta key
+            $meta_key = $this->namespace;
+            
+            // Get the meta value of the custom field key
+            $meta_value = get_post_meta( $post_id, $meta_key, true );
+            
+            // If the new meta value was added and there was no previous value, add it.
+            if ( $new_meta_value && ( '' == $meta_value ) ) {
+                add_post_meta( $post_id, $meta_key, $new_meta_value, true );
+            
+            // If the new meta value does not match the old value, update it.
+            } elseif ( $new_meta_value && $new_meta_value != $meta_value ) {
+                update_post_meta( $post_id, $meta_key, $new_meta_value );
+            
+            // If there is no new meta value but an old value exists, delete it.
+            } elseif ( ( '' == $new_meta_value ) && $meta_value ) {
+                delete_post_meta( $post_id, $meta_key, $meta_value );
+            }
+            
+        }
+    }
 
-            $author_recommended_posts = get_post_meta($object->ID, $this->namespace, true);
-            $author_recommended_posts_post_types = $this->get_option("{$this->namespace}_post_types");
-            $author_recommended_posts_search_results = $this->author_recommended_posts_search();
-            $author_recommended_posts_options_url = admin_url() . '/options-general.php?page=' . $this->namespace;
+        /**
+     * Sanitize data
+     * 
+     * @param mixed $str The data to be sanitized
+     * 
+     * @uses wp_kses()
+     * 
+     * @return mixed The sanitized version of the data
+     */
+    private function _sanitize( $str ) {
+        if ( !function_exists( 'wp_kses' ) ) {
+            require_once( ABSPATH . 'wp-includes/kses.php' );
+        }
+        global $allowedposttags;
+        global $allowedprotocols;
+        
+        if ( is_string( $str ) ) {
+            $str = wp_kses( $str, $allowedposttags, $allowedprotocols );
+        } elseif( is_array( $str ) ) {
+            $arr = array();
+            foreach( (array) $str as $key => $val ) {
+                $arr[$key] = $this->_sanitize( $val );
+            }
+            $str = $arr;
+        }
+        
+        return $str;
+    }
 
-            include( AUTHOR_RECOMMENDED_POSTS_DIRNAME . '/views/_recommended-meta-box.php' );
+
+        function recommended_meta_box( $object, $box ) {
+
+        $author_recommended_posts = get_post_meta( $object->ID, $this->namespace, true );
+        $author_recommended_posts_post_types = $this->get_option( "{$this->namespace}_post_types" );
+        $author_recommended_posts_search_results = $this->author_recommended_posts_search();
+        $author_recommended_posts_options_url = admin_url() . '/options-general.php?page=' . $this->namespace;
+
+        include( AUTHOR_RECOMMENDED_POSTS_DIRNAME . '/views/_recommended-meta-box.php' );
+    }
+
+    function author_recommended_posts_search(){
+        global $post;
+        $post_id = $post->ID;
+        $html = '';
+
+        // set post_types that get filtered in the search box.
+        $author_recommended_posts_post_types = $this->get_option( "{$this->namespace}_post_types" );
+
+        // set default query options
+        $options = array(
+            'post_type' =>  $author_recommended_posts_post_types,
+            'posts_per_page' => '-1',
+            'paged' => 0,
+            'order' => 'DESC',
+            'post_status' => array('publish'),
+            'suppress_filters' => false,
+            'post__not_in' => array($post_id),
+            's' => ''
+        );
+
+        // check if ajax
+        $ajax = isset( $_POST['action'] ) ? true : false;
+
+        // if ajax merge $_POST
+        if( $ajax ) {
+            $options = array_merge($options, $_POST);
         }
 
-        function author_recommended_posts_search() {
-            global $post;
-            $post_id = $post->ID;
-            $html = '';
+        // search
+        if( $options['s'] ) {
+            // set temp title to search query
+            $options['like_title'] = $options['s'];
+            // filter query by title
+            add_filter( 'posts_where', array($this, 'posts_where'), 10, 2 );
+        }
 
-            // set post_types that get filtered in the search box.
-            $author_recommended_posts_post_types = $this->get_option("{$this->namespace}_post_types");
+        // unset search so results are accurate and not muddled
+        unset( $options['s'] );
 
-            // set default query options
-            $options = array(
-                'post_type' => $author_recommended_posts_post_types,
-                'posts_per_page' => '-1',
-                'paged' => 0,
-                'order' => 'DESC',
-                'post_status' => array('publish'),
-                'suppress_filters' => false,
-                'post__not_in' => array($post_id),
-                's' => ''
-            );
+        $searchable_posts = get_posts( $options );
 
-            // check if ajax
-            $ajax = isset($_POST['action']) ? true : false;
+        if( $searchable_posts ) {
+            foreach( $searchable_posts as $searchable_post ) {
+                // right aligned info
+                $title = '<span class="recommended-posts-post-type">';
+                $title .= $searchable_post->post_type;
+                $title .= '</span>';
+                $title .= '<span class="recommended-posts-title">';
+                $title .= apply_filters( 'the_title', $searchable_post->post_title, $searchable_post->ID );
+                $title .= '</span>';
 
-            // if ajax merge $_POST
-            if ($ajax) {
-                $options = array_merge($options, $_POST);
-            }
-
-            // search
-            if ($options['s']) {
-                // set temp title to search query
-                $options['like_title'] = $options['s'];
-                // filter query by title
-                add_filter('posts_where', array($this, 'posts_where'), 10, 2);
-            }
-
-            // unset search so results are accurate and not muddled 
-            unset($options['s']);
-
-            $searchable_posts = get_posts($options);
-
-            if ($searchable_posts) {
-                foreach ($searchable_posts as $searchable_post) {
-                    // right aligned info
-                    $title = '<span class="recommended-posts-post-type">';
-                    $title .= $searchable_post->post_type;
-                    $title .= '</span>';
-                    $title .= '<span class="recommended-posts-title">';
-                    $title .= apply_filters('the_title', $searchable_post->post_title, $searchable_post->ID);
-                    $title .= '</span>';
-
-                    $html .= '<li><a href="' . get_permalink($searchable_post->ID) . '" data-post_id="' . $searchable_post->ID . '">' . $title . '</a></li>' . "\n";
-                }
-            }
-
-            // if ajax, die and echo $html otherwise just return
-            if ($ajax) {
-                die($html);
-            } else {
-                return $html;
+                $html .= '<li><a href="' . get_permalink($searchable_post->ID) . '" data-post_id="' . $searchable_post->ID . '">' . $title .  '</a></li>' . "\n";
             }
         }
+
+        // if ajax, die and echo $html otherwise just return
+        if( $ajax ) {
+            die( $html );
+        } else {
+            return $html;
+        }
+    }
+
+
 
     }
 
