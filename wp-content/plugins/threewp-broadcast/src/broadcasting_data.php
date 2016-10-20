@@ -41,7 +41,7 @@ class broadcasting_data
 		@var		$attachment_data
 		@since		20130603
 	**/
-	public $attachment_data;
+	public $attachment_data = [];
 
 	/**
 		@brief		[IN]: Array of child blog objects to which to broadcast.
@@ -58,6 +58,12 @@ class broadcasting_data
 		@since		2014-08-31 18:50:10
 	**/
 	public $broadcast_data;
+
+	/**
+		@brief		A collection of blog_id => true, showing to which blogs the attachments have been copied.
+		@since		2016-09-18 19:12:26
+	**/
+	public $copied_attachments_to_blog;
 
 	/**
 		@brief		The ID of the child blog we are currently working on.
@@ -254,6 +260,8 @@ class broadcasting_data
 		if ( isset( $options[ 'custom_fields' ] ) )
 			if ( is_object( $this->custom_fields ) )
 				$this->custom_fields = clone( $options[ 'custom_fields' ] );
+
+		$this->copied_attachments_to_blog = ThreeWP_Broadcast()->collection();
 
 		if ( ! $this->parent_post_id )
 			throw new Exception( 'Specify the parent post ID property when creating the broadcasting_data object.' );

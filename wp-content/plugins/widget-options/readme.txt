@@ -1,9 +1,9 @@
 === Widget Options ===
 Contributors: phpbits
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FMKC2SLPTULP8
-Tags: widgets, widget, display widgets, display widget, hide widgets, hide widget, sidebar, widget content, widget logic, widget options, widget option, restrict widgets, widget css, CSS, widget classes
+Tags: widgets, widget, display widgets, display widget, hide widgets, hide widget, sidebar, widget content, widget logic, widget options, widget option, restrict widgets, widget css, CSS, widget classes, widget styling, widget ID, widget custom class, widget visibility, widget ninja, jetpack visibility
 Requires at least: 4.0
-Tested up to: 4.5.1
+Tested up to: 4.6
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -27,6 +27,9 @@ Change your widget alignment to look better on your site. Comes with <strong>cen
 
 <h3>Custom Widget ID & Classes</h3>
 <em>As of version 1.2</em>, you can add custom class & ID on each widget for CSS, javascript & styling purposes. You can also create a predefined set of classes and it will be displayed as checkboxes on the options tab. <a href="https://phpbits.net/widget-options-improved-control-adding-id-classes-options">Learn more about this update</a>
+
+<h3>Display Widget Logic</h3>
+<em>As of version 2.0</em>, Widget Logic option is now added on this plugin if you are geeky enough to use <a href="http://codex.wordpress.org/Conditional_Tags">WordPress Conditional tags</a> on managing your widgets.
 
 <h3>View your changes live!</h3>
 This plugin is customizer ready for easier customization. View your changes live before saving it, <strong>not just better control but a time saver plugin!</strong>
@@ -53,7 +56,7 @@ If you like to contribute, report issue or have suggestions, you can find the de
 <strong>More information</strong>
 
 * Follow the developer <a href="https://twitter.com/phpbits" target="_blank">@Twitter</a>
-* Other <a href="https://profiles.wordpress.org/phpbits/#content-plugins">WordPress plugins</a>
+* Other <a href="https://phpbits.net/plugins/">WordPress plugins</a>
 
 == Installation ==
 
@@ -73,11 +76,17 @@ e.g.
 == Screenshots ==
 
 1. Visibility Options
-2. Device Options
+2. Device Visibility Options
 3. Custom Alignment
-3. Widget CSS ID & Classes
+4. Widget CSS ID & Classes
+5. Display Widget Logic
 
 == Changelog ==
+
+= 2.0 =
+* Add Widget Display Logic Options
+* Improve Tab UI for better navigation
+* other minor improvements
 
 = 1.3 =
 * Apply Category Visibility Selection to associated posts

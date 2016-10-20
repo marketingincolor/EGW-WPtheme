@@ -1,6 +1,6 @@
 <?php get_header(); ?>
-<div class="mkd-container-inner"> 
-     <?php 
+<div class="mkd-container-inner">
+     <?php
     $title_tag = 'h3';
     $title_length = '20';
     $display_date = 'yes';
@@ -10,7 +10,7 @@
     $display_count = 'yes';
     $display_comments = 'yes';
     ?>
-   
+
     <div class="mkd-blog-holder mkd-blog-single mkd-fsp-blog-holder">
         <?php ?>
         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -30,8 +30,8 @@
                             ))
                             ?>
                          <div class="mkd-post-fsp-savestories">
-                        <?php 
-                           customized_saved_stories();    
+                        <?php
+                           customized_saved_stories();
                         ?>
                         </div>
                         </div>
@@ -43,19 +43,27 @@
             <div class="mkd-column-inner">
                 <div class="mkd-blog-holder mkd-blog-single">
                     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                        <div class="mkd-post-content">                                
+                        <div class="mkd-post-content">
                             <div class="mkd-post-text">
-                                <div class="mkd-post-text-inner clearfix">                          
-                                    <?php discussion_get_module_template_part('templates/single/parts/title', 'blog'); ?>   
-                                     <div class="mdk-sng-pst"> 
+                                <div class="mkd-post-text-inner clearfix">
+                                    <?php discussion_get_module_template_part('templates/single/parts/title', 'blog'); ?>
+                                     <div class="mdk-sng-pst">
                                     <?php the_content(); ?>
+                                    <?php do_action('last_updated'); ?>
                                      </div>
                                 </div>
                             </div>
                         </div>
                         <?php do_action('discussion_before_blog_article_closed_tag'); ?>
                     </article>
-                        <?php include(locate_template('block/get-post-author.php')); ?>
+                    <?php include(locate_template('block/get-post-author.php')); ?>
+
+                    <?php
+                    $tm_disclaim = get_field('trademark_disclaimer'); //set via Custom Fields Plugin
+                    if ($tm_disclaim) {
+                        include(locate_template('block/show-trademark-disclaimer.php'));
+                    } ?>
+
                     <div class="disclamier">
                         <p><span>Disclaimer:</span> This content is for entertainment purposes only and it is not meant to be relied on as medical advice, diagnosis, or treatment. Consult your physician before starting any exercise or dietary program or taking any other action respecting your health. In case of a medical emergency, call 911.</p>
                     </div>

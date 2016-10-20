@@ -14,10 +14,17 @@
 		$(document).on('widget-updated', function(event, widget) {
 			extended_widget_opts_init( widget, 'updated' );
 		});
-		$(document).on( 'click', '#extended-widget-opts-page-lists h4',function(){
+		$(document).on( 'click', '.extended-widget-opts-inner-lists h4',function(){
 			getid = $(this).attr('id');
-			$('#extended-widget-opts-page-lists .'+ getid).slideToggle(250);
+			$('.extended-widget-opts-inner-lists .'+ getid).slideToggle(250);
 		} );
+
+		$(document).on( 'click', '.widget-opts-toggler-note',function(e){
+            $(this).parent('p').parent('.widget-opts-logic').find('.widget-opts-toggle-note').slideToggle(250);
+
+            e.preventDefault();
+            e.stopPropagation();
+        } );
 
 		//admin settings
 		$(document).on( 'click', '.opts-add-class-btn',function(e){
@@ -40,23 +47,46 @@
 	});
 
 	function extended_widget_opts_init( widget, action ){
-		selected = 0;
+		selected 			= 0;
+		selected_visibility = 0;
+		selected_settings   = 0;
 		if( ''	!=	widget ){
 			if( $( '#' + widget.attr('id') ).find('#extended-widget-opts-selectedtab').length > 0 ){
 				selected = $( '#' + widget.attr('id') ).find('#extended-widget-opts-selectedtab').val();
 				selected = parseInt( selected );
 			}
+
+			if( $( '#' + widget.attr('id') ).find('#extended-widget-opts-visibility-selectedtab').length > 0 ){
+                selected_visibility = $( '#' + widget.attr('id') ).find('#extended-widget-opts-visibility-selectedtab').val();
+                selected_visibility = parseInt( selected_visibility );
+            }
+
+          	if( $( '#' + widget.attr('id') ).find('#extended-widget-opts-settings-selectedtab').length > 0 ){
+                selected_settings = $( '#' + widget.attr('id') ).find('#extended-widget-opts-settings-selectedtab').val();
+                selected_settings = parseInt( selected_settings );
+            }
 		}
 		if( action == 'added' ){
-			selected = 0;
+			selected 			= 0;
+			selected_visibility = 0;
+			selected_settings   = 0;
 		}
 	    
 	    if( '' != widget ){
 	    	if( $( '#' + widget.attr('id') ).find('.extended-widget-opts-tabs').length > 0 ){
 	    		$( '#' + widget.attr('id') ).find('.extended-widget-opts-tabs').tabs({ active: selected });
 	    	}
+	    	if( $( '#' + widget.attr('id') ).find('.extended-widget-opts-visibility-tabs').length > 0 ){
+                $( '#' + widget.attr('id') ).find('.extended-widget-opts-visibility-tabs').tabs({ active: selected_visibility });
+            }
+            if( $( '#' + widget.attr('id') ).find('.extended-widget-opts-settings-tabs').length > 0 ){
+                $( '#' + widget.attr('id') ).find('.extended-widget-opts-settings-tabs').tabs({ active: selected_settings });
+            }
+
 	    }else{
 	    	$('.extended-widget-opts-tabs').tabs({ active: selected });
+	    	$('.extended-widget-opts-visibility-tabs').tabs({ active: selected_visibility });
+	    	$('.extended-widget-opts-settings-tabs').tabs({ active: selected_settings });
 	    }
 
 	    $('.extended-widget-opts-tabs').click('tabsselect', function (event, ui) {
@@ -64,6 +94,19 @@
 				$(this).find('#extended-widget-opts-selectedtab').val( $(this).tabs('option', 'active') );
 			}
 		});
+
+	    $('.extended-widget-opts-visibility-tabs').click('tabsselect', function (event, ui) {
+            if( $(this).find('#extended-widget-opts-visibility-selectedtab').length > 0 ){
+                $(this).find('#extended-widget-opts-visibility-selectedtab').val( $(this).tabs('option', 'active') );
+            }
+        });
+
+        $('.extended-widget-opts-settings-tabs').click('tabsselect', function (event, ui) {
+            if( $(this).find('#extended-widget-opts-settings-selectedtab').length > 0 ){
+                $(this).find('#extended-widget-opts-settings-selectedtab').val( $(this).tabs('option', 'active') );
+            }
+        });
+
     	$('.extended-widget-opts-date').datepicker({
 		    //comment the beforeShow handler if you want to see the ugly overlay
 		    beforeShow: function() {

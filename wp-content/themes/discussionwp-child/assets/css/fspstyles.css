@@ -1538,3 +1538,19 @@ table.ai1ec-month-view {
 }
 }
 /*article created section ends here*/
+
+/*Sponsored Content Styles*/
+.sponsored-post-bar {
+    background-color: #c9739c;
+    border-right: #f99d3e 5px solid;
+    box-sizing: border-box;
+    position:absolute;
+    height: 25px;
+    padding-right:0px;
+    text-align:right;
+    width: 100%;
+    bottom: 0px;
+    color: white;
+    z-index: 2;
+    padding-right: 9px;
+}

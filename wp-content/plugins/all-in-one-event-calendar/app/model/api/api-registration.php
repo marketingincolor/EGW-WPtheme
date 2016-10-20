@@ -32,6 +32,8 @@ class Ai1ec_Api_Registration extends Ai1ec_Api_Abstract {
 			$response_body = (array) $response->body;
 			$this->save_ticketing_settings( $response_body['message'], true, $response_body['auth_token'], $this->_find_user_calendar(), $body['email'] );
 			$this->has_payment_settings();
+			$this->get_subscriptions(true);
+			$this->sync_api_settings();
 		} else {
 			$error_message = $this->save_error_notification( $response, __( 'We were unable to Sign you In for Time.ly Network', AI1EC_PLUGIN_NAME ) );
 			$this->save_ticketing_settings( $error_message, false, '', 0, null );
@@ -75,8 +77,8 @@ class Ai1ec_Api_Registration extends Ai1ec_Api_Abstract {
 				$api_features = array();
 			}
 
-			// Save for 30 minutes
-			$minutes = 30;
+			// Save for 5 minutes
+			$minutes = 5;
 			set_site_transient( 'ai1ec_api_features', $api_features, $minutes * 60 );
 		}
 
@@ -97,6 +99,29 @@ class Ai1ec_Api_Registration extends Ai1ec_Api_Abstract {
 		return false;
 	}
 
+	/**
+	 * @return object Response body in JSON.
+	 */
+	protected function settings() {
+		$calendar_settings = get_site_transient( 'ai1ec_calendar_settings' );
+
+		if ( false === $calendar_settings || ( defined( 'AI1EC_DEBUG' ) && AI1EC_DEBUG ) ) {
+			$response = $this->request_api( 'GET', AI1EC_API_URL . 'calendars/' . $this->_get_ticket_calendar() . '/settings', null, true );
+
+			if ( $this->is_response_success( $response ) ) {
+				$calendar_settings = (array) $response->body;
+			} else {
+				$calendar_settings = array();
+			}
+
+			// Save for 5 minutes
+			$minutes = 5;
+			set_site_transient( 'ai1ec_calendar_settings', $calendar_settings, $minutes * 60 );
+		}
+
+		return $calendar_settings;
+	}
+
 	public function is_api_sign_up_available() {
 	    return $this->is_feature_available( Ai1ec_Api_Features::CODE_API_ACCESS );
 	}
@@ -104,23 +129,25 @@ class Ai1ec_Api_Registration extends Ai1ec_Api_Abstract {
 	public function is_ticket_available() {
 		return $this->is_feature_available( Ai1ec_Api_Features::CODE_TICKETING );
 	}
- 
+
  	/**
 	 * Clean the ticketing settings on WP database only
 	 */
 	public function signout() {
-		$calendar_id = $this->_get_ticket_calendar();
+		$calendar_id = $this->_get_ticket_calendar( false );
 		if ( 0 >= $calendar_id ) {
+			$this->clear_ticketing_settings();
 			return false;
 		}
 		$response = $this->request_api( 'GET', AI1EC_API_URL . "calendars/$calendar_id/signout", null, true );
-		if ( $this->is_response_success( $response ) ) {
+		// Consider "Unauthorized" status (401) a valid response
+		if ( $this->is_response_success( $response ) || 401 === wp_remote_retrieve_response_code( $response->raw ) ) {
 			$this->clear_ticketing_settings();
 			return array( 'message' => '' );
 		} else {
 			$error_message = $this->save_error_notification( $response, __( 'We were unable to Sign you Out of Time.ly Network', AI1EC_PLUGIN_NAME ) );
 			return array( 'message' => $error_message );
-		}				
+		}
 	}
 
 	/**
@@ -190,4 +217,21 @@ class Ai1ec_Api_Registration extends Ai1ec_Api_Abstract {
 			return array();
 		}
 	}
+
+	/**
+	 * Sync settings from API after signing in
+	 */
+	public function sync_api_settings() {
+		// Sync feeds subscriptions
+		try {
+			$api_feed = $this->_registry->get( 'model.api.api-feeds' );
+			$api_feed->get_and_sync_feed_subscriptions();
+		} catch ( Exception $e ) {
+			$error_message = 'Some feeds were not imported to Time.ly Network. Error: ' . $e->getMessage();
+
+			$notification  = $this->_registry->get( 'notification.admin' );
+			$notification->store( $error_message, 'error', 0, array( Ai1ec_Notification_Admin::RCPT_ADMIN ), false );
+		}
+	}
+
 }

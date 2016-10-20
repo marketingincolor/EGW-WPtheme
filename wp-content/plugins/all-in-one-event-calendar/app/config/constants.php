@@ -50,7 +50,7 @@ function ai1ec_initiate_constants( $ai1ec_base_dir, $ai1ec_base_url ) {
 	// = Plugin Version =
 	// ==================
 	if ( ! defined( 'AI1EC_VERSION' ) ) {
-define( 'AI1EC_VERSION', '2.4.0' );
+define( 'AI1EC_VERSION', '2.5.11' );
 	}
 
 	// ================
@@ -469,7 +469,7 @@ define( 'AI1EC_VERSION', '2.4.0' );
 	if ( ! defined( 'AI1EC_API_URL' ) ) {
 		define(
 			'AI1EC_API_URL',
-			'https://ticketing.time.ly/api/'
+			'https://api.time.ly/api/'
 		);
 	}
 
@@ -477,7 +477,7 @@ define( 'AI1EC_VERSION', '2.4.0' );
 	if ( ! defined( 'AI1EC_TICKETS_CHECKOUT_URL' ) ) {
 		define(
 			'AI1EC_TICKETS_CHECKOUT_URL',
-			'https://ticketing.time.ly/events/{event_id}/checkout'
+			'https://api.time.ly/events/{event_id}/checkout'
 		);
 	}
 

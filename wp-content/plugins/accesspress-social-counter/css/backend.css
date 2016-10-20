@@ -35,6 +35,7 @@ clear:both;
     position: relative;
     z-index: 5;
 }
+/*
 .apsc-tabs-trigger {
     background: none repeat scroll 0 0 #e4e4e4;
     color: #555;
@@ -44,6 +45,7 @@ clear:both;
     padding: 6px 10px;
     text-decoration: none;
 }
+*/
 .apsc-tabs-trigger:hover {
     color: #000000;
 }
@@ -723,12 +725,12 @@ padding: 1px 12px;
 }
 .apsc-panel{
 	float:left;
-	width:810px;
+	width:830px;
 }
 .apsc-promoFloat{
 	background: #f1f1f1;
 	float: left;
-	width: 311px;
+	width: 280px;
 	padding: 10px;
 }
 .apsc-promo-buttons{
@@ -772,4 +774,7 @@ span.product-title {
     background: #F1F1F1;
     color: #222;
     padding: 10px;
+}
+.apsc-add-set-wrapper h2.nav-tab-wrapper {
+    margin-bottom: 20px !important;
 }

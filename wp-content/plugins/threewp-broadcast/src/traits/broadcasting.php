@@ -53,9 +53,7 @@ trait broadcasting
 
 		$this->debug( 'The POST is <pre>%s</pre>', $bcd->_POST );
 
-		// See: For nested broadcasts. Just in case.
-		if ( ! $this->is_yoast_installed() )
-			switch_to_blog( $bcd->parent_blog_id );
+		switch_to_blog( $bcd->parent_blog_id );
 
 		if ( $bcd->link )
 		{
@@ -125,7 +123,9 @@ trait broadcasting
 				if ( count( $this->broadcasting ) == 1 )
 				{
 					$this->debug( 'Yoast SEO detected. Activating workaround. Asking metabox to save its settings.' );
+					restore_current_blog();
 					$GLOBALS[ 'wpseo_metabox' ]->save_postdata( $bcd->post->ID );
+					switch_to_blog( $bcd->parent_blog_id );
 				}
 				else
 					$this->debug( 'Yoast SEO detected but not activating, because we are not the top broadcast.' );
@@ -270,6 +270,11 @@ trait broadcasting
 			$action->broadcasting_data = $bcd;
 			$action->execute();
 
+			$this->debug( 'Site URL is %s and upload dir is now %s',
+				get_option( 'siteurl' ),
+				wp_upload_dir()
+			);
+
 			if ( ! $action->broadcast_here )
 			{
 				$this->debug( 'Skipping this blog.' );
@@ -321,6 +326,7 @@ trait broadcasting
 						// Allow modification of post date.
 						$temp_post_data->edit_date = true;
 
+						$this->debug( 'Running wp_update_post with %s', $temp_post_data );
 						wp_update_post( $temp_post_data );
 						$bcd->new_post->ID = $child_post_id;
 						$need_to_insert_post = false;
@@ -338,6 +344,7 @@ trait broadcasting
 				$this->debug( 'Creating a new post: %s', $temp_post_data );
 				unset( $temp_post_data->ID );
 
+				$this->debug( 'Running wp_insert_post with %s', $temp_post_data );
 				$result = wp_insert_post( $temp_post_data, true );
 
 				// Did we manage to insert the post properly?
@@ -468,28 +475,7 @@ trait broadcasting
 				$this->debug( 'Not deleting child attachments.' );
 
 			// Copy the attachments
-			$bcd->copied_attachments = [];
-			$this->debug( 'Looking through %s attachments.', count( $bcd->attachment_data ) );
-			foreach( $bcd->attachment_data as $key => $attachment )
-			{
-				$o = clone( $bcd );
-				$o->attachment_data = clone( $attachment );
-				$o->attachment_data->post = clone( $attachment->post );
-				$this->debug( "The attachment's post parent is %s.", $o->attachment_data->post->post_parent );
-				if ( $o->attachment_data->is_attached_to_parent() )
-				{
-					$this->debug( 'Assigning new post parent ID (%s) to attachment %s.', $bcd->new_post( 'ID' ), $o->attachment_data->post->ID );
-					$o->attachment_data->post->post_parent = $bcd->new_post( 'ID' );
-				}
-				else
-				{
-					$this->debug( 'Resetting post parent for attachment %s.', $o->attachment_data->post->ID );
-					$o->attachment_data->post->post_parent = 0;
-				}
-				$this->maybe_copy_attachment( $o );
-				$bcd->copied_attachments()->add( $attachment->post, get_post( $o->attachment_id ) );
-				$this->debug( 'Copied attachment %s to %s', $attachment->post->ID, $o->attachment_id );
-			}
+			$this->copy_attachments_to_child( $bcd );
 
 			// Maybe modify the post content with new URLs to attachments and what not.
 			$unmodified_post = (object)$bcd->new_post;
@@ -528,40 +514,6 @@ trait broadcasting
 
 			if ( $bcd->custom_fields )
 			{
-                            if(isset($bcd->custom_fields->original['video_file']) && !empty($bcd->custom_fields->original['video_file'])){                                    
-                                    
-                                if(!isset($o->attachment_id)){  
-
-                                    $parent_post_table='wp_posts';
-                                    $parent_blog_id=$bcd->parent_blog_id;
-                                    if($parent_blog_id!=1){
-                                        $parent_post_table='wp_'.$parent_blog_id.'_posts';
-                                    }                                        
-                                    global $wpdb;
-                                    $attachments = $wpdb->get_results("SELECT *from ".$parent_post_table." where ID=" . $bcd->custom_fields->original['video_file'][0]);
-                                    foreach($attachments as $attachment){
-                                        $attach_arr=(array)$attachment;
-                                    }
-                                    unset($attach_arr['ID']);
-                                    $child_post_table='wp_posts';
-                                    $child_blog_id=$bcd->current_child_blog_id();
-                                    if($bcd->current_child_blog_id()!=1){
-                                        $child_post_table='wp_'.$child_blog_id.'_posts';
-                                    }                                                                           
-                                    $check_attachments=$wpdb->get_results("SELECT *from ".$child_post_table." where guid LIKE '%".$attach_arr['guid']."%'");                                                                                                            
-                                    if(empty($check_attachments)){
-                                        $wpdb->insert($child_post_table, $attach_arr);
-                                        $bcd->custom_fields->original['video_file'][0]=$wpdb->insert_id;
-                                    }else {
-                                        foreach($check_attachments as $attachment){
-                                            $attach_arr=(array)$attachment;
-                                        }
-                                        $bcd->custom_fields->original['video_file'][0]=$attach_arr['ID'];
-                                    }                                                                        
-                                }else {
-                                    $bcd->custom_fields->original['video_file'][0]=$o->attachment_id;
-                                }
-                            }
 				$this->debug( 'Custom fields: Started.' );
 
 				$child_fields = $bcd->custom_fields()->child_fields();
@@ -665,9 +617,7 @@ trait broadcasting
 			$child_blog->switch_from();
 		}
 
-		// SEE: For nested broadcasts. Just in case.
-		if ( ! $this->is_yoast_installed() )
-			restore_current_blog();
+		restore_current_blog();
 
 		$action = new actions\broadcasting_finished;
 		$action->broadcasting_data = $bcd;
@@ -799,6 +749,9 @@ trait broadcasting
 			$this->filters( 'threewp_broadcast_broadcast_post', $broadcasting_data );
 		else
 			$this->debug( 'No blogs are selected. Not broadcasting.' );
+
+		// In case anyone called save_post(), instead of the action.
+		return $broadcasting_data;
 	}
 
 	/**

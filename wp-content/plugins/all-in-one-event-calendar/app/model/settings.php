@@ -49,11 +49,7 @@ class Ai1ec_Settings extends Ai1ec_App {
 	) {
 
 		if ( 'deprecated' === $type ) {
-			unset( $this->_options[$option] );
-		} else if ( 'hidden' === $type ) {
-			if ( isset( $this->_options[$option] ) && isset( $this->_options[$option]['renderer'] )  ) {
-				$this->_options[$option]['renderer'] = null;
-			}
+			unset( $this->_options[$option] );	
 		} else if (
 			! isset( $this->_options[$option] ) ||
 			! isset( $this->_options[$option]['version'] ) ||
@@ -228,16 +224,14 @@ class Ai1ec_Settings extends Ai1ec_App {
 			$this->_change_update_status( true );
 		}
 	}
-
-
+	
 	/**
 	 * Do things needed on every plugin upgrade.
 	 */
 	public function perform_upgrade_actions() {
-		$option = $this->_registry->get( 'model.option' );
-		$option->set( 'ai1ec_force_flush_rewrite_rules',      true, true );
-		$option->set( 'ai1ec_invalidate_css_cache',           true, true );
-		$option->set( Ai1ec_Theme_Loader::OPTION_FORCE_CLEAN, true, true );
+		update_option( 'ai1ec_force_flush_rewrite_rules',      true );
+		update_option( 'ai1ec_invalidate_css_cache',           true );
+		update_option( Ai1ec_Theme_Loader::OPTION_FORCE_CLEAN, true );
 	}
 
 	/**
@@ -320,7 +314,6 @@ class Ai1ec_Settings extends Ai1ec_App {
 				$test_version = $values['calendar_page_id']['version'];
 			}
 		}
-		$upgrade = false;
 		// check for updated translations
 		$this->_register_standard_values();
 		if ( // process meta updates changes
@@ -332,14 +325,9 @@ class Ai1ec_Settings extends Ai1ec_App {
 			$this->_register_standard_values();
 			$this->_update_name_translations();
 			$this->_change_update_status( true );
-			$upgrade = true;
 		} else if ( $values instanceof Ai1ec_Settings ) { // process legacy
 			$this->_parse_legacy( $values );
 			$this->_change_update_status( true );
-			$upgrade = true;
-		}
-		if ( true === $upgrade ) {
-			$this->perform_upgrade_actions();
 		}
 		$this->_registry->get( 'controller.shutdown' )->register(
 			array( $this, 'shutdown' )
@@ -560,6 +548,21 @@ class Ai1ec_Settings extends Ai1ec_App {
 					'validator' => 'numeric',
 				),
 				'default'  => 24,
+			),
+			'google_maps_api_key' => array(
+				'type' => 'string',
+				'renderer' => array(
+					'class'     => 'input',
+					'tab'       => 'viewing-events',
+					'item'      => 'viewing-events',
+					'label'     => Ai1ec_I18n::__(
+									'<span class="ai1ec-tooltip-toggle"
+									data-original-title="Google may request for an API key in order to show the map">
+									Google Maps API Key</span> (<a target="_blank" href="https://developers.google.com/maps/documentation/javascript/get-api-key#get-an-api-key">Get an API key</a>)'
+					),
+					'type'      => 'normal'
+				),
+				'default'  => '',
 			),
 			'month_word_wrap' => array(
 				'type'     => 'bool',

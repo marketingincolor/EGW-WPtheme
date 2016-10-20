@@ -10,6 +10,12 @@ class wp_update_term
 	extends action
 {
 	/**
+		@brief		IN: The broadcasting_data object.
+		@since		2016-07-22 16:38:11
+	**/
+	public $broadcasting_data;
+
+	/**
 		@brief		IN: The new term object with new values.
 		@see		set_new_term()
 		@since		2014-04-08 15:32:24

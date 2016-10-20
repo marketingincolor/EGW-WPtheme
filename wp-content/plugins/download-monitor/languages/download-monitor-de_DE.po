@@ -5,13 +5,14 @@
 # Barry Kooij <mail@barrykooij.nl>, 2015
 # Marcel Pietschmann <inactive+maphy_psd@transifex.com>, 2015
 # Patrick Brückner, 2014
+# maphy.psd <psd.phi@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Download Monitor\n"
 "Report-Msgid-Bugs-To: https://github.com/download-monitor/download-monitor/issues\n"
 "POT-Creation-Date: 2016-03-27 14:45:08+00:00\n"
-"PO-Revision-Date: 2016-03-27 14:46+0000\n"
-"Last-Translator: Barry Kooij <mail@barrykooij.nl>\n"
+"PO-Revision-Date: 2016-06-28 08:45+0000\n"
+"Last-Translator: maphy.psd <psd.phi@gmail.com>\n"
 "Language-Team: German (Germany) (http://www.transifex.com/barrykooijplugins/download-monitor/language/de_DE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -141,7 +142,7 @@ msgstr "Ja"
 
 #: includes/admin/class-dlm-admin-cpt.php:384
 msgid "Download Monitor Data"
-msgstr ""
+msgstr "Download Monitor Data"
 
 #: includes/admin/class-dlm-admin-cpt.php:386
 #: includes/admin/class-dlm-admin-writepanels.php:118
@@ -319,7 +320,7 @@ msgstr "Nur angemeldete Benutzer haben Zugriff auf die Datei, wenn dies ausgewä
 msgid ""
 "Don't force download. If the <code>dlm_uploads</code> folder is protected "
 "you may need to move your file."
-msgstr ""
+msgstr "Download nicht erzwingen. Falls der <code>dlm_upload</code> Ordner geschützt ist, kann es sein, dass du die Datei verschieben musst."
 
 #: includes/admin/class-dlm-admin-writepanels.php:160
 msgid "Add file"
@@ -335,7 +336,7 @@ msgstr "Alle expandieren"
 
 #: includes/admin/class-dlm-admin.php:104
 msgid "Select Page"
-msgstr ""
+msgstr "Wähle Seite"
 
 #: includes/admin/class-dlm-admin.php:131
 msgid "General"
@@ -459,7 +460,7 @@ msgstr "Download-Slug"
 
 #: includes/admin/class-dlm-admin.php:197
 msgid "Hashes"
-msgstr ""
+msgstr "Prüfsummen"
 
 #: includes/admin/class-dlm-admin.php:202
 msgid "MD5 hashes"
@@ -505,27 +506,27 @@ msgstr "Download-Versuche, IP-Adressen und anderes aufzeichnen."
 
 #: includes/admin/class-dlm-admin.php:239
 msgid "Count unique IPs only"
-msgstr ""
+msgstr "Zähle nur eindeutige IP Adressen"
 
 #: includes/admin/class-dlm-admin.php:241
 msgid ""
 "If enabled, the counter for each download will only increment and create a "
 "log entry once per IP address."
-msgstr ""
+msgstr "Wenn aktiviert, dann wird der Downloadzähler und die Logeinträge nur einmal pro IP Adresse gezählt und erstellt."
 
 #: includes/admin/class-dlm-admin.php:247
 msgid "Access"
-msgstr ""
+msgstr "Zugriff"
 
 #: includes/admin/class-dlm-admin.php:252
 msgid "No Access Page"
-msgstr ""
+msgstr "Kein Zugriff Seite"
 
 #: includes/admin/class-dlm-admin.php:253
 msgid ""
 "Choose what page is displayed when the user has no access to a file. Don't "
 "forget to add the <code>[dlm_no_access]</code> shortcode to the page."
-msgstr ""
+msgstr "Wählen Sie die Seite aus, die angezeigt wird, wenn der User kein Zugriff auf die Datei hat. Vergessen Sie nicht den <code>[dlm_no_access]</code> shortcode auf die Seite hinzuzufügen."
 
 #: includes/admin/class-dlm-admin.php:259 includes/class-dlm-installer.php:41
 #: includes/class-dlm-upgrade-manager.php:54
@@ -534,7 +535,7 @@ msgstr "Sie besitzen nicht die nötige Berechtigung, um auf diese Download-Datei
 
 #: includes/admin/class-dlm-admin.php:261
 msgid "No access message"
-msgstr ""
+msgstr "Kein Zugriff Nachricht"
 
 #: includes/admin/class-dlm-admin.php:262
 msgid ""
@@ -552,7 +553,7 @@ msgid ""
 "ranges. IPv4 examples: <code>198.51.100.1</code> or "
 "<code>198.51.100.0/24</code>. IPv6 examples: <code>2001:db8::1</code> or "
 "<code>2001:db8::/32</code>."
-msgstr ""
+msgstr "Gesperrte IP Addressen, 1 pro Linie. Für IP-Bereiche nutzen Sie die IP/CIDR Netzmaske. IPv4 Beispiele: <code>198.51.100.1</code> oder <code>198.51.100.0/24</code>. IPv6 Beispiele: <code>2001:db8::1</code> oder <code>2001:db8::/32</code>."
 
 #: includes/admin/class-dlm-admin.php:276
 msgid "Blacklist user agents"
@@ -578,13 +579,13 @@ msgstr "Erweiterungen"
 msgid ""
 "Because your server is running on nginx, our .htaccess file can't protect "
 "your downloads."
-msgstr ""
+msgstr "Ihr Server läuft mit nginx, sodass unsere .htaccess Datei Ihre Downloads nicht schützen kann."
 
 #: includes/admin/class-dlm-admin.php:412
 msgid ""
 "Please add the following rules to your nginx config to disable direct file "
 "access: %s"
-msgstr ""
+msgstr "Um einen direkten Datei-Zugriff zu verbieten, fügen Sie bitte folgende Regeln zur nginx Konfiguration hinzu: %s"
 
 #: includes/admin/class-dlm-admin.php:451
 msgid "Settings successfully saved"
@@ -652,7 +653,7 @@ msgstr "Wenn du %sDownload Monitor%s magst, hinterlasse uns doch eine %s★★�
 
 #: includes/admin/class-dlm-logging-list-table.php:63
 msgid "Delete"
-msgstr ""
+msgstr "Lösche"
 
 #: includes/admin/class-dlm-logging-list-table.php:90
 msgid "Download Complete"
@@ -684,7 +685,7 @@ msgstr "IP Addresse"
 
 #: includes/admin/class-dlm-logging-list-table.php:192
 msgid "Log entries deleted"
-msgstr ""
+msgstr "Logeinträge gelöscht"
 
 #: includes/admin/class-dlm-logging-list-table.php:209
 msgid "Any status"
@@ -841,7 +842,7 @@ msgstr "Datei nicht gefunden."
 
 #: includes/class-dlm-installer.php:165 includes/class-dlm-installer.php:174
 msgid "No Access"
-msgstr ""
+msgstr "Kein Zugriff"
 
 #: includes/class-dlm-post-type-manager.php:21
 msgid "All Downloads"
@@ -993,7 +994,7 @@ msgstr "Limit"
 
 #: includes/widgets/class-dlm-widget-downloads.php:183
 msgid "Output template"
-msgstr ""
+msgstr "Vorlage für Ausgabe:"
 
 #: includes/widgets/class-dlm-widget-downloads.php:187
 msgid "Default template"
@@ -1001,7 +1002,7 @@ msgstr "Standard-Vorlage"
 
 #: includes/widgets/class-dlm-widget-downloads.php:191
 msgid "Order by"
-msgstr ""
+msgstr "Geordnet nach:"
 
 #: includes/widgets/class-dlm-widget-downloads.php:197
 msgid "Random"
@@ -1081,11 +1082,11 @@ msgstr "Eine komplette Lösung für die Verwaltung von Downloads. Stellt ein Mon
 
 #. Author of the plugin/theme
 msgid "Never5"
-msgstr ""
+msgstr "Never5"
 
 #. Author URI of the plugin/theme
 msgid "https://www.never5.com"
-msgstr ""
+msgstr "https://www.never5.com"
 
 #: includes/admin/class-dlm-admin-media-insert.php:213
 msgctxt "Drop file here *or* select file"

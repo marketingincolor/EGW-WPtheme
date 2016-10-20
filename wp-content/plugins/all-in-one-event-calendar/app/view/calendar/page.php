@@ -109,7 +109,7 @@ class Ai1ec_Calendar_Page extends Ai1ec_Base {
 
 		// Get HTML for subscribe buttons.
 		$subscribe_buttons = $this->get_html_for_subscribe_buttons( $view_args );
-
+		
 		// Get HTML for view itself.
 		$view              = $view_obj->get_content( $view_args );
 
@@ -500,8 +500,7 @@ class Ai1ec_Calendar_Page extends Ai1ec_Base {
 		$view_args['request_format'] = $request->get( 'request_format' );
 		$exact_date = $this->get_exact_date( $request );
 
-		$view_args['no_navigation'] = $request
-			->get( 'no_navigation' ) === 'true';
+		$view_args['no_navigation'] = $request->get( 'no_navigation' ) == true;
 
 		// Find out which view of the calendar page was requested, and render it
 		// accordingly.
