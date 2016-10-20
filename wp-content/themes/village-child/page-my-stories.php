@@ -128,23 +128,28 @@ $merged_new_ar = array();
 <script type = "text/javascript">
     jQuery(function () {
         jQuery(".comment_button").unbind('click').click(function () {
-            var dataString = jQuery('#followsubcat').serialize();
             var datasubcatslectbox = jQuery('#subcatslectbox').val();
-            jQuery.ajax({
-                type: "POST",
-                url: "<?php echo get_stylesheet_directory_uri(); ?>/followajax.php",
-                data: dataString,
-                cache: false,
-                success: function (successvalue) {
-                    if (jQuery('#followedSubcat').html(successvalue)) {
-                        alert("You have followed selected sub category successfully");
+            var dataString = jQuery('#followsubcat').serialize();
+            if (datasubcatslectbox != "") {
+                jQuery.ajax({
+                    type: "POST",
+                    url: "<?php echo get_stylesheet_directory_uri(); ?>/followajax.php",
+                    data: dataString,
+                    cache: false,
+                    success: function (successvalue) {
+                        if (jQuery('#followedSubcat').html(successvalue)) {
+                            document.getElementById("selectbox-msg").innerHTML = '<div class="follow-vad-tick"><i class="fa fa-check" aria-hidden="true"></i>You have subscribed successfully</div>';
+                        }
+                        jQuery('select').children('option[value="' + datasubcatslectbox + '"]').attr('disabled', true);
+                        location.reload();
                     }
-                    jQuery('select').children('option[value="' + datasubcatslectbox + '"]').attr('disabled', true);
-                    location.reload();
+                });
+                return false;
+            } else {
+                document.getElementById("selectbox-msg").innerHTML = '<div class="follow-vad-cross"><i class="fa fa-times" aria-hidden="true"></i> Please select sub category</div>';
+                return false;
+            }
 
-                }
-            });
-            return false;
         });
 
         //Delete ajax
@@ -155,7 +160,7 @@ $merged_new_ar = array();
                 return this.value;
             }).get(); // ["18", "55", "10"]
             if (values.length == 0) {
-                alert('You must check at least one box!');
+                document.getElementById("unfollowed-msg").innerHTML = '<div class="follow-vad-cross"><i class="fa fa-times" aria-hidden="true"></i> You must check at least one box!</div>';
                 return false; // The form will *not* submit
             } else {
                 jQuery.ajax({
@@ -165,7 +170,7 @@ $merged_new_ar = array();
                     cache: false,
                     success: function (deletedvalue) {
                         if (jQuery('#followedSubcat').html(deletedvalue)) {
-                            alert("You have unfollowed successfully");
+                            document.getElementById("unfollowed-msg").innerHTML = '<div class="follow-vad-tick"><i class="fa fa-check" aria-hidden="true"></i> You have unfollowed successfully</div>';
                             location.reload();
                         }
                     }

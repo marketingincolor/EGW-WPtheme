@@ -1875,7 +1875,18 @@ input[type="checkbox"]:disabled + label span {
     padding: 3px 3px 4px;
 }
 /*Custom select ends here*/
-
+.follow-vad-tick{
+    color:#5cb85c;
+}
+.follow-vad-tick i{
+    padding-right: 4px;
+}
+.follow-vad-cross{
+    color:#d01040;
+}
+.follow-vad-cross i{
+    padding-right: 4px;
+}
 @media (min-width: 769px) and (max-width: 1200px) {
     .follow-innercont ul li{
         width: 50%;

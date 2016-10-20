@@ -30,8 +30,8 @@
                         <h2>Select Subcategory You Want to Follow:</h2>
                         <div class="selectcat-container">
                             <div class="select-inn-cnt">
-                                <select name="categoryid" id="subcatslectbox">
-                                    <option value=""><?php echo "Sub Categories" ?></option>
+                                <select name="categoryid" id="subcatslectbox" required>
+                                    <option value="" ><?php echo "Sub Categories" ?></option>
                                     <?php
                                     //example code for reference
                                     /* $args = array(
@@ -61,20 +61,21 @@
                                         <option <?php echo $disabled ?> value="<?php echo $category->term_id ?>"><?php echo $category->cat_name ?></option>
                                         <?php
                                     }
-                                    ?> 
+                                    ?>
                                 </select>
+                                <div id="selectbox-msg"></div>
                             </div>
                             <input type="hidden" name="updateflag" id="flagvalue" value="1">
                             <input type="hidden" name="submit" id="submitvalue" value="insert">
                             <input type="hidden" name="userid" value="<?php echo $userid; ?>">
-                <!--            <input type="hidden" name="categoryid" value="<?php //echo $categoryid;                           ?>"> -->
+                <!--            <input type="hidden" name="categoryid" value="<?php //echo $categoryid;                            ?>"> -->
                             <button type="button" value="Follow" name="follow" class="comment_button"><?php echo 'Follow'; ?></button>
                         </div>
                     </form>
                 </div>
 
                 <div class="follow-container-nw">
-                    <h2>Followed Subcategories:</h2>
+                    <h2>Followed Subcategories:</h2> 
                     <form action="" name="unfollowsubcat" id="unfollowsubcat">
                         <div id='followedSubcat' class="follow-innercont vc_col-md-12">
 
@@ -103,6 +104,7 @@
                                 <input type="hidden" name="submit" id="submitvalue" value="delete">
                                 <input type="hidden" name="userid" value="<?php echo $userid; ?>">
                                 <button type="button" value="Unfollow" id="unfollow_button" name="unfollow" class="unfollow_button"><?php echo 'Unfollow'; ?></button>
+                                <div id="unfollowed-msg"></div>
                             </div>
 
                         </div>
