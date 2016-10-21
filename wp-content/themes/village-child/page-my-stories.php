@@ -127,6 +127,11 @@ $merged_new_ar = array();
 </script>
 <script type = "text/javascript">
     jQuery(function () {
+        //unchecked all checkbox in page load;
+        jQuery('input[type=checkbox]').each(function ()
+        {
+            this.checked = false;
+        });
         jQuery(".comment_button").unbind('click').click(function () {
             var datasubcatslectbox = jQuery('#subcatslectbox').val();
             var dataString = jQuery('#followsubcat').serialize();

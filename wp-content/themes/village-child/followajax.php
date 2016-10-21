@@ -110,6 +110,11 @@ if ($_POST['submit'] == 'delete') {
 ?>
 <script type = "text/javascript">
     jQuery(function () {
+        //unchecked all checkbox in page load;
+        jQuery('input[type=checkbox]').each(function ()
+        {
+            this.checked = false;
+        });
         jQuery(".comment_button").unbind('click').click(function () {
             var datasubcatslectbox = jQuery('#subcatslectbox').val();
             var dataString = jQuery('#followsubcat').serialize();
@@ -201,7 +206,7 @@ if ($_POST['submit'] == 'delete') {
             } else {
                 jQuery.ajax({
                     type: "POST",
-                    url: "<?php //echo get_stylesheet_directory_uri(); ?>/followajax.php",
+                    url: "<?php //echo get_stylesheet_directory_uri();    ?>/followajax.php",
                     data: dataString,
                     cache: false,
                     success: function (deletedvalue) {
