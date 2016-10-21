@@ -132,6 +132,9 @@ $merged_new_ar = array();
         {
             this.checked = false;
         });
+        //jQuery("#subcatslectbox option:first").attr("selected", true);
+        jQuery('#subcatslectbox').val( jQuery('#subcatslectbox').prop('defaultSelected') );
+        jQuery("#subcatslectbox").css("box-shadow", "none");
         jQuery(".comment_button").unbind('click').click(function () {
             var datasubcatslectbox = jQuery('#subcatslectbox').val();
             var dataString = jQuery('#followsubcat').serialize();
