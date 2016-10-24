@@ -2049,32 +2049,56 @@ function add_sponsored_post_bar()
 }
 add_action('sponsored-post', 'add_sponsored_post_bar');
 
+/**
+ * Author - Doe
+ * Date - 10-24-2016
+ * @param  array $atts Used for manually settings shortcode attributes within posts.
+ * @return string For adding learn more snippets to bottom of posts
+ */
 function egw_category_shortcode($atts)
 { 
-    //If attributes were entered.
-    if ( $atts !== '' )
+    $yoast_cat = new WPSEO_Primary_Term('category', get_the_ID());
+    $yoast_cat = $yoast_cat->get_primary_term();
+    $yoast_catName = get_cat_name($yoast_cat);
+    $yoast_catLink = get_category_link($yoast_cat);
+
+    //No atts passed. Defaults to use yoast primary category.
+    //Also allows for shortcode to be used without Yoast.
+    if ( $atts == null || $atts == '' )
+    {
+        if ( $yoast_catName && $yoast_catLink )
+        {   
+
+            $build_shortcode = '<div class="egw-learn-more"><p>';
+            $build_shortcode .= '<a href='. $yoast_catLink. '>Learn more about ' . strtolower($yoast_catName) . ' >></a>';
+            $build_shortcode .= "</p></div>";
+            return $build_shortcode;
+        }
+
+        elseif ( $yoast_cat == null || $yoast_cat == '')
+        {
+            $category = get_the_category();
+            $first_category_name = $category[0]->cat_name;
+            $category_id = get_cat_ID( $first_category_name );
+            $category_link  = get_category_link($category_id); 
+            $build_shortcode = '<div class="egw-learn-more"><p>';
+            $build_shortcode .= '<a href='. $category_link. '>Learn more about ' . strtolower($first_category_name) . ' >></a>';
+            $build_shortcode .= "</p></div>";
+            return $build_shortcode;
+        }
+    }
+    //Attributes are set. Use them.
+    elseif( isset($atts)) 
     {
         extract(shortcode_atts(array('cat' => $atts,), $atts));
         $category_id = get_cat_ID($cat);
         $category_link = get_category_link($category_id);
-        $build_shortcode = '<div class="egw-learn-more">';
-        $build_shortcode .= '<a href="'. $category_link .'">Learn more about '. $cat. '>></a>';
-        $build_shortcode .= '</div>';
+        $build_shortcode = '<div class="egw-learn-more"><p>';
+        $build_shortcode .= '<a href="'. $category_link .'">Learn more about '. strtolower($cat) . '>></a>';
+        $build_shortcode .= '</p></div>';
         return $build_shortcode;   
     }
-    //No attributes entered.
-    elseif ( $atts == '' || $atts == null )
-    {
-        $category = get_the_category();
-        $first_category_name = $category[0]->cat_name;
-        $category_id = get_cat_ID( $first_category_name );
-        $category_link  = get_category_link($category_id); 
-        $build_shortcode = '<div class="egw-learn-more">';
-        $build_shortcode .= '<a href='. $category_link. '>Learn more about ' . $first_category_name. ' >></a>';
-        $build_shortcode .= "</div>";
-        return $build_shortcode;
-    }
-    else{
+    else {
         return;
     }
 }
