@@ -118,8 +118,8 @@ $merged_new_ar = array();
         }
         event.preventDefault();
     }
-    
-    
+
+
     jQuery(document).ready(function () {
         jQuery('#enable_story_playlist').click(function () {
             jQuery('#story-send').css('display', 'block');
@@ -141,7 +141,9 @@ $merged_new_ar = array();
         jQuery("#subcatslectbox").css("box-shadow", "none");
         jQuery(".comment_button").unbind('click').click(function () {
             var datasubcatslectbox = jQuery('#subcatslectbox').val();
-            document.getElementById("followbutton").setAttribute("disabled", "disabled");
+            if (datasubcatslectbox != "") {
+                document.getElementById("followbutton").setAttribute("disabled", "disabled");
+            }
             var dataString = jQuery('#followsubcat').serialize();
             if (datasubcatslectbox != "") {
                 jQuery.ajax({
