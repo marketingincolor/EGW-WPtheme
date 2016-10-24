@@ -86,7 +86,7 @@ $merged_new_ar = array();
 
         var displayed_article_count = parseInt(jQuery('#displayed_article_count').text());
         var total_article_count = parseInt(jQuery('#total_saved_article_count').text());
-        jQuery('#load-save-article-button').css('display', 'none');
+        jQuery('#load-save-article-button-section').css('display', 'none');
         jQuery('.loader_img').css('display', 'block');
         jQuery.ajax({
             type: "POST",
@@ -118,6 +118,8 @@ $merged_new_ar = array();
         }
         event.preventDefault();
     }
+    
+    
     jQuery(document).ready(function () {
         jQuery('#enable_story_playlist').click(function () {
             jQuery('#story-send').css('display', 'block');
@@ -132,11 +134,14 @@ $merged_new_ar = array();
         {
             this.checked = false;
         });
+        jQuery("#followbutton").removeAttr('disabled');
         //jQuery("#subcatslectbox option:first").attr("selected", true);
-        jQuery('#subcatslectbox').val( jQuery('#subcatslectbox').prop('defaultSelected') );
+        document.getElementsByClassName("comment_button").disabled = false;
+        jQuery('#subcatslectbox').val(jQuery('#subcatslectbox').prop('defaultSelected'));
         jQuery("#subcatslectbox").css("box-shadow", "none");
         jQuery(".comment_button").unbind('click').click(function () {
             var datasubcatslectbox = jQuery('#subcatslectbox').val();
+            document.getElementById("followbutton").setAttribute("disabled", "disabled");
             var dataString = jQuery('#followsubcat').serialize();
             if (datasubcatslectbox != "") {
                 jQuery.ajax({
@@ -148,6 +153,7 @@ $merged_new_ar = array();
                         if (jQuery('#followedSubcat').html(successvalue)) {
                             document.getElementById("selectbox-msg").innerHTML = '<div class="follow-vad-tick"><i class="fa fa-check" aria-hidden="true"></i>You have subscribed successfully</div>';
                         }
+
                         jQuery('select').children('option[value="' + datasubcatslectbox + '"]').attr('disabled', true);
                         location.reload();
                     }

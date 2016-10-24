@@ -69,7 +69,7 @@
                             <input type="hidden" name="submit" id="submitvalue" value="insert">
                             <input type="hidden" name="userid" value="<?php echo $userid; ?>">
                 <!--            <input type="hidden" name="categoryid" value="<?php //echo $categoryid;                            ?>"> -->
-                            <button type="button" value="Follow" name="follow" class="comment_button"><?php echo 'Follow'; ?></button>
+                            <button type="button" value="Follow" name="follow" class="comment_button" id="followbutton"><?php echo 'Follow'; ?></button>
                         </div>
                     </form>
                 </div>
