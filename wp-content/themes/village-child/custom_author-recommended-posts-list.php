@@ -10,7 +10,7 @@
             if (in_array(get_post_type($recommended_id), $author_recommended_posts_post_types)) {
                 $recommended_post_thumbnail = false;
                 if ($show_featured_image)
-                    $recommended_post_thumbnail_id = get_post_thumbnail_id($recommended_id);
+                $recommended_post_thumbnail_id = get_post_thumbnail_id($recommended_id);
                 $recommended_post_thumbnail_src = wp_get_attachment_image_src($recommended_post_thumbnail_id, 'medium', true);
                 $recommended_post_large_src = wp_get_attachment_image_src($recommended_post_thumbnail_id, 'large', true);
                 ?>  

@@ -2162,3 +2162,34 @@ function add_last_updated()
     }
 }
 add_action( 'last_updated', 'add_last_updated' );
+
+function egw_category_shortcode($atts)
+{ 
+    //If attributes were entered.
+    if ( $atts !== '' )
+    {
+        extract(shortcode_atts(array('cat' => $atts,), $atts));
+        $category_id = get_cat_ID($cat);
+        $category_link = get_category_link($category_id);
+        $build_shortcode = '<div class="egw-learn-more">';
+        $build_shortcode .= '<a href="'. $category_link .'">Learn more about '. $cat. '>></a>';
+        $build_shortcode .= '</div>';
+        return $build_shortcode;   
+    }
+    //No attributes entered.
+    elseif ( $atts == '' || $atts == null )
+    {
+        $category = get_the_category();
+        $first_category_name = $category[0]->cat_name;
+        $category_id = get_cat_ID( $first_category_name );
+        $category_link  = get_category_link($category_id); 
+        $build_shortcode = '<div class="egw-learn-more">';
+        $build_shortcode .= '<a href='. $category_link. '>Learn more about ' . $first_category_name. ' >></a>';
+        $build_shortcode .= "</div>";
+        return $build_shortcode;
+    }
+    else{
+        return;
+    }
+}
+add_shortcode('egw-learn-more', 'egw_category_shortcode');

@@ -617,9 +617,12 @@ function discussion_author_recommended_posts() {
             $recommended_ids = get_post_meta($shortcode_post_id, $namespace, true);
 
             $html = '';
-            echo "<br/>Shortcode Post ID: " . $shortcode_post_id . "<br/>";
-            echo "<br/>Namespace: " . $namespace . "<br/>";
-            echo "<br/>Recommended Ids: " . implode(",",$recommended_ids) ."<br/>";
+
+            // USE FOR TESTING BROADCAST PLUGIN
+            // echo "<br/>Shortcode Post ID: " . $shortcode_post_id . "<br/>";
+            // echo "<br/>Namespace: " . $namespace . "<br/>";
+            // echo "<br/>Recommended Ids: " . implode(",",$recommended_ids) ."<br/>";
+            
             if ($recommended_ids) {
                             echo "<br/>Namespace: " . $namespace . "<br/>";
 
