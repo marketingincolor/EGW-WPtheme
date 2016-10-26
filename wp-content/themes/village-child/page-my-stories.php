@@ -159,6 +159,7 @@ $merged_new_ar = array();
     document.getElementsByClassName("comment_button").disabled = false;
     jQuery('#subcatslectbox').val(jQuery('#subcatslectbox').prop('defaultSelected'));
     jQuery("#subcatslectbox").css("box-shadow", "none");
+    jQuery("#log-in-mystories").css("background-color", "#3a7d3b");
 
     //follow subcategories
     jQuery(document).on('click', '.comment_button', function () {

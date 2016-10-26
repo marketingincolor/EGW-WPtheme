@@ -1317,7 +1317,7 @@ function add_login_logout_to_menu($items, $args) {
     // else  
     //  $link = '<a class="" href="' . $homeurl . 'register"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">Find a Branch</span></span></span></a>';
 
-    return $items.= '<li id="log-in-out-link" class="menu-item menu-item-type-custom menu-item-object-custom  mkd-menu-narrow">' . $link . '</li>';
+    return $items.= '<li id="log-in-mystories" class="menu-item menu-item-type-custom menu-item-object-custom  mkd-menu-narrow">' . $link . '</li>';
 }
 
 add_filter('wp_nav_menu_items', 'add_login_logout_to_menu', 50, 2);
