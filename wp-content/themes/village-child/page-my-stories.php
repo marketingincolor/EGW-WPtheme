@@ -9,10 +9,14 @@
  *
  * Selectable from a dropdown menu on the edit page screen.
  */
+if (!$pagename && $id > 0) {
+    // If a static page is set as the front page, $pagename will not be set. Retrieve it from the queried object  
+    $post = $wp_query->get_queried_object();
+    $pagename = $post->post_name;
+}
 ?>
 <?php
 get_header();
-
 list($post_per_section, $post_type) = scroll_loadpost_settings();
 $category = 'feature-home';
 $my_query = null;
@@ -81,9 +85,7 @@ $merged_new_ar = array();
 <?php //include(locate_template('block/ajax-pagination.php')); ?>
 <?php get_footer(); ?>
 <script>
-
     function load_saved_articles(event) {
-
         var displayed_article_count = parseInt(jQuery('#displayed_article_count').text());
         var total_article_count = parseInt(jQuery('#total_saved_article_count').text());
         jQuery('#load-save-article-button-section').css('display', 'none');
@@ -111,6 +113,8 @@ $merged_new_ar = array();
                 }
             }
         });
+
+        //To display the checkbox under the "Send stories to friends" section.
         if (jQuery('#story-send').css("display") == "block") {
             setTimeout(function () {
                 jQuery('.save-article-checkbox').css('display', 'block');
@@ -119,84 +123,97 @@ $merged_new_ar = array();
         event.preventDefault();
     }
 
-
+    //"Send stories to friends" secion back to hide in sidebar in My Stories page
     jQuery(document).ready(function () {
         jQuery('#enable_story_playlist').click(function () {
-            jQuery('#story-send').css('display', 'block');
-            jQuery('.save-article-checkbox').css('display', 'block');
+            if (jQuery(this).hasClass('open')) {
+                jQuery(this).removeClass('open');
+                jQuery('.saved-articles-sidelist-nw >a >i').removeClass('fa fa-angle-down');
+                jQuery('.saved-articles-sidelist-nw >a >i').addClass('fa fa-angle-up');
+                jQuery(this).addClass('close');
+                jQuery("#story-send").slideDown(100);
+                jQuery('#story-send').css('display', 'block');
+                jQuery('.save-article-checkbox').css('display', 'block');
+                return false;
+            } else {
+                jQuery(this).removeClass('close');
+                jQuery('.saved-articles-sidelist-nw >a >i').removeClass('fa fa-angle-up');
+                jQuery('.saved-articles-sidelist-nw >a >i').addClass('fa fa-angle-down');
+                jQuery(this).addClass('open');
+                jQuery("#story-send").slideUp(100);
+                jQuery("#savedArticles").trigger('reset');
+                jQuery('#story-send').css('display', 'none');
+                jQuery('.save-article-checkbox').css('display', 'none');
+                return false;
+            }
         });
     });
-</script>
-<script type = "text/javascript">
-    jQuery(function () {
-        //unchecked all checkbox in page load;
-        jQuery('input[type=checkbox]').each(function ()
-        {
-            this.checked = false;
-        });
-        jQuery("#followbutton").removeAttr('disabled');
-        //jQuery("#subcatslectbox option:first").attr("selected", true);
-        document.getElementsByClassName("comment_button").disabled = false;
-        jQuery('#subcatslectbox').val(jQuery('#subcatslectbox').prop('defaultSelected'));
-        jQuery("#subcatslectbox").css("box-shadow", "none");
-        jQuery(".comment_button").unbind('click').click(function () {
-            var datasubcatslectbox = jQuery('#subcatslectbox').val();
-            if (datasubcatslectbox != "") {
-                document.getElementById("followbutton").setAttribute("disabled", "disabled");
-            }
-            var dataString = jQuery('#followsubcat').serialize();
-            if (datasubcatslectbox != "") {
-                jQuery.ajax({
-                    type: "POST",
-                    url: "<?php echo get_stylesheet_directory_uri(); ?>/followajax.php",
-                    data: dataString,
-                    cache: false,
-                    success: function (successvalue) {
-                        if (jQuery('#followedSubcat').html(successvalue)) {
-                            document.getElementById("selectbox-msg").innerHTML = '<div class="follow-vad-tick"><i class="fa fa-check" aria-hidden="true"></i>You have subscribed successfully</div>';
-                        }
 
-                        jQuery('select').children('option[value="' + datasubcatslectbox + '"]').attr('disabled', true);
+
+    //unchecked all checkbox in page load;
+    jQuery('input[type=checkbox]').each(function ()
+    {
+        this.checked = false;
+    });
+    jQuery("#followbutton").removeAttr('disabled');
+    document.getElementsByClassName("comment_button").disabled = false;
+    jQuery('#subcatslectbox').val(jQuery('#subcatslectbox').prop('defaultSelected'));
+    jQuery("#subcatslectbox").css("box-shadow", "none");
+
+    //follow subcategories
+    jQuery(document).on('click', '.comment_button', function () {
+        var datasubcatslectbox = jQuery('#subcatslectbox').val();
+        if (datasubcatslectbox != "") {
+            document.getElementById("followbutton").setAttribute("disabled", "disabled");
+        }
+        var dataString = jQuery('#followsubcat').serialize();
+        if (datasubcatslectbox != "") {
+            jQuery.ajax({
+                type: "POST",
+                url: "<?php echo get_stylesheet_directory_uri(); ?>/followajax.php",
+                data: dataString,
+                cache: false,
+                success: function (successvalue) {
+                    if (jQuery('#followedSubcat').html(successvalue)) {
+                        document.getElementById("selectbox-msg").innerHTML = '<div class="follow-vad-tick"><i class="fa fa-check" aria-hidden="true"></i>You have subscribed successfully</div>';
+                    }
+
+                    jQuery('select').children('option[value="' + datasubcatslectbox + '"]').attr('disabled', true);
+                    location.reload();
+                }
+            });
+            return false;
+        } else {
+            document.getElementById("selectbox-msg").innerHTML = '<div class="follow-vad-cross"><i class="fa fa-times" aria-hidden="true"></i> Please select sub category</div>';
+            return false;
+        }
+
+    });
+
+
+    //Delete followed subcategories  
+    jQuery(document).on('click', '#unfollow_button', function () {
+        var dataString = jQuery('#unfollowsubcat').serialize();
+        var values = jQuery('input:checkbox:checked.followedsubcates').map(function () {
+            return this.value;
+        }).get(); // ["18", "55", "10"]
+        if (values.length == 0) {
+            document.getElementById("unfollowed-msg").innerHTML = '<div class="follow-vad-cross"><i class="fa fa-times" aria-hidden="true"></i> You must check at least one box!</div>';
+            return false; // The form will *not* submit
+        } else {
+            jQuery.ajax({
+                type: "POST",
+                url: "<?php echo get_stylesheet_directory_uri(); ?>/followajax.php",
+                data: dataString,
+                cache: false,
+                success: function (deletedvalue) {
+                    if (jQuery('#followedSubcat').html(deletedvalue)) {
+                        document.getElementById("unfollowed-msg").innerHTML = '<div class="follow-vad-tick"><i class="fa fa-check" aria-hidden="true"></i> You have unfollowed successfully</div>';
                         location.reload();
                     }
-                });
-                return false;
-            } else {
-                document.getElementById("selectbox-msg").innerHTML = '<div class="follow-vad-cross"><i class="fa fa-times" aria-hidden="true"></i> Please select sub category</div>';
-                return false;
-            }
-
-        });
-
-        //Delete ajax
-        jQuery("#unfollow_button").unbind('click').click(function () {
-            var dataString = jQuery('#unfollowsubcat').serialize();
-
-            var values = jQuery('input:checkbox:checked.followedsubcates').map(function () {
-                return this.value;
-            }).get(); // ["18", "55", "10"]
-            if (values.length == 0) {
-                document.getElementById("unfollowed-msg").innerHTML = '<div class="follow-vad-cross"><i class="fa fa-times" aria-hidden="true"></i> You must check at least one box!</div>';
-                return false; // The form will *not* submit
-            } else {
-                jQuery.ajax({
-                    type: "POST",
-                    url: "<?php echo get_stylesheet_directory_uri(); ?>/followajax.php",
-                    data: dataString,
-                    cache: false,
-                    success: function (deletedvalue) {
-                        if (jQuery('#followedSubcat').html(deletedvalue)) {
-                            document.getElementById("unfollowed-msg").innerHTML = '<div class="follow-vad-tick"><i class="fa fa-check" aria-hidden="true"></i> You have unfollowed successfully</div>';
-                            location.reload();
-                        }
-                    }
-                });
-                return false;
-            }
-        });
-
-
+                }
+            });
+            return false;
+        }
     });
-
 </script>
-

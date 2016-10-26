@@ -1311,7 +1311,7 @@ function add_login_logout_to_menu($items, $args) {
     $redirect = ( is_home() ) ? home_url('/') : home_url('/');
     $homeurl = home_url('/');
     if (is_user_logged_in() && get_current_blog_id() != 1)
-        $link = '<a class="" href="' . $homeurl . 'my-stories/"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">My Stories</span></span></span></a>';
+        $link = '<a class="current" href="' . $homeurl . 'my-stories/"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">My Stories</span></span></span></a>';
     if (!is_user_logged_in() && get_current_blog_id() == 1)
         $link = '<a class="" href="' . $homeurl . 'register"><span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa"></i></span><span class="item_text">Join</span></span></span></a>';
     // else  

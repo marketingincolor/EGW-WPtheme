@@ -64,8 +64,9 @@
                             </div>
                             <div class="saved_art_action_btns-pop">
                                 <input class="fsp_send_btn_pop" id="emailsend" type="button" value="Send" name="Send">
-                                <input class="fsp_cancel_btn_pop"type="reset" value="Cancel" name="Cancel">
-<!--                                        <a class="fsp_send_btn_pop" href="<?php //the_permalink();                                          ?>" title="Send" rel="">Send</a>-->
+                                <input class="fsp_cancel_btn_pop" type="reset" value="Cancel" name="Cancel">
+                               
+<!--                                        <a class="fsp_send_btn_pop" href="<?php //the_permalink();                                           ?>" title="Send" rel="">Send</a>-->
 
                             </div>
                             <!-- saved articles ends here -->
@@ -82,96 +83,3 @@
 
 
 
-<script>
-    // Email form validation
-    function validate_popupform() {
-        var valreturn = 0;
-        var emailRegex = /^[A-Za-z0-9._]*\@[A-Za-z]*\.[A-Za-z]{2,5}$/;
-        var emailaddress = document.selectedArticleform.emailaddress.value,
-                comments = document.selectedArticleform.comments.value;
-        document.getElementById("errorBox-email").innerHTML = " ";
-        document.getElementById("errorBox-comments").innerHTML = " ";
-        if (emailaddress == "")
-        {
-            document.selectedArticleform.emailaddress.focus();
-            document.getElementById("errorBox-email").innerHTML = "Enter the email address";
-            return false;
-        } else {
-            //this validates all the emails that are seperated by a comma
-            var emailArray = emailaddress.split(",");
-            for (i = 0; i <= (emailArray.length - 1); i++) {
-                if (checkEmail(emailArray[i])) {
-                    //Do what ever with the email.
-                } else {
-                    document.getElementById("errorBox-email").innerHTML = "invalid email: " + emailArray[i];
-                    return false;
-                }
-            }
-
-        }
-        if (comments == "")
-        {
-            document.selectedArticleform.emailaddress.focus();
-            document.getElementById("errorBox-comments").innerHTML = "Required Value";
-            return false;
-        }
-        return true;
-    }
-    //this validates all the emails that are seperated by a comma
-    function checkEmail(email) {
-        var regExp = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9\-\.])+\.([A-Za-z]{2,4})$/;
-        return regExp.test(email);
-    }
-    //Email sending ajax call
-    jQuery(document).ready(function () {
-        jQuery('#successmsg').hide();
-        jQuery("#emailsend").click(function () {
-            var isValidated = validate_popupform();
-
-            if (isValidated == true) {
-                var name = jQuery("#enquiryForm").val();
-                var dataString = jQuery('#enquiryForm').serialize();
-
-
-                jQuery.ajax({
-                    type: "POST",
-                    url: "<?php echo bloginfo('wpurl'); ?>/wp-admin/admin-ajax.php",
-                    data: {
-                        action: 'saved_articles_popup_email',
-                        emaildata: dataString,
-                    },
-                    success: function (result) {
-                        jQuery('.form-group').hide();
-                        jQuery('#successmsg').show();
-                        jQuery('#successmsg>h3').html(result);
-                    }
-                });
-
-
-            }
-            return false;
-        });
-
-        jQuery(".fsp_cancel_btn_pop").click(function () {
-            jQuery.magnificPopup.close();
-            jQuery("#savedArticles").trigger('reset')
-            //location.reload();
-        });
-        jQuery(".mfp-close").click(function () {
-            jQuery.magnificPopup.close();
-            //location.reload();
-            jQuery("#savedArticles").trigger('reset')
-        });
-
-        //Close selected articles from popup
-        jQuery(".ion-android-close").click(function () {
-            var x;
-            if (confirm("Do you want to remove this article?") == true) {
-                jQuery('#element_' + this.id).remove();
-            } else {
-
-            }
-        });
-
-    });
-</script>

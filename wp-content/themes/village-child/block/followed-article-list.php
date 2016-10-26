@@ -53,7 +53,7 @@ list($post_per_section, $post_type) = scroll_loadpost_settings();
                              * Show remaining article belongs to following subcategories
                              */
                             $j = 0;
-                            if ($i < $post_per_section && $total_followed_posts >= $post_per_section) {
+                            if ($i < $post_per_section) {
                               $remaining = $post_per_section - $i;
                                 $posts = remainfollow_categorypost_detail($post_type, $subcat_id_ar, $display_postid_ar,$remaining);
                                 if (!empty($posts)) {

@@ -1608,6 +1608,7 @@ table.ai1ec-month-view {
     padding: 0;
     position: relative;
     text-align: left;
+    z-index: 999999;
 }
 .saved-articles-popup-nw h2{
     background: #e6e7e9;
@@ -1699,6 +1700,9 @@ table.ai1ec-month-view {
     line-height: 24px;
     outline: 0;
     cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance:none;
 }
 .saved_art_action_btns-pop input.fsp_cancel_btn_pop{
     background: #f69c4a none repeat scroll 0 0;
@@ -1708,6 +1712,8 @@ table.ai1ec-month-view {
     background: #b3cc36 none repeat scroll 0 0;
     border: 1px solid #a4bb6a;
     margin-right: 15px;
+    z-index: 99999;
+    
 }
 .saved_art_cont-pop h4{
     font-size:14px;
