@@ -144,9 +144,9 @@ if (isset($_POST)) {
             //mail($sharingemail, $subject, $articlefetched, $headers);
             wp_mail($sharingemail, $subject, $articlefetched, $headers);
         }
-        echo $success = "Email send successfully... ";
+        echo $success = "Mail Sent Successfully... ";
     } else {
-        echo $error = "Email not sent ";
+        echo $error = "Mail Not sent ";
     }
 }
 ?>
